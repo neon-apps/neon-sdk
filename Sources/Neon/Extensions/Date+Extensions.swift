@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    func returnString() -> String {
+    public func returnString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
