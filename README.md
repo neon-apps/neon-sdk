@@ -1,3 +1,3 @@
-# Neon
 
-A description of this package.
+# neon-sdk
+
