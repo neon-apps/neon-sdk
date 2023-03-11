@@ -33,7 +33,8 @@ let package = Package(
         .target(
             name: "RevenueCatHandler",
             dependencies: [
-                "Lottie"
+                "Lottie",
+                "RevenueCat"
             ], path: "RevenueCatHandler"),
     ]
 )

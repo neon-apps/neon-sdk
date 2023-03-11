@@ -11,7 +11,7 @@ import UIKit
 import Lottie
 
 public class RevenueCatHandler {
-    static let shared = RevenueCatHandler()
+    public static let shared = RevenueCatHandler()
     
     var loadingAnimation = String()
     var monthlyProductID = String()
