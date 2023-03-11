@@ -11,8 +11,8 @@ let package = Package(
             name: "Neon Core",
             targets: ["Neon Core"]),
         .library(
-            name: "RevenueCatHandler",
-            targets: ["RevenueCatHandler"]),
+            name: "RevenueCat Handler",
+            targets: ["RevenueCat Handler"]),
     ],
     
     dependencies: [
@@ -25,16 +25,18 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
+       
         .target(
             name: "Neon Core",
             dependencies: [
                 "SDWebImage"
             ], path: "Core"),
         .target(
-            name: "RevenueCatHandler",
+            name: "RevenueCat Handler",
             dependencies: [
                 "Lottie",
                 "RevenueCat"
-            ], path: "RevenueCatHandler"),
+            ], path: "RevenueCat Handler"),
+        
     ]
 )
