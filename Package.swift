@@ -24,8 +24,5 @@ let package = Package(
             dependencies: [
                 "SDWebImage"
             ], path: "Sources"),
-        .testTarget(
-            name: "NeonTests",
-            dependencies: ["Neon"]),
     ]
 )
