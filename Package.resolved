@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
+      "state" : {
+        "revision" : "c3852816c622ad35a03ed39c187c1644ece2382b",
+        "version" : "4.1.3"
+      }
+    },
+    {
+      "identity" : "purchases-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RevenueCat/purchases-ios.git",
+      "state" : {
+        "revision" : "b5562ed1409c47b20c74da3f2a1c2d603ca37508",
+        "version" : "4.17.7"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
