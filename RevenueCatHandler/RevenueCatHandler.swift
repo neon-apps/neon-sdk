@@ -24,7 +24,7 @@ public class RevenueCatHandler {
 
     var isUserPremium = Bool()
     
-    func configureRC(withAPIKey : String,
+    public func configureRC(withAPIKey : String,
                      loadingAnimation : String,
                      weeklyProductID : String = "",
                      monthlyProductID : String = "",
