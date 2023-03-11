@@ -1,8 +1,8 @@
 //
-//  StoreKitManager.swift
-//  Font Changer
+//  File.swift
+//  
 //
-//  Created by Uzay Altıner on 18.11.2022.
+//  Created by Tuna Öztürk on 11.03.2023.
 //
 
 import RevenueCat
@@ -10,7 +10,7 @@ import StoreKit
 import UIKit
 import Lottie
 
-class RevenueCatHandler {
+public class RevenueCatHandler {
     static let shared = RevenueCatHandler()
     
     var loadingAnimation = String()
