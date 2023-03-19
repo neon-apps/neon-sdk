@@ -28,7 +28,7 @@ let package = Package(
                 "Lottie",
                 "RevenueCat",
                 "SDWebImage",
-            ], path: "Neon")
+            ], path: "Neon", resources: [.process("Core/Resources")])
         
     ]
 )

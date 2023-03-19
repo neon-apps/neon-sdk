@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RevenueCatHandler.swift
 //  
 //
 //  Created by Tuna Öztürk on 11.03.2023.
