@@ -4,8 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Neon",
-    products: [
+    name: "Neon",    products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "NeonSDK",
@@ -39,7 +38,6 @@ let package = Package(
                 .product(name: "FirebaseStorage", package: "Firebase"),
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),
                 .product(name: "FirebaseAuth", package: "Firebase"),
-                .product(name: "FirebaseAnalytics", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase")
             ], path: "Neon", resources: [.process("Core/Resources")])
         

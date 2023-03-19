@@ -35,6 +35,7 @@ public class RevenueCatManager {
         self.annualProductID = annualProductID
         Purchases.configure(withAPIKey: withAPIKey)
         fetchPackages()
+ 
     }
     
     func fetchPackages() {
@@ -53,11 +54,13 @@ public class RevenueCatManager {
                     switch product.productIdentifier {
                     case self.weeklyProductID:
                         packageWeekly = package
+                        NotificationCenter.default.post(name: Notification.Name("PackageFetched"), object: nil)
                     case self.monthlyProductID:
                         packageMonthly = package
-                        NotificationCenter.default.post(name: Notification.Name("PricesReady"), object: nil)
+                        NotificationCenter.default.post(name: Notification.Name("PackageFetched"), object: nil)
                     case self.annualProductID:
                         packageAnnual = package
+                        NotificationCenter.default.post(name: Notification.Name("PackageFetched"), object: nil)
                     default:
                         return
                     }
@@ -65,6 +68,8 @@ public class RevenueCatManager {
             }
         }
     }
+    
+    
     
     func purchasePackage(package: Package?, vc: UIViewController, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         let viewLoading = createLoadingPurchaseView(view: vc.view)
