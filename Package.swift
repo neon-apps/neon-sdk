@@ -8,11 +8,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "Neon Core",
-            targets: ["Neon Core"]),
-        .library(
-            name: "RevenueCat Handler",
-            targets: ["RevenueCat Handler"]),
+            name: "NeonSDK",
+            targets: ["NeonSDK"])
     ],
     
     dependencies: [
@@ -27,21 +24,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
        
         .target(
-            name: "Neon",  dependencies: [
-                "Neon Core",
-                "RevenueCat Handler",
-            ], path: "Neon"),
-        .target(
-            name: "Neon Core",
-            dependencies: [
-                "SDWebImage",
-            ], path: "Core"),
-        .target(
-            name: "RevenueCat Handler",
-            dependencies: [
+            name: "NeonSDK",  dependencies: [
                 "Lottie",
-                "RevenueCat"
-            ], path: "RevenueCat Handler"),
+                "RevenueCat",
+                "SDWebImage",
+            ], path: "Neon")
         
     ]
 )
