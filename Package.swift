@@ -16,7 +16,7 @@ let package = Package(
     ],
     
     dependencies: [
-        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.15.5"),
+        .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.15.5"),
         .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "4.17.7"),
         .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.1.3")
         // Dependencies declare other packages that this package depends on.
@@ -27,9 +27,14 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
        
         .target(
+            name: "Neon",  dependencies: [
+                "Neon Core",
+                "RevenueCat Handler",
+            ], path: "Neon"),
+        .target(
             name: "Neon Core",
             dependencies: [
-                "SDWebImage"
+                "SDWebImage",
             ], path: "Core"),
         .target(
             name: "RevenueCat Handler",
