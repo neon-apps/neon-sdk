@@ -8,7 +8,25 @@
 import Foundation
 import UIKit
 
-class FontManager{
+public class FontManager{
+    
+    static let shared = FontManager()
+    
+    public enum FontWeight {
+        case Regular
+        case Medium
+        case SemiBold
+        case Bold
+    }
+
+    public enum FontType {
+        case Poppins
+        case SFProDisplay
+        case SFProText
+        case Inter
+        case None
+    }
+     var choosenFontType = FontType.None
     
     public func registerFonts() {
         for font in arrFonts{

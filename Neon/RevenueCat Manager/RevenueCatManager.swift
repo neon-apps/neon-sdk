@@ -1,5 +1,5 @@
 //
-//  RevenueCatHandler.swift
+//  RevenueCatManager.swift
 //  
 //
 //  Created by Tuna Öztürk on 11.03.2023.
@@ -10,8 +10,8 @@ import StoreKit
 import UIKit
 import Lottie
 
-public class RevenueCatHandler {
-    public static let shared = RevenueCatHandler()
+public class RevenueCatManager {
+    public static let shared = RevenueCatManager()
     
     var loadingAnimation = String()
     var monthlyProductID = String()

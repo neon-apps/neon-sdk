@@ -15,7 +15,10 @@ let package = Package(
     dependencies: [
         .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.15.5"),
         .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "4.17.7"),
-        .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.1.3")
+        .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.1.3"),
+        .package(name: "Hero", url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.4.0")),
+        .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.4.0")),
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -28,6 +31,16 @@ let package = Package(
                 "Lottie",
                 "RevenueCat",
                 "SDWebImage",
+                "Hero",
+                "SnapKit",
+                .product(name: "FirebaseAnalytics", package: "Firebase"),
+                .product(name: "FirebaseRemoteConfig", package: "Firebase"),
+                .product(name: "FirebaseFirestore", package: "Firebase"),
+                .product(name: "FirebaseStorage", package: "Firebase"),
+                .product(name: "FirebaseDynamicLinks", package: "Firebase"),
+                .product(name: "FirebaseAuth", package: "Firebase"),
+                .product(name: "FirebaseAnalytics", package: "Firebase"),
+                .product(name: "FirebaseCrashlytics", package: "Firebase")
             ], path: "Neon", resources: [.process("Core/Resources")])
         
     ]
