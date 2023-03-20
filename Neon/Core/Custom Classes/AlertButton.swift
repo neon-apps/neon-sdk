@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AlertButton{
+public class AlertButton{
     internal init(title: String = String(), style : UIAlertAction.Style = .default , completion: @escaping () -> ()) {
         self.title = title
         self.completion = completion

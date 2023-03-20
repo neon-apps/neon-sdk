@@ -33,7 +33,8 @@ let package = Package(
                 "Hero",
                 "SnapKit",
                .product(name: "FirebaseAnalytics", package: "Firebase"),
-                /*   .product(name: "FirebaseRemoteConfig", package: "Firebase"),
+                /*
+                .product(name: "FirebaseRemoteConfig", package: "Firebase"),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseStorage", package: "Firebase"),
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),

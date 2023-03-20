@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class AlertManager{
+public class AlertManager{
     
-    static func showCustomAlert(title: String, message: String, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController) {
+    public static func showCustomAlert(title: String, message: String, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
  
         if let buttons, !buttons.isEmpty{
