@@ -12,7 +12,7 @@ import SDWebImage
 
 extension UIImageView{
    
-  func setImage(urlString : String){
+    public func setImage(urlString : String){
     self.sd_imageTransition = .fade
     self.sd_setImage(with: URL(string: urlString), completed: { [] (image, error, cacheType, url) in })
   

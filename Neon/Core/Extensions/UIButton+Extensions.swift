@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    func makeUnderlineButtonTitle(color: UIColor) {
+    public func makeUnderlineButtonTitle(color: UIColor) {
         guard let text = self.titleLabel?.text else { return }
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttribute(NSAttributedString.Key.underlineColor,

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UILabel {
-    func setTextWithLineSpace(text: String, spacing: CGFloat = 6) {
+    public func setTextWithLineSpace(text: String, spacing: CGFloat = 6) {
         let attributedString = NSMutableAttributedString(string: text)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = spacing
@@ -19,7 +19,7 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    func setTextWithLeftImage(image: UIImage, text: String) {
+    public func setTextWithLeftImage(image: UIImage, text: String) {
         let attachment = NSTextAttachment()
         attachment.image = image
         let attachmentString = NSAttributedString(attachment: attachment)

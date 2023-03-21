@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    static func gradientImage(bounds: CGRect, colors: [UIColor]) -> UIImage {
+    public static func gradientImage(bounds: CGRect, colors: [UIColor]) -> UIImage {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = colors.map(\.cgColor)
@@ -29,7 +29,7 @@ extension UIImage {
 
 extension UIImage {
     
-    func crop(to:CGSize) -> UIImage {
+    public func crop(to:CGSize) -> UIImage {
         
         guard let cgimage = self.cgImage else { return self }
         

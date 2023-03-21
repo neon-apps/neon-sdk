@@ -9,7 +9,7 @@ import Foundation
 import StoreKit
 
 extension SKStoreReviewController {
-    public static func requestReviewInCurrentScene() {
+    public class func requestReviewInCurrentScene() {
         if #available(iOS 13.0, *) {
             if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                 if #available(iOS 14.0, *) {
