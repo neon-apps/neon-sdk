@@ -11,14 +11,14 @@ import UIKit
 
 extension UIViewController {
     
-    enum Direction {
+    public enum Direction {
         case right
         case left
         case up
         case down
     }
     
-     func present(destinationVC: UIViewController, slideDirection: Direction) {
+    public func present(destinationVC: UIViewController, slideDirection: Direction) {
         switch slideDirection {
         case .left:
             destinationVC.hero.modalAnimationType = .selectBy(presenting: .slide(direction: .right), dismissing: .slide(direction: .left))
@@ -36,12 +36,12 @@ extension UIViewController {
         
     }
 
-     func presentWithoutAnimation(destinationVC: UIViewController) {
+    public func presentWithoutAnimation(destinationVC: UIViewController) {
         destinationVC.modalPresentationStyle = .fullScreen
          self.present(destinationVC, animated: false)
     }
 
-     func presentAsPageSheet(destinationVC: UIViewController) {
+    public func presentAsPageSheet(destinationVC: UIViewController) {
         destinationVC.modalPresentationStyle = .pageSheet
          self.present(destinationVC, animated: true)
     }
