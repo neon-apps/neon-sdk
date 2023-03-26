@@ -41,7 +41,10 @@ public class LottieManager{
         
         let defaultAnimationWidht = animation.rawValue.width
         let defaultAnimationName = animation.rawValue.name
-        let animLoading = LottieAnimationView(name: defaultAnimationName)
+        
+        let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+        
+        let animLoading = LottieAnimationView(filePath: animationURL!)
         animLoading.frame.size = CGSize(width: width ?? defaultAnimationWidht, height: width ?? defaultAnimationWidht)
         animLoading.center = window.center
         animLoading.backgroundColor = .clear
