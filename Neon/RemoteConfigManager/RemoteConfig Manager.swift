@@ -53,7 +53,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getDouble(key : String) -> Double{
+    public static func getDouble(key : String) -> Double{
         if let doubleValue = RemoteConfig.remoteConfig().configValue(forKey: key).numberValue as? Double{
             UserDefaults.standard.setValue(doubleValue, forKey: key)
             return doubleValue

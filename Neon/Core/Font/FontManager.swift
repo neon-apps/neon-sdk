@@ -13,10 +13,12 @@ public class FontManager{
     static let shared = FontManager()
     
     public enum FontWeight {
+        case Light
         case Regular
         case Medium
         case SemiBold
         case Bold
+        case Black
     }
 
     public enum FontType {
