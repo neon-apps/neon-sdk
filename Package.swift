@@ -41,7 +41,7 @@ let package = Package(
                 .product(name: "FirebaseAuth", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase")
                */
-            ], path: "Neon", resources: [.process("Core/Resources")])
+            ], path: "Neon", resources: [.copy("Core/Resources/Animations"), .process("Core/Resources/Fonts")])
         
     ]
 )
