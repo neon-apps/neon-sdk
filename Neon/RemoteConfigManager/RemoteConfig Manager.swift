@@ -37,7 +37,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getRemoteConfigValue(key : String) -> String{
+    public func getString(key : String) -> String{
         if let stringValue = RemoteConfig.remoteConfig().configValue(forKey: key).stringValue{
             UserDefaults.standard.setValue(stringValue, forKey: key)
             return stringValue
@@ -46,7 +46,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getRemoteConfigValue(key : String) -> Int{
+    public func getInt(key : String) -> Int{
         if let integerValue = RemoteConfig.remoteConfig().configValue(forKey: key).numberValue as? Int{
             UserDefaults.standard.setValue(integerValue, forKey: key)
             return integerValue
@@ -55,7 +55,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getRemoteConfigValue(key : String) -> Double{
+    public func getDouble(key : String) -> Double{
         if let doubleValue = RemoteConfig.remoteConfig().configValue(forKey: key).numberValue as? Double{
             UserDefaults.standard.setValue(doubleValue, forKey: key)
             return doubleValue
@@ -64,23 +64,15 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getRemoteConfigValue(key : String) -> Bool{
+    public func getBool(key : String) -> Bool{
         let boolValue = RemoteConfig.remoteConfig().configValue(forKey: key).boolValue
         UserDefaults.standard.setValue(boolValue, forKey: key)
         return boolValue
         
     }
     
-    public func getRemoteConfigValue(key : String) -> [String : Any]{
-        if let dictionaryValue = RemoteConfig.remoteConfig().configValue(forKey: key).jsonValue as? [String : Any]{
-            UserDefaults.standard.setValue(dictionaryValue, forKey: key)
-            return dictionaryValue
-        }else{
-            return UserDefaults.standard.dictionary(forKey: key) ?? Dictionary()
-        }
-    }
     
-    public func getRemoteConfigValue(key : String) -> [Any]{
+    public func getArray(key : String) -> [Any]{
         if let arrayValue = RemoteConfig.remoteConfig().configValue(forKey: key).jsonValue as? [Any]{
             UserDefaults.standard.setValue(arrayValue, forKey: key)
             return arrayValue
@@ -89,7 +81,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getRemoteConfigValue(key : String) -> Data{
+    public func getData(key : String) -> Data{
         let dataValue = RemoteConfig.remoteConfig().configValue(forKey: key).dataValue
         UserDefaults.standard.setValue(dataValue, forKey: key)
         return dataValue
