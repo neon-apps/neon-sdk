@@ -10,22 +10,20 @@ import FirebaseRemoteConfig
 
 public class RemoteConfigManager{
     
-    public static let shared = RemoteConfigManager()
-    
-    public func configureRemoteConfig(defaultValues : [String : NSObject]){
+    public static func configureRemoteConfig(defaultValues : [String : NSObject]){
         
         setRemoteConfigDefaults(defaultValues: defaultValues)
         fetchRemoteConfigValues()
 
     }
     
-    func setRemoteConfigDefaults(defaultValues : [String : NSObject]){
+    static func setRemoteConfigDefaults(defaultValues : [String : NSObject]){
         
         RemoteConfig.remoteConfig().setDefaults(defaultValues)
         
     }
     
-    func fetchRemoteConfigValues(){
+    static func  fetchRemoteConfigValues(){
         RemoteConfig.remoteConfig().fetch{ (status, error) in
             guard error == nil else{
                 print(error?.localizedDescription ?? "" )
@@ -37,7 +35,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getString(key : String) -> String{
+    public static func getString(key : String) -> String{
         if let stringValue = RemoteConfig.remoteConfig().configValue(forKey: key).stringValue{
             UserDefaults.standard.setValue(stringValue, forKey: key)
             return stringValue
@@ -46,7 +44,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getInt(key : String) -> Int{
+    public static func getInt(key : String) -> Int{
         if let integerValue = RemoteConfig.remoteConfig().configValue(forKey: key).numberValue as? Int{
             UserDefaults.standard.setValue(integerValue, forKey: key)
             return integerValue
@@ -64,7 +62,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getBool(key : String) -> Bool{
+    public static func getBool(key : String) -> Bool{
         let boolValue = RemoteConfig.remoteConfig().configValue(forKey: key).boolValue
         UserDefaults.standard.setValue(boolValue, forKey: key)
         return boolValue
@@ -72,7 +70,7 @@ public class RemoteConfigManager{
     }
     
     
-    public func getArray(key : String) -> [Any]{
+    public static func getArray(key : String) -> [Any]{
         if let arrayValue = RemoteConfig.remoteConfig().configValue(forKey: key).jsonValue as? [Any]{
             UserDefaults.standard.setValue(arrayValue, forKey: key)
             return arrayValue
@@ -81,7 +79,7 @@ public class RemoteConfigManager{
         }
     }
     
-    public func getData(key : String) -> Data{
+    public static func getData(key : String) -> Data{
         let dataValue = RemoteConfig.remoteConfig().configValue(forKey: key).dataValue
         UserDefaults.standard.setValue(dataValue, forKey: key)
         return dataValue
