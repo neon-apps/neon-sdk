@@ -9,7 +9,7 @@ import Foundation
 import Hero
 import UIKit
 
-extension UIViewController {
+extension UIViewController { // Presentation
     
     public enum Direction {
         case right
@@ -45,4 +45,14 @@ extension UIViewController {
         destinationVC.modalPresentationStyle = .pageSheet
          self.present(destinationVC, animated: true)
     }
+}
+
+
+extension UIViewController{
+    
+    public func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
+    }
+    
 }
