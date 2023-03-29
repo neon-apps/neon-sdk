@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "60f9a33e7084482df67b48e16f315f4f7a6f5da9",
-        "version" : "10.6.0"
+        "revision" : "76de51f0e2be35ecb6ce05ed1ad0a73669b05a11",
+        "version" : "10.7.0"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "b5562ed1409c47b20c74da3f2a1c2d603ca37508",
-        "version" : "4.17.7"
+        "revision" : "5d77aeccee3622dd2a5dbfd7af5aed195b84767e",
+        "version" : "4.17.8"
       }
     },
     {

@@ -19,8 +19,9 @@ public class RevenueCatManager {
 
     public static var packages = [Package]()
     weak var delegate: RevenueCatManagerDelegate?
-
-    public static func configureRC(withAPIKey : String,
+    internal static var selectedPackage : Package?
+    
+    public static func configure(withAPIKey : String,
                             products : [String]) {
         Purchases.configure(withAPIKey: withAPIKey)
         RevenueCatManager().fetchPackages(products: products)
@@ -58,9 +59,9 @@ public class RevenueCatManager {
     
     
     
-    public static func subscribe(package: Package?, vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func subscribe(vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation)
-        guard let package else {
+        guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
             return }
         
@@ -78,9 +79,11 @@ public class RevenueCatManager {
         }
     }
     
-    public static func purchase(package: Package?, vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func purchase(vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation)
-        guard let package else { return }
+        guard let package = RevenueCatManager.selectedPackage else {
+            LottieManager.removeFullScreenLottie()
+            return }
         
         Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, error, _ in
             LottieManager.removeFullScreenLottie()
@@ -128,4 +131,11 @@ public class RevenueCatManager {
         }
     }
 
+}
+
+extension Package{
+    
+    func selectPackage(){
+        RevenueCatManager.selectedPackage = self
+    }
 }
