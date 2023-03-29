@@ -57,6 +57,28 @@ public class RevenueCatManager {
         return nil
     }
     
+    public static func getPackagePrice(id : String) -> String?{
+        for package in packages {
+            if package.storeProduct.productIdentifier == id{
+                return package.localizedPriceString
+            }
+        }
+        
+        return nil
+    }
+    
+    public static func selectPackage(id : String){
+        for package in packages {
+            if package.storeProduct.productIdentifier == id{
+                RevenueCatManager.selectedPackage = package
+                return
+            }
+        }
+        
+
+    }
+    
+    
     
     
     public static func subscribe(animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
@@ -154,9 +176,4 @@ public class RevenueCatManager {
 
 }
 
-extension Package{
-    
-    public func selectPackage(){
-        RevenueCatManager.selectedPackage = self
-    }
-}
+
