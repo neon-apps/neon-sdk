@@ -156,7 +156,7 @@ public class RevenueCatManager {
 
 extension Package{
     
-    func selectPackage(){
+    public func selectPackage(){
         RevenueCatManager.selectedPackage = self
     }
 }
