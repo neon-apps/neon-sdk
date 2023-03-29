@@ -15,10 +15,10 @@ public class StorageManager{
         
         
         let storage = Storage.storage()
-        let storageRef = storage.reference()
+        let storageReferance = storage.reference()
         let data = image.jpegData(compressionQuality: 0.5)
         let imageID = UUID().uuidString
-        let imageRef = storageRef.child("\(storageRef ?? imageID).png")
+        let imageRef = storageReferance.child("\(storageRef ?? imageID).png")
         
         let newMetadata = StorageMetadata()
         newMetadata.contentType = "image/png"
