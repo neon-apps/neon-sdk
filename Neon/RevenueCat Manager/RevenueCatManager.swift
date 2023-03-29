@@ -59,7 +59,7 @@ public class RevenueCatManager {
     
     
     
-    public static func subscribe(vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func subscribe(animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
@@ -79,7 +79,7 @@ public class RevenueCatManager {
         }
     }
     
-    public static func purchase(vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func purchase(animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
@@ -98,7 +98,7 @@ public class RevenueCatManager {
     }
     
     
-    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation)
 
         Purchases.shared.restorePurchases {  purchaserInfo, _ in
@@ -106,11 +106,32 @@ public class RevenueCatManager {
             if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
                 Neon.isUserPremium = true
                 UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
-                guard let completionSuccess else { return }
-                completionSuccess()
+                
+                if showAlerts{
+                    AlertManager.showCustomAlert(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
+                        AlertButton(completion: {
+                            guard let completionSuccess else { return }
+                            completionSuccess()
+                        })
+                    ], viewController: vc)
+                }else{
+                    guard let completionSuccess else { return }
+                    completionSuccess()
+                }
+          
             } else {
-                guard let completionFailure else { return }
-                completionFailure()
+                
+                if showAlerts{
+                    AlertManager.showCustomAlert(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
+                        AlertButton(completion: {
+                            guard let completionSuccess else { return }
+                            completionSuccess()
+                        })
+                    ], viewController: vc)
+                }else{
+                    guard let completionFailure else { return }
+                    completionFailure()
+                }
             }
         }
     }
