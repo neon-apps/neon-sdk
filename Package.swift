@@ -32,12 +32,11 @@ let package = Package(
                 "SDWebImage",
                 "Hero",
                 "SnapKit",
-               .product(name: "FirebaseAnalytics", package: "Firebase"),
+                .product(name: "FirebaseAnalytics", package: "Firebase"),
                 .product(name: "FirebaseRemoteConfig", package: "Firebase"),
                 .product(name: "FirebaseStorage", package: "Firebase"),
-                /* /
                 .product(name: "FirebaseFirestore", package: "Firebase"),
-                
+                /* /
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),
                 .product(name: "FirebaseAuth", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase")
