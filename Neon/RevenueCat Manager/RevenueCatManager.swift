@@ -18,7 +18,7 @@ public protocol RevenueCatManagerDelegate: AnyObject {
 public class RevenueCatManager {
 
     public static var packages = [Package]()
-    weak var delegate: RevenueCatManagerDelegate?
+    public static var delegate: RevenueCatManagerDelegate?
     internal static var selectedPackage : Package?
     
     public static func configure(withAPIKey : String,
@@ -41,7 +41,7 @@ public class RevenueCatManager {
                 }
                 for package in packages! {
                     RevenueCatManager.packages.append(package)
-                    self.delegate?.packageFetched()
+                    RevenueCatManager.delegate?.packageFetched()
                 }
             }
         }
