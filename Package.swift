@@ -36,9 +36,10 @@ let package = Package(
                 .product(name: "FirebaseRemoteConfig", package: "Firebase"),
                 .product(name: "FirebaseStorage", package: "Firebase"),
                 .product(name: "FirebaseFirestore", package: "Firebase"),
+                .product(name: "FirebaseFirestoreSwift", package: "Firebase"),
+                .product(name: "FirebaseAuth", package: "Firebase"),
                 /* /
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),
-                .product(name: "FirebaseAuth", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase")
                */
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts")])
