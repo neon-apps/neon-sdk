@@ -51,10 +51,10 @@ public class CoreDataManager{
         }
     }
     
-    public static func deleteData(entity : String, keyAttribute: String, value : String) {
+    public static func deleteData(entity : String, searchKey: String, searchValue : String) {
         let context = persistentContainer(entity: entity).viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        fetchRequest.predicate = NSPredicate(format: "\(keyAttribute) = %@", value)
+        fetchRequest.predicate = NSPredicate(format: "\(searchKey) = %@", searchValue)
         do {
             let fetchedObjects = try context.fetch(fetchRequest) as! [NSManagedObject]
             if let objectToDelete = fetchedObjects.first {
@@ -62,7 +62,7 @@ public class CoreDataManager{
                 try context.save()
                 print("Data Deleted - Entity : \(objectToDelete)")
             } else {
-                print("Data not found with name: \(value)")
+                print("Data not found with name: \(searchValue)")
             }
         } catch {
             print("Can not delete data")
@@ -70,11 +70,11 @@ public class CoreDataManager{
     }
     
     
-    public static func updateData(entity : String, keyAttribute: String, value : String, newAttributeDict : [String : Any]){
+    public static func updateData(entity : String, searchKey: String, searchValue : String, newAttributeDict : [String : Any]){
         
         let context = persistentContainer(entity: entity).viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        fetchRequest.predicate = NSPredicate(format: "\(keyAttribute) = %@", value)
+        fetchRequest.predicate = NSPredicate(format: "\(searchKey) = %@", searchValue)
         
         do {
             let results = try context.fetch(fetchRequest) as? [NSManagedObject]
