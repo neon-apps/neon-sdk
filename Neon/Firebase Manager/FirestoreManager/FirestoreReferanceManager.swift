@@ -55,11 +55,55 @@ class FirestoreReferanceManager{
         
         return documentRef
     }
+    
+  
+    func prepareFirebaseCollectionRef(_ path: [FirestoreReferance]) -> CollectionReference {
+        guard !path.isEmpty else {
+            fatalError("The path array cannot be empty")
+        }
+        
+        guard case .collection = path.last else {
+            fatalError("The path array must end with a collection reference")
+        }
+        
+        if path.count == 1 {
+            return Firestore.firestore().collection(getCollectionName(path[0]))
+        }
+        
+        guard path.count % 2 != 0 else {
+            fatalError("The path array must contain an odd number of elements")
+        }
+        
+        guard case .document = path[path.count - 2] else {
+            fatalError("The second to last element of the path array must be a document reference")
+        }
+        
+        var collectionRef: CollectionReference = Firestore.firestore().collection(getCollectionName(path[0]))
+        
+        for i in stride(from: 1, to: path.count - 1, by: 2) {
+            guard case .document = path[i] else {
+                fatalError("Document reference expected at position \(i) in the path array")
+            }
+            
+            guard case .collection = path[i+1] else {
+                fatalError("Collection reference expected at position \(i+1) in the path array")
+            }
+            
+            let documentName = getDocumentName(path[i])
+            let collectionName = getCollectionName(path[i+1])
+            collectionRef = collectionRef.document(documentName).collection(collectionName)
+        }
+        
+        return collectionRef
+    }
+
+
+
 
     func getCollectionName(_ reference: FirestoreReferance) -> String {
         switch reference {
         case .document(let name):
-            return name
+            fatalError("Document reference cannot be the last element of the path array")
         case .collection(let name):
             return name
         }
