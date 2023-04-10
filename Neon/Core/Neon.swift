@@ -21,7 +21,9 @@ public class Neon{
         window?.rootViewController = destinationVC
     }
     
-    public static func configureWindow(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController){
+    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController){
+        
+        configureIQKeyboard()
         
         if !UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted"){
             Neon.setWindow(window: &window, destinationVC: onboardingVC)
@@ -34,6 +36,10 @@ public class Neon{
             Neon.setWindow(window: &window, destinationVC: paywallVC)
         }
         
+    }
+    
+    fileprivate static func configureIQKeyboard(){
+        IQKeyboardManager.shared.enable = true
     }
     
     public static func onboardingCompleted(){
