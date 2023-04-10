@@ -116,6 +116,29 @@ public class FirestoreManager{
         
     }
     
+    ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
+    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> ()) {
+            let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+            referance.getDocuments { querySnapshot, err in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        do {
+                            let object = try document.data(as: objectType)
+                            if let encodableObject = object as? Encodable{
+                                completion(encodableObject)
+                            }else{
+                                print("Fetched object is not encodable")
+                            }
+                        } catch {
+                            print("Error decoding city: \(error)")
+                        }
+                    }
+                }
+            }
+        }
+    
     // Realtime listening
     
     
