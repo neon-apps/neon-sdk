@@ -7,7 +7,7 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
 ## Contents
 
 - [FirestoreManager](#FirestoreManager)
-    - [Create a Document with Fields](#usage)
+    - [Create a Document with Fields](#Create-a-Document-with-Fields)
     - [Create a Document with Object](#credits)
     - [Update a Document with Fields](#license)
     - [Delete a Document with Fields](#license)
@@ -15,7 +15,7 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
 
 The FirestoreManager class simplifies the management of Firebase Firestore operations, providing a more efficient and streamlined approach.
 
-### Create a Document with Fields
+### Create a Document with Fields 
 
 To create a document in a particular collection with specific properties, utilize the FirestoreManager.setDocument function and provide the necessary field values through the "fields" parameter.
 
