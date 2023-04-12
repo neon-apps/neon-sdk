@@ -13,8 +13,8 @@ import UIKit
 public class CoreDataManager{
 
 
-    public static func persistentContainer (entity : String) ->  NSPersistentContainer{
-        let container = NSPersistentContainer(name: entity)
+    public static func persistentContainer (container : String) ->  NSPersistentContainer{
+        let container = NSPersistentContainer(name: container)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -23,8 +23,8 @@ public class CoreDataManager{
         return container
     }
     
-    public static func saveContext (entity : String) {
-        let context = persistentContainer(entity: entity).viewContext
+    public static func saveContext (container : String, entity : String) {
+        let context = persistentContainer(container: container).viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -35,9 +35,9 @@ public class CoreDataManager{
         }
     }
     
-    public static func saveData(entity : String, attributeDict : [String : Any]){
+    public static func saveData(container : String, entity : String, attributeDict : [String : Any]){
         
-        let context = persistentContainer(entity: entity).viewContext
+        let context = persistentContainer(container: container).viewContext
         let entity = NSEntityDescription.insertNewObject(forEntityName: entity, into: context)
         for attribute in attributeDict{
             print("\(attribute.value) - \(attribute.key)")
@@ -51,8 +51,8 @@ public class CoreDataManager{
         }
     }
     
-    public static func deleteData(entity : String, searchKey: String, searchValue : String) {
-        let context = persistentContainer(entity: entity).viewContext
+    public static func deleteData(container : String, entity : String, searchKey: String, searchValue : String) {
+        let context = persistentContainer(container: container).viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.predicate = NSPredicate(format: "\(searchKey) = %@", searchValue)
         do {
@@ -70,9 +70,9 @@ public class CoreDataManager{
     }
     
     
-    public static func updateData(entity : String, searchKey: String, searchValue : String, newAttributeDict : [String : Any]){
+    public static func updateData(container : String, entity : String, searchKey: String, searchValue : String, newAttributeDict : [String : Any]){
         
-        let context = persistentContainer(entity: entity).viewContext
+        let context = persistentContainer(container: container).viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.predicate = NSPredicate(format: "\(searchKey) = %@", searchValue)
         
@@ -98,8 +98,8 @@ public class CoreDataManager{
         
     }
     
-    public static func fetchDatas(entity : String, dataFetched : @escaping (_ data : NSManagedObject) -> ()){
-        let context = persistentContainer(entity: entity).viewContext
+    public static func fetchDatas(container : String, entity : String, dataFetched : @escaping (_ data : NSManagedObject) -> ()){
+        let context = persistentContainer(container: container).viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
         do {
