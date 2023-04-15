@@ -20,6 +20,78 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
     - [Listen Documents](#Listen-Documents)
         - [Listen a Document](#Listen-a-Document)
         - [Listen All Documents in a Collection](#Listen-All-Documents-in-a-Collection)
+- [CoreDataManager](#CoreDataManager)
+    - [Save Data](#Save-Data)
+    - [Update Data](#Update-Data)
+    - [Delete Data](#Delete-Data)
+    - [Fetch Data](#Fetch-Data)
+# CoreDataManager
+
+The CoreDataManager class provides a simplified interface for performing common CoreData operations, thereby reducing the complexity of managing CoreData in an application.
+
+## Save Data
+
+The ```CoreDataManager.saveData``` function saves a new object of a specified entity type in the specified container with the provided attribute values. This function is particularly useful for simplifying the process of adding new objects to a CoreData database.
+
+```swift
+CoreDataManager.saveData(container: "CoreData",
+                        entity: "City",
+                        attributeDict: ["name" : "Los Angeles",
+                                        "id" : "1",
+                                        "population" : 700000
+                                        ])
+```
+
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```attributeDict``` parameter must include values for all required attributes of the specified entity type.
+
+## Update Data
+
+The ```CoreDataManager.updateData``` function updates an existing object of a specified entity type in the specified container with new attribute values. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and replaces its attribute values with the new values specified in the ```newAttributeDict``` parameter.
+
+```swift
+CoreDataManager.updateData(container: "CoreData",
+                            entity: "City",
+                            searchKey: "id",
+                            searchValue: "1",
+                            newAttributeDict: ["name" : "Los Angeles",
+                                                "state" : "CA",
+                                                "id" : "1",
+                                                "population" : 700000
+                                                ])
+```
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be updated and it should be a ```String```. Finally, ```newAttributeDict``` must include values for all attributes that need to be updated in the object.
+
+## Delete Data
+
+
+
+The ```CoreDataManager.deleteData``` function removes an existing object of a specified entity type from the specified container. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and removes it from the database.
+
+```swift
+CoreDataManager.deleteData(container: "CoreData",
+                            entity: "City",
+                            searchKey: "id",
+                            searchValue: "1")
+```
+
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be deleted and it should be a ```String```.
+
+## Fetch Data
+
+The ```CoreDataManager.fetchDatas``` function retrieves all objects of a specified entity type from the specified container and executes a closure with each fetched object. This function retrieves all attribute values of each object and passes them as a dictionary to the closure.
+
+```swift
+CoreDataManager.fetchDatas(container: "CoreData", entity: "City") { data in
+    if let cityName = data.value(forKey: "name") as? String {
+        
+    }
+    if let population = data.value(forKey: "population") as? Int {
+        
+    }
+}
+```
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the closure should handle the retrieved data by casting each attribute value to its appropriate type, such as String or Int, as shown in the example code provided.
+
 # FirestoreManager
 
 The FirestoreManager class simplifies the management of Firebase Firestore operations, providing a more efficient and streamlined approach.
