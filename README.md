@@ -6,92 +6,36 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
 
 ## Table of Contents
 
-- [FirestoreManager](#FirestoreManager)
-    - [Manage Documents](#Manage-Documents)
-        - [Create a Document with Fields](#Create-a-Document-with-Fields)
-        - [Create a Document with Object](#Create-a-Document-with-Object)
-        - [Update a Document with Fields](#Update-a-Document-with-Fields)
-        - [Delete a Document with Fields](#Delete-a-Document-with-Fields)
-    - [Get Documents](#Get-Documents)
-        - [Get a Document](#Get-a-Document)
-        - [Get All Documents in a Collection](#Get-All-Documents-in-a-Collection)
-        - [Get a Document as Object](#Get-a-Document-as-Object)
-        - [Get All Documents in a Collection as Object](#Get-All-Documents-in-a-Collection-as-Object)
-    - [Listen Documents](#Listen-Documents)
-        - [Listen a Document](#Listen-a-Document)
-        - [Listen All Documents in a Collection](#Listen-All-Documents-in-a-Collection)
+- [Firebase Managers](#Firebase-Managers)
+    - [FirestoreManager](#FirestoreManager)
+         - [Manage Documents](#Manage-Documents)
+           - [Create a Document with Fields](#Create-a-Document-with-Fields)
+           - [Create a Document with Object](#Create-a-Document-with-Object)
+           - [Update a Document with Fields](#Update-a-Document-with-Fields)
+           - [Delete a Document with Fields](#Delete-a-Document-with-Fields)
+        - [Get Documents](#Get-Documents)
+            - [Get a Document](#Get-a-Document)
+            - [Get All Documents in a Collection](#Get-All-Documents-in-a-Collection)
+            - [Get a Document as Object](#Get-a-Document-as-Object)
+            - [Get All Documents in a Collection as Object](#Get-All-Documents-in-a-Collection-as-Object)
+        - [Listen Documents](#Listen-Documents)
+            - [Listen a Document](#Listen-a-Document)
+            - [Listen All Documents in a Collection](#Listen-All-Documents-in-a-Collection)
+    - [RemoteConfigManager](#RemoteConfigManager)
+        - [Configure Remote Config](#Configure-Remote-Config)
+        - [Fetch Remote Config Values](#Fetch-Remote-Config-Values)
 - [CoreDataManager](#CoreDataManager)
     - [Save Data](#Save-Data)
     - [Update Data](#Update-Data)
     - [Delete Data](#Delete-Data)
     - [Fetch Data](#Fetch-Data)
-# CoreDataManager
+- [LottieManager](#LottieManager)
+    - [Show Full-Screen Lottie](#Show-Full-Screen-Lottie)
+    - [Remove Full-Screen Lottie](#Remove-Full-Screen-Lottie)
+    - [Add Lottie to Specific Location](#Add-Lottie-to-Specific-Location)
+#  Firebase Managers
 
-The CoreDataManager class provides a simplified interface for performing common CoreData operations, thereby reducing the complexity of managing CoreData in an application.
-
-## Save Data
-
-The ```CoreDataManager.saveData``` function saves a new object of a specified entity type in the specified container with the provided attribute values. This function is particularly useful for simplifying the process of adding new objects to a CoreData database.
-
-```swift
-CoreDataManager.saveData(container: "CoreData",
-                        entity: "City",
-                        attributeDict: ["name" : "Los Angeles",
-                                        "id" : "1",
-                                        "population" : 700000
-                                        ])
-```
-
-Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```attributeDict``` parameter must include values for all required attributes of the specified entity type.
-
-## Update Data
-
-The ```CoreDataManager.updateData``` function updates an existing object of a specified entity type in the specified container with new attribute values. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and replaces its attribute values with the new values specified in the ```newAttributeDict``` parameter.
-
-```swift
-CoreDataManager.updateData(container: "CoreData",
-                            entity: "City",
-                            searchKey: "id",
-                            searchValue: "1",
-                            newAttributeDict: ["name" : "Los Angeles",
-                                                "state" : "CA",
-                                                "id" : "1",
-                                                "population" : 700000
-                                                ])
-```
-Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be updated and it should be a ```String```. Finally, ```newAttributeDict``` must include values for all attributes that need to be updated in the object.
-
-## Delete Data
-
-
-
-The ```CoreDataManager.deleteData``` function removes an existing object of a specified entity type from the specified container. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and removes it from the database.
-
-```swift
-CoreDataManager.deleteData(container: "CoreData",
-                            entity: "City",
-                            searchKey: "id",
-                            searchValue: "1")
-```
-
-Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be deleted and it should be a ```String```.
-
-## Fetch Data
-
-The ```CoreDataManager.fetchDatas``` function retrieves all objects of a specified entity type from the specified container and executes a closure with each fetched object. This function retrieves all attribute values of each object and passes them as a dictionary to the closure.
-
-```swift
-CoreDataManager.fetchDatas(container: "CoreData", entity: "City") { data in
-    if let cityName = data.value(forKey: "name") as? String {
-        
-    }
-    if let population = data.value(forKey: "population") as? Int {
-        
-    }
-}
-```
-Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the closure should handle the retrieved data by casting each attribute value to its appropriate type, such as String or Int, as shown in the example code provided.
-
+Firebase Managers is a collection of manager classes that provides a streamlined interface for handling various Firebase services such as Authentication, Cloud Storage, Cloud Firestore, Remote Config, and more. These manager classes encapsulate the complexity of Firebase APIs and provide a simple and intuitive API for developers to work with Firebase services. Using Firebase Managers, developers can easily integrate Firebase services into their applications and build robust and scalable Firebase-powered apps.
 # FirestoreManager
 
 The FirestoreManager class simplifies the management of Firebase Firestore operations, providing a more efficient and streamlined approach.
@@ -334,3 +278,157 @@ By accessing the "source" variable returned by the function and utilizing a swit
         break
     }
 ```
+
+# RemoteConfigManager
+
+The FirebaseRemoteConfigManager class provides an interface for managing remote configuration values in a Firebase project. With this class, developers can fetch and apply configuration changes in real-time without requiring app updates, making it easy to customize the behavior and appearance of an app without the need for a code change. 
+
+## Configure Remote Config
+
+The ```RemoteConfigManager.configureRemoteConfig``` function initializes the Firebase Remote Config service with the specified default values for the remote configuration parameters. This function creates a new instance of the Firebase Remote Config service and sets the default values for each parameter, as specified in the ```defaultValues``` parameter.
+
+```swift
+RemoteConfigManager.configureRemoteConfig(defaultValues: [
+    "stringValue" : "String" as NSObject,
+    "boolValue" : false  as NSObject,
+    "integerValue" : 5  as NSObject,
+    "doubleValue" : 5.3  as NSObject,
+    "arrayValue" : [1,2,3]  as NSObject
+    ])
+```
+Note that the defaultValues parameter should be a dictionary with keys corresponding to the names of the remote configuration parameters and values of type NSObject, which can be of any supported type such as String, Bool, Int, Double, or Array.
+
+## Fetch Remote Config Values
+
+The ```RemoteConfigManager.getInt```, ```RemoteConfigManager.getDouble```, ```RemoteConfigManager.getBool```, ```RemoteConfigManager.getData```, and ```RemoteConfigManager.getArray``` functions retrieve the current values of specified remote configuration parameters from the Firebase Remote Config service. These functions retrieve the current value of the specified parameter from the Firebase Remote Config service and return it as a value of the appropriate type.
+
+```swift
+let integerValue = RemoteConfigManager.getInt(key: "integerValue")
+let doubleValue = RemoteConfigManager.getDouble(key: "doubleValue")
+let boolValue = RemoteConfigManager.getBool(key: "boolValue")
+let dataValue = RemoteConfigManager.getData(key: "dataValue")
+let arrayValue = RemoteConfigManager.getArray(key: "arrayValue")
+```
+
+Note that each of these functions should be called with a ```key``` parameter corresponding to the name of the remote configuration parameter to retrieve, and the returned value should be safely cast to the appropriate type. If the parameter does not exist or has not yet been fetched, the default value for that parameter will be returned.
+# CoreDataManager
+
+The CoreDataManager class provides a simplified interface for performing common CoreData operations, thereby reducing the complexity of managing CoreData in an application.
+
+## Save Data
+
+The ```CoreDataManager.saveData``` function saves a new object of a specified entity type in the specified container with the provided attribute values. This function is particularly useful for simplifying the process of adding new objects to a CoreData database.
+
+```swift
+CoreDataManager.saveData(container: "CoreData",
+                        entity: "City",
+                        attributeDict: ["name" : "Los Angeles",
+                                        "id" : "1",
+                                        "population" : 700000
+                                        ])
+```
+
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```attributeDict``` parameter must include values for all required attributes of the specified entity type.
+
+## Update Data
+
+The ```CoreDataManager.updateData``` function updates an existing object of a specified entity type in the specified container with new attribute values. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and replaces its attribute values with the new values specified in the ```newAttributeDict``` parameter.
+
+```swift
+CoreDataManager.updateData(container: "CoreData",
+                            entity: "City",
+                            searchKey: "id",
+                            searchValue: "1",
+                            newAttributeDict: ["name" : "Los Angeles",
+                                                "state" : "CA",
+                                                "id" : "1",
+                                                "population" : 700000
+                                                ])
+```
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be updated and it should be a ```String```. Finally, ```newAttributeDict``` must include values for all attributes that need to be updated in the object.
+
+## Delete Data
+
+
+
+The ```CoreDataManager.deleteData``` function removes an existing object of a specified entity type from the specified container. This function locates the object using the provided ```searchKey``` and ```searchValue``` parameters, and removes it from the database.
+
+```swift
+CoreDataManager.deleteData(container: "CoreData",
+                            entity: "City",
+                            searchKey: "id",
+                            searchValue: "1")
+```
+
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the ```searchKey``` parameter must correspond to a unique attribute of the specified entity type, and ```searchValue``` must match the value of this attribute in the object to be deleted and it should be a ```String```.
+
+## Fetch Data
+
+The ```CoreDataManager.fetchDatas``` function retrieves all objects of a specified entity type from the specified container and executes a closure with each fetched object. This function retrieves all attribute values of each object and passes them as a dictionary to the closure.
+
+```swift
+CoreDataManager.fetchDatas(container: "CoreData", entity: "City") { data in
+    if let cityName = data.value(forKey: "name") as? String {
+        
+    }
+    if let population = data.value(forKey: "population") as? Int {
+        
+    }
+}
+```
+Note that the entity type and container must already exist in the database for this function to work properly. Additionally, the closure should handle the retrieved data by casting each attribute value to its appropriate type, such as String or Int, as shown in the example code provided.
+
+# LottieManager
+
+The LottieManager class provides a convenient way to work with Lottie animations in an application. With LottieManager, developers can easily load and display Lottie animations in their apps.
+
+## Show Full-Screen Lottie
+
+The ```LottieManager.showFullScreenLottie``` function displays a Lottie animation in full screen. This function accepts three optional parameters:
+
+```swift
+LottieManager.showFullScreenLottie(animation: .loadingLines2, color: .blue, backgroundOpacity: 0)
+LottieManager.showFullScreenLottie(animation: .loadingLines, color: .clear)
+LottieManager.showFullScreenLottie(animation: .custom(name: "myCustomAnimation"))
+```
+
+```animation```: This parameter specifies the Lottie animation to display. It can either be a pre-defined animation provided by the NeonSDK, such as ```.loadingLines```, or a custom animation specified by name.
+
+```color```: This parameter sets the color of the Lottie animation. It can be set to any UIColor value, or set to .clear to display the animation with it's original color.
+
+```backgroundOpacity```: This parameter sets the opacity of the background behind the Lottie animation. It accepts a value between 0 and 1, where 0 is fully transparent and 1 is fully opaque.
+
+## Remove Full-Screen Lottie
+
+The ```LottieManager.removeFullScreenLottie``` function removes the currently displayed full screen Lottie animation, if any, from the screen. This function does not accept any parameters and simply removes the Lottie animation from the screen.
+
+```swift
+LottieManager.removeFullScreenLottie()
+```
+## Add Lottie to Specific Location
+
+The ```LottieManager.createLottie``` function creates and returns a Lottie animation with the specified animation. This function accepts one parameter:
+
+```animation```: This parameter specifies the Lottie animation to display. It can either be a pre-defined animation provided by the NeonSDK, such as ```.loadingCircle3```, or a custom animation specified by name with the syntax ```.custom(name: "myCustomAnimation")```.
+
+```swift
+
+// Add Lottie to specific location
+         
+let lottie = LottieManager.createLottie(animation: .loadingCircle3)
+view.addSubview(lottie)
+lottie.snp.makeConstraints({make in
+    make.top.left.height.width.equalTo(100)
+})
+             
+// Add Custom Lottie to specific location
+         
+let lottie2 = LottieManager.createLottie(animation: .custom(name: "myCustomAnimation"))
+view.addSubview(lottie2)
+lottie2.snp.makeConstraints({make in
+    make.top.left.height.width.equalTo(100)
+})
+```
+The returned Lottie animation view can then be added to a specific location within a view hierarchy using the addSubview method. Once added, it can be positioned using Auto Layout constraints, such as those created with the SnapKit library as shown in the example.
+
+Note that once the Lottie animation view is created, it can be customized further using properties such as loopMode, animationSpeed, and background color.
