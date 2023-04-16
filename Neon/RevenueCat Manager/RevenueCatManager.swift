@@ -84,8 +84,8 @@ public class RevenueCatManager {
     
     
     
-    public static func subscribe(animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation)
+    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
             return }
@@ -104,8 +104,8 @@ public class RevenueCatManager {
         }
     }
     
-    public static func purchase(animation : LottieManager.AnimationType, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation)
+    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
             return }
@@ -123,8 +123,8 @@ public class RevenueCatManager {
     }
     
     
-    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation)
+    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
 
         Purchases.shared.restorePurchases {  purchaserInfo, _ in
             LottieManager.removeFullScreenLottie()
