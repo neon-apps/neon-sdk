@@ -33,6 +33,12 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
     - [Show Full-Screen Lottie](#Show-Full-Screen-Lottie)
     - [Remove Full-Screen Lottie](#Remove-Full-Screen-Lottie)
     - [Add Lottie to Specific Location](#Add-Lottie-to-Specific-Location)
+- [RevenueCatManager](#RevenueCatManager)
+    - [Configure RevenueCat](#Configure-RevenueCat)
+    - [Select Package](#Select-Package)
+    - [Subscribe to Selected Package](#Subscribe-to-Selected-Package)
+    - [Purchase Selected Package](#Purchase-Selected-Package)
+    - [Restore Subscriptions](#Restore-Subscriptions)
 #  Firebase Managers
 
 Firebase Managers is a collection of manager classes that provides a streamlined interface for handling various Firebase services such as Authentication, Cloud Storage, Cloud Firestore, Remote Config, and more. These manager classes encapsulate the complexity of Firebase APIs and provide a simple and intuitive API for developers to work with Firebase services. Using Firebase Managers, developers can easily integrate Firebase services into their applications and build robust and scalable Firebase-powered apps.
@@ -432,3 +438,131 @@ lottie2.snp.makeConstraints({make in
 The returned Lottie animation view can then be added to a specific location within a view hierarchy using the addSubview method. Once added, it can be positioned using Auto Layout constraints, such as those created with the SnapKit library as shown in the example.
 
 Note that once the Lottie animation view is created, it can be customized further using properties such as loopMode, animationSpeed, and background color.
+
+
+# RevenueCatManager
+
+The RevenueCatManager class provides a simple interface for managing in-app purchases and subscriptions in an application using the RevenueCat SDK. With RevenueCatManager, developers can easily integrate RevenueCat into their application and handle subscription-related tasks such as purchase validation, receipt management, and user entitlements.
+
+## Configure RevenueCat
+
+
+```swift
+RevenueCatManager.configure(withAPIKey: "YOUR_API_KEY", products : [
+    "WEEKLY_PRODUCT_ID", 
+    "MONTHLY_PRODUCT_ID", 
+    "ANNUAL_PRODUCT_ID", 
+    "CUSTOM_PRODUCT_ID"
+])
+```
+  
+The ```RevenueCatManager.configure``` function configures the RevenueCat SDK with the provided API key and product identifiers. This function accepts two parameters:
+
+```withAPIKey```: This parameter specifies the API key for your RevenueCat account. This is a required parameter and must be provided.
+```products```: This parameter specifies an array of product identifiers that correspond to the in-app purchases defined in your RevenueCat account. 
+
+IMPORTANT NOTE! : The entitlement id in your RevenueCat dashboard should be "pro".
+
+## Fetch Prices
+
+Implement the ```RevenueCatManagerDelegate``` protocol in your ```ViewController``` and set the delegate to self to receive package fetch events. You can then retrieve the localized price string for a specific package by calling the ```getPackagePrice``` method with the package ID. Similarly, you can retrieve the entire package object by calling the ```getPackage``` method with the package ID. 
+
+```swift
+class ViewController: UIViewController, RevenueCatManagerDelegate {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        RevenueCatManager.delegate = self
+        packageFetched()
+
+    }
+
+    func packageFetched() {
+        
+        if let price = RevenueCatManager.getPackagePrice(id: "MONTHLY_PRODUCT_ID"){
+            let monthlyPackagePrice = price
+        }
+        
+        if let monthlyPackage = RevenueCatManager.getPackage(id: "MONTHLY_PRODUCT_ID"){
+            let price = monthlyPackage.localizedPriceString
+        }
+        
+    }
+}
+```
+
+Please note that you should call the ```packageFetched``` function in the ```viewDidLoad``` method. By doing so, you will receive the latest fetched price from ```UserDefaults``` before fetching packages.
+
+## Select Package
+
+The ```RevenueCatManager.selectPackage``` function allows you to select a specific package for purchase or subscribe. Simply provide the ID of the package you wish to select as the id parameter. 
+
+```swift
+func weeklyClicked(){
+    RevenueCatManager.selectPackage(id: "WEEKLY_PRODUCT_ID")
+}
+```
+This function should be called after successfully configuring RevenueCat and fetching the available packages, and before initiating the purchase process.
+
+## Subscribe to Selected Package
+
+The ```RevenueCatManager.subscribe``` function allows you to initiate the subscription process for the selected package. You can pass a Lottie animation to display during the subscription process, and provide completion blocks for both successful and failed purchase attempts.
+
+In the ```completionSuccess block```, you can handle the successful subscription purchase as needed. In the ```completionFailure``` block, you can handle any errors that may occur during the subscription process.
+
+```swift
+RevenueCatManager.subscribe(animation: .loadingBar) {
+    // Subscribed to selected package succesfully
+} completionFailure: {
+    // Couldn't subscribe to selected package
+}
+```
+In the ```RevenueCatManager.subscribe``` function, ```animationColor``` and ```animationWidth``` are optional parameters that can be used to customize the loading animation displayed during the subscription process.
+```swift
+RevenueCatManager.subscribe(animation: .loadingBar, animationColor : .red, animationWidth: 100)
+```
+```animationColor```specifies the color of the loading animation. If not provided, the default color will be used.
+
+```animationWidth``` specifies the width of the loading animation. If not provided, the default width will be used.
+
+## Purchase Selected Package
+
+The RevenueCatManager.purchase function can be used to purchase both consumable and non-consumable packages. It can't be used for subscriptions.
+
+```swift
+RevenueCatManager.purchase(animation: .loadingBar) {
+    // Selected package purchased succesfully
+} completionFailure: {
+    // Couldn't purchase selected package
+}
+        
+```
+
+For consumable packages, the purchased product is something that can be used up and needs to be purchased again in the future. An example of this type of package could be virtual coins in a game.
+
+For non-consumable packages, the purchased product is something that is permanently available to the user after purchase. An example of this type of package could be a lifetime subscription to a news app.
+
+The function will trigger the appropriate behavior based on the type of package being purchased.
+
+## Restore Subscriptions
+
+The RevenueCatManager.restorePurchases function is used to restore any previously purchased subscriptions made by the user on a different device or after re-installing the app.
+
+```swift
+RevenueCatManager.restorePurchases(vc: self, animation: .loadingBar) {
+    // Subscription restored succesfully
+} completionFailure: {
+    // Couldn't find any active subscription
+}
+```
+
+The function takes in the current view controller, animation parameter to show a loading animation while the process is running, and two completion blocks to handle success and failure cases respectively.
+
+```swift
+RevenueCatManager.restorePurchases(vc: self, animation: .loadingBar, showAlerts: false)
+```
+
+The ```showAlerts``` parameter is an optional parameter that defaults to true. When it is set to true, the user will see alert messages indicating whether the restore was successful or failed. 
+
+If you want to hide these alerts and handle the result of the restore programmatically, you can set ```showAlerts``` to false. This can be useful if you want to provide your own UI for handling restore results or if you want to perform some additional logic before showing the alerts to the user.
