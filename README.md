@@ -6,6 +6,7 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
 
 ## Table of Contents
 
+- [Configure NeonSDK](#Configure-NeonSDK)
 - [Firebase Managers](#Firebase-Managers)
     - [FirestoreManager](#FirestoreManager)
          - [Manage Documents](#Manage-Documents)
@@ -39,6 +40,28 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
     - [Subscribe to Selected Package](#Subscribe-to-Selected-Package)
     - [Purchase Selected Package](#Purchase-Selected-Package)
     - [Restore Subscriptions](#Restore-Subscriptions)
+## Configure NeonSDK
+
+
+```swift
+Neon.configure(
+    window: &window,
+    onboardingVC: Onboarding1VC(),
+    paywallVC: PaywallVC(),
+    homeVC: HomeVC())
+```
+
+The ```Neon.configure``` function is used to set up and configure the ```NeonSDK``` framework for use in your app. It takes four parameters:
+
+window: a reference to the app's main window.
+
+```onboardingVC```: the first view controller that should be displayed during onboarding.
+
+```paywallVC```: the view controller that should be displayed when a user is prompted to pay for premium features.
+
+```homeVC```: the view controller that should be displayed once the user has completed onboarding and/or paid for premium features.
+
+This function should be called in the ```AppDelegate```'s ```didFinishLaunchingWithOptions``` method. Once configured, ```NeonSDK``` will handle the user flow between these different view controllers based on their authentication and subscription status.
 #  Firebase Managers
 
 Firebase Managers is a collection of manager classes that provides a streamlined interface for handling various Firebase services such as Authentication, Cloud Storage, Cloud Firestore, Remote Config, and more. These manager classes encapsulate the complexity of Firebase APIs and provide a simple and intuitive API for developers to work with Firebase services. Using Firebase Managers, developers can easily integrate Firebase services into their applications and build robust and scalable Firebase-powered apps.
@@ -528,7 +551,7 @@ RevenueCatManager.subscribe(animation: .loadingBar, animationColor : .red, anima
 
 ## Purchase Selected Package
 
-The RevenueCatManager.purchase function can be used to purchase both consumable and non-consumable packages. It can't be used for subscriptions.
+The ```RevenueCatManager.purchase``` function can be used to purchase both consumable and non-consumable packages. It can't be used for subscriptions.
 
 ```swift
 RevenueCatManager.purchase(animation: .loadingBar) {
@@ -547,7 +570,7 @@ The function will trigger the appropriate behavior based on the type of package 
 
 ## Restore Subscriptions
 
-The RevenueCatManager.restorePurchases function is used to restore any previously purchased subscriptions made by the user on a different device or after re-installing the app.
+The ```RevenueCatManager.restorePurchases``` function is used to restore any previously purchased subscriptions made by the user on a different device or after re-installing the app.
 
 ```swift
 RevenueCatManager.restorePurchases(vc: self, animation: .loadingBar) {
