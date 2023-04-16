@@ -67,7 +67,7 @@ public class RevenueCatManager {
             }
         }
         
-        return nil
+        return UserDefaults.standard.string(forKey: "Neon-\(id)")
     }
     
     public static func selectPackage(id : String){
