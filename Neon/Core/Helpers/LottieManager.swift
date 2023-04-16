@@ -14,7 +14,8 @@ public class LottieManager{
     
     public static func createLottie(animation : AnimationType) -> LottieAnimationView {
         let defaultAnimationName = animation.rawValue.name
-        let animLoading = LottieAnimationView(name: defaultAnimationName)
+        let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+        let animLoading = LottieAnimationView(filePath: animationURL!)
         animLoading.backgroundColor = .clear
         animLoading.loopMode = .loop
         animLoading.animationSpeed = 1
