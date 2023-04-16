@@ -13,9 +13,20 @@ public class LottieManager{
     
     
     public static func createLottie(animation : AnimationType) -> LottieAnimationView {
+        
+        var animLoading = LottieAnimationView()
         let defaultAnimationName = animation.rawValue.name
-        let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
-        let animLoading = LottieAnimationView(filePath: animationURL!)
+        
+        switch animation {
+        case .custom(name: _):
+            animLoading = LottieAnimationView(name: defaultAnimationName)
+            break
+        default:
+            let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+            animLoading = LottieAnimationView(filePath: animationURL!)
+            break
+        }
+       
         animLoading.backgroundColor = .clear
         animLoading.loopMode = .loop
         animLoading.animationSpeed = 1
@@ -43,9 +54,20 @@ public class LottieManager{
         let defaultAnimationWidht = animation.rawValue.width
         let defaultAnimationName = animation.rawValue.name
         
-        let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+      
         
-        let animLoading = LottieAnimationView(filePath: animationURL!)
+        var animLoading = LottieAnimationView()
+        
+        switch animation {
+        case .custom(name: _):
+            animLoading = LottieAnimationView(name: defaultAnimationName)
+            break
+        default:
+            let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+            animLoading = LottieAnimationView(filePath: animationURL!)
+            break
+        }
+        
         animLoading.frame.size = CGSize(width: width ?? defaultAnimationWidht, height: width ?? defaultAnimationWidht)
         animLoading.center = window.center
         animLoading.backgroundColor = .clear
