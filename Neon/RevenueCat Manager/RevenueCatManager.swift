@@ -24,12 +24,12 @@ public class RevenueCatManager {
     public static func configure(withAPIKey : String,
                             products : [String]) {
         Purchases.configure(withAPIKey: withAPIKey)
-        RevenueCatManager().fetchPackages(products: products)
-        RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
- 
+        fetchPackages(products: products)
+        verifySubscription(completionSuccess: nil, completionFailure: nil)
+        configureNotification()
     }
     
-    func fetchPackages(products : [String]) {
+    internal static func fetchPackages(products : [String]) {
         Purchases.shared.getOfferings { [self] offerings, _ in
 
             if let offerings = offerings {
@@ -175,6 +175,13 @@ public class RevenueCatManager {
                 completionFailure()
             }
         }
+    }
+    
+    internal static func configureNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    @objc internal func appMovedToForeground(){
+        RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
     }
 
 }
