@@ -41,6 +41,7 @@ public class RevenueCatManager {
                 }
                 for package in packages! {
                     RevenueCatManager.packages.append(package)
+                    UserDefaults.standard.setValue(package.localizedPriceString, forKey: "Neon-\(package.storeProduct.productIdentifier)")
                     RevenueCatManager.delegate?.packageFetched()
                 }
             }
@@ -61,6 +62,8 @@ public class RevenueCatManager {
         for package in packages {
             if package.storeProduct.productIdentifier == id{
                 return package.localizedPriceString
+            }else{
+                UserDefaults.standard.string(forKey: "Neon-\(id)")
             }
         }
         

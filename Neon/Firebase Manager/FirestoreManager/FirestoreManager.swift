@@ -27,7 +27,7 @@ public class FirestoreManager{
     ///  The object should be from Codable class. Ex : public class Country: Codable {}
     public static func setDocument(path : [FirestoreReferance], object : Encodable){
         
-        
+
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         
         do {
