@@ -7,6 +7,8 @@ NeonSDK is a powerful software development kit designed to enhance the efficienc
 ## Table of Contents
 
 - [Configure NeonSDK](#Configure-NeonSDK)
+- [Neon Elements](#Neon-Elements)
+    - [NeonBlurView](#NeonBlurView)
 - [Firebase Managers](#Firebase-Managers)
     - [FirestoreManager](#FirestoreManager)
          - [Manage Documents](#Manage-Documents)
@@ -62,6 +64,41 @@ window: a reference to the app's main window.
 ```homeVC```: the view controller that should be displayed once the user has completed onboarding and/or paid for premium features.
 
 This function should be called in the ```AppDelegate```'s ```didFinishLaunchingWithOptions``` method. Once configured, ```NeonSDK``` will handle the user flow between these different view controllers based on their authentication and subscription status.
+
+```swift
+Neon.onboardingCompleted()
+```
+To notify the ```NeonSDK``` that the onboarding process has been completed, it is essential to call ```Neon.onboardingCompleted()``` at the end of the process. Please ensure that you include this method to ensure that the SDK is notified properly.
+## Neon Elements
+
+Neon Elements is a collection of custom UI elements that provide enhanced functionality and aesthetics compared to classic UIKit elements. These elements, such as NeonTextView, NeonBlurView, NeonButton, NeonImageView, etc., are designed to make app development easier and more efficient. They are built on top of UIKit and provide additional features, such as advanced animations, custom styles, and layout options, that allow developers to create visually appealing and engaging user interfaces. 
+## NeonBlurView
+
+
+```NeonBlurView``` is a subclass of ```UIVisualEffectView``` in the ```NeonSDK``` framework that provides a way to add a blurred overlay on top of another view. It is often used to create visually appealing effects such as highlighting or dimming parts of a screen.
+
+```swift
+let blurView = NeonBlurView()
+blurView.colorTint = .black
+blurView.colorTintAlpha = 0.2
+blurView.blurRadius = 10
+blurView.scale = 1
+view.addSubview(blurView)
+blurView.snp.makeConstraints { make in
+    make.center.equalToSuperview()
+    make.height.width.equalTo(200)
+}
+```
+
+```colorTint```: The color that is applied to the view behind the blur. The default value is nil.
+
+```colorTintAlpha```: The opacity of the color tint. The default value is 0.
+
+```blurRadius```: The radius of the blur effect. The default value is 0.
+
+```scale```: The scale factor applied to the view before blurring it. The default value is 1.0.
+
+You can add a ```NeonBlurView``` to your view hierarchy and configure its properties to achieve the desired blur effect.
 #  Firebase Managers
 
 Firebase Managers is a collection of manager classes that provides a streamlined interface for handling various Firebase services such as Authentication, Cloud Storage, Cloud Firestore, Remote Config, and more. These manager classes encapsulate the complexity of Firebase APIs and provide a simple and intuitive API for developers to work with Firebase services. Using Firebase Managers, developers can easily integrate Firebase services into their applications and build robust and scalable Firebase-powered apps.
@@ -426,6 +463,8 @@ LottieManager.showFullScreenLottie(animation: .custom(name: "myCustomAnimation")
 ```color```: This parameter sets the color of the Lottie animation. It can be set to any UIColor value, or set to .clear to display the animation with it's original color.
 
 ```backgroundOpacity```: This parameter sets the opacity of the background behind the Lottie animation. It accepts a value between 0 and 1, where 0 is fully transparent and 1 is fully opaque.
+
+It is recommended that you avoid showing Lottie animations in the ```viewDidLoad``` method. Instead, it is best to display them in ```viewWillAppear``` or a later method to ensure that the animation is properly loaded and displayed on the screen.
 
 ## Remove Full-Screen Lottie
 
