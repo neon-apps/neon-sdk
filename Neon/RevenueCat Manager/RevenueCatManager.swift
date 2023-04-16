@@ -84,8 +84,8 @@ public class RevenueCatManager {
     
     
     
-    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
+    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
             return }
@@ -104,8 +104,8 @@ public class RevenueCatManager {
         }
     }
     
-    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
+    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
             return }
@@ -123,8 +123,9 @@ public class RevenueCatManager {
     }
     
     
-    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation, color: animationColor)
+    
+    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
 
         Purchases.shared.restorePurchases {  purchaserInfo, _ in
             LottieManager.removeFullScreenLottie()
