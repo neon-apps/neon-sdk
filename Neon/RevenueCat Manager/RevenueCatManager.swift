@@ -63,7 +63,7 @@ public class RevenueCatManager {
             if package.storeProduct.productIdentifier == id{
                 return package.localizedPriceString
             }else{
-                UserDefaults.standard.string(forKey: "Neon-\(id)")
+                return UserDefaults.standard.string(forKey: "Neon-\(id)")
             }
         }
         
