@@ -178,12 +178,10 @@ public class RevenueCatManager {
     }
     
     internal static func configureNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.observe(name: UIApplication.willEnterForegroundNotification) { Notification in
+            RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
+        }
     }
-    @objc internal func appMovedToForeground(){
-        RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
-    }
-
 }
 
 
