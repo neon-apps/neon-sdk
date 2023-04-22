@@ -4,39 +4,37 @@
 //
 //  Created by Tuna Öztürk on 3.04.2023.
 //
-
+//
 import Foundation
 import UIKit
 
+
 class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var objects = [T]() {
-           didSet {
-               reloadData()
-           }
-       }
-    var itemsPerRow: Int = 2 {
+    
+    var objects: [T] {
         didSet {
-            collectionViewLayout.invalidateLayout()
-        }
-    }
-    var leftPadding: CGFloat = 20
-    var rightPadding: CGFloat = 20
-    var horizontalItemSpacing: CGFloat = 20 {
-        didSet {
-            collectionViewLayout.invalidateLayout()
+            reloadData()
         }
     }
     
-    var verticalItemSpacing: CGFloat = 20 {
-        didSet {
-            collectionViewLayout.invalidateLayout()
-        }
-    }
-
+    var itemsPerRow: Int
+    var leftPadding: CGFloat
+    var rightPadding: CGFloat
+    var horizontalItemSpacing: CGFloat
+    var verticalItemSpacing: CGFloat
+    
     var didSelect: ((T, IndexPath) -> Void)?
+    
     private let cellReuseIdentifier = String(describing: Cell.self)
     
-    init() {
+    init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20) {
+        self.objects = objects
+        self.itemsPerRow = itemsPerRow
+        self.leftPadding = leftPadding
+        self.rightPadding = rightPadding
+        self.horizontalItemSpacing = horizontalItemSpacing
+        self.verticalItemSpacing = verticalItemSpacing
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         super.init(frame: .zero, collectionViewLayout: layout)
@@ -81,9 +79,8 @@ class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-          return verticalItemSpacing
-      }
-      
+        return verticalItemSpacing
+    }
 }
 
 protocol ConfigurableCell {
@@ -92,6 +89,7 @@ protocol ConfigurableCell {
 }
 
 class NeonCollectionViewCell<T>: UICollectionViewCell {
+    
     var configureCell: ((T) -> Void)?
     
     func configure(with object: T) {
