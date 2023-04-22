@@ -35,8 +35,11 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     public var trailingSwipeActions = [SwipeAction<T>]()
     public var leadingSwipeActions = [SwipeAction<T>]()
     
-    public init(objects: [T] = []) {
+    public var heightForRows: CGFloat
+    
+    public init(objects: [T] = [], heightForRows: CGFloat = 44.0) {
         self.objects = objects
+        self.heightForRows = heightForRows
         super.init(frame: .zero, style: .plain)
         self.dataSource = self
         self.delegate = self
@@ -60,11 +63,16 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
         return cell
     }
     
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return heightForRows
+    }
+    
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = objects[indexPath.row]
         didSelect?(object, indexPath)
     }
-    
+  
     open override func layoutSubviews() {
         super.layoutSubviews()
         self.separatorStyle = .none // Update separator style on layoutSubviews
