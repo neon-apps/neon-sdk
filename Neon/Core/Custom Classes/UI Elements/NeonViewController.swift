@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class NeonViewController: UIViewController {
+public class NeonViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -18,7 +18,7 @@ class NeonViewController: UIViewController {
     
     // MARK: - View Lifecycle
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         addMainStack()
     }
