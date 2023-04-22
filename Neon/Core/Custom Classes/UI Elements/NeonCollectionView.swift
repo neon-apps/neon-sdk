@@ -11,23 +11,23 @@ import UIKit
 
 open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var objects: [T] {
+   public var objects: [T] {
         didSet {
             reloadData()
         }
     }
     
-    var itemsPerRow: Int
-    var leftPadding: CGFloat
-    var rightPadding: CGFloat
-    var horizontalItemSpacing: CGFloat
-    var verticalItemSpacing: CGFloat
+    public var itemsPerRow: Int
+    public var leftPadding: CGFloat
+    public var rightPadding: CGFloat
+    public var horizontalItemSpacing: CGFloat
+    public var verticalItemSpacing: CGFloat
     
-    var didSelect: ((T, IndexPath) -> Void)?
+    public var didSelect: ((T, IndexPath) -> Void)?
     
     private let cellReuseIdentifier = String(describing: Cell.self)
     
-    init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20) {
+    public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20) {
         self.objects = objects
         self.itemsPerRow = itemsPerRow
         self.leftPadding = leftPadding
