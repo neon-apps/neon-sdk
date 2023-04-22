@@ -90,9 +90,9 @@ protocol ConfigurableCell {
 
 open class NeonCollectionViewCell<T>: UICollectionViewCell {
     
-    public  var configureCell: ((T) -> Void)?
+    open  var configureCell: ((T) -> Void)?
     
-    public func configure(with object: T) {
+    open func configure(with object: T) {
         configureCell?(object)
     }
 }

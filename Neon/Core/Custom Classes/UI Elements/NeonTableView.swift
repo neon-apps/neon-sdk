@@ -100,9 +100,9 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
 
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell {
     
-    public var configureCell: ((T) -> Void)?
+    open var configureCell: ((T) -> Void)?
     
-    public func configure(with object: T) {
+    open func configure(with object: T) {
         configureCell?(object)
     }
 }
