@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tuna Öztürk on 3.04.2023.
 //
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-public class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var objects: [T] {
         didSet {
@@ -43,7 +43,7 @@ public class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectio
         self.register(Cell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -88,11 +88,12 @@ protocol ConfigurableCell {
     func configure(with data: ObjectType)
 }
 
-public class NeonCollectionViewCell<T>: UICollectionViewCell {
+open class NeonCollectionViewCell<T>: UICollectionViewCell {
     
-    var configureCell: ((T) -> Void)?
+    public  var configureCell: ((T) -> Void)?
     
-    func configure(with object: T) {
+    public func configure(with object: T) {
         configureCell?(object)
     }
 }
+
