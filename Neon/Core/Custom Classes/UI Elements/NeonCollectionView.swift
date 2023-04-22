@@ -9,7 +9,24 @@ import Foundation
 import UIKit
 
 
+public struct ContextMenuAction<T> {
+    let title: String
+    let image: String?
+    let action: (T, IndexPath) -> Void
+    let isDestructive: Bool
+    
+    public init(title: String, imageSystemName: String? = nil, isDestructive: Bool = false, action: @escaping (T, IndexPath) -> Void) {
+        self.title = title
+        self.image = imageSystemName
+        self.action = action
+        self.isDestructive = isDestructive
+    }
+}
+
+@available(iOS 13.0, *)
 open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    public var contextMenuActions = [ContextMenuAction<T>]()
     
    public var objects: [T] {
         didSet {
@@ -80,6 +97,25 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return verticalItemSpacing
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let object = objects[indexPath.row]
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [self] suggestedActions in
+            var actions = [UIAction]()
+            for contextMenuAction in self.contextMenuActions {
+                var image: UIImage? = nil
+                if let actionImage = contextMenuAction.image {
+                    image = UIImage(systemName: actionImage)
+                }
+                let uiAction = UIAction(title: contextMenuAction.title, image: image, attributes: contextMenuAction.isDestructive ? .destructive : []) { action in
+                    contextMenuAction.action(object, indexPath)
+                }
+                actions.append(uiAction)
+            }
+            return UIMenu(title: "", children: actions)
+        }
+        return configuration
     }
 }
 
