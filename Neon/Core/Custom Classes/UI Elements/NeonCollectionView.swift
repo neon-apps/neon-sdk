@@ -9,19 +9,7 @@ import Foundation
 import UIKit
 
 
-public struct ContextMenuAction<T> {
-    let title: String
-    let image: String?
-    let action: (T, IndexPath) -> Void
-    let isDestructive: Bool
-    
-    public init(title: String, imageSystemName: String? = nil, isDestructive: Bool = false, action: @escaping (T, IndexPath) -> Void) {
-        self.title = title
-        self.image = imageSystemName
-        self.action = action
-        self.isDestructive = isDestructive
-    }
-}
+
 
 @available(iOS 13.0, *)
 open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -35,6 +23,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     public var itemsPerRow: Int
+    public var heightForItem : CGFloat?
     public var leftPadding: CGFloat
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat
@@ -44,11 +33,12 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     
     private let cellReuseIdentifier = String(describing: Cell.self)
     
-    public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20) {
+    public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20, heightForItem : CGFloat? = nil) {
         self.objects = objects
         self.itemsPerRow = itemsPerRow
         self.leftPadding = leftPadding
         self.rightPadding = rightPadding
+        self.heightForItem = heightForItem
         self.horizontalItemSpacing = horizontalItemSpacing
         self.verticalItemSpacing = verticalItemSpacing
         
@@ -84,7 +74,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         let padding: CGFloat = horizontalItemSpacing
         let collectionViewWidth = collectionView.bounds.width
         let itemWidth = (collectionViewWidth - leftPadding - rightPadding - padding * CGFloat(itemsPerRow - 1)) / CGFloat(itemsPerRow)
-        return CGSize(width: itemWidth, height: itemWidth)
+        return CGSize(width: itemWidth, height: heightForItem ?? itemWidth)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -133,3 +123,16 @@ open class NeonCollectionViewCell<T>: UICollectionViewCell {
     }
 }
 
+public struct ContextMenuAction<T> {
+    let title: String
+    let image: String?
+    let action: (T, IndexPath) -> Void
+    let isDestructive: Bool
+    
+    public init(title: String, imageSystemName: String? = nil, isDestructive: Bool = false, action: @escaping (T, IndexPath) -> Void) {
+        self.title = title
+        self.image = imageSystemName
+        self.action = action
+        self.isDestructive = isDestructive
+    }
+}
