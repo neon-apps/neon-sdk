@@ -150,8 +150,8 @@ public class RevenueCatManager {
                 if showAlerts{
                     AlertManager.showCustomAlert(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
                         AlertButton(completion: {
-                            guard let completionSuccess else { return }
-                            completionSuccess()
+                            guard let completionFailure else { return }
+                            completionFailure()
                         })
                     ], viewController: vc)
                 }else{
