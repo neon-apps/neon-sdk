@@ -58,7 +58,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
         let object = objects[indexPath.row]
-        cell.configure(with: object)
+        cell.configure(with: object, at: indexPath)
         cell.selectionStyle = .none
         return cell
     }
@@ -109,8 +109,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell {
     
     open var configureCell: ((T) -> Void)?
+    open var indexPath: IndexPath?
     
-    open func configure(with object: T) {
+    open func configure(with object: T, at indexPath: IndexPath) {
+        self.indexPath = indexPath
         configureCell?(object)
     }
 }

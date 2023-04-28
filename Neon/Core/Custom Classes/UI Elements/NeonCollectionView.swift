@@ -111,10 +111,11 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
 
 protocol ConfigurableCell {
     associatedtype ObjectType
-    func configure(with data: ObjectType)
+    associatedtype IndexPath
+    func configure(with data: ObjectType, at indexPath: IndexPath)
 }
 
-open class NeonCollectionViewCell<T>: UICollectionViewCell {
+open class NeonCollectionViewCell<T>: UICollectionViewCell, ConfigurableCell {
     
     open var configureCell: ((T) -> Void)?
     open var indexPath: IndexPath?
