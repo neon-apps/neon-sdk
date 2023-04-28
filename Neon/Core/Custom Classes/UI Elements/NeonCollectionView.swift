@@ -61,7 +61,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
         let object = objects[indexPath.row]
-        cell.configure(with: object)
+        cell.configure(with: object, at: indexPath)
         return cell
     }
     
@@ -116,9 +116,11 @@ protocol ConfigurableCell {
 
 open class NeonCollectionViewCell<T>: UICollectionViewCell {
     
-    open  var configureCell: ((T) -> Void)?
+    open var configureCell: ((T) -> Void)?
+    open var indexPath: IndexPath?
     
-    open func configure(with object: T) {
+    open func configure(with object: T, at indexPath: IndexPath) {
+        self.indexPath = indexPath
         configureCell?(object)
     }
 }
