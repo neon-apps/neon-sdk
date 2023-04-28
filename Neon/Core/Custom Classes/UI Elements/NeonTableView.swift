@@ -51,24 +51,24 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
         let object = objects[indexPath.row]
-        cell.configure(with: object, at: indexPath)
+        cell.configure(with: object)
         cell.selectionStyle = .none
         return cell
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForRows
     }
     
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = objects[indexPath.row]
         didSelect?(object, indexPath)
     }
@@ -78,11 +78,11 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
         self.separatorStyle = .none // Update separator style on layoutSubviews
     }
     
-    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
          return configureSwipeActions(for: indexPath, swipeActions: leadingSwipeActions)
      }
      
-     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    open func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
          return configureSwipeActions(for: indexPath, swipeActions: trailingSwipeActions)
      }
      
@@ -109,10 +109,8 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell {
     
     open var configureCell: ((T) -> Void)?
-    open var indexPath: IndexPath?
     
-    open func configure(with object: T, at indexPath: IndexPath) {
-        self.indexPath = indexPath
+    open func configure(with object: T) {
         configureCell?(object)
     }
 }

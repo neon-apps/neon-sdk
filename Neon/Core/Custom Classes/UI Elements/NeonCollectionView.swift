@@ -54,23 +54,23 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objects.count
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
         let object = objects[indexPath.row]
-        cell.configure(with: object, at: indexPath)
+        cell.configure(with: object)
         return cell
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let object = objects[indexPath.row]
         didSelect?(object, indexPath)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = horizontalItemSpacing
         let collectionViewWidth = collectionView.bounds.width
         let itemWidth = (collectionViewWidth - leftPadding - rightPadding - padding * CGFloat(itemsPerRow - 1)) / CGFloat(itemsPerRow)
@@ -81,15 +81,15 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         return UIEdgeInsets(top: 10, left: leftPadding, bottom: 10, right: rightPadding)
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return horizontalItemSpacing
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return verticalItemSpacing
     }
     
-    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    open func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let object = objects[indexPath.row]
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [self] suggestedActions in
             var actions = [UIAction]()
@@ -111,17 +111,14 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
 
 protocol ConfigurableCell {
     associatedtype ObjectType
-    associatedtype IndexPath
-    func configure(with data: ObjectType, at indexPath: IndexPath)
+    func configure(with data: ObjectType)
 }
 
-open class NeonCollectionViewCell<T>: UICollectionViewCell, ConfigurableCell {
+open class NeonCollectionViewCell<T>: UICollectionViewCell {
     
-    open var configureCell: ((T) -> Void)?
-    open var indexPath: IndexPath?
+    open  var configureCell: ((T) -> Void)?
     
-    open func configure(with object: T, at indexPath: IndexPath) {
-        self.indexPath = indexPath
+    open func configure(with object: T) {
         configureCell?(object)
     }
 }
