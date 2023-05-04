@@ -86,7 +86,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
          return configureSwipeActions(for: indexPath, swipeActions: trailingSwipeActions)
      }
      
-     private func configureSwipeActions(for indexPath: IndexPath, swipeActions: [SwipeAction<T>]) -> UISwipeActionsConfiguration? {
+     open func configureSwipeActions(for indexPath: IndexPath, swipeActions: [SwipeAction<T>]) -> UISwipeActionsConfiguration? {
          var actions = [UIContextualAction]()
          for swipeAction in swipeActions where swipeAction.color != .clear {
              let action = UIContextualAction(style: .normal, title: swipeAction.title) { [weak self] (action, view, completionHandler) in
