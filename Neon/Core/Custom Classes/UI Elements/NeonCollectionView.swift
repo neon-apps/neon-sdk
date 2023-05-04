@@ -22,17 +22,21 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         }
     }
     
-    public var itemsPerRow: Int
+    public var itemsPerRow: Int?
     public var heightForItem : CGFloat?
+    public var widthForItem : CGFloat?
+    public var verticalItemSpacing: CGFloat?
+    
     public var leftPadding: CGFloat
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat
-    public var verticalItemSpacing: CGFloat
+   
     
     public var didSelect: ((T, IndexPath) -> Void)?
     
     private let cellReuseIdentifier = String(describing: Cell.self)
     
+    /// Use this initalizer for vertical collections.
     public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20, heightForItem : CGFloat? = nil) {
         self.objects = objects
         self.itemsPerRow = itemsPerRow
@@ -44,6 +48,21 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        super.init(frame: .zero, collectionViewLayout: layout)
+        self.dataSource = self
+        self.delegate = self
+        self.register(Cell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+    }
+    
+    /// Use this initalizer for horizontal collections.
+    public init(objects: [T] = [], leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20 , widthForItem : CGFloat? = nil) {
+        self.objects = objects
+        self.leftPadding = leftPadding
+        self.rightPadding = rightPadding
+        self.horizontalItemSpacing = horizontalItemSpacing
+        self.widthForItem = widthForItem
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         super.init(frame: .zero, collectionViewLayout: layout)
         self.dataSource = self
         self.delegate = self
@@ -71,10 +90,21 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = horizontalItemSpacing
-        let collectionViewWidth = collectionView.bounds.width
-        let itemWidth = (collectionViewWidth - leftPadding - rightPadding - padding * CGFloat(itemsPerRow - 1)) / CGFloat(itemsPerRow)
-        return CGSize(width: itemWidth, height: heightForItem ?? itemWidth)
+        
+        if let itemsPerRow{
+            let padding: CGFloat = horizontalItemSpacing
+            let collectionViewWidth = collectionView.bounds.width
+            let itemWidth = (collectionViewWidth - leftPadding - rightPadding - padding * CGFloat(itemsPerRow - 1)) / CGFloat(itemsPerRow)
+            return CGSize(width: itemWidth, height: heightForItem ?? itemWidth)
+        }
+        
+        if let widthForItem{
+            let collectionViewHeight = collectionView.bounds.height
+            return CGSize(width: widthForItem, height: collectionViewHeight)
+        }
+    
+        fatalError("You need to specify itemsPerRow or widthForItem")
+    
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -86,7 +116,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return verticalItemSpacing
+        return verticalItemSpacing ?? 0.0
     }
     
     open func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
