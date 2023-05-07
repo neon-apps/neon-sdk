@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Localize_Swift
 
-public class NeonButton : UIButton{
+open class NeonButton : UIButton{
     
     public override func setTitle(_ title: String?, for state: UIControl.State) {
         super.setTitle(title?.localized(), for: state)
