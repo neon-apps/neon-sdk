@@ -18,6 +18,7 @@ let package = Package(
         .package(name: "Hero", url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.4.0")),
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.4.0")),
+        .package(url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0"))
        
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -33,6 +34,7 @@ let package = Package(
                 "SDWebImage",
                 "Hero",
                 "SnapKit",
+        
                 .product(name: "FirebaseAnalytics", package: "Firebase"),
                 .product(name: "FirebaseRemoteConfig", package: "Firebase"),
                 .product(name: "FirebaseStorage", package: "Firebase"),

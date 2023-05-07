@@ -7,7 +7,15 @@
 
 import Foundation
 import UIKit
+import Localize_Swift
 
-public class NeonLabel : UILabel{
-    
+class NeonLabel: UILabel {
+    override var text: String? {
+        get {
+            return super.text
+        }
+        set {
+            super.text = newValue?.localized()
+        }
+    }
 }
