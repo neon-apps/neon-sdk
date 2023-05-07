@@ -20,7 +20,7 @@ open class NeonScrollLabel: UIView {
     private static let kLabelCount: Int = 2
     private static let kDefaultFadeLength: CGFloat = 7.0
     private static let kDefaultLabelBufferSpace: CGFloat = 20  // Pixel buffer space between scrolling label
-    private static let kDefaultPixelsPerSecond: Double = 30.0
+    private static let kDefaultPixelsPerSecond: Double = 14.0
     private static let kDefaultPauseTime: Double = 1.5
 
     public var scrollDirection = NeonScrollDirection.right {
@@ -29,7 +29,7 @@ open class NeonScrollLabel: UIView {
         }
     }
 
-    // Pixels per second, defaults to 30
+    // Pixels per second, defaults to 14
     public var scrollSpeed = NeonScrollLabel.kDefaultPixelsPerSecond {
         didSet {
             scrollLabelIfNeeded()
