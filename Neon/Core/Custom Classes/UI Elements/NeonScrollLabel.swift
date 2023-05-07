@@ -15,7 +15,7 @@ public enum NeonScrollDirection {
     case left
 }
 
-public class NeonScrollLabel: UIView {
+open class NeonScrollLabel: UIView {
 
     private static let kLabelCount: Int = 2
     private static let kDefaultFadeLength: CGFloat = 7.0

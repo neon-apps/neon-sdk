@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Localize_Swift
 
-public class NeonLabel: UILabel {
+open class NeonLabel: UILabel {
     public override var text: String? {
         get {
             return super.text
