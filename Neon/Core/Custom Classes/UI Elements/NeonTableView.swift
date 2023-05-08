@@ -104,6 +104,20 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
          return configuration
      }
     
+    // Multi-Section TableView
+    
+    open func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ""
+    }
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+      return UIView()
+    }
+    
+    
 }
 
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell {
