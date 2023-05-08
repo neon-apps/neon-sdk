@@ -108,7 +108,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: leftPadding, bottom: 10, right: rightPadding)
+        return UIEdgeInsets(top: 0, left: leftPadding, bottom: 0, right: rightPadding)
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
