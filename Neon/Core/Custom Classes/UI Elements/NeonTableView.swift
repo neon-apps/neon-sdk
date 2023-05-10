@@ -37,14 +37,15 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     
     public var heightForRows: CGFloat
     
-    public init(objects: [T] = [], heightForRows: CGFloat = 44.0) {
+    public init(objects: [T] = [], heightForRows: CGFloat = 44.0, style : UITableView.Style = .plain) {
         self.objects = objects
         self.heightForRows = heightForRows
-        super.init(frame: .zero, style: .plain)
+        super.init(frame: .zero, style: style)
         self.dataSource = self
         self.delegate = self
         self.register(Cell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.separatorStyle = .none
+        
     }
     
     required public init?(coder: NSCoder) {
@@ -120,6 +121,8 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+    
+    
     
     
 }
