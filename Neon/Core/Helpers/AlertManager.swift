@@ -11,7 +11,7 @@ import UIKit
 public class AlertManager{
     
     public static func showCustomAlert(title: String, message: String, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
  
         if let buttons, !buttons.isEmpty{
             for button in buttons {
