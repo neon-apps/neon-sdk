@@ -122,7 +122,13 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
         return UIView()
     }
     
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
     
+    open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
     
     
 }
