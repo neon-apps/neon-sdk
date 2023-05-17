@@ -15,8 +15,15 @@ open class NeonViewController: UIViewController {
     
     fileprivate let scrollView = UIScrollView()
     public let mainStack = UIStackView()
+    public var padding = UIEdgeInsets.zero{
+        didSet{
+            applyPadding()
+        }
+    }
+    
     
     // MARK: - View Lifecycle
+    
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +48,24 @@ open class NeonViewController: UIViewController {
         }
         mainStack.axis = .vertical
         mainStack.spacing = 20
+        
     }
     
+    func applyPadding(){
+        mainStack.layoutMargins = UIEdgeInsets(top: padding.top, left: 0, bottom: padding.bottom, right: 0)
+        mainStack.isLayoutMarginsRelativeArrangement = true
+        mainStack.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(padding.left)
+            make.right.equalToSuperview().inset(padding.right)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            
+        }
+    }
+    
+    }
+
+
     // MARK: - Spacing Functions
     
-}
+

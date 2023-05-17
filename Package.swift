@@ -41,7 +41,7 @@ let package = Package(
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseFirestoreSwift", package: "Firebase"),
                 .product(name: "FirebaseAuth", package: "Firebase"),
-                /* /
+                /* /x"
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),
                 .product(name: "FirebaseCrashlytics", package: "Firebase")
                */
