@@ -10,7 +10,7 @@ import Foundation
 
 public class Neon{
     public static var isUserPremium = false
-    
+    static var isPremiumTestActive = false
     
     public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController) {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -44,5 +44,12 @@ public class Neon{
     
     public static func onboardingCompleted(){
         UserDefaults.standard.setValue(true, forKey: "Neon-isOnboardingCompleted")
+    }
+    
+    public static func activatePremiumTest(){
+        #if DEBUG
+        isPremiumTestActive = true
+        Neon.isUserPremium = true
+        #endif
     }
 }
