@@ -19,7 +19,7 @@ public class RevenueCatManager {
 
     public static var packages = [Package]()
     public static var delegate: RevenueCatManagerDelegate?
-    internal static var selectedPackage : Package?
+    public static var selectedPackage : Package?
     
     public static func configure(withAPIKey : String,
                             products : [String]) {
