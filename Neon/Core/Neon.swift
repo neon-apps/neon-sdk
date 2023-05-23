@@ -45,6 +45,9 @@ public class Neon{
     public static func onboardingCompleted(){
         UserDefaults.standard.setValue(true, forKey: "Neon-isOnboardingCompleted")
     }
+    public static func isOnboardingCompleted() -> Bool{
+        return UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted")
+    }
     
     public static func activatePremiumTest(){
         #if DEBUG
