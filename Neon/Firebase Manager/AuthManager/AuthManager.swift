@@ -15,8 +15,8 @@ public class AuthManager{
           // ...
         }
     }
-    public static var currentUserID : String{
-        return Auth.auth().currentUser?.uid ?? "USER-ID-NİL"
+    public static var currentUserID : String?{
+        return Auth.auth().currentUser?.uid
     }
     
 }
