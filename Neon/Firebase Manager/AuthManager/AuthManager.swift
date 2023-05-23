@@ -10,12 +10,12 @@ import FirebaseAuth
 
 public class AuthManager{
     
-    public func signInAnonymously(){
+    public static func signInAnonymously(){
         Auth.auth().signInAnonymously { authResult, error in
           // ...
         }
     }
-    public var currentUserID : String{
+    public static var currentUserID : String{
         return Auth.auth().currentUser?.uid ?? "USER-ID-NİL"
     }
     
