@@ -8,12 +8,15 @@
 import Foundation
 import FirebaseAuth
 
-class AuthManager{
+public class AuthManager{
     
-    func signInAnonymously(){
+    public func signInAnonymously(){
         Auth.auth().signInAnonymously { authResult, error in
           // ...
         }
+    }
+    public var currentUserID : String{
+        return Auth.auth().currentUser?.uid ?? "USER-ID-NİL"
     }
     
 }
