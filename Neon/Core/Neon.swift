@@ -45,7 +45,7 @@ public class Neon{
     public static func onboardingCompleted(){
         UserDefaults.standard.setValue(true, forKey: "Neon-isOnboardingCompleted")
     }
-    public static func isOnboardingCompleted() -> Bool{
+    public static var isOnboardingCompleted : Bool{
         return UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted")
     }
     
