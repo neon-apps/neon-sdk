@@ -130,6 +130,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
         return 0
     }
     
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+    
     
 }
 
