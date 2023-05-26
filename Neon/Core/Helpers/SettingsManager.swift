@@ -11,7 +11,7 @@ import StoreKit
 public class SettingsManager{
     
     
-    public func shareApp(appID : String, vc : UIViewController){
+    public static func shareApp(appID : String, vc : UIViewController){
         if let name = URL(string: "https://apps.apple.com/app/id\(appID)"), !name.absoluteString.isEmpty {
             let itemsToShare = [name]
             let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
@@ -20,7 +20,7 @@ public class SettingsManager{
         }
     }
     
-    public func showReviewSheet(appID : String){
+    public static func showReviewSheet(appID : String){
         if let checkURL = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?action=write-review") {
             open(url: checkURL)
         } else {
@@ -28,14 +28,14 @@ public class SettingsManager{
         }
     }
     
-    static func openLinkFromBrowser(_ url: String) {
+    public static func openLinkFromBrowser(_ url: String) {
         guard let url = URL(string: url) else { return}
         if UIApplication.shared.canOpenURL(url) {
           UIApplication.shared.open(url, options: [:])
         }
       }
     
-    func open(url: URL) {
+    static func open(url: URL) {
         if #available(iOS 10, *) {
           UIApplication.shared.open(url, options: [:], completionHandler: { success in
             print("Open \(url): \(success)")
