@@ -28,6 +28,13 @@ public class SettingsManager{
         }
     }
     
+    static func openLinkFromBrowser(_ url: String) {
+        guard let url = URL(string: url) else { return}
+        if UIApplication.shared.canOpenURL(url) {
+          UIApplication.shared.open(url, options: [:])
+        }
+      }
+    
     func open(url: URL) {
         if #available(iOS 10, *) {
           UIApplication.shared.open(url, options: [:], completionHandler: { success in
