@@ -39,6 +39,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     public var isShimmerActive = false
     public var heightForRows: CGFloat
     public var shouldReloadWhenObjectsSet = true
+    public var numberOfItemsOnShimmer = 10
     
     public init(objects: [T] = [], heightForRows: CGFloat = 44.0, style : UITableView.Style = .plain) {
         self.objects = objects
@@ -56,13 +57,15 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return isShimmerActive ? numberOfItemsOnShimmer : objects.count
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
-        let object = objects[indexPath.row]
-        cell.configure(with: object)
+        if !isShimmerActive{
+            let object = objects[indexPath.row]
+            cell.configure(with: object)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -73,8 +76,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let object = objects[indexPath.row]
-        didSelect?(object, indexPath)
+        if !isShimmerActive{
+            let object = objects[indexPath.row]
+            didSelect?(object, indexPath)
+        }
     }
   
     open override func layoutSubviews() {
@@ -91,6 +96,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
      }
      
      open func configureSwipeActions(for indexPath: IndexPath, swipeActions: [SwipeAction<T>]) -> UISwipeActionsConfiguration? {
+         
+         if isShimmerActive{
+             return nil
+         }
          var actions = [UIContextualAction]()
          for swipeAction in swipeActions where swipeAction.color != .clear {
              let action = UIContextualAction(style: .normal, title: swipeAction.title) { [weak self] (action, view, completionHandler) in
