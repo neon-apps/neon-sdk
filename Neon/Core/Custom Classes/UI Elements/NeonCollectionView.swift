@@ -32,7 +32,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     public var leftPadding: CGFloat
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat
-    
+    public var isShimmerActive = false
     
     public var didSelect: ((T, IndexPath) -> Void)?
     
@@ -91,6 +91,10 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         didSelect?(object, indexPath)
     }
     
+    open func collectionView(_: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt _: IndexPath) {
+        cell.setTemplateWithSubviews(isShimmerActive, animate: true, viewBackgroundColor: ShimmerManager.shimmerBackgroundColor)
+    }
+    
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if let itemsPerRow{
@@ -146,7 +150,9 @@ protocol ConfigurableCell {
     func configure(with data: ObjectType)
 }
 
-open class NeonCollectionViewCell<T>: UICollectionViewCell {
+open class NeonCollectionViewCell<T>: UICollectionViewCell, ShimmeringViewProtocol {
+    
+    open var shimmeringAnimatedItems =  [UIView]()
     
     open  var configureCell: ((T) -> Void)?
     

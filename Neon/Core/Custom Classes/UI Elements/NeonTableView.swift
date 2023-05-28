@@ -34,7 +34,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     private let cellReuseIdentifier = String(describing: Cell.self)
     public var trailingSwipeActions = [SwipeAction<T>]()
     public var leadingSwipeActions = [SwipeAction<T>]()
-    
+    public var isShimmerActive = false
     public var heightForRows: CGFloat
     
     public init(objects: [T] = [], heightForRows: CGFloat = 44.0, style : UITableView.Style = .plain) {
@@ -131,13 +131,14 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     }
     
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        cell.setTemplateWithSubviews(isShimmerActive, animate: true, viewBackgroundColor: ShimmerManager.shimmerBackgroundColor)
     }
-    
-    
+   
 }
 
-open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell {
+open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell, ShimmeringViewProtocol {
+    
+    open var shimmeringAnimatedItems =  [UIView]()
     
     open var configureCell: ((T) -> Void)?
     
