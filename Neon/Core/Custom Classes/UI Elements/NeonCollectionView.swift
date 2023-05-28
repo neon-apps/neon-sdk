@@ -18,7 +18,9 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     
    public var objects: [T] {
         didSet {
-            reloadData()
+            if shouldReloadCollectionWhenObjectsSet{
+                reloadData()
+            }
         }
     }
     
@@ -26,11 +28,11 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     public var heightForItem : CGFloat?
     public var widthForItem : CGFloat?
     public var verticalItemSpacing: CGFloat?
-    
+    public var shouldReloadCollectionWhenObjectsSet = true
     public var leftPadding: CGFloat
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat
-   
+    
     
     public var didSelect: ((T, IndexPath) -> Void)?
     
@@ -116,7 +118,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return verticalItemSpacing ?? 0.0
+        return verticalItemSpacing ?? horizontalItemSpacing
     }
     
     open func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
