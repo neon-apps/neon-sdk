@@ -33,7 +33,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat
     public var isShimmerActive = false
-    
+    public var numberOfItemsOnShimmer = 10
     public var didSelect: ((T, IndexPath) -> Void)?
     
     private let cellReuseIdentifier = String(describing: Cell.self)
@@ -76,19 +76,24 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return objects.count
+        return isShimmerActive ? numberOfItemsOnShimmer : objects.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
-        let object = objects[indexPath.row]
-        cell.configure(with: object)
+        if !isShimmerActive{
+            let object = objects[indexPath.row]
+            cell.configure(with: object)
+        }
         return cell
     }
     
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let object = objects[indexPath.row]
-        didSelect?(object, indexPath)
+        if !isShimmerActive{
+            let object = objects[indexPath.row]
+            didSelect?(object, indexPath)
+        }
     }
     
     open func collectionView(_: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt _: IndexPath) {
@@ -126,6 +131,9 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if isShimmerActive{
+            return nil
+        }
         let object = objects[indexPath.row]
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [self] suggestedActions in
             var actions = [UIAction]()
