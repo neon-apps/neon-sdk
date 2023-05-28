@@ -18,7 +18,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     
    public var objects: [T] {
         didSet {
-            if shouldReloadCollectionWhenObjectsSet{
+            if shouldReloadWhenObjectsSet{
                 reloadData()
             }
         }
@@ -28,7 +28,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     public var heightForItem : CGFloat?
     public var widthForItem : CGFloat?
     public var verticalItemSpacing: CGFloat?
-    public var shouldReloadCollectionWhenObjectsSet = true
+    public var shouldReloadWhenObjectsSet = true
     public var leftPadding: CGFloat
     public var rightPadding: CGFloat
     public var horizontalItemSpacing: CGFloat

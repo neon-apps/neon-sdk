@@ -26,7 +26,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     
     public var objects: [T] {
         didSet {
-            if shouldReloadCollectionWhenObjectsSet{
+            if shouldReloadWhenObjectsSet{
                 reloadData()
             }
         }
@@ -38,7 +38,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     public var leadingSwipeActions = [SwipeAction<T>]()
     public var isShimmerActive = false
     public var heightForRows: CGFloat
-    public var shouldReloadCollectionWhenObjectsSet = true
+    public var shouldReloadWhenObjectsSet = true
     
     public init(objects: [T] = [], heightForRows: CGFloat = 44.0, style : UITableView.Style = .plain) {
         self.objects = objects
