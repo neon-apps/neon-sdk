@@ -152,7 +152,7 @@ protocol ConfigurableCell {
 
 open class NeonCollectionViewCell<T>: UICollectionViewCell, ShimmeringViewProtocol {
     
-    open var shimmeringAnimatedItems =  [UIView]()
+    open var shimmerItems =  [UIView]()
     
     open  var configureCell: ((T) -> Void)?
     

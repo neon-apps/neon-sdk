@@ -19,7 +19,7 @@ extension UIView {
         var excludedViews = excludedViews
         if let view = self as? ShimmeringViewProtocol {
             excludedViews = excludedViews.union(view.excludedItems)
-            views.append(contentsOf: view.shimmeringAnimatedItems.filter({ !excludedViews.contains($0) }))
+            views.append(contentsOf: view.shimmerItems.filter({ !excludedViews.contains($0) }))
         }
         subviews.forEach { $0.getSubShimmerViews(&views, excludedViews: excludedViews) }
     }

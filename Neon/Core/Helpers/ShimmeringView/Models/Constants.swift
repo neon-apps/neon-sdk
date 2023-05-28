@@ -14,6 +14,11 @@ struct Key {
 }
 
 public class ShimmerManager{
+    
+    static func configure(shimmerColor : UIColor, shimmerBackgroundColor : UIColor ){
+        self.shimmerColor = shimmerColor
+        self.shimmerBackgroundColor = shimmerBackgroundColor
+    }
     public static var shimmerColor = UIColor()
     public static var shimmerBackgroundColor = UIColor()
 }

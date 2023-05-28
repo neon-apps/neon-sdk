@@ -138,7 +138,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
 
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell, ShimmeringViewProtocol {
     
-    open var shimmeringAnimatedItems =  [UIView]()
+    open var shimmerItems =  [UIView]()
     
     open var configureCell: ((T) -> Void)?
     
