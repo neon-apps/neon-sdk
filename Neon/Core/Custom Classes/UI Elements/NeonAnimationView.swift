@@ -11,8 +11,8 @@ import Lottie
 
 public class NeonAnimationView: UIView {
     
-    private var animLoading: LottieAnimationView!
-    private var viewTint: UIView?
+    public var lottieAnimationView: LottieAnimationView!
+    private var tintView: UIView?
     
     public init(animation: LottieManager.AnimationType, color: UIColor? = nil) {
         super.init(frame: .zero)
@@ -21,24 +21,24 @@ public class NeonAnimationView: UIView {
         
         switch animation {
         case .custom(name: _):
-            animLoading = LottieAnimationView(name: defaultAnimationName)
+            lottieAnimationView = LottieAnimationView(name: defaultAnimationName)
         default:
             let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
-            animLoading = LottieAnimationView(filePath: animationURL!)
+            lottieAnimationView = LottieAnimationView(filePath: animationURL!)
         }
         
-        animLoading.backgroundColor = .clear
-        animLoading.loopMode = .loop
-        animLoading.animationSpeed = 1
-        animLoading.backgroundBehavior = .pauseAndRestore
-        animLoading.play()
-        addSubview(animLoading)
+        lottieAnimationView.backgroundColor = .clear
+        lottieAnimationView.loopMode = .loop
+        lottieAnimationView.animationSpeed = 1
+        lottieAnimationView.backgroundBehavior = .pauseAndRestore
+        lottieAnimationView.play()
+        addSubview(lottieAnimationView)
 
         if let color = color {
-            viewTint = UIView(frame: animLoading.bounds)
-            viewTint?.backgroundColor = color
-            addSubview(viewTint!)
-            viewTint?.mask = animLoading
+            tintView = UIView(frame: lottieAnimationView.bounds)
+            tintView?.backgroundColor = color
+            addSubview(tintView!)
+            tintView?.mask = lottieAnimationView
         }
         
        
@@ -50,8 +50,8 @@ public class NeonAnimationView: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        animLoading.frame = bounds
-        viewTint?.frame = animLoading.bounds
+        lottieAnimationView.frame = bounds
+        tintView?.frame = lottieAnimationView.bounds
     }
     
 }
