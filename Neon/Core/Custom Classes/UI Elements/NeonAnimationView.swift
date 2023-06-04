@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Lottie
 
-class NeonAnimationView: UIView {
+public class NeonAnimationView: UIView {
     
     private var animLoading: LottieAnimationView!
     private var viewTint: UIView?
@@ -47,7 +47,7 @@ class NeonAnimationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         animLoading.frame = bounds
         viewTint?.frame = animLoading.bounds
