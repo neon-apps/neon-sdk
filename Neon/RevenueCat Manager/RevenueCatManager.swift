@@ -15,6 +15,7 @@ public protocol RevenueCatManagerDelegate: AnyObject {
     func packageFetched()
 }
 
+@available(iOS 13.0, *)
 public class RevenueCatManager {
 
     public static var packages = [Package]()
