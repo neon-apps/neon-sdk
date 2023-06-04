@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tuna Öztürk on 4.06.2023.
 //
@@ -23,7 +23,7 @@ public class NeonAnimationView: UIView {
         case .custom(name: _):
             animLoading = LottieAnimationView(name: defaultAnimationName)
         default:
-            let animationURL = Bundle.main.path(forResource: defaultAnimationName, ofType: "json")
+            let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
             animLoading = LottieAnimationView(filePath: animationURL!)
         }
         
@@ -32,7 +32,8 @@ public class NeonAnimationView: UIView {
         animLoading.animationSpeed = 1
         animLoading.backgroundBehavior = .pauseAndRestore
         animLoading.play()
-        
+        addSubview(animLoading)
+
         if let color = color {
             viewTint = UIView(frame: animLoading.bounds)
             viewTint?.backgroundColor = color
@@ -40,7 +41,7 @@ public class NeonAnimationView: UIView {
             viewTint?.mask = animLoading
         }
         
-        addSubview(animLoading)
+       
     }
     
     required init?(coder aDecoder: NSCoder) {
