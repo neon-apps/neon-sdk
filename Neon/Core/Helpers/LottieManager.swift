@@ -12,7 +12,7 @@ import Lottie
 public class LottieManager{
     
     
-    public static func createLottie(animation : AnimationType) -> LottieAnimationView {
+    public static func createLottie(animation : AnimationType, color : UIColor? = nil) -> LottieAnimationView {
         
         var animLoading = LottieAnimationView()
         let defaultAnimationName = animation.rawValue.name
@@ -32,6 +32,16 @@ public class LottieManager{
         animLoading.animationSpeed = 1
         animLoading.backgroundBehavior = .pauseAndRestore
         animLoading.play()
+        
+        
+        if let color{
+            let viewTint = UIView()
+            viewTint.frame = animLoading.bounds
+            viewTint.backgroundColor = color
+            animLoading.addSubview(viewTint)
+            viewTint.mask = animLoading
+        }
+        
         return animLoading
     }
 
