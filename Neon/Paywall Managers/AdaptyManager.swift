@@ -102,6 +102,16 @@ public class AdaptyManager {
         return nil
     }
     
+    public static func getRemoteConfigValue(id : String) -> Any?{
+        if let remoteConfig = selectedPaywall?.remoteConfig{
+            let value = remoteConfig[id]
+            UserDefaults.standard.set(value, forKey: "Neon-Adapty-\(id)")
+            return value
+        }
+        return UserDefaults.standard.value(forKey: "Neon-Adapty-\(id)")
+    }
+    
+    
     public static func getPackagePrice(id : String) -> String?{
         for package in packages {
             if package.vendorProductId == id{
