@@ -112,16 +112,16 @@ public class AdaptyManager {
     }
     
     
-    public static func getPackagePrice(id : String) -> String?{
+    public static func getPackagePrice(id : String) -> String{
         for package in packages {
             if package.vendorProductId == id{
-                return package.localizedPrice
+                return package.localizedPrice ?? "..."
             }else{
-                return UserDefaults.standard.string(forKey: "Neon-\(id)")
+                return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
             }
         }
         
-        return UserDefaults.standard.string(forKey: "Neon-\(id)")
+        return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
     }
     
     public static func selectPackage(id : String){
