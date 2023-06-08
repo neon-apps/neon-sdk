@@ -136,7 +136,7 @@ public class AdaptyManager {
     
     
     
-    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
         guard let package = AdaptyManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
@@ -157,6 +157,8 @@ public class AdaptyManager {
                 break
                 // successful purchase
             case let .failure(error):
+                guard let completionFailure else { return }
+                completionFailure()
                 break
                 // handle the error
             }
@@ -165,7 +167,7 @@ public class AdaptyManager {
     }
 
     
-    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         
         
         LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
