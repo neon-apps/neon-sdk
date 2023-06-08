@@ -54,7 +54,7 @@ class NeonTestemonialCell: NeonCollectionViewCell<NeonTestemonial> {
             make.left.right.equalToSuperview().inset(20)
         }
         stackView.addArrangedSubview(imgStars)
-        imgStars.image = UIImage(named: "img_stars")
+        imgStars.image = UIImage(named: "img_stars", in: Bundle.module, compatibleWith: nil)
         imgStars.contentMode = .scaleAspectFit
         
        
