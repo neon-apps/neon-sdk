@@ -143,6 +143,7 @@ public class AdaptyManager {
             return }
 
         Adapty.makePurchase(product: package) { result in
+            LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(profile):
                 if profile.accessLevels["pro"]?.isActive ?? false {
@@ -173,6 +174,7 @@ public class AdaptyManager {
         LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
 
         Adapty.restorePurchases {  result in
+            LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(profile):
                 if profile.accessLevels["pro"]?.isActive ?? false {
