@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import NeonSDK
+
 
 
 
@@ -22,10 +22,12 @@ class NeonPaywallFeaturesTableView: NeonTableView<NeonPaywallFeature, NeonPaywal
     
     
      convenience init() {
+        NeonPaywallFeature.arrFeatures = []
         self.init(
             objects: NeonPaywallFeature.arrFeatures,
             heightForRows: 44
         )
+        
         updateUI()
     }
     

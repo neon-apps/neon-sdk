@@ -27,6 +27,7 @@ class NeonTestemonialCollectionView: NeonCollectionView<NeonTestemonial, NeonTes
     
     
      convenience init() {
+         NeonTestemonial.arrTestemonials = []
         self.init(
             objects: NeonTestemonial.arrTestemonials,
             leftPadding: 25,

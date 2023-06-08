@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import NeonSDK
 
 class NeonPaywallFeatureCell: NeonTableViewCell<NeonPaywallFeature> {
     
