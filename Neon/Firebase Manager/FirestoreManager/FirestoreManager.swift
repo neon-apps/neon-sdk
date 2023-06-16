@@ -100,7 +100,7 @@ public class FirestoreManager{
     }
     
     /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
-    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any], _ isLast : Bool) -> ()){
+    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  @escaping () -> () , isCollectionEmpty :  @escaping () -> ()){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
         referance.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -108,16 +108,19 @@ public class FirestoreManager{
             } else {
                 
                 var fetchedDocumentCount = Int()
-                var isLast = Bool()
+                
+                if querySnapshot!.documents.isEmpty{
+                    isCollectionEmpty()
+                }
                 
                 for document in querySnapshot!.documents {
                     let documentID = document.documentID
                     let documentData = document.data()
                     fetchedDocumentCount += 1
                     if fetchedDocumentCount == querySnapshot!.documents.count{
-                        isLast = true
+                        isLastFetched()
                     }
-                    completion(documentID, documentData, isLast)
+                    completion(documentID, documentData)
                 }
             }
         }
