@@ -100,7 +100,7 @@ public class FirestoreManager{
     }
     
     /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
-    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  @escaping () -> () , isCollectionEmpty :  @escaping () -> ()){
+    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
         referance.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -110,17 +110,22 @@ public class FirestoreManager{
                 var fetchedDocumentCount = Int()
                 
                 if querySnapshot!.documents.isEmpty{
-                    isCollectionEmpty()
+                    if let isCollectionEmpty{
+                        isCollectionEmpty()
+                    }
                 }
                 
                 for document in querySnapshot!.documents {
                     let documentID = document.documentID
                     let documentData = document.data()
                     fetchedDocumentCount += 1
-                    if fetchedDocumentCount == querySnapshot!.documents.count{
-                        isLastFetched()
-                    }
                     completion(documentID, documentData)
+                    
+                    if fetchedDocumentCount == querySnapshot!.documents.count{
+                        if let isLastFetched{
+                            isLastFetched()
+                        }
+                    }
                 }
             }
         }
@@ -128,7 +133,7 @@ public class FirestoreManager{
     }
     
     ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
-    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable, _ isLast : Bool) -> ()) {
+    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil) {
             let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
             referance.getDocuments { querySnapshot, err in
                 if let err = err {
@@ -136,7 +141,12 @@ public class FirestoreManager{
                 } else {
                     
                     var fetchedDocumentCount = Int()
-                    var isLast = Bool()
+                  
+                    if querySnapshot!.documents.isEmpty{
+                        if let isCollectionEmpty{
+                            isCollectionEmpty()
+                        }
+                    }
                     
                     for document in querySnapshot!.documents {
                         fetchedDocumentCount += 1
@@ -144,11 +154,13 @@ public class FirestoreManager{
                             let object = try document.data(as: objectType)
                             if let encodableObject = object as? Encodable{
                                 
-                                if fetchedDocumentCount == querySnapshot!.documents.count{
-                                    isLast = true
-                                }
+                                completion(encodableObject)
                                 
-                                completion(encodableObject, isLast)
+                                if fetchedDocumentCount == querySnapshot!.documents.count{
+                                    if let isLastFetched{
+                                        isLastFetched()
+                                    }
+                                }
                             }else{
                                 print("Fetched object is not encodable")
                             }
