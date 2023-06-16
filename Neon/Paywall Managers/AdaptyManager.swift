@@ -145,8 +145,8 @@ public class AdaptyManager {
         Adapty.makePurchase(product: package) { result in
             LottieManager.removeFullScreenLottie()
             switch result {
-            case let .success(profile):
-                if profile.accessLevels["pro"]?.isActive ?? false {
+            case let .success(purchaseInfo):
+                if purchaseInfo.profile.accessLevels["pro"]?.isActive ?? false {
                     Neon.isUserPremium = true
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     guard let completionSuccess else { return }
