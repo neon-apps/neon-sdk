@@ -71,7 +71,7 @@ public class LottieManager{
         animLoading.frame.size = CGSize(width: width ?? defaultAnimationWidht, height: width ?? defaultAnimationWidht)
         animLoading.center = window.center
         animLoading.backgroundColor = .clear
-        animLoading.loopMode = .loop
+        animLoading.loopMode = playOnce ? .playOnce : .loop
         animLoading.animationSpeed = 1
         animLoading.backgroundBehavior = .pauseAndRestore
         viewLoading.addSubview(animLoading)
