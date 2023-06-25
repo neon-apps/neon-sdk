@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @available(iOS 13.0, *)
-class AdaptyPaywallManager{
+public class AdaptyPaywallManager{
     
     static var shared = AdaptyPaywallManager()
     
@@ -50,7 +50,7 @@ class AdaptyPaywallManager{
     var testemonial3 = NeonTestemonial()
   
     
-    static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, homeVC: UIViewController, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testemonial1: NeonTestemonial, testemonial2: NeonTestemonial, testemonial3: NeonTestemonial) {
+    public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, homeVC: UIViewController, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testemonial1: NeonTestemonial, testemonial2: NeonTestemonial, testemonial3: NeonTestemonial) {
         AdaptyPaywallManager.shared.mainColor = mainColor
         AdaptyPaywallManager.shared.darkColor = darkColor
         AdaptyPaywallManager.shared.lightColor = lightColor
@@ -70,7 +70,7 @@ class AdaptyPaywallManager{
     
     var canDismiss = false
     
-    static func presentAdaptyPaywall(controller : UIViewController, canDismiss : Bool = true){
+    public static func presentAdaptyPaywall(controller : UIViewController, canDismiss : Bool = true){
         AdaptyPaywallManager.shared.canDismiss = canDismiss
         controller.present(destinationVC: NeonAdaptyPaywallVC(), slideDirection: .up)
     }
