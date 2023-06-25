@@ -70,7 +70,7 @@ public class NeonAdaptyPaywallButton: UIButton {
     
     private func updateTitleLabel() {
         let mainTitleFont = Font.custom(size: 15, fontWeight: .Medium)
-        let mainTitleColor = AdaptyPaywallManager.shared.isDarkModeEnabled ? UIColor.white : UIColor.black
+        let mainTitleColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? UIColor.white : UIColor.black
         let mainTitleAttributes: [NSAttributedString.Key: Any] = [
             .font: mainTitleFont,
             .foregroundColor: mainTitleColor
@@ -101,12 +101,12 @@ public class NeonAdaptyPaywallButton: UIButton {
         layer.cornerRadius = 12
         layer.borderWidth = 2
         layer.borderColor = UIColor.clear.cgColor
-        backgroundColor = AdaptyPaywallManager.shared.isDarkModeEnabled ? AdaptyPaywallManager.shared.darkColor : AdaptyPaywallManager.shared.lightColor
+        backgroundColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? AdaptyPaywallBuilder.shared.darkColor : AdaptyPaywallBuilder.shared.lightColor
     }
     
     private func updateButtonAppearance() {
         if isSelected {
-            layer.borderColor = AdaptyPaywallManager.shared.mainColor.cgColor
+            layer.borderColor = AdaptyPaywallBuilder.shared.mainColor.cgColor
             circleView.isHidden = false
         } else {
             layer.borderColor = UIColor.clear.cgColor
@@ -116,7 +116,7 @@ public class NeonAdaptyPaywallButton: UIButton {
     }
     
     private func addCircleView() {
-        circleView.layer.borderColor = AdaptyPaywallManager.shared.mainColor.cgColor
+        circleView.layer.borderColor = AdaptyPaywallBuilder.shared.mainColor.cgColor
         circleView.layer.borderWidth = 1
         circleView.layer.cornerRadius = circleSize / 2
         circleView.isHidden = true
@@ -130,7 +130,7 @@ public class NeonAdaptyPaywallButton: UIButton {
         
         let dotSize = circleSize - 8
         let dotView = UIView()
-        dotView.backgroundColor = AdaptyPaywallManager.shared.mainColor
+        dotView.backgroundColor = AdaptyPaywallBuilder.shared.mainColor
         dotView.layer.cornerRadius = dotSize / 2
         circleView.addSubview(dotView)
         dotView.snp.makeConstraints { make in
@@ -144,7 +144,7 @@ public class NeonAdaptyPaywallButton: UIButton {
     }
     
     private func addBestSellerLabel() {
-        bestSellerLabel.text = AdaptyPaywallManager.shared.bestSellerLabelText
+        bestSellerLabel.text = AdaptyPaywallBuilder.shared.bestSellerLabelText
         bestSellerLabel.topInset = 4
         bestSellerLabel.bottomInset = 4
         bestSellerLabel.leftInset = 10
@@ -152,7 +152,7 @@ public class NeonAdaptyPaywallButton: UIButton {
         bestSellerLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
         bestSellerLabel.textColor = .white
         bestSellerLabel.textAlignment = .center
-        bestSellerLabel.backgroundColor = AdaptyPaywallManager.shared.mainColor
+        bestSellerLabel.backgroundColor = AdaptyPaywallBuilder.shared.mainColor
         bestSellerLabel.layer.cornerRadius = 4.0
         bestSellerLabel.clipsToBounds = true
         guard let superview = self.superview else {
