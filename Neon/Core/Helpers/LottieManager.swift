@@ -37,7 +37,7 @@ public class LottieManager{
 
     
     
-    public static func showFullScreenLottie(animation : AnimationType, width : Int? = nil, color : UIColor? = nil, backgroundOpacity : Double = 0.65) {
+    public static func showFullScreenLottie(animation : AnimationType, width : Int? = nil, color : UIColor? = nil, backgroundOpacity : Double = 0.65, playOnce : Bool = false) {
         
         guard let window = UIApplication.shared.keyWindow else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.001, execute: {
@@ -75,7 +75,14 @@ public class LottieManager{
         animLoading.animationSpeed = 1
         animLoading.backgroundBehavior = .pauseAndRestore
         viewLoading.addSubview(animLoading)
-        animLoading.play()
+        if playOnce{
+            animLoading.play { finished in
+                LottieManager.removeFullScreenLottie()
+            }
+        }else{
+            animLoading.play()
+        }
+      
         
         
         if let color{
@@ -87,6 +94,8 @@ public class LottieManager{
         }
         
         window.addSubview(viewLoading)
+        
+        
 
     }
     
