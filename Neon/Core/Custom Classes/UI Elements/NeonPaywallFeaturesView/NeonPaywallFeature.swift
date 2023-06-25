@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-class NeonPaywallFeature{
+public class NeonPaywallFeature{
     
     static var arrFeatures = [NeonPaywallFeature]()
     
-    internal init(title: String = String(), icon: UIImage = UIImage()) {
+    public init(title: String = String(), icon: UIImage = UIImage()) {
         self.title = title
         self.icon = icon
     }
 
-    var title = String()
-    var icon = UIImage()
+    public var title = String()
+    public var icon = UIImage()
    
 }

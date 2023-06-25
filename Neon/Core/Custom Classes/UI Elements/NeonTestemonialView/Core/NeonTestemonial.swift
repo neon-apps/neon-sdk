@@ -8,17 +8,17 @@
 import Foundation
 
 
-class NeonTestemonial{
+public class NeonTestemonial{
     
-    internal init(title: String = String(), testemonial: String = String(), author: String = String()) {
+    public init(title: String = String(), testemonial: String = String(), author: String = String()) {
         self.title = title
         self.testemonial = testemonial
         self.author = author
     }
 
-    var title = String()
-    var testemonial = String()
-    var author = String()
+    public var title = String()
+    public var testemonial = String()
+    public var author = String()
     
     static var arrTestemonials = [NeonTestemonial]()
 }
