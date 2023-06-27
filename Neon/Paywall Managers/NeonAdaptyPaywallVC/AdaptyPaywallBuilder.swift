@@ -51,6 +51,7 @@ public class AdaptyPaywallBuilder{
   
     
     public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, homeVC: UIViewController, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testemonial1: NeonTestemonial, testemonial2: NeonTestemonial, testemonial3: NeonTestemonial) {
+        AdaptyPaywallBuilder.shared.paywallID = paywallID
         AdaptyPaywallBuilder.shared.mainColor = mainColor
         AdaptyPaywallBuilder.shared.darkColor = darkColor
         AdaptyPaywallBuilder.shared.lightColor = lightColor
