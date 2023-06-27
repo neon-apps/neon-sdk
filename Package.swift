@@ -42,9 +42,10 @@ let package = Package(
                 .product(name: "FirebaseFirestore", package: "Firebase"),
                 .product(name: "FirebaseFirestoreSwift", package: "Firebase"),
                 .product(name: "FirebaseAuth", package: "Firebase"),
+                .product(name: "FirebaseCrashlytics", package: "Firebase")
                 /* /x"
                 .product(name: "FirebaseDynamicLinks", package: "Firebase"),
-                .product(name: "FirebaseCrashlytics", package: "Firebase")
+                
                */
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts"), .process("Core/Resources/Assets")])
         
