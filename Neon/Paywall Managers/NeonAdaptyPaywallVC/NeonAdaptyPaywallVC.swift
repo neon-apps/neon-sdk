@@ -19,7 +19,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     var completionAfterShowingPaywall : (() -> ())?
     public override func viewDidLoad() {
         super.viewDidLoad()
-        AdaptyManager.selectedPaywall = AdaptyManager.getPaywall(id: AdaptyPaywallBuilder.shared.paywallID)
+        AdaptyManager.selectedPaywall = AdaptyManager.getPaywall(id: AdaptyPaywallBuilder().paywallID)
         createUI()
         packageFetched()
         Neon.onboardingCompleted()
@@ -31,7 +31,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     func createUI(){
 
         let backgroundImage = UIImageView()
-        backgroundImage.image =  AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  UIImage(named: "paywall_1_background_dark") : UIImage(named: "paywall_1_background_light")
+        backgroundImage.image =  AdaptyPaywallBuilder().isDarkModeEnabled ?  UIImage(named: "paywall_1_background_dark") : UIImage(named: "paywall_1_background_light")
         view.addSubview(backgroundImage)
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.snp.makeConstraints { make in
@@ -39,10 +39,10 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         }
         
         titleLabel.textAlignment = .center
-        titleLabel.text = AdaptyPaywallBuilder.shared.titleLabelTextWhenWeeklySelected
+        titleLabel.text = AdaptyPaywallBuilder().titleLabelTextWhenWeeklySelected
         titleLabel.numberOfLines = 2
         titleLabel.font = Font.custom(size: 30, fontWeight: .SemiBold)
-        titleLabel.textColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
+        titleLabel.textColor = AdaptyPaywallBuilder().isDarkModeEnabled ? .white : .black
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
@@ -62,29 +62,29 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         }
         
     
-        testemonialView.testemonialTextColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  .white : .black
-        testemonialView.testemonialbackgroundColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  AdaptyPaywallBuilder.shared.darkColor : AdaptyPaywallBuilder.shared.lightColor
-        testemonialView.currentTestemonialPageTintColor = AdaptyPaywallBuilder.shared.mainColor
+        testemonialView.testemonialTextColor = AdaptyPaywallBuilder().isDarkModeEnabled ?  .white : .black
+        testemonialView.testemonialbackgroundColor = AdaptyPaywallBuilder().isDarkModeEnabled ?  AdaptyPaywallBuilder().darkColor : AdaptyPaywallBuilder().lightColor
+        testemonialView.currentTestemonialPageTintColor = AdaptyPaywallBuilder().mainColor
         testemonialView.testemonialPageTintColor = .darkGray
         testemonialView.testemonialbackgroundCornerRadious = 12
         testemonialView.pageControlType = .V1
         
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial1.title, testemonial: AdaptyPaywallBuilder.shared.testemonial1.testemonial, author: AdaptyPaywallBuilder.shared.testemonial1.author)
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial2.title, testemonial: AdaptyPaywallBuilder.shared.testemonial2.testemonial, author: AdaptyPaywallBuilder.shared.testemonial2.author)
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial3.title, testemonial: AdaptyPaywallBuilder.shared.testemonial3.testemonial, author: AdaptyPaywallBuilder.shared.testemonial3.author)
+        testemonialView.addTestemonial(title: AdaptyPaywallBuilder().testemonial1.title, testemonial: AdaptyPaywallBuilder().testemonial1.testemonial, author: AdaptyPaywallBuilder().testemonial1.author)
+        testemonialView.addTestemonial(title: AdaptyPaywallBuilder().testemonial2.title, testemonial: AdaptyPaywallBuilder().testemonial2.testemonial, author: AdaptyPaywallBuilder().testemonial2.author)
+        testemonialView.addTestemonial(title: AdaptyPaywallBuilder().testemonial3.title, testemonial: AdaptyPaywallBuilder().testemonial3.testemonial, author: AdaptyPaywallBuilder().testemonial3.author)
 
   
         let legalView = NeonLegalView()
-        legalView.termsURL = AdaptyPaywallBuilder.shared.termsURL
-        legalView.privacyURL = AdaptyPaywallBuilder.shared.privacyURL
+        legalView.termsURL = AdaptyPaywallBuilder().termsURL
+        legalView.privacyURL = AdaptyPaywallBuilder().privacyURL
         legalView.restoreButtonClicked = {
-            AdaptyManager.restorePurchases(vc: self, animation: .loadingCircle, animationColor: AdaptyPaywallBuilder.shared.mainColor) {
-                self.present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .right)
+            AdaptyManager.restorePurchases(vc: self, animation: .loadingCircle, animationColor: AdaptyPaywallBuilder().mainColor) {
+                self.present(destinationVC: AdaptyPaywallBuilder().homeVC, slideDirection: .right)
             } completionFailure: {
                 
             }
         }
-        legalView.textColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
+        legalView.textColor = AdaptyPaywallBuilder().isDarkModeEnabled ? .white : .black
         view.addSubview(legalView)
         legalView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
@@ -92,13 +92,13 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         }
         
       
-        btnBuy.setTitle(AdaptyPaywallBuilder.shared.ctaButtonTextWhenWeeklySelected, for: .normal)
+        btnBuy.setTitle(AdaptyPaywallBuilder().ctaButtonTextWhenWeeklySelected, for: .normal)
         btnBuy.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
-        btnBuy.backgroundColor = AdaptyPaywallBuilder.shared.mainColor
+        btnBuy.backgroundColor = AdaptyPaywallBuilder().mainColor
         btnBuy.setTitleColor(.white, for: .normal)
         btnBuy.layer.cornerRadius = 12
-        btnBuy.bouncingScale = AdaptyPaywallBuilder.shared.ctaButtonBouncedScale
-        btnBuy.bouncingDuration = AdaptyPaywallBuilder.shared.ctaButtonBouncingDuration
+        btnBuy.bouncingScale = AdaptyPaywallBuilder().ctaButtonBouncedScale
+        btnBuy.bouncingDuration = AdaptyPaywallBuilder().ctaButtonBouncingDuration
         btnBuy.addTarget(self, action: #selector(btnBuyClicked), for: .touchUpInside)
         view.addSubview(btnBuy)
         btnBuy.snp.makeConstraints { make in
@@ -112,7 +112,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         lblFreeTrial.text = "Enable Free Trial"
         lblFreeTrial.numberOfLines = 1
         lblFreeTrial.font = Font.custom(size: 15, fontWeight: .Medium)
-        lblFreeTrial.textColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
+        lblFreeTrial.textColor = AdaptyPaywallBuilder().isDarkModeEnabled ? .white : .black
         view.addSubview(lblFreeTrial)
         lblFreeTrial.snp.makeConstraints { make in
             make.bottom.equalTo(btnBuy.snp.top).offset(-30)
@@ -130,7 +130,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             
         }
      
-        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) billed once"
+        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder().lifetimeProductID)) billed once"
         btnLifetime.subtitle = "Unlock Premium Features"
         view.addSubview(btnLifetime)
         btnLifetime.snp.makeConstraints { make in
@@ -139,13 +139,13 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.height.equalTo(65)
         }
         btnLifetime.clickCompletion = { [self] in
-            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder.shared.lifetimeProductID)
-            titleLabel.text = AdaptyPaywallBuilder.shared.titleLabelTextWhenLifetimeSelected
-            btnBuy.setTitle(AdaptyPaywallBuilder.shared.ctaButtonTextWhenLifetimeSelected, for: .normal)
+            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder().lifetimeProductID)
+            titleLabel.text = AdaptyPaywallBuilder().titleLabelTextWhenLifetimeSelected
+            btnBuy.setTitle(AdaptyPaywallBuilder().ctaButtonTextWhenLifetimeSelected, for: .normal)
             switchFreeTrial.setOn(false, animated: true)
         }
       
-        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) per week"
+        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder().weeklyProductID)) per week"
         btnWeekly.subtitle = "3-day free trial"
         btnWeekly.isSelected = true
         view.addSubview(btnWeekly)
@@ -156,16 +156,16 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.height.equalTo(65)
         }
         btnWeekly.clickCompletion = { [self] in
-            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder.shared.weeklyProductID)
-            titleLabel.text = AdaptyPaywallBuilder.shared.titleLabelTextWhenWeeklySelected
-            btnBuy.setTitle(AdaptyPaywallBuilder.shared.ctaButtonTextWhenWeeklySelected, for: .normal)
+            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder().weeklyProductID)
+            titleLabel.text = AdaptyPaywallBuilder().titleLabelTextWhenWeeklySelected
+            btnBuy.setTitle(AdaptyPaywallBuilder().ctaButtonTextWhenWeeklySelected, for: .normal)
             switchFreeTrial.setOn(true, animated: true)
         }
         
         
         let featuresView = NeonPaywallFeaturesView()
-        featuresView.featureTextColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
-        featuresView.featureIconBackgroundColor = AdaptyPaywallBuilder.shared.mainColor
+        featuresView.featureTextColor = AdaptyPaywallBuilder().isDarkModeEnabled ? .white : .black
+        featuresView.featureIconBackgroundColor = AdaptyPaywallBuilder().mainColor
         featuresView.featureIconTintColor = .white
         view.addSubview(featuresView)
         featuresView.snp.makeConstraints { make in
@@ -173,15 +173,15 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.top.equalTo(testemonialView.snp.bottom).offset(5)
             make.bottom.equalTo(btnWeekly.snp.top).offset(-10)
         }
-        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature1.title, icon: AdaptyPaywallBuilder.shared.feature1.icon)
-        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature2.title, icon: AdaptyPaywallBuilder.shared.feature2.icon)
+        featuresView.addFeature(title: AdaptyPaywallBuilder().feature1.title, icon: AdaptyPaywallBuilder().feature1.icon)
+        featuresView.addFeature(title: AdaptyPaywallBuilder().feature2.title, icon: AdaptyPaywallBuilder().feature2.icon)
       
         if UIScreen.main.bounds.height > 812{ // iPhone X
-            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3.title, icon: AdaptyPaywallBuilder.shared.feature3.icon)
+            featuresView.addFeature(title: AdaptyPaywallBuilder().feature3.title, icon: AdaptyPaywallBuilder().feature3.icon)
         }
        
         if UIScreen.main.bounds.height <= 667{ // iPhone 8
-            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3.title, icon: AdaptyPaywallBuilder.shared.feature3.icon)
+            featuresView.addFeature(title: AdaptyPaywallBuilder().feature3.title, icon: AdaptyPaywallBuilder().feature3.icon)
             testemonialView.isHidden = true
             
             featuresView.snp.remakeConstraints { make in
@@ -196,13 +196,13 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     
     @objc func btnBuyClicked(){
         if AdaptyManager.selectedPackage == nil{
-            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder.shared.weeklyProductID)
+            AdaptyManager.selectPackage(id: AdaptyPaywallBuilder().weeklyProductID)
         }
-        AdaptyManager.subscribe(animation: .loadingCircle, animationColor: AdaptyPaywallBuilder.shared.mainColor) { [self] in
-            if AdaptyPaywallBuilder.shared.canDismiss{
+        AdaptyManager.subscribe(animation: .loadingCircle, animationColor: AdaptyPaywallBuilder().mainColor) { [self] in
+            if AdaptyPaywallBuilder().canDismiss{
                 dismiss(animated: true)
             }else{
-                self.present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .down)
+                self.present(destinationVC: AdaptyPaywallBuilder().homeVC, slideDirection: .down)
             }
         } completionFailure: {
          
@@ -210,7 +210,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
 
     }
     func createAnimatedViews(){
-        let sparkle1 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color: AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle1 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color: AdaptyPaywallBuilder().mainColor)
         view.addSubview(sparkle1)
         sparkle1.alpha = 0.4
         sparkle1.snp.makeConstraints { make in
@@ -219,7 +219,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.right.equalToSuperview().offset(10)
         }
         
-        let sparkle2 = NeonAnimationView(animation: .custom(name: "sparkle_2"), color: AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle2 = NeonAnimationView(animation: .custom(name: "sparkle_2"), color: AdaptyPaywallBuilder().mainColor)
         view.addSubview(sparkle2)
         sparkle2.alpha = 0.4
         sparkle2.snp.makeConstraints { make in
@@ -228,7 +228,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.left.equalTo(titleLabel.snp.left).offset(-20)
         }
         
-        let sparkle3 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color:  AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle3 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color:  AdaptyPaywallBuilder().mainColor)
         view.addSubview(sparkle3)
         sparkle3.alpha = 0.4
         sparkle3.transform = CGAffineTransform(scaleX: -1, y: 1)
@@ -243,11 +243,11 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     func createCloseButton(){
         let closeButton = UIButton()
         closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        let closeButtonAlpha = AdaptyPaywallBuilder.shared.closeButtonAlpha
+        let closeButtonAlpha = AdaptyPaywallBuilder().closeButtonAlpha
         closeButton.alpha = closeButtonAlpha
-        closeButton.tintColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
+        closeButton.tintColor = AdaptyPaywallBuilder().isDarkModeEnabled ? .white : .black
         closeButton.addAction { [self] in
-            if AdaptyPaywallBuilder.shared.canDismiss{
+            if AdaptyPaywallBuilder().canDismiss{
     
                 dismiss(animated: true)
                 
@@ -256,11 +256,11 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
                 }
       
             }else{
-                present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .right)
+                present(destinationVC: AdaptyPaywallBuilder().homeVC, slideDirection: .right)
             }
         }
       
-        let closeButtonAppearanceDuration = AdaptyPaywallBuilder.shared.closeButtonAppearanceDuration
+        let closeButtonAppearanceDuration = AdaptyPaywallBuilder().closeButtonAppearanceDuration
         if closeButtonAppearanceDuration != 0{
             closeButton.isHidden = true
         }
@@ -268,7 +268,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             closeButton.isHidden = false
         })
         view.addSubview(closeButton)
-        let closeButtonSize = AdaptyPaywallBuilder.shared.closeButtonSize
+        let closeButtonSize = AdaptyPaywallBuilder().closeButtonSize
         closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
             make.left.equalToSuperview().offset(10)
@@ -286,8 +286,8 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     }
     
     public func packageFetched() {
-        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) billed once"
-        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) per week"
+        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder().lifetimeProductID)) billed once"
+        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder().weeklyProductID)) per week"
     }
     
 }
