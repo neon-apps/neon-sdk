@@ -130,8 +130,10 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             
         }
      
-        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) billed once"
-        btnLifetime.subtitle = "Unlock Premium Features"
+        btnLifetime.title = "Lifetime -".localized()
+        btnLifetime.title = " \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) "
+        btnLifetime.title += "billed once".localized()
+        btnLifetime.subtitle = "Unlock Premium Features".localized()
         view.addSubview(btnLifetime)
         btnLifetime.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(30)
@@ -145,8 +147,9 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             switchFreeTrial.setOn(false, animated: true)
         }
       
-        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) per week"
-        btnWeekly.subtitle = "3-day free trial"
+        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) "
+        btnWeekly.title += "per week".localized()
+        btnWeekly.subtitle = "3-day free trial".localized()
         btnWeekly.isSelected = true
         view.addSubview(btnWeekly)
         btnWeekly.isBestSeller = true
