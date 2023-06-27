@@ -11,6 +11,8 @@ import UIKit
 @available(iOS 13.0, *)
 public class AdaptyPaywallBuilder{
     
+    static var shared = AdaptyPaywallBuilder()
+    
     var bestSellerLabelText = AdaptyManager.getRemoteConfigValue(id: "bestSellerLabelText") as? String ?? "Best Seller"
     var ctaButtonTextWhenLifetimeSelected = AdaptyManager.getRemoteConfigValue(id: "ctaButtonTextWhenLifetimeSelected") as? String ?? "Unlock All Premium Features"
     var ctaButtonTextWhenWeeklySelected = AdaptyManager.getRemoteConfigValue(id: "ctaButtonTextWhenWeeklySelected") as? String ?? "Start my 3-day free trial"
@@ -49,27 +51,27 @@ public class AdaptyPaywallBuilder{
   
     
     public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, homeVC: UIViewController, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testemonial1: NeonTestemonial, testemonial2: NeonTestemonial, testemonial3: NeonTestemonial) {
-        AdaptyPaywallBuilder().mainColor = mainColor
-        AdaptyPaywallBuilder().darkColor = darkColor
-        AdaptyPaywallBuilder().lightColor = lightColor
-        AdaptyPaywallBuilder().isDarkModeEnabled = isDarkModeEnabled
-        AdaptyPaywallBuilder().weeklyProductID = weeklyProductID
-        AdaptyPaywallBuilder().lifetimeProductID = lifetimeProductID
-        AdaptyPaywallBuilder().homeVC = homeVC
-        AdaptyPaywallBuilder().termsURL = termsURL
-        AdaptyPaywallBuilder().privacyURL = privacyURL
-        AdaptyPaywallBuilder().feature1 = feature1
-        AdaptyPaywallBuilder().feature2 = feature2
-        AdaptyPaywallBuilder().feature3 = feature3
-        AdaptyPaywallBuilder().testemonial1 = testemonial1
-        AdaptyPaywallBuilder().testemonial2 = testemonial2
-        AdaptyPaywallBuilder().testemonial3 = testemonial3
+        AdaptyPaywallBuilder.shared.mainColor = mainColor
+        AdaptyPaywallBuilder.shared.darkColor = darkColor
+        AdaptyPaywallBuilder.shared.lightColor = lightColor
+        AdaptyPaywallBuilder.shared.isDarkModeEnabled = isDarkModeEnabled
+        AdaptyPaywallBuilder.shared.weeklyProductID = weeklyProductID
+        AdaptyPaywallBuilder.shared.lifetimeProductID = lifetimeProductID
+        AdaptyPaywallBuilder.shared.homeVC = homeVC
+        AdaptyPaywallBuilder.shared.termsURL = termsURL
+        AdaptyPaywallBuilder.shared.privacyURL = privacyURL
+        AdaptyPaywallBuilder.shared.feature1 = feature1
+        AdaptyPaywallBuilder.shared.feature2 = feature2
+        AdaptyPaywallBuilder.shared.feature3 = feature3
+        AdaptyPaywallBuilder.shared.testemonial1 = testemonial1
+        AdaptyPaywallBuilder.shared.testemonial2 = testemonial2
+        AdaptyPaywallBuilder.shared.testemonial3 = testemonial3
     }
     
     var canDismiss = false
     
     public static func presentAdaptyPaywall(controller : UIViewController, canDismiss : Bool = true){
-        AdaptyPaywallBuilder().canDismiss = canDismiss
+        AdaptyPaywallBuilder.shared.canDismiss = canDismiss
         controller.present(destinationVC: NeonAdaptyPaywallVC(), slideDirection: .up)
     }
 }
