@@ -33,7 +33,7 @@ public class NeonLegalView : UIView{
     func setupView(){
         
         
-        let attributedTitle = NSAttributedString(string: "Privacy Policy", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        let attributedTitle = NSAttributedString(string: "Privacy Policy".localized(), attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         privacyButton.setAttributedTitle(attributedTitle, for: .normal)
         privacyButton.setTitleColor(textColor, for: .normal)
         privacyButton.titleLabel?.font = Font.custom(size: 10, fontWeight: .Regular)
@@ -45,7 +45,7 @@ public class NeonLegalView : UIView{
         }
         privacyButton.addTarget(self, action: #selector(privacyButtonClicked), for: .touchUpInside)
        
-        let attributedTitle2 = NSAttributedString(string: "Restore Purchases", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        let attributedTitle2 = NSAttributedString(string: "Restore Purchases".localized(), attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         restoreButton.setAttributedTitle(attributedTitle2, for: .normal)
         restoreButton.setTitleColor(textColor, for: .normal)
         restoreButton.titleLabel?.font = Font.custom(size: 10, fontWeight: .Regular)
@@ -57,7 +57,7 @@ public class NeonLegalView : UIView{
         }
         restoreButton.addTarget(self, action: #selector(restoreClicked), for: .touchUpInside)
      
-        let attributedTitle3 = NSAttributedString(string: "Terms of Use", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        let attributedTitle3 = NSAttributedString(string: "Terms of Use".localized(), attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
         termsButton.setAttributedTitle(attributedTitle3, for: .normal)
         termsButton.setTitleColor(textColor, for: .normal)
         termsButton.titleLabel?.font = Font.custom(size: 10, fontWeight: .Regular)
