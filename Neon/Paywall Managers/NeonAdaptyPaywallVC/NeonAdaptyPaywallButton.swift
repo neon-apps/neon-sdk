@@ -144,7 +144,7 @@ public class NeonAdaptyPaywallButton: UIButton {
     }
     
     private func addBestSellerLabel() {
-        bestSellerLabel.text = AdaptyPaywallBuilder.shared.bestSellerLabelText
+        bestSellerLabel.text = AdaptyPaywallBuilder().bestSellerLabelText
         bestSellerLabel.topInset = 4
         bestSellerLabel.bottomInset = 4
         bestSellerLabel.leftInset = 10

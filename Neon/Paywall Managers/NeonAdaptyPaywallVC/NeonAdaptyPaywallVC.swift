@@ -109,7 +109,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         
         let lblFreeTrial = UILabel()
         lblFreeTrial.textAlignment = .left
-        lblFreeTrial.text = "Enable Free Trial"
+        lblFreeTrial.text = "Enable Free Trial".localized()
         lblFreeTrial.numberOfLines = 1
         lblFreeTrial.font = Font.custom(size: 15, fontWeight: .Medium)
         lblFreeTrial.textColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ? .white : .black
@@ -286,8 +286,12 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     }
     
     public func packageFetched() {
-        btnLifetime.title = "Lifetime - \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) billed once"
-        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) per week"
+        btnLifetime.title = "Lifetime -".localized()
+        btnLifetime.title = " \(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.lifetimeProductID)) "
+        btnLifetime.title += "billed once".localized()
+        
+        btnWeekly.title = "\(AdaptyManager.getPackagePrice(id: AdaptyPaywallBuilder.shared.weeklyProductID)) "
+        btnWeekly.title += "per week".localized()
     }
     
 }
