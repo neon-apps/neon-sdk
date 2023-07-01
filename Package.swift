@@ -30,13 +30,13 @@ let package = Package(
        
         .target(
             name: "NeonSDK",  dependencies: [
-                "Lottie",
                 "RevenueCat",
                 "SDWebImage",
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",
                 "Adapty",
+                .product(name: "Lottie", package: "Lottie", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAnalytics", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseRemoteConfig", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseStorage", package: "Firebase", condition: .when(platforms: [.iOS])),
