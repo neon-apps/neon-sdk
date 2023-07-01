@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 7.06.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import Adapty
 import StoreKit
@@ -252,3 +252,4 @@ public class AdaptyManager {
 }
 
 
+#endif

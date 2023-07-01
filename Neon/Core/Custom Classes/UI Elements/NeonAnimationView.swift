@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 4.06.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import UIKit
 import Lottie
@@ -55,3 +55,4 @@ public class NeonAnimationView: UIView {
     }
     
 }
+#endif
