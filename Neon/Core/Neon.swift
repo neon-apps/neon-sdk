@@ -22,7 +22,7 @@ public class Neon{
     }
     
     public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController){
-        
+
         configureIQKeyboard()
         
         if !UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted"){
@@ -37,11 +37,11 @@ public class Neon{
         }
         
     }
-#endif
+
     fileprivate static func configureIQKeyboard(){
         IQKeyboardManager.shared.enable = true
     }
-    
+#endif
     public static func onboardingCompleted(){
         UserDefaults.standard.setValue(true, forKey: "Neon-isOnboardingCompleted")
     }
