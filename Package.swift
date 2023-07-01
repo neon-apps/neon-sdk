@@ -34,7 +34,7 @@ let package = Package(
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",
-                "Adapty",
+                .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
                 .product(name: "Lottie", package: "Lottie", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAnalytics", package: "Firebase", condition: .when(platforms: [.iOS])),
