@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 26.03.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import FirebaseRemoteConfig
 
@@ -86,3 +86,4 @@ public class RemoteConfigManager{
     }
     
 }
+#endif

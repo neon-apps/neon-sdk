@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 8.04.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import FirebaseFirestore
 
@@ -118,3 +118,4 @@ class FirestoreReferanceManager{
         }
     }
 }
+#endif
