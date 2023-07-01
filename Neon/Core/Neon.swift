@@ -11,9 +11,13 @@ import Foundation
 public class Neon{
     public static var isUserPremium = false
     static var isPremiumTestActive = false
-#if !os(xrOS)
+
     public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController) {
+#if !os(xrOS)
         window = UIWindow(frame: UIScreen.main.bounds)
+#else
+        window = UIWindow()
+#endif
         if #available(iOS 13.0, *) {
             window?.overrideUserInterfaceStyle = .light
         }
@@ -22,9 +26,9 @@ public class Neon{
     }
     
     public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController){
-
+#if !os(xrOS)
         configureIQKeyboard()
-        
+#endif
         if !UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted"){
             Neon.setWindow(window: &window, destinationVC: onboardingVC)
             return
@@ -37,7 +41,7 @@ public class Neon{
         }
         
     }
-
+#if !os(xrOS)
     fileprivate static func configureIQKeyboard(){
         IQKeyboardManager.shared.enable = true
     }
