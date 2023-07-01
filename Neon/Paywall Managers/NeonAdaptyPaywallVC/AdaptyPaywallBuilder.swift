@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 25.06.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import UIKit
 
@@ -76,3 +76,4 @@ public class AdaptyPaywallBuilder{
         controller.present(destinationVC: NeonAdaptyPaywallVC(), slideDirection: .up)
     }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Tuna Öztürk on 25.06.2023.
 //
 
+#if !os(xrOS)
 import Foundation
 import UIKit
 import Adapty
@@ -298,3 +299,4 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     }
     
 }
+#endif
