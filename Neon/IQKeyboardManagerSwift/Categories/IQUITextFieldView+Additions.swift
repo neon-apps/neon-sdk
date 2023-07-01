@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 /**
@@ -91,3 +92,4 @@ UIView category for managing UITextField/UITextView
         }
     }
 }
+#endif

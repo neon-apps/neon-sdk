@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 // MARK: UIStatusBar Notification methods
@@ -75,3 +76,4 @@ internal extension IQKeyboardManager {
         showLog("📱<<<<< \(#function) ended: \(elapsedTime) seconds <<<<<", indentation: -1)
     }
 }
+#endif

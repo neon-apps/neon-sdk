@@ -20,10 +20,11 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
+#if !os(xrOS)
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
 @objc open class IQPreviousNextView: UIView {
 
 }
+#endif

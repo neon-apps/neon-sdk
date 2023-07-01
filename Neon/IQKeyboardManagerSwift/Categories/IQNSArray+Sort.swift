@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 /**
@@ -55,3 +56,4 @@ internal extension Array where Element: UIView {
         })
     }
 }
+#endif

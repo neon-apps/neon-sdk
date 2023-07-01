@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
@@ -115,3 +116,4 @@ internal extension UICollectionView {
         }
     }
 }
+#endif

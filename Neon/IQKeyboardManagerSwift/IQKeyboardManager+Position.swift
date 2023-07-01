@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
@@ -715,3 +716,4 @@ public extension IQKeyboardManager {
         self.rootViewController = nil
     }
 }
+#endif

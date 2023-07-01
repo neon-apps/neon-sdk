@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
@@ -643,3 +644,4 @@ extension IQKeyboardReturnKeyHandler: UITextViewDelegate {
     }
 #endif
 }
+#endif

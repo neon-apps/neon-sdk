@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 8.06.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import UIKit
 
@@ -85,3 +85,4 @@ public class NeonLegalView : UIView{
         fatalError("init(coder:) has not been implemented")
     }
 }
+#endif

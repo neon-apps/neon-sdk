@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 @available(iOSApplicationExtension, unavailable)
@@ -97,3 +98,4 @@ import UIKit
         target = nil
     }
 }
+#endif

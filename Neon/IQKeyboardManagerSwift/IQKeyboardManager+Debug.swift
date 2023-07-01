@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 // import Foundation - UIKit contains Foundation
+#if !os(xrOS)
 import UIKit
 
 // MARK: Debugging & Developer options
@@ -109,3 +110,4 @@ public extension IQKeyboardManager {
         }
     }
 }
+#endif
