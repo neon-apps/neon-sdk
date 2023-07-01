@@ -201,7 +201,11 @@ UIView category methods to add IQToolbar on UIKeyboard.
             return unwrappedToolbar
         } else {
 
-            let frame = CGRect(origin: .zero, size: .init(width: UIScreen.main.bounds.width, height: 44))
+            var width = 0.0
+#if !os(xrOS)
+            width = UIScreen.main.bounds.width
+#endif
+            let frame = CGRect(origin: .zero, size: .init(width: width, height: 44))
             let newToolbar = IQToolbar(frame: frame)
 
             objc_setAssociatedObject(self, &AssociatedKeys.keyboardToolbar, newToolbar, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

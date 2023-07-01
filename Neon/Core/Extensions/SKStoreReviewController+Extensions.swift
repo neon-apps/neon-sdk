@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 11.03.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import StoreKit
 
@@ -25,3 +25,4 @@ extension SKStoreReviewController {
         }
     }
 }
+#endif

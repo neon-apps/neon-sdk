@@ -19,7 +19,7 @@ public class SettingsManager{
         } else {
         }
     }
-    
+#if !os(xrOS)
     public static func showReviewSheet(appID : String){
         if let checkURL = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?action=write-review") {
             open(url: checkURL)
@@ -27,7 +27,7 @@ public class SettingsManager{
             SKStoreReviewController.requestReviewInCurrentScene()
         }
     }
-    
+
     public static func openLinkFromBrowser(url: String) {
         guard let url = URL(string: url) else { return}
         if UIApplication.shared.canOpenURL(url) {
@@ -48,4 +48,5 @@ public class SettingsManager{
 
         }
       }
+#endif
 }

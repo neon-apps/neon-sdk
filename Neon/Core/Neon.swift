@@ -11,7 +11,7 @@ import Foundation
 public class Neon{
     public static var isUserPremium = false
     static var isPremiumTestActive = false
-    
+#if !os(xrOS)
     public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController) {
         window = UIWindow(frame: UIScreen.main.bounds)
         if #available(iOS 13.0, *) {
@@ -37,7 +37,7 @@ public class Neon{
         }
         
     }
-    
+#endif
     fileprivate static func configureIQKeyboard(){
         IQKeyboardManager.shared.enable = true
     }

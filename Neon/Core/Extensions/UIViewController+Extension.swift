@@ -47,7 +47,7 @@ extension UIViewController { // Presentation
     }
 }
 
-
+#if !os(xrOS)
 extension UIViewController{
     
     public func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle) {
@@ -56,3 +56,4 @@ extension UIViewController{
     }
     
 }
+#endif

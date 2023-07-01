@@ -4,7 +4,7 @@
 //
 //  Created by Tuna Öztürk on 7.05.2023.
 //
-
+#if !os(xrOS)
 import Foundation
 import Localize_Swift
 
@@ -436,3 +436,4 @@ open class NeonScrollLabel: UIView {
         perform(#selector(NeonScrollLabel.scrollLabelIfNeeded), with: nil, afterDelay: 0.1)
     }
 }
+#endif

@@ -25,8 +25,11 @@ public class Font {
              fontWeightStr = fontWeightStr.lowercased()
              fontWeightStr = fontWeightStr.capitalized
          }
-         
+#if !os(xrOS)
         return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size * UIScreen.main.bounds.height * 0.00115)!
+#else
+        return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
+#endif
     }
     
 }

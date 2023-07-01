@@ -17,16 +17,16 @@ public class Helpers{
         activityViewController.popoverPresentationController?.sourceView = vc.view
         vc.present(activityViewController, animated: true, completion: nil)
     }
-    
+#if !os(xrOS)
     public static func showRatePopup() {
         SKStoreReviewController.requestReviewInCurrentScene()
     }
-    
+
     public static func openWithBrowser(url: URL) {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:])
         }
     }
-    
+#endif
     
 }
