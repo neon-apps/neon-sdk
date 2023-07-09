@@ -18,6 +18,15 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     let titleLabel = UILabel()
     let btnBuy = NeonBouncingButton()
     var completionAfterShowingPaywall : (() -> ())?
+        
+    public init(canDismiss : Bool = true){
+        AdaptyPaywallBuilder.shared.canDismiss = canDismiss
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     public override func viewDidLoad() {
         super.viewDidLoad()
         AdaptyManager.selectedPaywall = AdaptyManager.getPaywall(id: AdaptyPaywallBuilder.shared.paywallID)
@@ -260,7 +269,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
                 }
       
             }else{
-                present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .right)
+                present(destinationVC: Neon.homeVC, slideDirection: .right)
             }
         }
       

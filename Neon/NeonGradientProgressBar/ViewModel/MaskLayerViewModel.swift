@@ -12,6 +12,8 @@ import Foundation
 import QuartzCore
 
 /// This view model keeps track of the progress-value and updates the `maskLayer` accordingly.
+
+@available(iOS 13.0, *)
 final class MaskLayerViewModel {
 
     // MARK: - Public properties
@@ -86,7 +88,7 @@ final class MaskLayerViewModel {
 }
 
 // MARK: - Supporting Types
-
+@available(iOS 13.0, *)
 extension MaskLayerViewModel {
 
     /// Combines all properties for an animated update of a frame.

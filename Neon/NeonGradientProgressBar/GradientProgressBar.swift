@@ -13,6 +13,8 @@ import UIKit
 /// To provide the same interface with `NeonGradientProgressBar`, we're gonna make both classes conform to this protocol.
 ///
 /// - SeeAlso: [Apple documentation for `UIProgressView`](https://apple.co/2HjwstS)
+
+@available(iOS 13.0, *)
 protocol UIProgressHandling {
     /// The current progress shown by the receiver (between 0.0 and 1.0, inclusive).
     var progress: Float { get set }
@@ -28,6 +30,8 @@ protocol UIProgressHandling {
 extension UIProgressView: UIProgressHandling {}
 
 /// A customizable gradient progress view.
+///
+@available(iOS 13.0, *)
 @IBDesignable
 open class NeonGradientProgressBar: UIView {
 
@@ -146,7 +150,7 @@ open class NeonGradientProgressBar: UIView {
 }
 
 // MARK: - `UIProgressHandling` conformance
-
+@available(iOS 13.0, *)
 extension NeonGradientProgressBar: UIProgressHandling {
     // MARK: - Public properties
 

@@ -10,6 +10,7 @@ import Combine
 import UIKit
 
 /// This view model keeps track of the gradient-colors and updates the `gradientLayer` accordingly.
+@available(iOS 13.0, *)
 final class GradientLayerViewModel {
 
     // MARK: - Public properties

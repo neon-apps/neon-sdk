@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+@available(iOS 13.0, *)
 public class NeonSplashVC: UIViewController {
     
     var timer: Timer?
