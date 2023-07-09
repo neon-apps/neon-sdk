@@ -11,7 +11,10 @@ import Foundation
 public class Neon{
     public static var isUserPremium = false
     static var isPremiumTestActive = false
-
+    static var homeVC = UIViewController()
+    static var onboardingVC = UIViewController()
+    static var paywallVC = UIViewController()
+    
     public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController) {
 #if !os(xrOS)
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -25,10 +28,19 @@ public class Neon{
         window?.rootViewController = destinationVC
     }
     
-    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController){
+    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController, splashVC : UIViewController? = nil){
 #if !os(xrOS)
         configureIQKeyboard()
 #endif
+        
+        self.homeVC = homeVC
+        self.paywallVC = paywallVC
+        self.onboardingVC = onboardingVC
+        
+        if let splashVC{
+            Neon.setWindow(window: &window, destinationVC: splashVC)
+        }else{
+            
         if !UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted"){
             Neon.setWindow(window: &window, destinationVC: onboardingVC)
             return
@@ -38,6 +50,8 @@ public class Neon{
             Neon.setWindow(window: &window, destinationVC: homeVC)
         }else{
             Neon.setWindow(window: &window, destinationVC: paywallVC)
+        }
+            
         }
         
     }
