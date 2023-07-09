@@ -1,5 +1,5 @@
 //
-//  NeonTestemonialView.swift
+//  NeonTestimonialView.swift
 //  Cleaner
 //
 //  Created by Tuna Öztürk on 7.06.2023.
@@ -10,42 +10,42 @@ import Foundation
 import UIKit
 
 @available(iOS 13.0, *)
-public class NeonTestemonialView: UIView, NeonTestemonialCollectionViewDelegate {
+public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate {
     
-    let testemonialCollectionView = NeonTestemonialCollectionView()
+    let testimonialCollectionView = NeonTestimonialCollectionView()
     var pageControl = NeonBasePageControl()
 
-    public var intervalBetweenTestemonials = 5.0{
+    public var intervalBetweenTestimonials = 5.0{
         didSet{
-            testemonialCollectionView.intervalBetweenTestemonials = intervalBetweenTestemonials
+            testimonialCollectionView.intervalBetweenTestimonials = intervalBetweenTestimonials
         }
     }
     
-    public var testemonialTextColor = UIColor.black{
+    public var testimonialTextColor = UIColor.black{
         didSet{
-            testemonialCollectionView.testemonialTextColor = testemonialTextColor
+            testimonialCollectionView.testimonialTextColor = testimonialTextColor
         }
     }
-    public var testemonialbackgroundColor = UIColor.white{
+    public var testimonialbackgroundColor = UIColor.white{
         didSet{
-            testemonialCollectionView.testemonialbackgroundColor = testemonialbackgroundColor
+            testimonialCollectionView.testimonialbackgroundColor = testimonialbackgroundColor
         }
     }
-    public var testemonialbackgroundCornerRadious = 12{
+    public var testimonialbackgroundCornerRadious = 12{
         didSet{
-            testemonialCollectionView.testemonialbackgroundCornerRadious = testemonialbackgroundCornerRadious
-        }
-    }
-    
-    public var currentTestemonialPageTintColor = UIColor.black{
-        didSet{
-            pageControl.currentPageTintColor = currentTestemonialPageTintColor
+            testimonialCollectionView.testimonialbackgroundCornerRadious = testimonialbackgroundCornerRadious
         }
     }
     
-    public var testemonialPageTintColor = UIColor.black{
+    public var currentTestimonialPageTintColor = UIColor.black{
         didSet{
-            pageControl.tintColor = testemonialPageTintColor
+            pageControl.currentPageTintColor = currentTestimonialPageTintColor
+        }
+    }
+    
+    public var testimonialPageTintColor = UIColor.black{
+        didSet{
+            pageControl.tintColor = testimonialPageTintColor
         }
     }
     
@@ -92,13 +92,13 @@ public class NeonTestemonialView: UIView, NeonTestemonialCollectionViewDelegate 
 
         
       
-        addSubview(testemonialCollectionView)
-        testemonialCollectionView.snp.makeConstraints { make in
+        addSubview(testimonialCollectionView)
+        testimonialCollectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview().inset(30)
         }
-        testemonialCollectionView.testemonialCollectionViewDelegate = self
+        testimonialCollectionView.testimonialCollectionViewDelegate = self
      
    
     }
@@ -107,22 +107,22 @@ public class NeonTestemonialView: UIView, NeonTestemonialCollectionViewDelegate 
         pageControl.removeFromSuperview()
         addSubview(pageControl)
         pageControl.radius = 3
-        pageControl.currentPageTintColor = currentTestemonialPageTintColor
-        pageControl.tintColor = testemonialPageTintColor
+        pageControl.currentPageTintColor = currentTestimonialPageTintColor
+        pageControl.tintColor = testimonialPageTintColor
         pageControl.padding = 6
-        pageControl.numberOfPages = NeonTestemonial.arrTestemonials.count
+        pageControl.numberOfPages = NeonTestimonial.arrTestimonials.count
         pageControl.snp.makeConstraints { make in
-            make.top.equalTo(testemonialCollectionView.snp.bottom).offset(10)
+            make.top.equalTo(testimonialCollectionView.snp.bottom).offset(10)
             make.bottom.equalTo(self.snp.bottom)
             make.centerX.equalToSuperview()
         }
     }
-    public func addTestemonial(title : String, testemonial : String, author : String){
-        NeonTestemonial.arrTestemonials.append(NeonTestemonial(title: title, testemonial: testemonial,author: author))
-        testemonialCollectionView.objects = NeonTestemonial.arrTestemonials
-        pageControl.numberOfPages = NeonTestemonial.arrTestemonials.count
+    public func addTestimonial(title : String, testimonial : String, author : String){
+        NeonTestimonial.arrTestimonials.append(NeonTestimonial(title: title, testimonial: testimonial,author: author))
+        testimonialCollectionView.objects = NeonTestimonial.arrTestimonials
+        pageControl.numberOfPages = NeonTestimonial.arrTestimonials.count
     }
-    func testemonialCollectionView(_ collectionView: NeonTestemonialCollectionView, destinationPage pageIndex: Int) {
+    func testimonialCollectionView(_ collectionView: NeonTestimonialCollectionView, destinationPage pageIndex: Int) {
         pageControl.set(progress: pageIndex, animated: true)
     }
     required init?(coder: NSCoder) {

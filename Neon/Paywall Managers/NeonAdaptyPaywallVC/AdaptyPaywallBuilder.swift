@@ -45,12 +45,12 @@ public class AdaptyPaywallBuilder{
     var feature2 = NeonPaywallFeature()
     var feature3 = NeonPaywallFeature()
 
-    var testemonial1 = NeonTestemonial()
-    var testemonial2 = NeonTestemonial()
-    var testemonial3 = NeonTestemonial()
+    var testimonial1 = NeonTestimonial()
+    var testimonial2 = NeonTestimonial()
+    var testimonial3 = NeonTestimonial()
   
     
-    public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testemonial1: NeonTestemonial, testemonial2: NeonTestemonial, testemonial3: NeonTestemonial) {
+    public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testimonial1: NeonTestimonial, testimonial2: NeonTestimonial, testimonial3: NeonTestimonial) {
         AdaptyPaywallBuilder.shared.paywallID = paywallID
         AdaptyPaywallBuilder.shared.mainColor = mainColor
         AdaptyPaywallBuilder.shared.darkColor = darkColor
@@ -63,9 +63,9 @@ public class AdaptyPaywallBuilder{
         AdaptyPaywallBuilder.shared.feature1 = feature1
         AdaptyPaywallBuilder.shared.feature2 = feature2
         AdaptyPaywallBuilder.shared.feature3 = feature3
-        AdaptyPaywallBuilder.shared.testemonial1 = testemonial1
-        AdaptyPaywallBuilder.shared.testemonial2 = testemonial2
-        AdaptyPaywallBuilder.shared.testemonial3 = testemonial3
+        AdaptyPaywallBuilder.shared.testimonial1 = testimonial1
+        AdaptyPaywallBuilder.shared.testimonial2 = testimonial2
+        AdaptyPaywallBuilder.shared.testimonial3 = testimonial3
     }
     
     var canDismiss = false

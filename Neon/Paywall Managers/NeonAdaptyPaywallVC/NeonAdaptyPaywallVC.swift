@@ -63,25 +63,25 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         
         createAnimatedViews()
         
-        let testemonialView = NeonTestemonialView()
-        view.addSubview(testemonialView)
-        testemonialView.snp.makeConstraints { make in
+        let testimonialView = NeonTestimonialView()
+        view.addSubview(testimonialView)
+        testimonialView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.height.equalTo(210)
         }
         
     
-        testemonialView.testemonialTextColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  .white : .black
-        testemonialView.testemonialbackgroundColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  AdaptyPaywallBuilder.shared.darkColor : AdaptyPaywallBuilder.shared.lightColor
-        testemonialView.currentTestemonialPageTintColor = AdaptyPaywallBuilder.shared.mainColor
-        testemonialView.testemonialPageTintColor = .darkGray
-        testemonialView.testemonialbackgroundCornerRadious = 12
-        testemonialView.pageControlType = .V1
+        testimonialView.testimonialTextColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  .white : .black
+        testimonialView.testimonialbackgroundColor = AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  AdaptyPaywallBuilder.shared.darkColor : AdaptyPaywallBuilder.shared.lightColor
+        testimonialView.currentTestimonialPageTintColor = AdaptyPaywallBuilder.shared.mainColor
+        testimonialView.testimonialPageTintColor = .darkGray
+        testimonialView.testimonialbackgroundCornerRadious = 12
+        testimonialView.pageControlType = .V1
         
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial1.title, testemonial: AdaptyPaywallBuilder.shared.testemonial1.testemonial, author: AdaptyPaywallBuilder.shared.testemonial1.author)
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial2.title, testemonial: AdaptyPaywallBuilder.shared.testemonial2.testemonial, author: AdaptyPaywallBuilder.shared.testemonial2.author)
-        testemonialView.addTestemonial(title: AdaptyPaywallBuilder.shared.testemonial3.title, testemonial: AdaptyPaywallBuilder.shared.testemonial3.testemonial, author: AdaptyPaywallBuilder.shared.testemonial3.author)
+        testimonialView.addTestimonial(title: AdaptyPaywallBuilder.shared.testimonial1.title, testimonial: AdaptyPaywallBuilder.shared.testimonial1.testimonial, author: AdaptyPaywallBuilder.shared.testimonial1.author)
+        testimonialView.addTestimonial(title: AdaptyPaywallBuilder.shared.testimonial2.title, testimonial: AdaptyPaywallBuilder.shared.testimonial2.testimonial, author: AdaptyPaywallBuilder.shared.testimonial2.author)
+        testimonialView.addTestimonial(title: AdaptyPaywallBuilder.shared.testimonial3.title, testimonial: AdaptyPaywallBuilder.shared.testimonial3.testimonial, author: AdaptyPaywallBuilder.shared.testimonial3.author)
 
   
         let legalView = NeonLegalView()
@@ -183,7 +183,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         view.addSubview(featuresView)
         featuresView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(testemonialView.snp.bottom).offset(5)
+            make.top.equalTo(testimonialView.snp.bottom).offset(5)
             make.bottom.equalTo(btnWeekly.snp.top).offset(-10)
         }
         featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature1.title, icon: AdaptyPaywallBuilder.shared.feature1.icon)
@@ -195,7 +195,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
        
         if UIScreen.main.bounds.height <= 667{ // iPhone 8
             featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3.title, icon: AdaptyPaywallBuilder.shared.feature3.icon)
-            testemonialView.isHidden = true
+            testimonialView.isHidden = true
             
             featuresView.snp.remakeConstraints { make in
                 make.left.right.equalToSuperview()

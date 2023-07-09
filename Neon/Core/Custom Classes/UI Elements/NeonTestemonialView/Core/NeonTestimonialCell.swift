@@ -1,5 +1,5 @@
 //
-//  NeonTestemonialCell.swift
+//  NeonTestimonialCell.swift
 //  Cleaner
 //
 //  Created by Tuna Öztürk on 7.06.2023.
@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 
-class NeonTestemonialCell: NeonCollectionViewCell<NeonTestemonial> {
+class NeonTestimonialCell: NeonCollectionViewCell<NeonTestimonial> {
     
     public let titleLabel = UILabel()
-    public let testemonialLabel = UILabel()
+    public let testimonialLabel = UILabel()
     public let imgStars = UIImageView()
     public let authorLabel = UILabel()
    
@@ -26,11 +26,11 @@ class NeonTestemonialCell: NeonCollectionViewCell<NeonTestemonial> {
     }
     
 
-    override func configure(with testemonial: NeonTestemonial) {
-        super.configure(with: testemonial)
-        titleLabel.text = testemonial.title
-        testemonialLabel.text = testemonial.testemonial
-        authorLabel.text = testemonial.author
+    override func configure(with testimonial: NeonTestimonial) {
+        super.configure(with: testimonial)
+        titleLabel.text = testimonial.title
+        testimonialLabel.text = testimonial.testimonial
+        authorLabel.text = testimonial.author
     }
   
     private func setupSubviews() {
@@ -61,11 +61,11 @@ class NeonTestemonialCell: NeonCollectionViewCell<NeonTestemonial> {
         imgStars.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
         }
-        stackView.addArrangedSubview(testemonialLabel)
-        testemonialLabel.font = Font.custom(size: 12, fontWeight: .Regular)
-        testemonialLabel.numberOfLines = 3
-        testemonialLabel.textAlignment = .center
-        testemonialLabel.snp.makeConstraints { make in
+        stackView.addArrangedSubview(testimonialLabel)
+        testimonialLabel.font = Font.custom(size: 12, fontWeight: .Regular)
+        testimonialLabel.numberOfLines = 3
+        testimonialLabel.textAlignment = .center
+        testimonialLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
         }
       
