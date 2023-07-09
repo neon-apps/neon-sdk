@@ -27,9 +27,10 @@ public class AdaptyManager {
     
     
     public static var delegate: AdaptyManagerDelegate?
-
+    private static var accessLevel = String()
     
-    public static func configure(withAPIKey : String, paywallIDs : [String]) {
+    public static func configure(withAPIKey : String, paywallIDs : [String], accessLevel : String = "premium") {
+        self.accessLevel = accessLevel
         Adapty.activate(withAPIKey)
         fetchPaywalls(paywallIDs: paywallIDs)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
@@ -146,7 +147,7 @@ public class AdaptyManager {
             LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(purchaseInfo):
-                if purchaseInfo.profile.accessLevels["pro"]?.isActive ?? false {
+                if purchaseInfo.profile.accessLevels[self.accessLevel]?.isActive ?? false {
                     Neon.isUserPremium = true
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     guard let completionSuccess else { return }
@@ -177,7 +178,7 @@ public class AdaptyManager {
             LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(profile):
-                if profile.accessLevels["pro"]?.isActive ?? false {
+                if profile.accessLevels[self.accessLevel]?.isActive ?? false {
                     Neon.isUserPremium = true
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     
@@ -227,7 +228,7 @@ public class AdaptyManager {
         
             Adapty.getProfile { result in
                 if let profile = try? result.get(),
-                   profile.accessLevels["pro"]?.isActive ?? false {
+                   profile.accessLevels[self.accessLevel]?.isActive ?? false {
                     Neon.isUserPremium = true
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     guard let completionSuccess else { return }
