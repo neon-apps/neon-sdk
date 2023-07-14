@@ -41,7 +41,8 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
     func createUI(){
 
         let backgroundImage = UIImageView()
-        backgroundImage.image =  AdaptyPaywallBuilder.shared.isDarkModeEnabled ?  UIImage(named: "paywall_1_background_dark") : UIImage(named: "paywall_1_background_light")
+        backgroundImage.image = AdaptyPaywallBuilder.shared.backgroundImage
+        backgroundImage.backgroundColor = AdaptyPaywallBuilder.shared.backgroundColor
         view.addSubview(backgroundImage)
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.snp.makeConstraints { make in

@@ -30,7 +30,8 @@ public class AdaptyPaywallBuilder{
     var mainColor = UIColor.blue
     var darkColor = UIColor.red
     var lightColor = UIColor.green
-    
+    var backgroundColor = UIColor.white
+    var backgroundImage : UIImage?
     var isDarkModeEnabled = true
     
     var weeklyProductID = ""
@@ -50,10 +51,12 @@ public class AdaptyPaywallBuilder{
     var testimonial3 = NeonTestimonial()
   
     
-    public static func configureAdaptyPaywall(paywallID : String, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testimonial1: NeonTestimonial, testimonial2: NeonTestimonial, testimonial3: NeonTestimonial) {
+    public static func configureAdaptyPaywall(paywallID : String, backgroundColor : UIColor, backgroundImage : UIImage?, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testimonial1: NeonTestimonial, testimonial2: NeonTestimonial, testimonial3: NeonTestimonial) {
         AdaptyPaywallBuilder.shared.paywallID = paywallID
         AdaptyPaywallBuilder.shared.mainColor = mainColor
         AdaptyPaywallBuilder.shared.darkColor = darkColor
+        AdaptyPaywallBuilder.shared.backgroundColor = backgroundColor
+        AdaptyPaywallBuilder.shared.backgroundImage = backgroundImage
         AdaptyPaywallBuilder.shared.lightColor = lightColor
         AdaptyPaywallBuilder.shared.isDarkModeEnabled = isDarkModeEnabled
         AdaptyPaywallBuilder.shared.weeklyProductID = weeklyProductID
@@ -66,6 +69,8 @@ public class AdaptyPaywallBuilder{
         AdaptyPaywallBuilder.shared.testimonial1 = testimonial1
         AdaptyPaywallBuilder.shared.testimonial2 = testimonial2
         AdaptyPaywallBuilder.shared.testimonial3 = testimonial3
+        
+        
     }
     
     var canDismiss = false
