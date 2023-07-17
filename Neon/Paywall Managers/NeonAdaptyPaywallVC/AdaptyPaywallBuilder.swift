@@ -37,8 +37,6 @@ public class AdaptyPaywallBuilder{
     var weeklyProductID = ""
     var lifetimeProductID = ""
     
-    var homeVC = UIViewController()
-    
     var termsURL = String()
     var privacyURL = String()
     
@@ -51,7 +49,7 @@ public class AdaptyPaywallBuilder{
     var testimonial3 = NeonTestimonial()
   
     
-    public static func configureAdaptyPaywall(paywallID : String, backgroundColor : UIColor, backgroundImage : UIImage?, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testimonial1: NeonTestimonial, testimonial2: NeonTestimonial, testimonial3: NeonTestimonial) {
+    public static func configureAdaptyPaywall(paywallID : String, backgroundColor : UIColor, backgroundImage : UIImage? = nil, mainColor: UIColor, darkColor: UIColor, lightColor: UIColor, isDarkModeEnabled: Bool, weeklyProductID: String, lifetimeProductID: String, termsURL : String, privacyURL : String, feature1: NeonPaywallFeature, feature2: NeonPaywallFeature, feature3: NeonPaywallFeature, testimonial1: NeonTestimonial, testimonial2: NeonTestimonial, testimonial3: NeonTestimonial) {
         AdaptyPaywallBuilder.shared.paywallID = paywallID
         AdaptyPaywallBuilder.shared.mainColor = mainColor
         AdaptyPaywallBuilder.shared.darkColor = darkColor

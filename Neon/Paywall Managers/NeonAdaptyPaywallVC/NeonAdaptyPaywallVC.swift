@@ -90,7 +90,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         legalView.privacyURL = AdaptyPaywallBuilder.shared.privacyURL
         legalView.restoreButtonClicked = {
             AdaptyManager.restorePurchases(vc: self, animation: .loadingCircle, animationColor: AdaptyPaywallBuilder.shared.mainColor) {
-                self.present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .right)
+                self.present(destinationVC: Neon.homeVC, slideDirection: .right)
             } completionFailure: {
                 
             }
@@ -216,7 +216,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             if AdaptyPaywallBuilder.shared.canDismiss{
                 dismiss(animated: true)
             }else{
-                self.present(destinationVC: AdaptyPaywallBuilder.shared.homeVC, slideDirection: .down)
+                self.present(destinationVC: Neon.homeVC, slideDirection: .down)
             }
         } completionFailure: {
          
