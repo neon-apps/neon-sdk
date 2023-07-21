@@ -170,10 +170,10 @@ open class NeonCollectionViewCell<T>: UICollectionViewCell, ShimmeringViewProtoc
 }
 
 public struct ContextMenuAction<T> {
-    let title: String
-    let image: String?
-    let action: (T, IndexPath) -> Void
-    let isDestructive: Bool
+    public let title: String
+    public let image: String?
+    public let action: (T, IndexPath) -> Void
+    public let isDestructive: Bool
     
     public init(title: String, imageSystemName: String? = nil, isDestructive: Bool = false, action: @escaping (T, IndexPath) -> Void) {
         self.title = title
