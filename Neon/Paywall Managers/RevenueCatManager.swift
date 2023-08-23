@@ -123,6 +123,25 @@ public class RevenueCatManager {
         }
     }
     
+    public static func purchaseLifeTime(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
+        guard let package = RevenueCatManager.selectedPackage else {
+            LottieManager.removeFullScreenLottie()
+            return }
+        
+        Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, error, _ in
+            LottieManager.removeFullScreenLottie()
+            if error == nil{
+                guard let completionSuccess else { return }
+                Neon.isUserPremium = true
+                completionSuccess()
+            } else {
+                guard let completionFailure else { return }
+                completionFailure()
+            }
+        }
+    }
+    
     
     
     public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
