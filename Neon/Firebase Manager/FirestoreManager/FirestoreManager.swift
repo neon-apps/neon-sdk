@@ -27,7 +27,7 @@ public class FirestoreManager{
     ///  The object should be from Codable class. Ex : public class Country: Codable {}
     public static func setDocument(path : [FirestoreReferance], object : Encodable){
         
-
+        
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         
         do {
@@ -100,8 +100,18 @@ public class FirestoreManager{
     }
     
     /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
-    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil){
-        let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int? = nil){
+        var referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+            
+        
+        if let orderBy{
+            referance.order(by: orderBy, descending: isDescendingOrder)
+        }
+        
+        if let limitTo{
+            referance.limit(to: limitTo)
+        }
+        
         referance.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -133,44 +143,54 @@ public class FirestoreManager{
     }
     
     ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
-    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil) {
-            let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
-            referance.getDocuments { querySnapshot, err in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    
-                    var fetchedDocumentCount = Int()
-                  
-                    if querySnapshot!.documents.isEmpty{
-                        if let isCollectionEmpty{
-                            isCollectionEmpty()
-                        }
+    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int? = nil) {
+        
+        let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+        
+        if let orderBy{
+            referance.order(by: orderBy, descending: isDescendingOrder)
+        }
+        
+        if let limitTo{
+            referance.limit(to: limitTo)
+        }
+        
+        referance.getDocuments { querySnapshot, err in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                var fetchedDocumentCount = Int()
+                
+                if querySnapshot!.documents.isEmpty{
+                    if let isCollectionEmpty{
+                        isCollectionEmpty()
                     }
-                    
-                    for document in querySnapshot!.documents {
-                        fetchedDocumentCount += 1
-                        do {
-                            let object = try document.data(as: objectType)
-                            if let encodableObject = object as? Encodable{
-                                
-                                completion(encodableObject)
-                                
-                                if fetchedDocumentCount == querySnapshot!.documents.count{
-                                    if let isLastFetched{
-                                        isLastFetched()
-                                    }
+                }
+                
+                for document in querySnapshot!.documents {
+                    fetchedDocumentCount += 1
+                    do {
+                        let object = try document.data(as: objectType)
+                        if let encodableObject = object as? Encodable{
+                            
+                            completion(encodableObject)
+                            
+                            if fetchedDocumentCount == querySnapshot!.documents.count{
+                                if let isLastFetched{
+                                    isLastFetched()
                                 }
-                            }else{
-                                print("Fetched object is not encodable")
                             }
-                        } catch {
-                            print("Error decoding city: \(error)")
+                        }else{
+                            print("Fetched object is not encodable")
                         }
+                    } catch {
+                        print("Error decoding city: \(error)")
                     }
                 }
             }
         }
+    }
     
     // Realtime listening
     
@@ -185,21 +205,21 @@ public class FirestoreManager{
     public static func listenDocument(path : [FirestoreReferance], completion : @escaping ( _ documentData : [String : Any], _ source : WriteSource) -> ()){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         let listener = referance.addSnapshotListener { documentSnapshot, error in
-                guard let document = documentSnapshot else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-           
-                let documentID = document.documentID
-                let documentData = document.data()
-                guard let documentData else {
-                    print("Document couldn't fetched because it does not have any fields")
-                    return
-                }
-            
-                let source = document.metadata.hasPendingWrites ? WriteSource.local : WriteSource.server
-                completion(documentData, source)
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
             }
+            
+            let documentID = document.documentID
+            let documentData = document.data()
+            guard let documentData else {
+                print("Document couldn't fetched because it does not have any fields")
+                return
+            }
+            
+            let source = document.metadata.hasPendingWrites ? WriteSource.local : WriteSource.server
+            completion(documentData, source)
+        }
         activeListeners.append(listener)
     }
     
@@ -212,17 +232,17 @@ public class FirestoreManager{
             } else {
                 
                 guard let snapshot = querySnapshot else {
-                          print("Error fetching snapshots: \(err!)")
-                          return
-                      }
+                    print("Error fetching snapshots: \(err!)")
+                    return
+                }
                 
                 snapshot.documentChanges.forEach { diff in
-                     let document = diff.document
-                     let documentID = document.documentID
-                     let documentData = document.data()
-                     let source = document.metadata.hasPendingWrites ? WriteSource.local : WriteSource.server
-                     completion(documentID, documentData, source, diff.type)
-                    }
+                    let document = diff.document
+                    let documentID = document.documentID
+                    let documentData = document.data()
+                    let source = document.metadata.hasPendingWrites ? WriteSource.local : WriteSource.server
+                    completion(documentID, documentData, source, diff.type)
+                }
             }
         }
         
@@ -241,7 +261,7 @@ public class FirestoreManager{
         }
         activeListeners = []
     }
-   
-
+    
+    
 }
 #endif

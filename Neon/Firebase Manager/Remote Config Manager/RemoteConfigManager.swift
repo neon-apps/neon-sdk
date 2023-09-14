@@ -10,8 +10,9 @@ import FirebaseRemoteConfig
 
 public class RemoteConfigManager{
     
+    private static var dictRemoteConfig = [String : NSObject]()
     public static func configureRemoteConfig(defaultValues : [String : NSObject]){
-        
+        dictRemoteConfig = defaultValues
         setRemoteConfigDefaults(defaultValues: defaultValues)
         fetchRemoteConfigValues()
 
@@ -35,6 +36,7 @@ public class RemoteConfigManager{
         }
     }
     
+
     public static func getString(key : String) -> String{
         if let stringValue = RemoteConfig.remoteConfig().configValue(forKey: key).stringValue{
             UserDefaults.standard.setValue(stringValue, forKey: key)
