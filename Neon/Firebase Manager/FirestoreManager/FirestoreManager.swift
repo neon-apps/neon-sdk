@@ -100,7 +100,7 @@ public class FirestoreManager{
     }
     
     /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
-    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 1000000){
+    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 10000){
       
         var referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).limit(to: limitTo)
         
@@ -139,7 +139,7 @@ public class FirestoreManager{
     }
     
     ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
-    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 1000000) {
+    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 10000) {
         
         var referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).limit(to: limitTo)
         
