@@ -99,15 +99,21 @@ public class FirestoreManager{
         }
     }
     
-    /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
-    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 10000){
+    
+    /// The path should take a collection referance.
+    public static func prepareReferance(path : [FirestoreReferance]) -> Query{
       
-        var referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).limit(to: limitTo)
+        let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+        return referance
         
-        if let orderBy{
-            referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).order(by: orderBy, descending: isDescendingOrder).limit(to: limitTo)
-        }
-        
+    }
+    
+    
+    /// The path should take a collection referance. completion will be called one time for the every document fetched. It will give id and data of the document.
+    public static func getDocuments(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil){
+      
+        let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+ 
         referance.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -138,15 +144,85 @@ public class FirestoreManager{
         
     }
     
-    ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
-    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil, orderBy : String? = nil, isDescendingOrder : Bool = true, limitTo : Int = 10000) {
-        
-        var referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).limit(to: limitTo)
-        
-        if let orderBy{
-            referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path).order(by: orderBy, descending: isDescendingOrder).limit(to: limitTo)
+    /// The referance should take a collection referance that will be created by using FirestoreManager.prepareReferance method. Completion will be called one time for the every document fetched. It will give id and data of the document.
+    public static func getDocuments(referance : Query, completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isLastFetched :  (() -> ())? = nil , isCollectionEmpty :  (() -> ())? = nil){
+ 
+        referance.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                var fetchedDocumentCount = Int()
+                
+                if querySnapshot!.documents.isEmpty{
+                    if let isCollectionEmpty{
+                        isCollectionEmpty()
+                    }
+                }
+                
+                for document in querySnapshot!.documents {
+                    let documentID = document.documentID
+                    let documentData = document.data()
+                    fetchedDocumentCount += 1
+                    completion(documentID, documentData)
+                    
+                    if fetchedDocumentCount == querySnapshot!.documents.count{
+                        if let isLastFetched{
+                            isLastFetched()
+                        }
+                    }
+                }
+            }
         }
-     
+        
+    }
+    
+    
+    ///  The object should be from Codable class. The path should take a collection referance. completion will be called one time for the every document fetched.
+    public static func getDocuments<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil) {
+        
+        let referance = FirestoreReferanceManager.shared.prepareFirebaseCollectionRef(path)
+      
+        referance.getDocuments { querySnapshot, err in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                var fetchedDocumentCount = Int()
+                
+                if querySnapshot!.documents.isEmpty{
+                    if let isCollectionEmpty{
+                        isCollectionEmpty()
+                    }
+                }
+                
+                for document in querySnapshot!.documents {
+                    fetchedDocumentCount += 1
+                    do {
+                        let object = try document.data(as: objectType)
+                        if let encodableObject = object as? Encodable{
+                            
+                            completion(encodableObject)
+                            
+                            if fetchedDocumentCount == querySnapshot!.documents.count{
+                                if let isLastFetched{
+                                    isLastFetched()
+                                }
+                            }
+                        }else{
+                            print("Fetched object is not encodable")
+                        }
+                    } catch {
+                        print("Error decoding city: \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    ///  The object should be from Codable class. The referance should take a collection referance that will be created by using FirestoreManager.prepareReferance method.. Completion will be called one time for the every document fetched.
+    public static func getDocuments<T: Decodable>(referance : Query, objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isLastFetched :  (() -> ())? = nil, isCollectionEmpty :  (() -> ())? = nil) {
+      
         referance.getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -191,6 +267,7 @@ public class FirestoreManager{
         case local
         case server
     }
+    
     
     static var activeListeners = [ListenerRegistration]()
     
