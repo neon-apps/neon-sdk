@@ -167,6 +167,30 @@ public class AdaptyManager {
         }
         
     }
+    
+    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
+        guard let package = AdaptyManager.selectedPackage else {
+            LottieManager.removeFullScreenLottie()
+            return }
+
+        Adapty.makePurchase(product: package) { result in
+            LottieManager.removeFullScreenLottie()
+            switch result {
+            case let .success(purchaseInfo):
+                guard let completionSuccess else { return }
+                completionSuccess()
+                break
+                // successful purchase
+            case let .failure(error):
+                guard let completionFailure else { return }
+                completionFailure()
+                break
+                // handle the error
+            }
+        }
+        
+    }
 
     
     public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
