@@ -46,8 +46,7 @@ let package = Package(
                 .product(name: "FirebaseCrashlytics", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS]))
 
-                
-               */
+            
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts"), .process("Core/Resources/Assets")])
         
     ]
