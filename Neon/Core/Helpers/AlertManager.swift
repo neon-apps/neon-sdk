@@ -52,13 +52,20 @@ public class AlertManager{
     }
     
     public static func updateLoadingAlert(title: String? = nil, message: String? = nil) {
-        alertController?.title = title
-        alertController?.message = message
+      
+        if let title{
+            alertController?.title = title
+        }
+        
+        if let message{
+            alertController?.message = message
+        }
+      
     }
     
     public static func dismissLoadingAlert() {
         alertController?.dismiss(animated: true, completion: nil)
-        alertController = nil 
+        alertController = nil
     }
     
 }
