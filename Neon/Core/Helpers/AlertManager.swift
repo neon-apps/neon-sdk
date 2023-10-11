@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tuna Öztürk on 19.03.2023.
 //
@@ -24,6 +24,41 @@ public class AlertManager{
             alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         }
         viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    private static var alertController: UIAlertController?
+    
+    public static func showLoadingAlert(
+        title: String = "",
+        message: String = "",
+        viewController: UIViewController,
+        height : CGFloat = 130
+    ) {
+        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let spinner = UIActivityIndicatorView(style: .medium)
+        alertController?.view.addSubview(spinner)
+        
+        viewController.present(alertController!, animated: true, completion: nil)
+        
+        spinner.snp.makeConstraints { make in
+            make.bottom.equalTo(alertController!.view).inset(20) // Adjust the top constraint
+            make.centerX.equalTo(alertController!.view)
+        }
+        alertController?.view.snp.makeConstraints { make in
+            make.height.equalTo(height)
+        }
+        spinner.startAnimating()
+    }
+    
+    public static func updateLoadingAlert(title: String? = nil, message: String? = nil) {
+        alertController?.title = title
+        alertController?.message = message
+    }
+    
+    public static func dismissLoadingAlert() {
+        alertController?.dismiss(animated: true, completion: nil)
+        alertController = nil 
     }
     
 }
