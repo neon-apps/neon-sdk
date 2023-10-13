@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-public class NeonMessenger{
+open class NeonMessenger{
     
     
-    public static func addConnection(id: String, firstName : String, lastName : String, photoURL : String){
+    open static func addConnection(id: String, firstName : String, lastName : String, photoURL : String){
         let newUser = NeonMessengerUser(id : id, firstName: firstName, lastName: lastName, photoURL: photoURL)
         NeonMessengerManager.arrConnections.append(newUser)
     }
     
-    public static func setCurrentUser(id: String, firstName : String, lastName : String, photoURL : String){
+    open static func setCurrentUser(id: String, firstName : String, lastName : String, photoURL : String){
         let currentUser = NeonMessengerUser(id : id, firstName: firstName, lastName: lastName, photoURL: photoURL)
         NeonMessengerManager.currentUser = currentUser
         
@@ -24,7 +24,7 @@ public class NeonMessenger{
         
     }
     
-    public static func customizeColors(
+    open static func customizeColors(
         primaryBackgroundColor : UIColor,
         secondaryBackgroundColor : UIColor,
         primaryTextColor : UIColor,
@@ -61,7 +61,7 @@ public class NeonMessenger{
         }
     
     
-    public static func customizeContent(messengerTitle : String,
+    open static func customizeContent(messengerTitle : String,
                                  searchfieldPlaceholder : String,
                                  inputFieldPlaceholder : String){
         NeonMessengerConstants.messengerTitle = messengerTitle

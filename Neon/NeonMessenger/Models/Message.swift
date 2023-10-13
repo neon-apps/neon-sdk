@@ -8,7 +8,7 @@
 import Foundation
 
 
-public class Message{
+open class Message{
     internal init(content: String = String(), sender: NeonMessengerUser = NeonMessengerUser(), date : Date = Date(), isRead : Bool = Bool() , id : String = String()) {
         self.content = content
         self.sender = sender

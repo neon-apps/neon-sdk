@@ -8,14 +8,14 @@
 import UIKit
 import NeonSDK
 
-public protocol NeonMessengerDelegate: AnyObject {
+open protocol NeonMessengerDelegate: AnyObject {
     func userProfileClicked(user : NeonMessengerUser)
     func messageSent(to user : NeonMessengerUser, message : Message)
     // Add other delegate methods as needed
 }
 
 @available(iOS 13.0, *)
-public class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
+open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
 
     fileprivate let chatsTableView = ChatsTableView()
     fileprivate let connectionsCollectionView = ConnectionsCollectionView()
@@ -24,7 +24,7 @@ public class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
 
    
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
@@ -45,7 +45,7 @@ public class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
         createUI()
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         NeonMessengerManager.fetchLastMessages(completion: { [self] in
             connectionsCollectionView.objects = NeonMessengerManager.arrConnections
             chatsTableView.objects = NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).sorted(by: {$0.lastMessage!.date > $1.lastMessage!.date})
@@ -131,11 +131,11 @@ public class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
         chatsTableView.endUpdates()
     }
 
-    public func userProfileClicked(user: NeonMessengerUser) {
+    open func userProfileClicked(user: NeonMessengerUser) {
         
     }
     
-    public func messageSent(to user: NeonMessengerUser, message: Message) {
+    open func messageSent(to user: NeonMessengerUser, message: Message) {
         
     }
     
