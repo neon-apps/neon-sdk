@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-open class NeonMessenger{
+public class NeonMessenger{
     
     
     public static func addConnection(id: String, firstName : String, lastName : String, photoURL : String){
