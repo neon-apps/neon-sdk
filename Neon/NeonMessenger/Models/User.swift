@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-open class NeonMessengerUser: Equatable{
+public class NeonMessengerUser: Equatable{
     internal init(id : String = String(), firstName: String = String(), lastName: String = String(), photoURL: String = String()) {
         self.id = id
         self.firstName = firstName
@@ -32,7 +32,7 @@ open class NeonMessengerUser: Equatable{
         }
     }
     
-    open static func == (lhs: NeonMessengerUser, rhs: NeonMessengerUser) -> Bool {
+    public static func == (lhs: NeonMessengerUser, rhs: NeonMessengerUser) -> Bool {
         return lhs.id == rhs.id
     }
     

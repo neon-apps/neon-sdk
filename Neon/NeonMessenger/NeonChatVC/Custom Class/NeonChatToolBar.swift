@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NeonSDK
 
-open class NeonChatToolBar : UIView, UITextViewDelegate {
+public class NeonChatToolBar : UIView, UITextViewDelegate {
     
     var btnSend = UIButton()
     let textview = NeonTextView()
@@ -48,7 +48,7 @@ open class NeonChatToolBar : UIView, UITextViewDelegate {
         }
     }
     
-    open init(){
+    public init(){
         super.init(frame: .zero)
 
         setupView()
@@ -86,7 +86,7 @@ open class NeonChatToolBar : UIView, UITextViewDelegate {
  
     }
     
-    open func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         let fixedWidth = textView.frame.size.width
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: .greatestFiniteMagnitude))
         textview.snp.updateConstraints() { make in
