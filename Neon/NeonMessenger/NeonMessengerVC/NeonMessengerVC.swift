@@ -15,7 +15,7 @@ public protocol NeonMessengerDelegate: AnyObject {
 }
 
 @available(iOS 13.0, *)
-public class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
+open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
 
     fileprivate let chatsTableView = ChatsTableView()
     fileprivate let connectionsCollectionView = ConnectionsCollectionView()
