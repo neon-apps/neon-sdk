@@ -28,11 +28,15 @@ public class AdaptyManager {
     
     public static var delegate: AdaptyManagerDelegate?
     private static var accessLevel = String()
+
     
-    public static func configure(withAPIKey : String, paywallIDs : [String], accessLevel : String = "premium") {
+  
+ 
+    
+    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium") {
         self.accessLevel = accessLevel
         Adapty.activate(withAPIKey)
-        fetchPaywalls(paywallIDs: paywallIDs)
+        fetchPaywalls(paywallIDs: placementIDs)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
     }
@@ -93,18 +97,26 @@ public class AdaptyManager {
         return nil
     }
     
-    public static func getPaywall(id : String) -> AdaptyPaywall?{
+    public static func getPaywall(placementID : String) -> AdaptyPaywall?{
         for paywall in paywalls {
-            if paywall.id == id{
+            if paywall.id == placementID{
                 return paywall
             }
         }
         
         return nil
     }
+    public static func selectPaywall(placementID : String){
+        selectedPaywall = getPaywall(placementID: placementID)
+    }
+    
     
     public static func getRemoteConfigValue(id : String) -> Any?{
-        if let remoteConfig = selectedPaywall?.remoteConfig{
+        
+        guard let selectedPaywall else{
+            fatalError("Currently you didn't set any paywall as selected. If you need to use remoteConfig, you have to select the paywall with it's placement ID in the first line of viewDidLoad of the paywall. Use AdaptyManager.selectPaywall function to set selected paywall.")
+        }
+        if let remoteConfig = selectedPaywall.remoteConfig{
             let value = remoteConfig[id]
             UserDefaults.standard.set(value, forKey: "Neon-Adapty-\(id)")
             return value
@@ -274,6 +286,28 @@ public class AdaptyManager {
             AdaptyManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
         }
     }
+    
+    
+    
+    
+    
+    
+    @available(*, deprecated, renamed: "configure(withAPIKey:placementIDs:)")
+    public static func configure(withAPIKey: String, paywallIDs: [String], accessLevel: String = "premium") {
+        configure(withAPIKey: withAPIKey, placementIDs: paywallIDs, accessLevel: accessLevel)
+    }
+    @available(*, deprecated, renamed: "getPaywall(placementID:)")
+    public static func getPaywall(id : String) -> AdaptyPaywall?{
+        for paywall in paywalls {
+            if paywall.id == id{
+                return paywall
+            }
+        }
+        
+        return nil
+    }
+    
+    
 }
 
 
