@@ -13,7 +13,7 @@ public protocol NeonMessengerDelegate: AnyObject {
     func messageSent(to user : NeonMessengerUser, message : Message)
     // Add other delegate methods as needed
 }
-
+    
 @available(iOS 13.0, *)
 open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
 
@@ -24,7 +24,7 @@ open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
 
    
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
