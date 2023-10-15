@@ -79,7 +79,7 @@ open class NeonOnboardingController: UIViewController {
         }else{
             vibrate(style: .heavy)
             Neon.onboardingCompleted()
-            isOnboardingCompleted()
+            onboardingCompleted()
         }
     }
     
@@ -222,7 +222,7 @@ extension NeonOnboardingController{
         NeonOnboardingPageCell.subtitleFont = subtitleFont
     }
     
- @objc public func isOnboardingCompleted(){
+ @objc open func onboardingCompleted(){
         
     }
     
