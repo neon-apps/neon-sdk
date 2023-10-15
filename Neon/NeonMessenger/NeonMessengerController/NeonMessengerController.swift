@@ -15,7 +15,7 @@ public protocol NeonMessengerDelegate: AnyObject {
 }
     
 @available(iOS 13.0, *)
-open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
+open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
 
     fileprivate let chatsTableView = ChatsTableView()
     fileprivate let connectionsCollectionView = ConnectionsCollectionView()
@@ -29,18 +29,18 @@ open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
         // Do any additional setup after loading the view.
         
         guard NeonMessengerConstants.didColorsConfigured else {
-            fatalError("NeonMessenger Colors should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerVC. Use NeonMessenger.customizeColors to configure")
+            fatalError("NeonMessenger Colors should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerController. Use NeonMessenger.customizeColors to configure")
         }
         
         guard NeonMessengerConstants.didCurrentUserConfigured else {
-            fatalError("NeonMessenger Current User should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerVC. Use NeonMessenger.setCurrentUser to configure.")
+            fatalError("NeonMessenger Current User should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerController. Use NeonMessenger.setCurrentUser to configure.")
         }
         
         guard NeonMessengerConstants.didContentsConfigured else {
-            fatalError("NeonMessenger Contents should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerVC. Use NeonMessenger.customizeContent method to configure.")
+            fatalError("NeonMessenger Contents should be configured before super.viewDidLoad() of the ViewController that inherit NeonMessengerController. Use NeonMessenger.customizeContent method to configure.")
         }
         
-        NeonChatVC.delegate = self
+        NeonChatController.delegate = self
         
         createUI()
     }
@@ -95,7 +95,7 @@ open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
         
       
         connectionsCollectionView.didSelect = { user, indexPath in
-            let destinationVC = NeonChatVC()
+            let destinationVC = NeonChatController()
             destinationVC.choosenUser = user
             self.present(destinationVC: destinationVC, slideDirection: .right)
         }
@@ -108,7 +108,7 @@ open class NeonMessengerVC: UIViewController, NeonMessengerDelegate {
         
        
         chatsTableView.didSelect = { user, indexPath in
-            let destinationVC = NeonChatVC()
+            let destinationVC = NeonChatController()
             destinationVC.choosenUser = user
             self.present(destinationVC: destinationVC, slideDirection: .right)
         }

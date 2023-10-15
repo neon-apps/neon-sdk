@@ -10,7 +10,7 @@ import NeonSDK
 
 
 @available(iOS 13.0, *)
-class NeonChatVC: UIViewController {
+class NeonChatController: UIViewController {
 
     let messagesTableView = MessagesTableView()
     var choosenUser = NeonMessengerUser()
@@ -99,7 +99,7 @@ class NeonChatVC: UIViewController {
         chatToolbar.icon = UIImage(systemName: "arrow.up.circle.fill")
         chatToolbar.placeholder = NeonMessengerConstants.inputFieldPlaceholder
         chatToolbar.sendMessageClicked = { [self] message in
-            NeonChatVC.delegate?.messageSent(to: choosenUser, message: Message(content: message, sender: NeonMessengerManager.currentUser, date: Date()))
+            NeonChatController.delegate?.messageSent(to: choosenUser, message: Message(content: message, sender: NeonMessengerManager.currentUser, date: Date()))
             NeonMessengerManager.addMessage(connection: choosenUser, content: message, sender: NeonMessengerManager.currentUser, chat: &self.arrMessages)
             updateTable()
         }
@@ -142,7 +142,7 @@ class NeonChatVC: UIViewController {
     }
     
     @objc func userProfileClicked(){
-        NeonChatVC.delegate?.userProfileClicked(user: choosenUser)
+        NeonChatController.delegate?.userProfileClicked(user: choosenUser)
     }
     
     @objc func markAsRead(){
