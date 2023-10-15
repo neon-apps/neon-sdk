@@ -39,7 +39,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     private let cellReuseIdentifier = String(describing: Cell.self)
     
     /// Use this initalizer for vertical collections.
-    public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20, heightForItem : CGFloat? = nil) {
+    public init(objects: [T] = [], itemsPerRow: Int, leftPadding: CGFloat, rightPadding: CGFloat, horizontalItemSpacing: CGFloat, verticalItemSpacing: CGFloat, heightForItem : CGFloat? = nil) {
         self.objects = objects
         self.itemsPerRow = itemsPerRow
         self.leftPadding = leftPadding
@@ -57,7 +57,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     }
     
     /// Use this initalizer for horizontal collections.
-    public init(objects: [T] = [], leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20 , widthForItem : CGFloat? = nil) {
+    public init(objects: [T] = [], leftPadding: CGFloat, rightPadding: CGFloat, horizontalItemSpacing: CGFloat , widthForItem : CGFloat? = nil) {
         self.objects = objects
         self.leftPadding = leftPadding
         self.rightPadding = rightPadding
