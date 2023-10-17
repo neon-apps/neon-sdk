@@ -20,13 +20,13 @@ public class NeonMessengerUser: Equatable{
     
   
     
-    var photoURL = String()
-    var firstName = String()
-    var lastName = String()
-    var id = String()
-    var lastMessage : Message?
+    public var photoURL = String()
+    public var firstName = String()
+    public var lastName = String()
+    public var id = String()
+    public var lastMessage : Message?
     
-    var fullName : String {
+    public var fullName : String {
         get{
             return firstName + " " + lastName
         }
