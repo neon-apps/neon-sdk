@@ -34,7 +34,7 @@ class NeonMessengerManager{
             .document(name: UUID().uuidString)
         ], fields: ["content" : content,
                     "senderID" : sender.id,
-                    "isRead" : true,
+                    "read" : true,
                     "date" : Date()
                    ])
         
@@ -49,7 +49,7 @@ class NeonMessengerManager{
             .document(name: UUID().uuidString)
         ], fields: ["content" : content,
                     "senderID" : sender.id,
-                    "isRead" : false,
+                    "read" : false,
                     "date" : Date()
                    ])
         
@@ -59,7 +59,7 @@ class NeonMessengerManager{
         
         if let content = documentData["content"] as? String,
            let senderID = documentData["senderID"] as? String,
-           let isRead = documentData["isRead"] as? Bool,
+           let isRead = documentData["read"] as? Bool,
            let timestamp = documentData["date"] as? Timestamp{
             
             let sender = (senderID == connection.id) ? connection : NeonMessengerManager.currentUser
@@ -134,7 +134,7 @@ class NeonMessengerManager{
             FirestoreManager.getDocuments(referance: referance , completion: { documentID, documentData in
                 
                 if let content = documentData["content"] as? String,
-                   let isRead = documentData["isRead"] as? Bool,
+                   let isRead = documentData["read"] as? Bool,
                    let timestamp = documentData["date"] as? Timestamp{
                     let date = timestamp.dateValue()
                     let message = Message(content: content, date : date, isRead: isRead, id: documentID)
@@ -165,7 +165,7 @@ class NeonMessengerManager{
             .document(name: user.id),
             .collection(name: "Messages"),
             .document(name: lastMessage.id)
-        ], fields: ["isRead" : true
+        ], fields: ["read" : true
                    ])
     }
     

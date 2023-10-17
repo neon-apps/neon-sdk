@@ -131,11 +131,11 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         chatsTableView.endUpdates()
     }
 
-    public func userProfileClicked(user: NeonMessengerUser) {
+    open func userProfileClicked(user: NeonMessengerUser) {
         
     }
     
-    public func messageSent(to user: NeonMessengerUser, message: Message) {
+    open func messageSent(to user: NeonMessengerUser, message: Message) {
         
     }
     
