@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 
+@available(iOS 13.0, *)
 public class NeonLegalView : UIView{
     
-    public var termsURL = String()
-    public var privacyURL = String()
+    public var termsURL : String? = nil
+    public var privacyURL : String? = nil
+    
     public var textColor = UIColor.black{
         didSet{
             termsButton.setTitleColor(textColor, for: .normal)
@@ -25,6 +27,9 @@ public class NeonLegalView : UIView{
     public let restoreButton = UIButton()
     public let termsButton = UIButton()
     
+    
+    private var currentController = UIViewController()
+    private var legalController : NeonLegalController? = nil
     public  init() {
         super.init(frame: .zero)
         setupView()
@@ -70,8 +75,33 @@ public class NeonLegalView : UIView{
         termsButton.addTarget(self, action: #selector(termsButtonClicked), for: .touchUpInside)
     }
     
+    public func configureLegalController(onVC : UIViewController,
+                                  backgroundColor : UIColor,
+                                  headerColor : UIColor,
+                                  titleColor : UIColor,
+                                  textColor : UIColor){
+        legalController = NeonLegalController()
+        legalController!.backgroundColor = backgroundColor
+        legalController!.headerColor = headerColor
+        legalController!.titleColor = titleColor
+        legalController!.legalTextColor = textColor
+        currentController = onVC
+    }
+ 
+    
     @objc func privacyButtonClicked(){
-        SettingsManager.openLinkFromBrowser(url: privacyURL)
+        if let privacyURL{
+            SettingsManager.openLinkFromBrowser(url: privacyURL)
+        }else{
+            if let legalController{
+                legalController.controllerType = .privacyPolicy
+                currentController.present(destinationVC: legalController, slideDirection: .right)
+            }else{
+                fatalError("You have to configure the legal controller with configureLegalController method. ")
+            }
+          
+        }
+    
     }
     @objc func restoreClicked(){
         if let restoreButtonClicked{
@@ -79,7 +109,16 @@ public class NeonLegalView : UIView{
         }
     }
     @objc func termsButtonClicked(){
-        SettingsManager.openLinkFromBrowser(url: termsURL)
+        if let termsURL{
+            SettingsManager.openLinkFromBrowser(url: termsURL)
+        }else{
+            if let legalController{
+                legalController.controllerType = .termsOfUse
+                currentController.present(destinationVC: legalController, slideDirection: .right)
+            }else{
+                fatalError("You have to configure the legal controller with configureLegalController method. ")
+            }
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import StoreKit
+@available(iOS 13.0, *)
 public class SettingsManager{
     
     
@@ -19,6 +20,23 @@ public class SettingsManager{
         } else {
         }
     }
+    
+    public static func presentLegalController(onVC : UIViewController,
+                                  type : NeonLegalController.LegalControllerType,
+                                  backgroundColor : UIColor,
+                                  headerColor : UIColor,
+                                  titleColor : UIColor,
+                                  textColor : UIColor){
+        let legalController = NeonLegalController()
+        legalController.controllerType = type
+        legalController.backgroundColor = backgroundColor
+        legalController.headerColor = headerColor
+        legalController.titleColor = titleColor
+        legalController.legalTextColor = textColor
+        onVC.present(destinationVC: legalController, slideDirection: .right)
+    }
+    
+    
 #if !os(xrOS)
     public static func showReviewSheet(appID : String){
         if let checkURL = URL(string: "itms-apps://itunes.apple.com/app/id\(appID)?action=write-review") {
