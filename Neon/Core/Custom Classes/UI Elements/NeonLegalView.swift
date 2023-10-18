@@ -29,7 +29,11 @@ public class NeonLegalView : UIView{
     
     
     private var currentController = UIViewController()
-    private var legalController : NeonLegalController? = nil
+    var controllerBackgroundColor = UIColor()
+    var controllerHeaderColor = UIColor()
+    var controllerTitleColor = UIColor()
+    var legalTextColor = UIColor()
+    var isLegalControllerConfigured = false
     public  init() {
         super.init(frame: .zero)
         setupView()
@@ -80,12 +84,13 @@ public class NeonLegalView : UIView{
                                   headerColor : UIColor,
                                   titleColor : UIColor,
                                   textColor : UIColor){
-        legalController = NeonLegalController()
-        legalController!.backgroundColor = backgroundColor
-        legalController!.headerColor = headerColor
-        legalController!.titleColor = titleColor
-        legalController!.legalTextColor = textColor
+
+        controllerBackgroundColor = backgroundColor
+        controllerHeaderColor = headerColor
+        controllerTitleColor = titleColor
+        legalTextColor = textColor
         currentController = onVC
+        isLegalControllerConfigured = true
     }
  
     
@@ -93,7 +98,12 @@ public class NeonLegalView : UIView{
         if let privacyURL{
             SettingsManager.openLinkFromBrowser(url: privacyURL)
         }else{
-            if let legalController{
+            if isLegalControllerConfigured{
+                let legalController = NeonLegalController()
+                legalController.backgroundColor = controllerBackgroundColor
+                legalController.headerColor = controllerHeaderColor
+                legalController.titleColor = controllerTitleColor
+                legalController.legalTextColor = textColor
                 legalController.controllerType = .privacyPolicy
                 currentController.present(destinationVC: legalController, slideDirection: .right)
             }else{
@@ -112,7 +122,12 @@ public class NeonLegalView : UIView{
         if let termsURL{
             SettingsManager.openLinkFromBrowser(url: termsURL)
         }else{
-            if let legalController{
+            if isLegalControllerConfigured{
+                let legalController = NeonLegalController()
+                legalController.backgroundColor = controllerBackgroundColor
+                legalController.headerColor = controllerHeaderColor
+                legalController.titleColor = controllerTitleColor
+                legalController.legalTextColor = textColor
                 legalController.controllerType = .termsOfUse
                 currentController.present(destinationVC: legalController, slideDirection: .right)
             }else{
