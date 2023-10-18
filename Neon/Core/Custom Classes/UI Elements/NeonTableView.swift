@@ -41,7 +41,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     public var shouldReloadWhenObjectsSet = true
     public var numberOfItemsOnShimmer = 10
     
-    public init(objects: [T], heightForRows: CGFloat, style : UITableView.Style = .plain) {
+    public init(objects: [T] = [], heightForRows: CGFloat = 44, style : UITableView.Style = .plain) {
         self.objects = objects
         self.heightForRows = heightForRows
         super.init(frame: .zero, style: style)
