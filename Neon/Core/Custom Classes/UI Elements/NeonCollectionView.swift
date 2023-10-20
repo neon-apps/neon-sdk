@@ -160,6 +160,10 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize()
     }
+    
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
 }
 
 protocol ConfigurableCell {
