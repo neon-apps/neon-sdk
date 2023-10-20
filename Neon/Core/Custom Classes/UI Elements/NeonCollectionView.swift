@@ -164,6 +164,10 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
     }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize()
+    }
 }
 
 protocol ConfigurableCell {
