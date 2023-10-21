@@ -39,7 +39,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
     private let cellReuseIdentifier = String(describing: Cell.self)
     
     /// Use this initalizer for vertical collections.
-    public init(objects: [T] = [], itemsPerRow: Int = 2, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20, heightForItem : CGFloat? = nil) {
+    public init(objects: [T] = [], itemsPerRow: Int? = nil, leftPadding: CGFloat = 20, rightPadding: CGFloat = 20, horizontalItemSpacing: CGFloat = 20, verticalItemSpacing: CGFloat = 20, heightForItem : CGFloat? = nil) {
         self.objects = objects
         self.itemsPerRow = itemsPerRow
         self.leftPadding = leftPadding
@@ -54,6 +54,12 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         self.dataSource = self
         self.delegate = self
         self.register(Cell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        
+        if itemsPerRow == nil{
+            if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+              }
+        }
     }
     
     /// Use this initalizer for horizontal collections.
@@ -69,6 +75,12 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         self.dataSource = self
         self.delegate = self
         self.register(Cell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        
+        if widthForItem == nil{
+            if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+              }
+        }
     }
     
     required public init?(coder: NSCoder) {
@@ -114,7 +126,7 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
             return CGSize(width: widthForItem, height: collectionViewHeight)
         }
     
-        fatalError("You need to specify itemsPerRow or widthForItem")
+        return CGSize()
     
     }
     
