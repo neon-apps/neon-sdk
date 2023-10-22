@@ -36,6 +36,23 @@ public class SettingsManager{
         onVC.present(destinationVC: legalController, slideDirection: .right)
     }
     
+    public static func presentSupportController(onVC : UIViewController,
+                                                type : NeonSupportControllerConstants.ControllerType,
+                                  mainColor : UIColor,
+                                  backgroundColor : UIColor,
+                                  containerColor : UIColor,
+                                  textColor : UIColor,
+                                  placeholderColor : UIColor){
+        let supportController = NeonSupportController()
+        NeonSupportControllerConstants.choosenControllerType = type
+        NeonSupportControllerConstants.backgroundColor = backgroundColor
+        NeonSupportControllerConstants.containerColor = containerColor
+        NeonSupportControllerConstants.placeholderColor = placeholderColor
+        NeonSupportControllerConstants.mainColor = mainColor
+        NeonSupportControllerConstants.textColor = textColor
+        onVC.present(destinationVC: supportController, slideDirection: .right)
+    }
+    
     
 #if !os(xrOS)
     public static func showReviewSheet(appID : String){
