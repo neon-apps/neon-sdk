@@ -135,7 +135,7 @@ public class RevenueCatManager {
                 UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                 
                 if showAlerts{
-                    AlertManager.showCustomAlert(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
+                    DefaultAlertManager.showCustomAlert(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
                         AlertButton(completion: {
                             guard let completionSuccess else { return }
                             completionSuccess()
@@ -149,7 +149,7 @@ public class RevenueCatManager {
             } else {
                 
                 if showAlerts{
-                    AlertManager.showCustomAlert(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
+                    DefaultAlertManager.showCustomAlert(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
                         AlertButton(completion: {
                             guard let completionFailure else { return }
                             completionFailure()

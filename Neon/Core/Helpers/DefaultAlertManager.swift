@@ -8,8 +8,19 @@
 import Foundation
 import UIKit
 
+
+
+@available(*, deprecated, message: "Use DefaultAlertManager instead.")
+public class AlertManager {
+    // Your implementation here
+
+    init() {
+        fatalError("AlertManager is deprecated. Use DefaultAlertManager instead.")
+    }
+}
+
 @available(iOS 13.0, *)
-public class AlertManager{
+public class DefaultAlertManager{
     
     public static func showCustomAlert(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
