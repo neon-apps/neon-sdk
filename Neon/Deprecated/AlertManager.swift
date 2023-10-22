@@ -12,7 +12,7 @@ import UIKit
 
 
 
-@available(*, unavailable, renamed: "DefaultAlertManager", message: "AlertManager has been renamed to DefaultAlertManager. Please use DefaultAlertManager instead.")
+@available(*, unavailable, renamed: "DefaultAlertManager")
 public class AlertManager{
     
     @available(iOS 13.0, *)
