@@ -12,7 +12,7 @@ import UIKit
 
 
 
-@available(*, unavailable, renamed: "DefaultAlertManager")
+@available(*, unavailable, renamed: "NeonAlertManager.default")
 public class AlertManager{
     
     @available(iOS 13.0, *)
