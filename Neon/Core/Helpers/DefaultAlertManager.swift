@@ -10,14 +10,7 @@ import UIKit
 
 
 
-@available(*, deprecated, message: "Use DefaultAlertManager instead.")
-public class AlertManager {
-    // Your implementation here
 
-    init() {
-        fatalError("AlertManager is deprecated. Use DefaultAlertManager instead.")
-    }
-}
 
 @available(iOS 13.0, *)
 public class DefaultAlertManager{
@@ -81,3 +74,6 @@ public class DefaultAlertManager{
     
 }
 
+
+@available(*, unavailable, renamed: "DefaultAlertManager", message: "AlertManager has been renamed to DefaultAlertManager. Please use DefaultAlertManager instead.")
+public class AlertManager {}
