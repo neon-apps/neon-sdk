@@ -121,99 +121,99 @@ public extension UIDevice {
  
 public enum DeviceModel: String {
     // iPhone
-    case iPhone4
-    case iPhone4s
-    case iPhone5
-    case iPhone5c
-    case iPhone5s
-    case iPhone6
-    case iPhone6Plus
-    case iPhone6s
-    case iPhone6sPlus
-    case iPhoneSE
-    case iPhoneSE2
-    case iPhoneSE3
-    case iPhone7
-    case iPhone7Plus
-    case iPhone8
-    case iPhone8Plus
-    case iPhoneX
-    case iPhoneXS
-    case iPhoneXSMax
-    case iPhoneXR
-    case iPhone11
-    case iPhone11Pro
-    case iPhone11ProMax
-    case iPhone12Mini
-    case iPhone12
-    case iPhone12Pro
-    case iPhone12ProMax
-    case iPhone13Mini
-    case iPhone13
-    case iPhone13Pro
-    case iPhone13ProMax
-    case iPhone14
-    case iPhone14Plus
-    case iPhone14Pro
-    case iPhone14ProMax
-    case iPhone15
-    case iPhone15Plus
-    case iPhone15Pro
-    case iPhone15ProMax
-    
-    // iPod Touch
-    case iPodTouch5
-    case iPodTouch6
-    case iPodTouch7
-    
-    // iPad
-    case iPad2
-    case iPad3
-    case iPad4
-    case iPad5
-    case iPad6
-    case iPad7
-    case iPad8
-    case iPad9
-    case iPad10
-    case iPadAir
-    case iPadAir2
-    case iPadAir3
-    case iPadAir4
-    case iPadAir5
-    case iPadMini
-    case iPadMini2
-    case iPadMini3
-    case iPadMini4
-    case iPadMini5
-    case iPadMini6
-    case iPadPro9_7
-    case iPadPro10_5
-    case iPadPro11_1stGen
-    case iPadPro11_2ndGen
-    case iPadPro11_3rdGen
-    case iPadPro11_4thGen
-    case iPadPro11_5thGen
-    case iPadPro12_9_1stGen
-    case iPadPro12_9_2ndGen
-    case iPadPro12_9_3rdGen
-    case iPadPro12_9_4thGen
-    case iPadPro12_9_5thGen
-    case iPadPro12_9_6thGen
-    
-    // Apple TV
-    case appleTV
-    case appleTV4K
-    
-    // HomePod
-    case homePod
-    case homePodMini
-    
-    // Simulator
-    case simulator
-    
-    // Unknown
-    case unknown // Default case
+    case iPhone4 = "iPhone 4"
+        case iPhone4s = "iPhone 4s"
+        case iPhone5 = "iPhone 5"
+        case iPhone5c = "iPhone 5c"
+        case iPhone5s = "iPhone 5s"
+        case iPhone6 = "iPhone 6"
+        case iPhone6Plus = "iPhone 6 Plus"
+        case iPhone6s = "iPhone 6s"
+        case iPhone6sPlus = "iPhone 6s Plus"
+        case iPhoneSE = "iPhone SE"
+        case iPhoneSE2 = "iPhone SE (2nd gen)"
+        case iPhoneSE3 = "iPhone SE (3rd gen)"
+        case iPhone7 = "iPhone 7"
+        case iPhone7Plus = "iPhone 7 Plus"
+        case iPhone8 = "iPhone 8"
+        case iPhone8Plus = "iPhone 8 Plus"
+        case iPhoneX = "iPhone X"
+        case iPhoneXS = "iPhone XS"
+        case iPhoneXSMax = "iPhone XS Max"
+        case iPhoneXR = "iPhone XR"
+        case iPhone11 = "iPhone 11"
+        case iPhone11Pro = "iPhone 11 Pro"
+        case iPhone11ProMax = "iPhone 11 Pro Max"
+        case iPhone12Mini = "iPhone 12 Mini"
+        case iPhone12 = "iPhone 12"
+        case iPhone12Pro = "iPhone 12 Pro"
+        case iPhone12ProMax = "iPhone 12 Pro Max"
+        case iPhone13Mini = "iPhone 13 Mini"
+        case iPhone13 = "iPhone 13"
+        case iPhone13Pro = "iPhone 13 Pro"
+        case iPhone13ProMax = "iPhone 13 Pro Max"
+        case iPhone14 = "iPhone 14"
+        case iPhone14Plus = "iPhone 14 Plus"
+        case iPhone14Pro = "iPhone 14 Pro"
+        case iPhone14ProMax = "iPhone 14 Pro Max"
+        case iPhone15 = "iPhone 15"
+        case iPhone15Plus = "iPhone 15 Plus"
+        case iPhone15Pro = "iPhone 15 Pro"
+        case iPhone15ProMax = "iPhone 15 Pro Max"
+        
+        // iPod Touch
+        case iPodTouch5 = "iPod Touch 5"
+        case iPodTouch6 = "iPod Touch 6"
+        case iPodTouch7 = "iPod Touch 7"
+        
+        // iPad
+        case iPad2 = "iPad 2"
+        case iPad3 = "iPad 3"
+        case iPad4 = "iPad 4"
+        case iPad5 = "iPad 5"
+        case iPad6 = "iPad 6"
+        case iPad7 = "iPad 7"
+        case iPad8 = "iPad 8"
+        case iPad9 = "iPad 9"
+        case iPad10 = "iPad 10"
+        case iPadAir = "iPad Air"
+        case iPadAir2 = "iPad Air 2"
+        case iPadAir3 = "iPad Air 3"
+        case iPadAir4 = "iPad Air 4"
+        case iPadAir5 = "iPad Air 5"
+        case iPadMini = "iPad Mini"
+        case iPadMini2 = "iPad Mini 2"
+        case iPadMini3 = "iPad Mini 3"
+        case iPadMini4 = "iPad Mini 4"
+        case iPadMini5 = "iPad Mini 5"
+        case iPadMini6 = "iPad Mini 6"
+        case iPadPro9_7 = "iPad Pro 9.7-inch"
+        case iPadPro10_5 = "iPad Pro 10.5-inch"
+        case iPadPro11_1stGen = "iPad Pro 11-inch (1st gen)"
+        case iPadPro11_2ndGen = "iPad Pro 11-inch (2nd gen)"
+        case iPadPro11_3rdGen = "iPad Pro 11-inch (3rd gen)"
+        case iPadPro11_4thGen = "iPad Pro 11-inch (4th gen)"
+        case iPadPro11_5thGen = "iPad Pro 11-inch (5th gen)"
+        case iPadPro12_9_1stGen = "iPad Pro 12.9-inch (1st gen)"
+        case iPadPro12_9_2ndGen = "iPad Pro 12.9-inch (2nd gen)"
+        case iPadPro12_9_3rdGen = "iPad Pro 12.9-inch (3rd gen)"
+        case iPadPro12_9_4thGen = "iPad Pro 12.9-inch (4th gen)"
+        case iPadPro12_9_5thGen = "iPad Pro 12.9-inch (5th gen)"
+        case iPadPro12_9_6thGen = "iPad Pro 12.9-inch (6th gen)"
+        
+        // Apple TV
+        case appleTV = "Apple TV"
+        case appleTV4K = "Apple TV 4K"
+        
+        // HomePod
+        case homePod = "HomePod"
+        case homePodMini = "HomePod Mini"
+        
+        // Simulator
+        case simulator = "Simulator"
+        
+        // Unknown
+        case unknown = "Unknown" // Default case
     
     var screenHeight: CGFloat {
          switch self {
@@ -272,13 +272,17 @@ public enum DeviceModel: String {
          }
      }
     
-    func isLargerThan(_ otherDevice: DeviceModel) -> Bool {
+    public func isLargerThan(_ otherDevice: DeviceModel) -> Bool {
            return self.screenHeight > otherDevice.screenHeight
        }
        
-       func isSmallerThan(_ otherDevice: DeviceModel) -> Bool {
+    public func isSmallerThan(_ otherDevice: DeviceModel) -> Bool {
            return self.screenHeight < otherDevice.screenHeight
-       }
+    }
+    
+    public var stringValue : String{
+        return self.rawValue
+    }
      
 }
 
