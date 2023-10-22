@@ -15,7 +15,7 @@ public class AlertButton{
         self.style = style
         
     }
-    var title = String()
-    var completion: () -> ()
-    var style : UIAlertAction.Style = .default
+    public var title = String()
+    public var completion: () -> ()
+    public var style : UIAlertAction.Style = .default
 }
