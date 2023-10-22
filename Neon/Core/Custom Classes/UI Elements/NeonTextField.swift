@@ -20,4 +20,11 @@ public class NeonTextField : UITextField{
         return bounds.inset(by: contentInset)
     }
     
+    public func setCustomPlaceholder(_ placeholder : String, color: UIColor){
+        self.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: color]
+        )
+    }
+    
 }
