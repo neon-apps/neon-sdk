@@ -21,7 +21,7 @@ public class CustomAlertManager {
     private static let backgroundView = UIView()
     private static var blurBackgroundView = UIVisualEffectView()
     private static var verticalPadding : CGFloat = 20
-    private static var isConfigured = false
+    public static var isConfigured = false
     
     public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType) {
             self.backgroundColor = backgroundColor
