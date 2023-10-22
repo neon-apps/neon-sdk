@@ -33,7 +33,7 @@ public class CustomAlertManager {
         }
     
     
-    public static func showAlert(viewController: UIViewController, title: String?, message: String?, icon: UIImage? = nil, iconTintColor: UIColor? = nil, iconSize: CGSize = CGSize(width: 50, height: 50), verticalPadding : CGFloat = 20, buttons: [CustomAlertButton]? = nil) {
+    public static func present(viewController: UIViewController, title: String?, message: String?, icon: UIImage? = nil, iconTintColor: UIColor? = nil, iconSize: CGSize = CGSize(width: 50, height: 50), verticalPadding : CGFloat = 20, buttons: [CustomAlertButton]? = nil) {
      
         if !isConfigured{
             fatalError("You have to configure the CustomAlertManager before presenting it. Use CustomAlertManager.configure method in your AppDelegate's didFinishLaunchingWithOptions.")
