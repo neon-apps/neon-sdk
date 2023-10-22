@@ -76,13 +76,14 @@ public class CustomAlertManager {
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.font = Font.custom(size: 16, fontWeight: .Bold)
+        titleLabel.font = Font.custom(size: 18, fontWeight: .Bold)
         titleLabel.textColor = textColor
         alertView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImageView.snp.bottom).offset(verticalPadding)
             make.centerX.equalTo(alertView.snp.centerX)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
         
         if icon == nil{
@@ -96,7 +97,7 @@ public class CustomAlertManager {
         subtitleLabel.numberOfLines = 0
         subtitleLabel.textAlignment = .center
         subtitleLabel.textColor = textColor
-        subtitleLabel.font = Font.custom(size: 12, fontWeight: .Regular)
+        subtitleLabel.font = Font.custom(size: 14, fontWeight: .Regular)
         alertView.addSubview(subtitleLabel)
         
         subtitleLabel.snp.makeConstraints { make in
@@ -128,7 +129,7 @@ public class CustomAlertManager {
                 }
             }
 
-            buttonView.titleLabel?.font = Font.custom(size: 14, fontWeight: .SemiBold)
+            buttonView.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
             buttonView.layer.cornerRadius = 10
             buttonView.layer.masksToBounds = true
             
