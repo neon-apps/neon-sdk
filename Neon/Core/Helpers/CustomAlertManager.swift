@@ -289,7 +289,7 @@ public class CustomAlertManager {
 }
 
 open class CustomAlertButton : NSObject {
-    internal init(title: String, buttonType: CustomAlertButton.ButtonType, overrideTextColor: UIColor? = nil, completion: (() -> Void)? = nil) {
+    public init(title: String, buttonType: CustomAlertButton.ButtonType, overrideTextColor: UIColor? = nil, completion: (() -> Void)? = nil) {
         self.title = title
         self.buttonType = buttonType
         self.completion = completion

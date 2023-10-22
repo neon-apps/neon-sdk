@@ -15,6 +15,7 @@ import UIKit
 @available(*, unavailable, renamed: "DefaultAlertManager", message: "AlertManager has been renamed to DefaultAlertManager. Please use DefaultAlertManager instead.")
 public class AlertManager{
     
+    @available(iOS 13.0, *)
     public static func showCustomAlert(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.overrideUserInterfaceStyle = overrideUserInterfaceStyle
@@ -33,6 +34,7 @@ public class AlertManager{
     
     private static var alertController: UIAlertController?
     
+    @available(iOS 13.0, *)
     public static func showLoadingAlert(
         title: String = "",
         message: String = "",
