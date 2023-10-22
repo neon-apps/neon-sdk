@@ -219,7 +219,7 @@ public class AdaptyManager {
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     
                     if showAlerts{
-                        DefaultAlertManager.showCustomAlert(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
+                        NeonAlertManager.default.present(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
                             AlertButton(completion: {
                                 guard let completionSuccess else { return }
                                 completionSuccess()
@@ -233,7 +233,7 @@ public class AdaptyManager {
                 }else{
                     
                     if showAlerts{
-                        DefaultAlertManager.showCustomAlert(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
+                        NeonAlertManager.default.present(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
                             AlertButton(completion: {
                                 guard let completionFailure else { return }
                                 completionFailure()
@@ -247,7 +247,7 @@ public class AdaptyManager {
                 break
                 // check the access level
             case let .failure(error):
-                DefaultAlertManager.showCustomAlert(title: "Oops!", message: "Something went wrong, please try again later", style: .alert, buttons: [
+                NeonAlertManager.default.present(title: "Oops!", message: "Something went wrong, please try again later", style: .alert, buttons: [
                         AlertButton(completion: {
                             guard let completionFailure else { return }
                             completionFailure()

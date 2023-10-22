@@ -15,7 +15,7 @@ import UIKit
 @available(iOS 13.0, *)
 public class DefaultAlertManager{
     
-    public static func showCustomAlert(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {
+    public static func present(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.overrideUserInterfaceStyle = overrideUserInterfaceStyle
         if let buttons, !buttons.isEmpty{
@@ -33,7 +33,7 @@ public class DefaultAlertManager{
     
     private static var alertController: UIAlertController?
     
-    public static func showLoadingAlert(
+    public static func presentLoadingAlert(
         title: String = "",
         message: String = "",
         viewController: UIViewController,
@@ -71,6 +71,18 @@ public class DefaultAlertManager{
         alertController?.dismiss(animated: true, completion: nil)
         alertController = nil
     }
+    
+    
+    @available(*, unavailable, renamed: "present")
+    public static func showCustomAlert(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {}
+    
+    @available(*, unavailable, renamed: "presentLoadingAlert")
+    public static func showLoadingAlert(
+        title: String = "",
+        message: String = "",
+        viewController: UIViewController,
+        height : CGFloat = 130
+    ) {}
     
 }
 
