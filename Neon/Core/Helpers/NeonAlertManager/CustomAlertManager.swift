@@ -78,6 +78,7 @@ public class CustomAlertManager {
         titleLabel.text = title
         titleLabel.font = Font.custom(size: 18, fontWeight: .Bold)
         titleLabel.textColor = textColor
+        titleLabel.numberOfLines = 0
         alertView.addSubview(titleLabel)
         titleLabel.textAlignment = .center
         titleLabel.snp.makeConstraints { make in
