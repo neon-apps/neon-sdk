@@ -118,7 +118,7 @@ public extension UIDevice {
     
 }
 
-
+ 
 public enum DeviceModel: String {
     // iPhone
     case iPhone4
@@ -214,6 +214,72 @@ public enum DeviceModel: String {
     
     // Unknown
     case unknown // Default case
+    
+    var screenHeight: CGFloat {
+         switch self {
+         case .iPhone4, .iPhone4s:
+             return 480.0
+         case .iPhone5, .iPhone5c, .iPhone5s:
+             return 568.0
+         case .iPhone6, .iPhone6s, .iPhone7, .iPhone8:
+             return 667.0
+         case .iPhone6Plus, .iPhone6sPlus, .iPhone7Plus, .iPhone8Plus:
+             return 736.0
+         case .iPhoneSE, .iPhoneSE2, .iPhoneSE3:
+             return 667.0
+         case .iPhoneX, .iPhoneXS, .iPhone11Pro:
+             return 812.0
+         case .iPhoneXSMax, .iPhone11ProMax:
+             return 896.0
+         case .iPhoneXR, .iPhone11:
+             return 896.0
+         case .iPhone12Mini:
+             return 812.0
+         case .iPhone12, .iPhone12Pro:
+             return 844.0
+         case .iPhone12ProMax:
+             return 926.0
+         case .iPhone13Mini:
+             return 812.0
+         case .iPhone13, .iPhone13Pro:
+             return 844.0
+         case .iPhone13ProMax:
+             return 926.0
+         case .iPhone14, .iPhone14Plus:
+             return 926.0
+         case .iPhone14Pro, .iPhone14ProMax:
+             return 926.0
+         case .iPhone15, .iPhone15Plus:
+             return 926.0
+         case .iPhone15Pro, .iPhone15ProMax:
+             return 926.0
+         case .iPadMini, .iPadMini2, .iPadMini3, .iPadMini4, .iPadMini5, .iPadMini6:
+             return 1024.0
+         case .iPad2, .iPad3, .iPad4:
+             return 1024.0
+         case .iPad5, .iPad6, .iPad7, .iPad8, .iPad9, .iPad10:
+             return 1080.0
+         case .iPadAir, .iPadAir2, .iPadAir3, .iPadAir4, .iPadAir5:
+             return 1080.0
+         case .iPadPro9_7, .iPadPro10_5:
+             return 1024.0
+         case .iPadPro11_1stGen, .iPadPro11_2ndGen, .iPadPro11_3rdGen, .iPadPro11_4thGen, .iPadPro11_5thGen:
+             return 834.0
+         case .iPadPro12_9_1stGen, .iPadPro12_9_2ndGen, .iPadPro12_9_3rdGen, .iPadPro12_9_4thGen, .iPadPro12_9_5thGen, .iPadPro12_9_6thGen:
+             return 1024.0
+         default:
+             return 0.0
+         }
+     }
+    
+    func isLargerThan(_ otherDevice: DeviceModel) -> Bool {
+           return self.screenHeight > otherDevice.screenHeight
+       }
+       
+       func isSmallerThan(_ otherDevice: DeviceModel) -> Bool {
+           return self.screenHeight < otherDevice.screenHeight
+       }
+     
 }
 
 public extension UIDevice {
@@ -305,4 +371,6 @@ public extension UIDevice {
         default: return .unknown // Return unknown for unrecognized models
         }
     }
+    
+    
 }
