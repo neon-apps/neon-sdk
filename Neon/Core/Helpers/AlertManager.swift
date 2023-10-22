@@ -1,8 +1,8 @@
 //
 //  File.swift
+//  
 //
-//
-//  Created by Tuna Öztürk on 19.03.2023.
+//  Created by Tuna Öztürk on 22.10.2023.
 //
 
 import Foundation
@@ -12,8 +12,8 @@ import UIKit
 
 
 
-@available(iOS 13.0, *)
-public class DefaultAlertManager{
+@available(*, unavailable, renamed: "DefaultAlertManager", message: "AlertManager has been renamed to DefaultAlertManager. Please use DefaultAlertManager instead.")
+public class AlertManager{
     
     public static func showCustomAlert(title: String?, message: String?, style : UIAlertController.Style, buttons : [AlertButton]? = nil ,viewController: UIViewController, overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
@@ -73,6 +73,5 @@ public class DefaultAlertManager{
     }
     
 }
-
 
 
