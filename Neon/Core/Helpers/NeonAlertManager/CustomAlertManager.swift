@@ -79,7 +79,7 @@ public class CustomAlertManager {
         titleLabel.font = Font.custom(size: 18, fontWeight: .Bold)
         titleLabel.textColor = textColor
         alertView.addSubview(titleLabel)
-        
+        titleLabel.textAlignment = .center
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(iconImageView.snp.bottom).offset(verticalPadding)
             make.centerX.equalTo(alertView.snp.centerX)
@@ -150,7 +150,7 @@ public class CustomAlertManager {
         alertView.addSubview(stackView)
         
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(20)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(verticalPadding)
             make.leading.trailing.equalToSuperview().inset(30)
             if (buttons != nil){
                 make.height.equalTo(buttons!.count * 60)
