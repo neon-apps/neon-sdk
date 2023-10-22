@@ -13,7 +13,7 @@ public class NeonSupportControllerConstants{
     static var arrSupportTypes: [NeonSupportType] = [
         NeonSupportType(
             title: "Contact Us",
-            icon: UIImage(named: "icon_contact")!,
+            icon: UIImage(named: "icon_contact", in: Bundle.module, compatibleWith: nil)!,
             placeholder: "Got questions? We've got answers! Reach out anytime.",
             ctaButtonTitle: "Give a High-Five",
             controllerType: .contactUs,
@@ -22,7 +22,7 @@ public class NeonSupportControllerConstants{
         ),
         NeonSupportType(
             title: "Report a Bug",
-            icon: UIImage(named: "icon_bug")!,
+            icon: UIImage(named: "icon_bug", in: Bundle.module, compatibleWith: nil)!,
             placeholder: "Uh-oh, a bug? Let us know, and we'll squish it!",
             ctaButtonTitle: "Spot the Buggy",
             controllerType: .bugReport,
@@ -31,7 +31,7 @@ public class NeonSupportControllerConstants{
         ),
         NeonSupportType(
             title: "Give Feedback",
-            icon: UIImage(named: "icon_feedback")!,
+            icon: UIImage(named: "icon_feedback", in: Bundle.module, compatibleWith: nil)!,
             placeholder: "Share your thoughts! We're all ears.",
             ctaButtonTitle: "Brighten Our Day",
             controllerType: .feedback,
@@ -40,7 +40,7 @@ public class NeonSupportControllerConstants{
         ),
         NeonSupportType(
             title: "Request a Feature",
-            icon: UIImage(named: "icon_feature")!,
+            icon: UIImage(named: "icon_feature", in: Bundle.module, compatibleWith: nil)!,
             placeholder: "Wish for a feature? We'll make it happen!",
             ctaButtonTitle: "Make a Wish!",
             controllerType: .featureRequest,
