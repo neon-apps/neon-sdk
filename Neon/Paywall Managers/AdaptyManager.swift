@@ -97,6 +97,15 @@ public class AdaptyManager {
         return nil
     }
     
+    public static func getPackage(index : Int) -> AdaptyPaywallProduct?{
+        
+        if packages.count > index{
+            return packages[index]
+        }else{
+            return nil
+        }
+    }
+    
     public static func getPaywall(placementID : String) -> AdaptyPaywall?{
         for paywall in paywalls {
             if paywall.id == placementID{
