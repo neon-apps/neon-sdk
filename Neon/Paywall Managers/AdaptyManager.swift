@@ -146,6 +146,10 @@ public class AdaptyManager {
         return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
     }
     
+    public static func getPrice(package : AdaptyPaywallProduct) -> String{
+        return package.localizedPrice ?? "..."
+    }
+    
     public static func selectPackage(id : String){
         for package in packages {
             if package.vendorProductId == id{
