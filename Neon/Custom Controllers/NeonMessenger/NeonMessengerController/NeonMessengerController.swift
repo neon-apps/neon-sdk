@@ -131,7 +131,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         
         lblNoMessages.text = "You don't have any\nmessages yet!"
             lblNoMessages.numberOfLines = 2
-        lblNoMessages.textColor = NeonMessengerConstants.primaryTextColor
+        lblNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
         lblNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
         view.addSubview(lblNoMessages)
         lblNoMessages.snp.makeConstraints { make in
@@ -158,6 +158,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).sorted(by: {$0.lastMessage!.date > $1.lastMessage!.date})[indexPath.row].lastMessage = nil
         chatsTableView.objects = NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).sorted(by: {$0.lastMessage!.date > $1.lastMessage!.date})
         chatsTableView.deleteRows(at: [indexPath], with: .left)
+        adjustNoMessagesViewAppearance()
         chatsTableView.endUpdates()
     }
 
