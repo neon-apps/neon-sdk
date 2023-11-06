@@ -71,7 +71,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         searchBar.borderWidth = 3
         searchBar.cornerRadious = 15
         searchBar.iconSize = 20
-        searchBar.icon = UIImage(named: "Search")
+        searchBar.icon = NeonSymbols.magnifyingglass
         searchBar.iconTintColor = NeonMessengerConstants.searchIconColor
         searchBar.placeholder = NeonMessengerConstants.searchfieldPlaceholder
         searchBar.textfield.textColor = NeonMessengerConstants.primaryTextColor
@@ -120,6 +120,24 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
             make.top.equalTo(connectionsCollectionView.snp.bottom).offset(15)
             make.left.right.bottom.equalToSuperview()
         }
+        
+
+        
+        if NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).isEmpty{
+            
+        let lblNoMessages = UILabel()
+        lblNoMessages.text = "You don't have any\nmessages yet!"
+        lblNoMessages.textColor = NeonMessengerConstants.primaryTextColor
+        lblNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
+        view.addSubview(lblNoMessages)
+        lblNoMessages.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        lblNoMessages.sizeToFit()
+        
+        }
+        
+        
     }
     
     func deleteChat(user : NeonMessengerUser, indexPath : IndexPath){
@@ -138,6 +156,8 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
     open func messageSent(to user: NeonMessengerUser, message: Message) {
         
     }
+    
+    
     
 
 }
