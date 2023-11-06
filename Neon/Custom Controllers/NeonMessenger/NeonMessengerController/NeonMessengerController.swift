@@ -17,6 +17,7 @@ public protocol NeonMessengerDelegate: AnyObject {
 @available(iOS 13.0, *)
 open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
 
+    fileprivate let lblNoMessages = UILabel()
     fileprivate let chatsTableView = ChatsTableView()
     fileprivate let connectionsCollectionView = ConnectionsCollectionView()
     fileprivate var filteredConnections = NeonMessengerManager.arrConnections
@@ -49,7 +50,9 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         NeonMessengerManager.fetchLastMessages(completion: { [self] in
             connectionsCollectionView.objects = NeonMessengerManager.arrConnections
             chatsTableView.objects = NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).sorted(by: {$0.lastMessage!.date > $1.lastMessage!.date})
+            adjustNoMessagesViewAppearance()
         })
+        
     }
     func createUI(){
         
@@ -123,10 +126,11 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         
 
         
-        if NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).isEmpty{
+    
             
-        let lblNoMessages = UILabel()
+        
         lblNoMessages.text = "You don't have any\nmessages yet!"
+            lblNoMessages.numberOfLines = 2
         lblNoMessages.textColor = NeonMessengerConstants.primaryTextColor
         lblNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
         view.addSubview(lblNoMessages)
@@ -138,6 +142,14 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         }
         
         
+    
+    
+    func adjustNoMessagesViewAppearance(){
+        if NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).isEmpty{
+            lblNoMessages.isHidden = false
+        }else{
+            lblNoMessages.isHidden = true
+        }
     }
     
     func deleteChat(user : NeonMessengerUser, indexPath : IndexPath){
