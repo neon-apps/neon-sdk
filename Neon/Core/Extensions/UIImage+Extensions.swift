@@ -29,7 +29,7 @@ extension UIImage {
 
 @available(iOS 13.0, *)
 extension UIImage{
-    func withConfiguration(size : CGFloat, weight : SymbolWeight = .regular) -> UIImage{
+    public func withConfiguration(size : CGFloat, weight : SymbolWeight = .regular) -> UIImage{
         let config = UIImage.SymbolConfiguration(
             pointSize: size, weight: weight, scale: .default)
        return self.withConfiguration(config)
