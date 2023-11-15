@@ -26,17 +26,17 @@ enum Images {
     static func particles_icon(for particles: NeonConfettiParticle) -> UIImage {
         switch particles {
         case .arc:
-            return UIImage.init(named: "arc", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "arc", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .heart:
-            return UIImage.init(named: "heart", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "heart", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .circle:
-            return UIImage.init(named: "circle", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "circle", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .polygon:
-            return UIImage.init(named: "polygon", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "polygon", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .star:
-            return UIImage.init(named: "star", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "star", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .triangle:
-            return UIImage.init(named: "triangle", in: bundle, compatibleWith: nil) ?? UIImage()
+            return UIImage.init(named: "triangle", in: Bundle.module, compatibleWith: nil) ?? UIImage()
         case .custom(let image):
             return image
         }
@@ -44,19 +44,5 @@ enum Images {
     
     // MARK: - Internal
     
-    static var bundle: Bundle {
-        
-        // If installed via SPM, will be available bundle .module.
-        
-        #if SPCONFETTI_SPM
-        return .module
-        #else
-        
-        // If installed via Cocoapods, should use bundle from podspec.
-        
-        let path = Bundle(for: NeonConfettiManager.self).path(forResource: "NeonConfettiManager", ofType: "bundle") ?? ""
-        let bundle = Bundle(path: path) ?? Bundle.main
-        return bundle
-        #endif
-    }
+   
 }
