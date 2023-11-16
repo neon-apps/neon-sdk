@@ -13,8 +13,6 @@ extension UIStackView{
     
    public func addSpacer(_ size: CGFloat = 20) {
         let spacingView = UIView()
-        spacingView.layer.borderColor = UIColor.green.cgColor
-        spacingView.layer.borderWidth = 3
         spacingView.snp.makeConstraints { make in
             make.height.width.equalTo(size - self.spacing)
         }
