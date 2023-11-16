@@ -259,6 +259,8 @@ public enum DeviceModel: String {
              return 834.0
          case .iPadPro12_9_1stGen, .iPadPro12_9_2ndGen, .iPadPro12_9_3rdGen, .iPadPro12_9_4thGen, .iPadPro12_9_5thGen, .iPadPro12_9_6thGen:
              return 1024.0
+         case .simulator:
+             return 926
          default:
              return 0.0
          }
