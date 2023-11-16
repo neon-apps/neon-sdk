@@ -272,6 +272,15 @@ public enum DeviceModel: String {
            return self.screenHeight < otherDevice.screenHeight
     }
     
+    public func isEqualOrLargerThan(_ otherDevice: DeviceModel) -> Bool {
+           return self.screenHeight >= otherDevice.screenHeight
+       }
+       
+    public func isEqualOrSmallerThan(_ otherDevice: DeviceModel) -> Bool {
+           return self.screenHeight <= otherDevice.screenHeight
+    }
+    
+    
     public var stringValue : String{
         return self.rawValue
     }
