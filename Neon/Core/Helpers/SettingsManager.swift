@@ -42,7 +42,8 @@ public class SettingsManager{
                                   backgroundColor : UIColor,
                                   containerColor : UIColor,
                                   textColor : UIColor,
-                                  placeholderColor : UIColor){
+                                  placeholderColor : UIColor,
+                                  buttonTextColor : UIColor = .white){
         let supportController = NeonSupportController()
         NeonSupportControllerConstants.choosenControllerType = type
         NeonSupportControllerConstants.backgroundColor = backgroundColor
@@ -50,6 +51,7 @@ public class SettingsManager{
         NeonSupportControllerConstants.placeholderColor = placeholderColor
         NeonSupportControllerConstants.mainColor = mainColor
         NeonSupportControllerConstants.textColor = textColor
+        NeonSupportControllerConstants.buttonTextColor = buttonTextColor
         onVC.present(destinationVC: supportController, slideDirection: .right)
     }
     

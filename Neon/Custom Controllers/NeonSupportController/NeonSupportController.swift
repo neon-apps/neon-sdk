@@ -79,6 +79,7 @@ open class NeonSupportController: UIViewController {
         btnSend.backgroundColor = NeonSupportControllerConstants.mainColor
         btnSend.setTitle(NeonSupportControllerConstants.choosenSupportType.ctaButtonTitle, for: .normal)
         btnSend.layer.cornerRadius = 10
+        btnSend.setTitleColor(NeonSupportControllerConstants.buttonTextColor, for: .normal)
         btnSend.layer.masksToBounds = true
         btnSend.addTarget(self, action: #selector(btnSendClicked), for: .touchUpInside)
         btnSend.titleLabel?.font = Font.custom(size: 18, fontWeight: .SemiBold)
@@ -280,7 +281,12 @@ open class NeonSupportController: UIViewController {
                     icon: NeonSymbols.info_circle,
                     iconTintColor: NeonSupportControllerConstants.mainColor,
                     iconSize: CGSize(width: 50, height: 50),
-                    verticalPadding: 20)
+                    verticalPadding: 20,
+                    buttons: [
+                        CustomAlertButton(title: "Okay",
+                                          buttonType: .background,
+                                         overrideTextColor: NeonSupportControllerConstants.buttonTextColor)
+                    ])
                 return false
             }
             
@@ -292,7 +298,12 @@ open class NeonSupportController: UIViewController {
                     icon: NeonSymbols.info_circle,
                     iconTintColor: NeonSupportControllerConstants.mainColor,
                     iconSize: CGSize(width: 50, height: 50),
-                    verticalPadding: 20)
+                    verticalPadding: 20,
+                    buttons: [
+                        CustomAlertButton(title: "Okay", 
+                                          buttonType: .background,
+                                         overrideTextColor: NeonSupportControllerConstants.buttonTextColor)
+                    ])
                 return false
             }
             
@@ -304,7 +315,12 @@ open class NeonSupportController: UIViewController {
                     icon: NeonSymbols.info_circle,
                     iconTintColor: NeonSupportControllerConstants.mainColor,
                     iconSize: CGSize(width: 50, height: 50),
-                    verticalPadding: 20)
+                    verticalPadding: 20,
+                    buttons: [
+                        CustomAlertButton(title: "Okay",
+                                          buttonType: .background,
+                                         overrideTextColor: NeonSupportControllerConstants.buttonTextColor)
+                    ])
                 return false
             }
             
@@ -325,7 +341,12 @@ open class NeonSupportController: UIViewController {
                 icon: NeonSymbols.info_circle,
                 iconTintColor: NeonSupportControllerConstants.mainColor,
                 iconSize: CGSize(width: 50, height: 50),
-                verticalPadding: 20)
+                verticalPadding: 20,
+                buttons: [
+                    CustomAlertButton(title: "Okay",
+                                      buttonType: .background,
+                                     overrideTextColor: NeonSupportControllerConstants.buttonTextColor)
+                ])
             return false
         }
         return true
@@ -403,7 +424,12 @@ open class NeonSupportController: UIViewController {
                 icon: NeonSymbols.info_circle,
                 iconTintColor: NeonSupportControllerConstants.mainColor,
                 iconSize: CGSize(width: 50, height: 50),
-                verticalPadding: 20)
+                verticalPadding: 20,
+                buttons: [
+                    CustomAlertButton(title: "Okay",
+                                      buttonType: .background,
+                                     overrideTextColor: NeonSupportControllerConstants.buttonTextColor)
+                ])
             return false
         }
         return true

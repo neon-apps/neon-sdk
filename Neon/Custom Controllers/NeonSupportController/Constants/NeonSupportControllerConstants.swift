@@ -64,6 +64,7 @@ public class NeonSupportControllerConstants{
     
     static var backgroundColor = UIColor()
     static var mainColor = UIColor()
+    static var buttonTextColor = UIColor()
     static var containerColor = UIColor()
     static var textColor = UIColor()
     static var placeholderColor = UIColor()

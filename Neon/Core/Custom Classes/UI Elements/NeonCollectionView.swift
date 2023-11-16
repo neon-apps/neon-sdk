@@ -165,9 +165,19 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         
     }
     
+    open func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize()
     }
+    
+    
 }
 
 protocol ConfigurableCell {
