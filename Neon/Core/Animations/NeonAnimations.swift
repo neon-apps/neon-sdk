@@ -40,14 +40,6 @@ extension UIView {
             bounce(duration: duration, delay: delay)
         case .changeColor(let toColor, let easing):
             changeColor(to: toColor, duration: duration, easing: easing, delay: delay)
-        case .arc(let radius, let degrees, let easing, let repeated):
-            arc(radius: radius, degrees: degrees, duration: duration, easing: easing, repeated: repeated, delay: delay)
-            
-        case .shift(let direction, let distance, let easing, let repeated):
-            shift(to: direction, distance: distance, duration: duration, easing: easing, repeated: repeated, delay: delay)
-            
-        case .bring(let direction, let distance, let easing, let repeated):
-            bring(from: direction, distance: distance, duration: duration, easing: easing, repeated: repeated, delay: delay)
         }
     }
     
@@ -163,7 +155,7 @@ extension UIView {
     // Tween
     
     
-    func changeColor(to: UIColor,
+    public func changeColor(to: UIColor,
                     duration: TimeInterval,
                     easing: Easing,
                      delay : TimeInterval? = nil){
@@ -188,7 +180,7 @@ extension UIView {
     
 
     
-    func arc(radius: CGFloat,
+    public func arc(radius: CGFloat,
              degrees: Double,
              duration: Double,
              easing: Easing,
@@ -221,7 +213,7 @@ extension UIView {
   
      }
     
-    func shift(to direction: NeonAnimationDirection,
+    public func shift(to direction: NeonAnimationDirection,
                distance: CGFloat,
                duration: Double,
                easing: Easing,
@@ -255,7 +247,7 @@ extension UIView {
   
      }
     
-    func bring(from direction: NeonAnimationDirection,
+    public func bring(from direction: NeonAnimationDirection,
                distance: CGFloat,
                duration: Double,
                easing: Easing,
@@ -347,8 +339,4 @@ public enum AnimationType {
     case fadeInAndSlideInRight
     case fadeInAndSlideInLeft
     case bounce
-    case changeColor(to: UIColor, easing: Easing)
-    case arc(radius: CGFloat, degrees: Double, easing: Easing, repeat: NeonAnimationRepeat? = nil)
-    case shift(direction: NeonAnimationDirection, distance: CGFloat, easing: Easing, repeat: NeonAnimationRepeat? = nil)
-    case bring(direction: NeonAnimationDirection, distance: CGFloat, easing: Easing, repeat: NeonAnimationRepeat? = nil)
 }
