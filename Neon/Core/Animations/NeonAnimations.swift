@@ -38,8 +38,6 @@ extension UIView {
             fadeInAndSlideIn(from: .left, duration: duration, delay: delay)
         case .bounce:
             bounce(duration: duration, delay: delay)
-        case .changeColor(let toColor, let easing):
-            changeColor(to: toColor, duration: duration, easing: easing, delay: delay)
         }
     }
     
@@ -184,7 +182,7 @@ extension UIView {
              degrees: Double,
              duration: Double,
              easing: Easing,
-             repeated : NeonAnimationRepeat? = nil,
+             repeat : NeonAnimationRepeat? = nil,
              delay : TimeInterval = 0) {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
@@ -199,8 +197,8 @@ extension UIView {
              }
      
         
-                if let repeated{
-                    switch repeated {
+                if let `repeat`{
+                    switch `repeat` {
                     case .forever:
                         scheduler.run(action: action.repeatedForever())
                     case .times(let count):
@@ -217,7 +215,7 @@ extension UIView {
                distance: CGFloat,
                duration: Double,
                easing: Easing,
-               repeated : NeonAnimationRepeat? = nil,
+               repeat : NeonAnimationRepeat? = nil,
                delay : TimeInterval = 0) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
@@ -233,8 +231,8 @@ extension UIView {
              self.center[keyPath: axis] = $0
          }
     
-                if let repeated{
-                    switch repeated {
+                if let `repeat`{
+                    switch `repeat` {
                     case .forever:
                         scheduler.run(action: action.repeatedForever())
                     case .times(let count):
@@ -251,7 +249,7 @@ extension UIView {
                distance: CGFloat,
                duration: Double,
                easing: Easing,
-               repeated : NeonAnimationRepeat? = nil,
+               repeat : NeonAnimationRepeat? = nil,
                delay : TimeInterval? = nil) {
         
         let (axis, delta) = axisAndDelta(for: direction, distance: distance, actionType: .bring)
@@ -264,8 +262,8 @@ extension UIView {
         
         if (delay != nil){
             DispatchQueue.main.asyncAfter(deadline: .now() + delay!, execute: {
-                if let repeated{
-                    switch repeated {
+                if let `repeat`{
+                    switch `repeat` {
                     case .forever:
                         scheduler.run(action: action.repeatedForever())
                     case .times(let count):
@@ -276,8 +274,8 @@ extension UIView {
                 }
             })
         }else{
-            if let repeated{
-                switch repeated {
+            if let `repeat`{
+                switch `repeat` {
                 case .forever:
                     scheduler.run(action: action.repeatedForever())
                 case .times(let count):
