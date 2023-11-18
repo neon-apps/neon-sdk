@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import NeonSDK
+@available(iOS 13.0, *)
 class NeonLongOnboardingTestimonialView: UIView {
     
     public let titleLabel = UILabel()

@@ -10,6 +10,7 @@ import UIKit
 import NeonSDK
 import SnapKit
 
+@available(iOS 13.0, *)
 class NeonLongOnboardingPageAnalyzingProgressView: UIView {
     
     private let titleLabel = UILabel()

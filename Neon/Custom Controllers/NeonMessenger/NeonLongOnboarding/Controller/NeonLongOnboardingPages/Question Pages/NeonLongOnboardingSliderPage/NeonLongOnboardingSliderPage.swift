@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import NeonSDK
 
-@available(iOS 15, *)
+@available(iOS 13, *)
 class NeonLongOnboardingSliderPage: BaseNeonLongOnboardingPage, UITextFieldDelegate{
   
     var animationDelay = 1.2
@@ -92,7 +92,11 @@ class NeonLongOnboardingSliderPage: BaseNeonLongOnboardingPage, UITextFieldDeleg
     func createAttributedString(item: String, description: String) -> NSAttributedString {
         let attributedItem = NSMutableAttributedString(string: item, attributes: [.font: Font.custom(size: 20, fontWeight: .Medium)])
         let attributedDescription = NSAttributedString(string: description, attributes: [.font: Font.custom(size: 12, fontWeight: .Regular)])
-        attributedItem.append(NSAttributedString(" "))
+        if #available(iOS 15, *) {
+            attributedItem.append(NSAttributedString(" "))
+        } else {
+            // Fallback on earlier versions
+        }
         attributedItem.append(attributedDescription)
         return attributedItem
     }

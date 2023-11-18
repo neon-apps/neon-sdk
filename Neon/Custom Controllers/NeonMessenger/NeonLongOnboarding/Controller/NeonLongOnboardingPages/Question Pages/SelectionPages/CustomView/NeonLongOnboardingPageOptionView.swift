@@ -9,12 +9,13 @@ import UIKit
 import Foundation
 import NeonSDK
 
-
+@available(iOS 13.0, *)
 protocol NeonLongOnboardingPageOptionViewDelegate: AnyObject {
     func optionDidSelect(_ option: NeonLongOnboardingPageOptionView)
     func optionDidDeselect(_ option: NeonLongOnboardingPageOptionView)
 }
 
+@available(iOS 13.0, *)
 class NeonLongOnboardingPageOptionView: UIView {
     
     weak var delegate: NeonLongOnboardingPageOptionViewDelegate?

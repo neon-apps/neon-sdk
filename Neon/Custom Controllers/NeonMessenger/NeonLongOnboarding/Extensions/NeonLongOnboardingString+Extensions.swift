@@ -9,6 +9,7 @@ import Foundation
 
 extension String?{
     
+    @available(iOS 13.0, *)
     func changeUsername() -> String{
         
         guard let firstName = NeonLongOnboardingConstants.firstName else{
@@ -25,6 +26,7 @@ extension String?{
 
 extension String{
     
+    @available(iOS 13.0, *)
     func changeUsername() -> String{
         
         guard let firstName = NeonLongOnboardingConstants.firstName else{

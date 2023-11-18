@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 13.0, *)
 public class NeonLongOnboardingSection{
     
     private static var lastSectionIndex = -1

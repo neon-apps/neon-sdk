@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import NeonSDK
 
+@available(iOS 13.0, *)
 class NeonLongOnboardingCustomPlanItemsView: UIView {
     
     // Assuming you want to display strings
