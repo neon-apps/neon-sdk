@@ -192,7 +192,7 @@ extension UIView {
              degrees: Double,
              duration: Double,
              easing: Easing,
-             repeated : Repeat? = nil,
+             repeated : NeonAnimationRepeat? = nil,
              delay : TimeInterval = 0) {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
@@ -221,11 +221,11 @@ extension UIView {
   
      }
     
-    func shift(to direction: Direction,
+    func shift(to direction: NeonAnimationDirection,
                distance: CGFloat,
                duration: Double,
                easing: Easing,
-               repeated : Repeat? = nil,
+               repeated : NeonAnimationRepeat? = nil,
                delay : TimeInterval = 0) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
@@ -255,11 +255,11 @@ extension UIView {
   
      }
     
-    func bring(from direction: Direction,
+    func bring(from direction: NeonAnimationDirection,
                distance: CGFloat,
                duration: Double,
                easing: Easing,
-               repeated : Repeat? = nil,
+               repeated : NeonAnimationRepeat? = nil,
                delay : TimeInterval? = nil) {
         
         let (axis, delta) = axisAndDelta(for: direction, distance: distance, actionType: .bring)
@@ -302,7 +302,7 @@ extension UIView {
         case bring
     }
 
-    private func axisAndDelta(for direction: Direction, distance: CGFloat, actionType: ActionType) -> (WritableKeyPath<CGPoint, CGFloat>, CGFloat) {
+    private func axisAndDelta(for direction: NeonAnimationDirection, distance: CGFloat, actionType: ActionType) -> (WritableKeyPath<CGPoint, CGFloat>, CGFloat) {
         let isShiftAction = actionType == .shift
 
         switch direction {
@@ -321,12 +321,12 @@ extension UIView {
     
 }
 
-public enum Repeat{
+public enum NeonAnimationRepeat{
     case forever
     case times(Int)
 }
     
-public enum Direction{
+public enum NeonAnimationDirection{
     case left
     case right
     case up
@@ -348,7 +348,7 @@ public enum AnimationType {
     case fadeInAndSlideInLeft
     case bounce
     case changeColor(to: UIColor, easing: Easing)
-    case arc(radius: CGFloat, degrees: Double, easing: Easing, repeated: Repeat? = nil)
-    case shift(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat? = nil)
-    case bring(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat? = nil)
+    case arc(radius: CGFloat, degrees: Double, easing: Easing, repeat: NeonAnimationRepeat? = nil)
+    case shift(direction: NeonAnimationDirection, distance: CGFloat, easing: Easing, repeat: NeonAnimationRepeat? = nil)
+    case bring(direction: NeonAnimationDirection, distance: CGFloat, easing: Easing, repeat: NeonAnimationRepeat? = nil)
 }
