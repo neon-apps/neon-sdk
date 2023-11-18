@@ -348,7 +348,7 @@ public enum AnimationType {
     case fadeInAndSlideInLeft
     case bounce
     case changeColor(to: UIColor, easing: Easing)
-    case arc(radius: CGFloat, degrees: Double, easing: Easing, repeated: Repeat?)
-    case shift(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat?)
-    case bring(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat?)
+    case arc(radius: CGFloat, degrees: Double, easing: Easing, repeated: Repeat? = nil)
+    case shift(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat? = nil)
+    case bring(direction: Direction, distance: CGFloat, easing: Easing, repeated: Repeat? = nil)
 }
