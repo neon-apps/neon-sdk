@@ -176,7 +176,23 @@ extension UIView {
 
     }
     
-
+    public func rotate(angle : Double, duration: Double, delay : TimeInterval = 0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+            UIView.animate(withDuration: duration, animations: {
+                let rotationTransform = CGAffineTransform(rotationAngle: angle)
+                self.transform = self.transform.concatenating(rotationTransform)
+            })
+        })
+    }
+    
+    public func scale(x : Double, y : Double, duration: Double, delay : TimeInterval = 0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+            UIView.animate(withDuration: duration, animations: {
+                let scaleTransform = CGAffineTransform(scaleX: x, y: y)
+                self.transform = self.transform.concatenating(scaleTransform)
+            })
+        })
+    }
     
     public func arc(radius: CGFloat,
              degrees: Double,
@@ -200,9 +216,9 @@ extension UIView {
                 if let `repeat`{
                     switch `repeat` {
                     case .forever:
-                        scheduler.run(action: action.repeatedForever())
+                        scheduler.run(action: action.yoyo().repeatedForever())
                     case .times(let count):
-                        scheduler.run(action: action.repeated(count))
+                        scheduler.run(action: action.yoyo().repeated(count))
                     }
                 }else{
                     scheduler.run(action: action)
@@ -234,9 +250,9 @@ extension UIView {
                 if let `repeat`{
                     switch `repeat` {
                     case .forever:
-                        scheduler.run(action: action.repeatedForever())
+                        scheduler.run(action: action.yoyo().repeatedForever())
                     case .times(let count):
-                        scheduler.run(action: action.repeated(count))
+                        scheduler.run(action: action.yoyo().repeated(count))
                     }
                 }else{
                     scheduler.run(action: action)
@@ -250,8 +266,10 @@ extension UIView {
                duration: Double,
                easing: Easing,
                repeat : NeonAnimationRepeat? = nil,
-               delay : TimeInterval? = nil) {
+               delay : TimeInterval = 0) {
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: { [self] in
+            
         let (axis, delta) = axisAndDelta(for: direction, distance: distance, actionType: .bring)
             let startPoint = self.center[keyPath: axis] - delta
             let endPoint = self.center[keyPath: axis]
@@ -260,31 +278,17 @@ extension UIView {
                 self.center[keyPath: axis] = $0
             }
         
-        if (delay != nil){
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay!, execute: {
                 if let `repeat`{
                     switch `repeat` {
                     case .forever:
-                        scheduler.run(action: action.repeatedForever())
+                        scheduler.run(action: action.yoyo().repeatedForever())
                     case .times(let count):
-                        scheduler.run(action: action.repeated(count))
+                        scheduler.run(action: action.yoyo().repeated(count))
                     }
                 }else{
                     scheduler.run(action: action)
                 }
             })
-        }else{
-            if let `repeat`{
-                switch `repeat` {
-                case .forever:
-                    scheduler.run(action: action.repeatedForever())
-                case .times(let count):
-                    scheduler.run(action: action.repeated(count))
-                }
-            }else{
-                scheduler.run(action: action)
-            }
-        }
      }
     
     enum ActionType {
