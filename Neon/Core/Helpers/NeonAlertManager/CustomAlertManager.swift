@@ -225,7 +225,8 @@ public class CustomAlertManager {
     private static func presentAlertView(controller : UIViewController, stackView : UIStackView, alertView : UIView) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             
-            currentAlertView!.snp.remakeConstraints { make in
+            guard let alertView = currentAlertView else { return }
+            alertView.snp.remakeConstraints { make in
                 make.centerY.equalToSuperview()
                 make.leading.trailing.equalToSuperview().inset(50)
                 make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)

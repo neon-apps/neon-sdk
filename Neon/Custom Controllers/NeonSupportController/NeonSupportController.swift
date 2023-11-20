@@ -403,7 +403,7 @@ open class NeonSupportController: UIViewController {
                                   buttonType: .text,
                                   overrideTextColor: NeonSupportControllerConstants.textColor,
                                   completion: { [self] in
-                                      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [self] in
+                                      DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
                                           if areFieldsValid(){
                                               cacheContactDetails()
                                               showAlert()
