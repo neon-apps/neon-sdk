@@ -16,10 +16,10 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
     let descriptionLabel = UILabel()
     let backgroundImageView = UIImageView()
     let targetBoardAnimationView = NeonAnimationView(animation: .custom(name: "archery"))
-    let benefitView1 = NeonLongOnboardingGreatFitBenefitView()
-    let benefitView2 = NeonLongOnboardingGreatFitBenefitView()
-    let benefitView3 = NeonLongOnboardingGreatFitBenefitView()
-    let benefitView4 = NeonLongOnboardingGreatFitBenefitView()
+    var benefitView1 : NeonLongOnboardingGreatFitBenefitView?
+    var benefitView2 : NeonLongOnboardingGreatFitBenefitView?
+    var benefitView3 : NeonLongOnboardingGreatFitBenefitView?
+    var benefitView4 : NeonLongOnboardingGreatFitBenefitView?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -57,38 +57,42 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
    
        
         // Top Left
-        view.addSubview(benefitView1)
-        benefitView1.rotate(degree: -30)
-        benefitView1.snp.makeConstraints { make in
+        
+        view.addSubview(benefitView1!)
+        benefitView1!.rotate(degree: -30)
+        benefitView1!.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(25)
             make.top.equalTo(subtitleLabel.snp.bottom).offset(40)
             make.height.width.equalTo(100)
         }
         
         // Top Right
-        view.addSubview(benefitView2)
-        benefitView2.rotate(degree: -30)
-        benefitView2.snp.makeConstraints { make in
+        
+        view.addSubview(benefitView2!)
+        benefitView2!.rotate(degree: -30)
+        benefitView2!.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-20)
             make.top.equalTo(subtitleLabel.snp.bottom).offset(40)
             make.height.width.equalTo(100)
         }
         
         // Bottom Left
-        view.addSubview(benefitView3)
-        benefitView3.rotate(degree: -30)
-        benefitView3.snp.makeConstraints { make in
+        
+        view.addSubview(benefitView3!)
+        benefitView3!.rotate(degree: -30)
+        benefitView3!.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
-            make.top.equalTo(benefitView1.snp.bottom).offset(40)
+            make.top.equalTo(benefitView1!.snp.bottom).offset(40)
             make.height.width.equalTo(100)
         }
         
         //Bottom Right
-        view.addSubview(benefitView4)
-        benefitView4.rotate(degree: -30)
-        benefitView4.snp.makeConstraints { make in
+        benefitView4 = NeonLongOnboardingGreatFitBenefitView()
+        view.addSubview(benefitView4!)
+        benefitView4!.rotate(degree: -30)
+        benefitView4!.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-25)
-            make.top.equalTo(benefitView2.snp.bottom).offset(50)
+            make.top.equalTo(benefitView2!.snp.bottom).offset(50)
             make.height.width.equalTo(100)
         }
         
@@ -121,10 +125,16 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
                 fatalError("To use greatFit page, you should add exactly 4 benefits while you are adding the page, inside benefits array.")
             }
             
-            benefitView1.configure(benefit: benefits[0])
-            benefitView2.configure(benefit: benefits[1])
-            benefitView3.configure(benefit: benefits[2])
-            benefitView4.configure(benefit: benefits[3])
+            benefitView1 = NeonLongOnboardingGreatFitBenefitView()
+            benefitView2 = NeonLongOnboardingGreatFitBenefitView()
+            benefitView3 = NeonLongOnboardingGreatFitBenefitView()
+            benefitView4 = NeonLongOnboardingGreatFitBenefitView()
+            
+            
+            benefitView1!.configure(benefit: benefits[0])
+            benefitView2!.configure(benefit: benefits[1])
+            benefitView3!.configure(benefit: benefits[2])
+            benefitView4!.configure(benefit: benefits[3])
             break
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
@@ -153,10 +163,10 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
                 self.targetBoardAnimationView.lottieAnimationView.play()
             })
             
-            benefitView1.animate(type: .fadeInAndSlideInLeft, delay: 1.3)
-            benefitView2.animate(type: .fadeInAndSlideInRight, delay: 1.5)
-            benefitView3.animate(type: .fadeInAndSlideInLeft, delay: 1.7)
-            benefitView4.animate(type: .fadeInAndSlideInRight, delay: 1.9)
+            benefitView1!.animate(type: .fadeInAndSlideInLeft, delay: 1.3)
+            benefitView2!.animate(type: .fadeInAndSlideInRight, delay: 1.5)
+            benefitView3!.animate(type: .fadeInAndSlideInLeft, delay: 1.7)
+            benefitView4!.animate(type: .fadeInAndSlideInRight, delay: 1.9)
             descriptionLabel.animate(type: .fadeInAndSlideInBottom, delay: 2.4)
             btnContinue.animate(type: .fadeInAndSlideInBottom, delay: 2.5)
         }
