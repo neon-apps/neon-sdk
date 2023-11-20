@@ -15,7 +15,7 @@ class NeonLongOnboardingSayGoodbyePage: BaseNeonLongOnboardingPage{
   
     var animationDelay = 1.2
     let descriptionLabel = UILabel()
-    let crossAnimation = NeonAnimationView(animation: .custom(name: "cross"))
+    let crossAnimation = NeonAnimationView(animation: .sdk(name: "cross"))
     let sayGoodbyeView1 = NeonLongOnboardingSayGoodbyeView()
     let sayGoodbyeView2 = NeonLongOnboardingSayGoodbyeView()
     let sayGoodbyeView3 = NeonLongOnboardingSayGoodbyeView()

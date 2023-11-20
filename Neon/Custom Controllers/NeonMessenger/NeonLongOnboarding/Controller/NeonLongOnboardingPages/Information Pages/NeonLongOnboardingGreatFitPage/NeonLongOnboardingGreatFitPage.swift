@@ -15,7 +15,7 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
     var animationDelay = 1.2
     let descriptionLabel = UILabel()
     let backgroundImageView = UIImageView()
-    let targetBoardAnimationView = NeonAnimationView(animation: .custom(name: "archery"))
+    let targetBoardAnimationView = NeonAnimationView(animation: .sdk(name: "archery"))
     var benefitView1 : NeonLongOnboardingGreatFitBenefitView?
     var benefitView2 : NeonLongOnboardingGreatFitBenefitView?
     var benefitView3 : NeonLongOnboardingGreatFitBenefitView?

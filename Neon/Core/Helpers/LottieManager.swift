@@ -22,6 +22,10 @@ public class LottieManager{
         case .custom(name: _):
             animLoading = LottieAnimationView(name: defaultAnimationName)
             break
+        case .sdk(name: _):
+            let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
+            animLoading = LottieAnimationView(filePath: animationURL!)
+            break
         default:
             let animationURL = Bundle.module.path(forResource: defaultAnimationName, ofType: "json")
             animLoading = LottieAnimationView(filePath: animationURL!)
@@ -134,6 +138,7 @@ public class LottieManager{
          case downloading2
          case downloading3
          case custom(name : String)
+         case sdk(name : String)
          
         
         public typealias RawValue = (name: String, width: Int)
@@ -178,7 +183,8 @@ public class LottieManager{
                 return (name: "downloading2", width: 80)
             case .downloading3:
                 return (name: "downloading3", width: 60)
-                
+            case .sdk(name: let name):
+                return (name: name, width: 100)
             }
         }
         

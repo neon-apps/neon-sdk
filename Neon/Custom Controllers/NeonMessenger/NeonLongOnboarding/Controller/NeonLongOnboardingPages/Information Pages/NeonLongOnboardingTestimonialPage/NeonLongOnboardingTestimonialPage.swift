@@ -35,7 +35,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         configurePage()
         
       
-        processingAnimationView = NeonAnimationView(animation: .custom(name: "processing"), color: NeonLongOnboardingConstants.selectedOptionBorderColor)
+        processingAnimationView = NeonAnimationView(animation: .sdk(name: "processing"), color: NeonLongOnboardingConstants.selectedOptionBorderColor)
         view.addSubview(processingAnimationView!)
         processingAnimationView!.snp.makeConstraints { make in
             make.top.equalTo(backButton.snp.top)

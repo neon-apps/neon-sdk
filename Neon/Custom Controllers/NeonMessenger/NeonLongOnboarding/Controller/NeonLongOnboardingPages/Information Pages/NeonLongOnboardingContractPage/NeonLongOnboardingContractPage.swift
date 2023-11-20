@@ -14,7 +14,7 @@ import AudioToolbox
 class NeonLongOnboardingContractPage: BaseNeonLongOnboardingPage{
     var vibrationTimer: Timer?
     let itemsView = NeonLongOnboardingCustomPlanItemsView()
-    let longPressAnimationView = NeonAnimationView(animation: .custom(name: "longPress"), color: NeonLongOnboardingConstants.selectedOptionBorderColor)
+    let longPressAnimationView = NeonAnimationView(animation: .sdk(name: "longPress"), color: NeonLongOnboardingConstants.selectedOptionBorderColor)
     var longPressLabel = UILabel()
     let viewFingerPrint = UIView()
     override func viewDidLoad() {

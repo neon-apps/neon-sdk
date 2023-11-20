@@ -224,7 +224,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
 
     }
     func createAnimatedViews(){
-        let sparkle1 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color: AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle1 = NeonAnimationView(animation: .sdk(name: "sparkle_1"), color: AdaptyPaywallBuilder.shared.mainColor)
         view.addSubview(sparkle1)
         sparkle1.alpha = 0.4
         sparkle1.snp.makeConstraints { make in
@@ -233,7 +233,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.right.equalToSuperview().offset(10)
         }
         
-        let sparkle2 = NeonAnimationView(animation: .custom(name: "sparkle_2"), color: AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle2 = NeonAnimationView(animation: .sdk(name: "sparkle_2"), color: AdaptyPaywallBuilder.shared.mainColor)
         view.addSubview(sparkle2)
         sparkle2.alpha = 0.4
         sparkle2.snp.makeConstraints { make in
@@ -242,7 +242,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.left.equalTo(titleLabel.snp.left).offset(-20)
         }
         
-        let sparkle3 = NeonAnimationView(animation: .custom(name: "sparkle_1"), color:  AdaptyPaywallBuilder.shared.mainColor)
+        let sparkle3 = NeonAnimationView(animation: .sdk(name: "sparkle_1"), color:  AdaptyPaywallBuilder.shared.mainColor)
         view.addSubview(sparkle3)
         sparkle3.alpha = 0.4
         sparkle3.transform = CGAffineTransform(scaleX: -1, y: 1)
