@@ -34,6 +34,8 @@ public class NeonLongOnboardingConstants{
     
     static var selectedOptionImage = UIImage()
     
+    static var ctaButtonTitle = String()
+    
     // UserInfo
     
     static var firstName : String?

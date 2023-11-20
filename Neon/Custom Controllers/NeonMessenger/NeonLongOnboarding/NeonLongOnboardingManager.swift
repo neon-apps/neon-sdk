@@ -54,6 +54,10 @@ public class NeonLongOnboardingManager{
     public static func configureImages(selectedOptionImage : UIImage = NeonSymbols.checkmark_seal_fill){
         NeonLongOnboardingConstants.selectedOptionImage = selectedOptionImage
     }
+    
+    public static func configureCopy(ctaButtonTitle : String = "Next"){
+        NeonLongOnboardingConstants.ctaButtonTitle = ctaButtonTitle
+    }
     public static func moveToNextPage(controller : UIViewController){
         
         if let currentPage = NeonLongOnboardingConstants.currentPage, let currentSection = NeonLongOnboardingConstants.currentSection{
