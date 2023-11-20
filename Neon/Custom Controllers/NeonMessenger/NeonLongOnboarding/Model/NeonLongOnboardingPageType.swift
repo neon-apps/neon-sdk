@@ -7,9 +7,9 @@
 
 import Foundation
 import UIKit
-import NeonSDK
 
-enum NeonLongOnboardingPageType{
+
+public enum NeonLongOnboardingPageType{
     case singleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String)
     case multipleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String)
     case information(title : String, subtitle: String, description : String)

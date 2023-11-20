@@ -210,9 +210,19 @@ public class FirestoreManager{
                                 }
                             }
                         }else{
+                            if fetchedDocumentCount == querySnapshot!.documents.count{
+                                if let isLastFetched{
+                                    isLastFetched()
+                                }
+                            }
                             print("Fetched object is not encodable")
                         }
                     } catch {
+                        if fetchedDocumentCount == querySnapshot!.documents.count{
+                            if let isLastFetched{
+                                isLastFetched()
+                            }
+                        }
                         print("Error decoding city: \(error)")
                     }
                 }
@@ -250,9 +260,19 @@ public class FirestoreManager{
                                 }
                             }
                         }else{
+                            if fetchedDocumentCount == querySnapshot!.documents.count{
+                                if let isLastFetched{
+                                    isLastFetched()
+                                }
+                            }
                             print("Fetched object is not encodable")
                         }
                     } catch {
+                        if fetchedDocumentCount == querySnapshot!.documents.count{
+                            if let isLastFetched{
+                                isLastFetched()
+                            }
+                        }
                         print("Error decoding city: \(error)")
                     }
                 }

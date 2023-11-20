@@ -14,7 +14,7 @@ protocol NeonLongOnboardingManagerProtocol {
     func onboardingCompleted()
 }
 @available(iOS 13.0, *)
-class NeonLongOnboardingManager{
+public class NeonLongOnboardingManager{
     
     static var delegate : NeonLongOnboardingManagerProtocol?
     
@@ -54,7 +54,7 @@ class NeonLongOnboardingManager{
     public static func configureImages(selectedOptionImage : UIImage = NeonSymbols.checkmark_seal_fill){
         NeonLongOnboardingConstants.selectedOptionImage = selectedOptionImage
     }
-    static func moveToNextPage(controller : UIViewController){
+    public static func moveToNextPage(controller : UIViewController){
         
         if let currentPage = NeonLongOnboardingConstants.currentPage, let currentSection = NeonLongOnboardingConstants.currentSection{
             if currentSection.pages.count > currentPage.indexInSection + 1{
@@ -83,7 +83,7 @@ class NeonLongOnboardingManager{
       
     }
     
-    static func moveToPreviousPage(controller : UIViewController) {
+    public static func moveToPreviousPage(controller : UIViewController) {
         if let currentPage = NeonLongOnboardingConstants.currentPage, let currentSection = NeonLongOnboardingConstants.currentSection {
             if currentPage.indexInSection > 0 {
                 // There are previous pages in the current section
@@ -107,7 +107,7 @@ class NeonLongOnboardingManager{
         }
     }
 
-    static func saveResponse(question : String, responses : [Any]){
+    public static func saveResponse(question : String, responses : [Any]){
         
         let newResponse = NeonLongOnboardingResponse(question: question, responses: responses)
         if let index = NeonLongOnboardingConstants.responses.firstIndex(where: {$0.question == newResponse.question}){

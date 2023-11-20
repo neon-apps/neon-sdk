@@ -7,9 +7,9 @@
 
 import Foundation
 
-class NeonLongOnboardingGreatFitBenefit{
+public class NeonLongOnboardingGreatFitBenefit{
     
-    internal init(title: String = String(), emoji: String = String()) {
+    public init(title: String = String(), emoji: String = String()) {
         self.title = title
         self.emoji = emoji
     }

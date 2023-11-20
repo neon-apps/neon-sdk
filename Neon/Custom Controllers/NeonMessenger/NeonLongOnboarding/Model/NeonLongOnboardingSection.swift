@@ -27,7 +27,7 @@ public class NeonLongOnboardingSection{
         NeonLongOnboardingSection.lastSectionIndex = self.index
     }
     
-    func addPage(type : NeonLongOnboardingPageType){
+    public func addPage(type : NeonLongOnboardingPageType){
         let newPage = NeonLongOnboardingPage(type: type)
         self.pages.append(newPage)
         checkPageCount()

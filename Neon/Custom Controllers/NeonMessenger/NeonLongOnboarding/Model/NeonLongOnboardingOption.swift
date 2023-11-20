@@ -8,9 +8,9 @@
 import Foundation
 
 
-class NeonLongOnboardingOption{
+public class NeonLongOnboardingOption{
     
-    internal init(title: String, emoji: String) {
+    public init(title: String, emoji: String) {
         self.title = title
         self.emoji = emoji
     }
