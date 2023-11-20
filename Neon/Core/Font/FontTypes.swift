@@ -51,4 +51,11 @@ let arrFonts = [
     NeonFont(fileName: "Poppins-Light", fileExtension: "ttf", postScriptName: "Poppins-Light"),
     NeonFont(fileName: "Poppins-Black", fileExtension: "ttf", postScriptName: "Poppins-Black"),
     
+    NeonFont(fileName: "Montserrat-Regular", fileExtension: "ttf", postScriptName: "Montserrat-Regular"),
+    NeonFont(fileName: "Montserrat-Medium", fileExtension: "ttf", postScriptName: "Montserrat-Medium"),
+    NeonFont(fileName: "Montserrat-SemiBold", fileExtension: "ttf", postScriptName: "Montserrat-SemiBold"),
+    NeonFont(fileName: "Montserrat-Bold", fileExtension: "ttf", postScriptName: "Montserrat-Bold"),
+    NeonFont(fileName: "Montserrat-Light", fileExtension: "ttf", postScriptName: "Montserrat-Light"),
+    NeonFont(fileName: "Montserrat-Black", fileExtension: "ttf", postScriptName: "Montserrat-Black"),
+    
 ]
