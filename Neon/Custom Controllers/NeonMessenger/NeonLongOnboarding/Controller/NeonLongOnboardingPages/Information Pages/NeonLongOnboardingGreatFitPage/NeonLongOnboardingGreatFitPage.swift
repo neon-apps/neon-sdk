@@ -87,7 +87,6 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
         }
         
         //Bottom Right
-        benefitView4 = NeonLongOnboardingGreatFitBenefitView()
         view.addSubview(benefitView4!)
         benefitView4!.rotate(degree: -30)
         benefitView4!.snp.makeConstraints { make in
