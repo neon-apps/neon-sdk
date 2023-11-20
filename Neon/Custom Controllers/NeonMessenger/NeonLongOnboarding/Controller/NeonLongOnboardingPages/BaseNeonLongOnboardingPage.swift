@@ -55,7 +55,7 @@ class BaseNeonLongOnboardingPage: UIViewController {
         view.addSubview(btnContinue)
         btnContinue.layer.cornerRadius = 32.5
         btnContinue.layer.masksToBounds = true
-        btnContinue.setTitle("Next", for: .normal)
+        btnContinue.setTitle(NeonLongOnboardingConstants.ctaButtonTitle, for: .normal)
         btnContinue.titleLabel?.font = Font.custom(size: 18, fontWeight: .SemiBold)
         btnContinue.addTarget(self, action: #selector(btnContinueClicked), for: .touchUpInside)
         btnContinue.snp.makeConstraints { make in
