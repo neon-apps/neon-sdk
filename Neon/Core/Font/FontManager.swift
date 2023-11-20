@@ -26,6 +26,7 @@ public class FontManager{
         case SFProDisplay
         case SFProText
         case Inter
+        case Montserrat
         case None
     }
      var choosenFontType = FontType.None
