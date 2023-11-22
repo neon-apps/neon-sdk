@@ -88,6 +88,14 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         }
         
         
+        btnContinue.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(15)
+            make.right.equalToSuperview().inset(20)
+            make.height.equalTo(65)
+            make.left.equalTo(btnNo.snp.right).offset(20)
+        }
+        
+        
         btnContinue.setTitle("Yes", for: .normal)
  
         enableButton()
