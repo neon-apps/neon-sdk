@@ -77,7 +77,7 @@ public class NeonLongOnboardingManager{
                     controller.present(destinationVC: NeonLongOnboardingConstants.currentPage!.controller, slideDirection: .right)
                 }else{
                     // Onboarding completed
-                    delegate?.onboardingCompleted(controller: self)
+                    delegate?.onboardingCompleted(controller: controller)
                 }
             }
         }
