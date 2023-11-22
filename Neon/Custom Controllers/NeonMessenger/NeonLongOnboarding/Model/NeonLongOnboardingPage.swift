@@ -12,7 +12,7 @@ import UIKit
 public class NeonLongOnboardingPage{
     
     
-    var controller = UIViewController()
+   
     var id = UUID().uuidString
     var type : NeonLongOnboardingPageType
     var isQuestion = Bool()
@@ -55,62 +55,66 @@ public class NeonLongOnboardingPage{
         }
     }
     
-    internal init(type: NeonLongOnboardingPageType) {
-        self.type = type
-        switch type {
+    var controller : UIViewController{
+        switch self.type {
         case .singleSelection(_,_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingSingleSelectionPage()
+            return NeonLongOnboardingSingleSelectionPage()
         case .multipleSelection(_,_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingMultipleSelectionPage()
+            return NeonLongOnboardingMultipleSelectionPage()
         case .information(_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingInformationPage()
+            return NeonLongOnboardingInformationPage()
         case .beforeAfter(_,_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingBeforeAfterPage()
+            return NeonLongOnboardingBeforeAfterPage()
         case .name(_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingNamePage()
+            return NeonLongOnboardingNamePage()
         case .number(_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingNumberPage()
+            return NeonLongOnboardingNumberPage()
         case .greatFit(_,_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingGreatFitPage()
+            return NeonLongOnboardingGreatFitPage()
         case .customPlan(_,_,_,_,_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingCustomPlanPage()
+            return NeonLongOnboardingCustomPlanPage()
         case .contract(_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingContractPage()
+            return NeonLongOnboardingContractPage()
         case .letsGo(_,_):
             isQuestion = false
-            controller = NeonLongOnboardingLetsGoPage()
+            return NeonLongOnboardingLetsGoPage()
         case .statement(_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingStatementPage()
+            return NeonLongOnboardingStatementPage()
         case .slider(_,_,_,_,_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingSliderPage()
+            return NeonLongOnboardingSliderPage()
         case .text(_,_,_):
             isQuestion = true
-            controller = NeonLongOnboardingTextPage()
+            return NeonLongOnboardingTextPage()
         case .sayGoodbye(_,_):
             isQuestion = false
-            controller = NeonLongOnboardingSayGoodbyePage()
+            return NeonLongOnboardingSayGoodbyePage()
         case .custom(let controller, let isQuesiton):
             self.isQuestion = isQuesiton
-            self.controller = controller
+            return controller
         case .analyzing(_,_,_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingAnalyzingPage()
+            return NeonLongOnboardingAnalyzingPage()
         case .testimonial(_,_,_,_,_):
             isQuestion = false
-            controller = NeonLongOnboardingTestimonialPage()
+            return NeonLongOnboardingTestimonialPage()
         }
         
+    }
+    
+    
+    internal init(type: NeonLongOnboardingPageType) {
+        self.type = type        
     }
 }
 
