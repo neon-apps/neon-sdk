@@ -58,55 +58,39 @@ public class NeonLongOnboardingPage{
     var controller : UIViewController{
         switch self.type {
         case .singleSelection(_,_,_,_):
-            isQuestion = true
             return NeonLongOnboardingSingleSelectionPage()
         case .multipleSelection(_,_,_,_):
-            isQuestion = true
             return NeonLongOnboardingMultipleSelectionPage()
         case .information(_,_,_):
-            isQuestion = false
             return NeonLongOnboardingInformationPage()
         case .beforeAfter(_,_,_,_):
-            isQuestion = false
             return NeonLongOnboardingBeforeAfterPage()
         case .name(_,_,_):
-            isQuestion = true
             return NeonLongOnboardingNamePage()
         case .number(_,_,_):
-            isQuestion = true
             return NeonLongOnboardingNumberPage()
         case .greatFit(_,_,_,_):
-            isQuestion = false
             return NeonLongOnboardingGreatFitPage()
         case .customPlan(_,_,_,_,_,_,_):
-            isQuestion = false
             return NeonLongOnboardingCustomPlanPage()
         case .contract(_,_,_):
-            isQuestion = false
             return NeonLongOnboardingContractPage()
         case .letsGo(_,_):
-            isQuestion = false
             return NeonLongOnboardingLetsGoPage()
         case .statement(_,_,_):
-            isQuestion = false
             return NeonLongOnboardingStatementPage()
         case .slider(_,_,_,_,_,_,_):
-            isQuestion = true
             return NeonLongOnboardingSliderPage()
         case .text(_,_,_):
-            isQuestion = true
             return NeonLongOnboardingTextPage()
         case .sayGoodbye(_,_):
-            isQuestion = false
             return NeonLongOnboardingSayGoodbyePage()
         case .custom(let controller, let isQuesiton):
             self.isQuestion = isQuesiton
             return controller
         case .analyzing(_,_,_,_,_):
-            isQuestion = false
             return NeonLongOnboardingAnalyzingPage()
         case .testimonial(_,_,_,_,_):
-            isQuestion = false
             return NeonLongOnboardingTestimonialPage()
         }
         
@@ -114,7 +98,44 @@ public class NeonLongOnboardingPage{
     
     
     internal init(type: NeonLongOnboardingPageType) {
-        self.type = type        
+        self.type = type
+        
+        switch type {
+        case .singleSelection(_,_,_,_):
+            isQuestion = true
+        case .multipleSelection(_,_,_,_):
+            isQuestion = true
+        case .information(_,_,_):
+            isQuestion = false
+        case .beforeAfter(_,_,_,_):
+            isQuestion = false
+        case .name(_,_,_):
+            isQuestion = true
+        case .number(_,_,_):
+            isQuestion = true
+        case .greatFit(_,_,_,_):
+            isQuestion = false
+        case .customPlan(_,_,_,_,_,_,_):
+            isQuestion = false
+        case .contract(_,_,_):
+            isQuestion = false
+        case .letsGo(_,_):
+            isQuestion = false
+        case .statement(_,_,_):
+            isQuestion = false
+        case .slider(_,_,_,_,_,_,_):
+            isQuestion = true
+        case .text(_,_,_):
+            isQuestion = true
+        case .sayGoodbye(_,_):
+            isQuestion = false
+        case .custom(let controller, let isQuesiton):
+            self.isQuestion = isQuesiton
+        case .analyzing(_,_,_,_,_):
+            isQuestion = false
+        case .testimonial(_,_,_,_,_):
+            isQuestion = false
+        }
     }
 }
 
