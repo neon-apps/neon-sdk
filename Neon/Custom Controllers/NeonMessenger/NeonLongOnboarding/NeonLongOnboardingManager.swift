@@ -11,7 +11,7 @@ import NeonSDK
 
 protocol NeonLongOnboardingManagerProtocol {
     func responseReceived(question : String, response : [Any], responseType : NeonLongOnboardingResponseType)
-    func onboardingCompleted()
+    func onboardingCompleted(controller : UIViewController)
 }
 @available(iOS 13.0, *)
 public class NeonLongOnboardingManager{
@@ -77,7 +77,7 @@ public class NeonLongOnboardingManager{
                     controller.present(destinationVC: NeonLongOnboardingConstants.currentPage!.controller, slideDirection: .right)
                 }else{
                     // Onboarding completed
-                    delegate?.onboardingCompleted()
+                    delegate?.onboardingCompleted(controller: self)
                 }
             }
         }
