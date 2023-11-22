@@ -10,8 +10,8 @@ import UIKit
 
 
 public enum NeonLongOnboardingPageType{
-    case singleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String)
-    case multipleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String)
+    case singleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String? = nil)
+    case multipleSelection(question : String, subtitle: String?, options : [NeonLongOnboardingOption], whyDoWeAsk : String? = nil)
     case information(title : String, subtitle: String, description : String)
     case name(title : String, subtitle: String, description : String)
     case number(question : String, subtitle: String, digitCount : Int)

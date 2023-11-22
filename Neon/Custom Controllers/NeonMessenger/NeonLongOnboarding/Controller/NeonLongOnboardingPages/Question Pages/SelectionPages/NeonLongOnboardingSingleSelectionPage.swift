@@ -46,6 +46,9 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
     override func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
         case .singleSelection(let question, let subtitle, _, let whyDoWeAsk):
+            if whyDoWeAsk == nil{
+                whyWeAskLabel.isHidden = true
+            }
             whyDoWeAskDescription = whyDoWeAsk.changeUsername()
             titleLabel.text = question.changeUsername()
             if subtitle != nil{

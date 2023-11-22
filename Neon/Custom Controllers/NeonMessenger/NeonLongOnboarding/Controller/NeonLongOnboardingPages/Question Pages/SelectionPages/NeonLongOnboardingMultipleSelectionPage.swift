@@ -59,6 +59,9 @@ class NeonLongOnboardingMultipleSelectionPage: BaseNeonLongOnboardingSelectionPa
     override func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
         case .multipleSelection(let question, let subtitle, _, let whyDoWeAsk):
+            if whyDoWeAsk == nil{
+                whyWeAskLabel.isHidden = true
+            }
             whyDoWeAskDescription = whyDoWeAsk.changeUsername()
             titleLabel.text = question.changeUsername()
             if subtitle != nil{
