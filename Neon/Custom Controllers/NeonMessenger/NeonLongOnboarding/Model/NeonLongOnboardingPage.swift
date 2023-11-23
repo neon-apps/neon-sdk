@@ -75,7 +75,7 @@ public class NeonLongOnboardingPage{
             return NeonLongOnboardingCustomPlanPage()
         case .contract(_,_,_):
             return NeonLongOnboardingContractPage()
-        case .letsGo(_,_):
+        case .letsGo(_,_,_):
             return NeonLongOnboardingLetsGoPage()
         case .statement(_,_,_):
             return NeonLongOnboardingStatementPage()
@@ -119,7 +119,7 @@ public class NeonLongOnboardingPage{
             isQuestion = false
         case .contract(_,_,_):
             isQuestion = false
-        case .letsGo(_,_):
+        case .letsGo(_,_,_):
             isQuestion = false
         case .statement(_,_,_):
             isQuestion = false

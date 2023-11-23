@@ -14,7 +14,7 @@ class NeonLongOnboardingLetsGoPage: BaseNeonLongOnboardingPage{
   
     let imageView = UIImageView()
     let btnNo = UIButton()
-    
+    var isNoButtonHidden = false
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -47,7 +47,7 @@ class NeonLongOnboardingLetsGoPage: BaseNeonLongOnboardingPage{
       
         
         
-        view.addSubview(btnNo)
+       
         btnNo.layer.cornerRadius = 32.5
         btnNo.layer.masksToBounds = true
         btnNo.setTitle("No", for: .normal)
@@ -56,20 +56,24 @@ class NeonLongOnboardingLetsGoPage: BaseNeonLongOnboardingPage{
         btnNo.layer.borderWidth = 2
         btnNo.setTitleColor(NeonLongOnboardingConstants.textColor, for: .normal)
         btnNo.addTarget(self, action: #selector(btnContinueClicked), for: .touchUpInside)
-        btnNo.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(15)
-            make.left.equalToSuperview().inset(20)
-            make.height.equalTo(65)
-            make.width.equalTo(130)
+    
+        if !isNoButtonHidden{
+            view.addSubview(btnNo)
+            btnNo.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(15)
+                make.left.equalToSuperview().inset(20)
+                make.height.equalTo(65)
+                make.width.equalTo(130)
+            }
+            btnContinue.snp.remakeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(15)
+                make.right.equalToSuperview().inset(20)
+                make.height.equalTo(65)
+                make.left.equalTo(btnNo.snp.right).offset(20)
+            }
         }
         
-        
-        btnContinue.snp.remakeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(15)
-            make.right.equalToSuperview().inset(20)
-            make.height.equalTo(65)
-            make.left.equalTo(btnNo.snp.right).offset(20)
-        }
+       
         
         btnContinue.setTitle("Sure! Let's Go!", for: .normal)
    
@@ -83,9 +87,10 @@ class NeonLongOnboardingLetsGoPage: BaseNeonLongOnboardingPage{
 
     func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .letsGo(let question, let image):
+        case .letsGo(let question, let image, let hideNoButton):
             titleLabel.text = question.changeUsername()
             imageView.image = image
+            isNoButtonHidden = hideNoButton
         break
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")

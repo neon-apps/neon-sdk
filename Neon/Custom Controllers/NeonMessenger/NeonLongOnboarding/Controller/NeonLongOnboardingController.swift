@@ -47,6 +47,8 @@ open class NeonLongOnboardingController: UIViewController, NeonLongOnboardingMan
   
   
     open func responseReceived(question : String, response : [Any], responseType : NeonLongOnboardingResponseType){}
+    
+    open func pagePresented(page : UIViewController){}
 
     open func onboardingCompleted(controller : UIViewController) {
         

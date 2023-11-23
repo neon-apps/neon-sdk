@@ -12,6 +12,7 @@ import NeonSDK
 protocol NeonLongOnboardingManagerProtocol {
     func responseReceived(question : String, response : [Any], responseType : NeonLongOnboardingResponseType)
     func onboardingCompleted(controller : UIViewController)
+    func pagePresented(page : UIViewController)
 }
 @available(iOS 13.0, *)
 public class NeonLongOnboardingManager{
@@ -66,6 +67,7 @@ public class NeonLongOnboardingManager{
                 NeonLongOnboardingConstants.currentPage = currentSection.pages[currentPage.indexInSection + 1]
                 
                 controller.present(destinationVC: NeonLongOnboardingConstants.currentPage!.controller, slideDirection: .right)
+                delegate?.pagePresented(page: NeonLongOnboardingConstants.currentPage!.controller)
             }else{
                 // Move to new section if there is one
                 
@@ -75,6 +77,7 @@ public class NeonLongOnboardingManager{
                     NeonLongOnboardingConstants.currentPage = NeonLongOnboardingConstants.currentSection!.pages.first
                     
                     controller.present(destinationVC: NeonLongOnboardingConstants.currentPage!.controller, slideDirection: .right)
+                    delegate?.pagePresented(page: NeonLongOnboardingConstants.currentPage!.controller)
                 }else{
                     // Onboarding completed
                     delegate?.onboardingCompleted(controller: controller)

@@ -11,7 +11,7 @@ import NeonSDK
 
 
 @available(iOS 13.0, *)
-class BaseNeonLongOnboardingPage: UIViewController {
+public class BaseNeonLongOnboardingPage: UIViewController {
     
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
