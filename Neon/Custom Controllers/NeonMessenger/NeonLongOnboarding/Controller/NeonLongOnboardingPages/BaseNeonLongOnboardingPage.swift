@@ -23,14 +23,14 @@ public class BaseNeonLongOnboardingPage: UIViewController {
     var progressView : NeonLongOnboardingProgressView?
     let backButton = UIButton()
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         createUI()
         
     }
     
-    override func viewDidLayoutSubviews() {
+    override public func viewDidLayoutSubviews() {
         animateViews()
     }
     func createUI(){
