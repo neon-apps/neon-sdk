@@ -58,6 +58,7 @@ class NeonChatController: UIViewController {
         let imgUser = UIImageView()
         imgUser.setImage(urlString: choosenUser.photoURL)
         imgUser.layer.cornerRadius = 25
+        imgUser.contentMode = .scaleAspectFill
         imgUser.layer.masksToBounds = true
         viewHeader.addSubview(imgUser)
         imgUser.snp.makeConstraints { make in

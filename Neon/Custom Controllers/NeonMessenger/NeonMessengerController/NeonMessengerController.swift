@@ -129,7 +129,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
     
             
         
-        lblNoMessages.text = "You don't have any\nmessages yet!"
+        lblNoMessages.text = NeonMessengerConstants.noMessagesText
             lblNoMessages.numberOfLines = 2
         lblNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
         lblNoMessages.textAlignment = .center
@@ -137,6 +137,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
         view.addSubview(lblNoMessages)
         lblNoMessages.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            make.left.right.equalToSuperview().inset(20)
         }
         lblNoMessages.sizeToFit()
         

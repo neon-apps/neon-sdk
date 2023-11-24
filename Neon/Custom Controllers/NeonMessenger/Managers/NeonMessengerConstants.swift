@@ -32,10 +32,10 @@ struct NeonMessengerConstants {
     static var inputFieldTextColor = UIColor.white
     static var connectionMessageBackgroundColor = UIColor.white
     static var currentUserMessageBackgroundColor = UIColor.white
-    
+  
     // Content
     
-    
+    static var noMessagesText = String()
     static var messengerTitle = String()
     static var searchfieldPlaceholder = String()
     static var inputFieldPlaceholder = String()
