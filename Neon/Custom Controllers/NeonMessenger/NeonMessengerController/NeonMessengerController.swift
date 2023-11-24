@@ -17,7 +17,8 @@ public protocol NeonMessengerDelegate: AnyObject {
 @available(iOS 13.0, *)
 open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
 
-    fileprivate let lblNoMessages = UILabel()
+    fileprivate let titleNoMessages = UILabel()
+    fileprivate let subtitleNoMessages = UILabel()
     fileprivate let chatsTableView = ChatsTableView()
     fileprivate let connectionsCollectionView = ConnectionsCollectionView()
     fileprivate var filteredConnections = NeonMessengerManager.arrConnections
@@ -129,17 +130,29 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
     
             
         
-        lblNoMessages.text = NeonMessengerConstants.noMessagesText
-            lblNoMessages.numberOfLines = 0
-        lblNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
-        lblNoMessages.textAlignment = .center
-        lblNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
-        view.addSubview(lblNoMessages)
-        lblNoMessages.snp.makeConstraints { make in
+        titleNoMessages.text = NeonMessengerConstants.noMessagesTitle
+        titleNoMessages.numberOfLines = 0
+        titleNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
+        titleNoMessages.textAlignment = .center
+        titleNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
+        view.addSubview(titleNoMessages)
+        titleNoMessages.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview().inset(20)
         }
-        lblNoMessages.sizeToFit()
+        titleNoMessages.sizeToFit()
+        
+        subtitleNoMessages.text = NeonMessengerConstants.noMessagesSubtitle
+        subtitleNoMessages.numberOfLines = 0
+        subtitleNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
+        subtitleNoMessages.textAlignment = .center
+        subtitleNoMessages.font = Font.custom(size: 12, fontWeight: .Medium)
+        view.addSubview(subtitleNoMessages)
+        subtitleNoMessages.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(titleNoMessages.snp.bottom).offset(15)
+        }
+        subtitleNoMessages.sizeToFit()
         
         }
         
@@ -148,9 +161,11 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
     
     func adjustNoMessagesViewAppearance(){
         if NeonMessengerManager.arrConnections.filter({$0.lastMessage != nil}).isEmpty{
-            lblNoMessages.isHidden = false
+            titleNoMessages.isHidden = false
+            subtitleNoMessages.isHidden = false
         }else{
-            lblNoMessages.isHidden = true
+            titleNoMessages.isHidden = true
+            subtitleNoMessages.isHidden = true
         }
     }
     

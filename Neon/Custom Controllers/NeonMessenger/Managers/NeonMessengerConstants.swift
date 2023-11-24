@@ -35,7 +35,8 @@ struct NeonMessengerConstants {
   
     // Content
     
-    static var noMessagesText = String()
+    static var noMessagesTitle = String()
+    static var noMessagesSubtitle = String()
     static var messengerTitle = String()
     static var searchfieldPlaceholder = String()
     static var inputFieldPlaceholder = String()

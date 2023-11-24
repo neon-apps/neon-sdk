@@ -64,11 +64,13 @@ public class NeonMessenger{
     public static func customizeContent(messengerTitle : String,
                                  searchfieldPlaceholder : String,
                                  inputFieldPlaceholder : String,
-                                        noMessagesText : String){
+                                        noMessagesSubtitle : String,
+                                        noMessagesTitle : String){
         NeonMessengerConstants.messengerTitle = messengerTitle
         NeonMessengerConstants.searchfieldPlaceholder = searchfieldPlaceholder
         NeonMessengerConstants.inputFieldPlaceholder = inputFieldPlaceholder
-        NeonMessengerConstants.noMessagesText = noMessagesText
+        NeonMessengerConstants.noMessagesSubtitle = noMessagesSubtitle
+        NeonMessengerConstants.noMessagesTitle = noMessagesTitle
         NeonMessengerConstants.didContentsConfigured = true
 
     }
