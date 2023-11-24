@@ -130,7 +130,7 @@ open class NeonMessengerController: UIViewController, NeonMessengerDelegate {
             
         
         lblNoMessages.text = NeonMessengerConstants.noMessagesText
-            lblNoMessages.numberOfLines = 2
+            lblNoMessages.numberOfLines = 0
         lblNoMessages.textColor = NeonMessengerConstants.secondaryTextColor
         lblNoMessages.textAlignment = .center
         lblNoMessages.font = Font.custom(size: 16, fontWeight: .SemiBold)
