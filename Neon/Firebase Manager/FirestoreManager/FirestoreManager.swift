@@ -34,7 +34,7 @@ public class FirestoreManager{
             try referance.setData(from: object)
             addTimestamp(referance: referance)
         } catch let error {
-            print("Error writing city to Firestore: \(error)")
+            print("Error writing object to Firestore: \(error)")
         }
     }
     
@@ -62,7 +62,7 @@ public class FirestoreManager{
     // Get Operations
     
     
-    public static func getDocument(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> ()){
+    public static func getDocument(path : [FirestoreReferance], completion : @escaping (_ documentID : String, _ documentData : [String : Any]) -> (), isDocumentNotExist :  (() -> ())? = nil){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         referance.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -75,6 +75,10 @@ public class FirestoreManager{
                 completion(documentID, documentData)
             } else {
                 print("Document does not exist")
+                if let isDocumentNotExist{
+                    isDocumentNotExist()
+                }
+               
             }
         }
         
@@ -223,7 +227,7 @@ public class FirestoreManager{
                                 isLastFetched()
                             }
                         }
-                        print("Error decoding city: \(error)")
+                        print("Error decoding object: \(error)")
                     }
                 }
             }
@@ -273,7 +277,7 @@ public class FirestoreManager{
                                 isLastFetched()
                             }
                         }
-                        print("Error decoding city: \(error)")
+                        print("Error decoding object: \(error)")
                     }
                 }
             }
