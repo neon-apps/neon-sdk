@@ -8,9 +8,9 @@
 import Foundation
 
 
-class NeonCurrencyManager{
+public class NeonCurrencyManager{
     
-    static func getCurrencySymbol(for currencyCode: String) -> String? {
+    public static func getCurrencySymbol(for currencyCode: String) -> String? {
         let currencySymbols: [String: String] = [
             "AED": "د.إ", // United Arab Emirates Dirham
             "AFN": "؋",  // Afghanistan Afghani
