@@ -28,13 +28,14 @@ enum GradientDirection {
 enum GradientStyle {
     case background
     case border(width: CGFloat)
+    case text
 }
 
 
 extension UIView {
     func applyGradient(colors: [UIColor], direction: GradientDirection, style: GradientStyle) {
         
-        
+       
         self.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
         
         let gradientLayer = CAGradientLayer()
@@ -49,6 +50,7 @@ extension UIView {
         case .vertical:
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+
         }
         
         switch style {
@@ -62,8 +64,19 @@ extension UIView {
             borderLayer.strokeColor = UIColor.white.cgColor // Use any color
             gradientLayer.mask = borderLayer
             self.layer.addSublayer(gradientLayer)
+        case .text :
+            if let label = self as? UILabel{
+                let renderer = UIGraphicsImageRenderer(bounds: bounds)
+                let gradient = renderer.image { ctx in
+                    gradientLayer.render(in: ctx.cgContext)
+                }
+                label.textColor = UIColor(patternImage: gradient)
+            }else{
+                fatalError("applyGradient function only works with UILabel when you use with text style.")
+            }
         }
         
         
     }
 }
+
