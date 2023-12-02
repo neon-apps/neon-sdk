@@ -20,12 +20,12 @@ extension UIView{
     
 }
 
-enum GradientDirection {
+public enum GradientDirection {
     case horizontal
     case vertical
 }
 
-enum GradientStyle {
+public enum GradientStyle {
     case background
     case border(width: CGFloat)
     case text
@@ -33,7 +33,7 @@ enum GradientStyle {
 
 
 extension UIView {
-    func applyGradient(colors: [UIColor], direction: GradientDirection, style: GradientStyle) {
+    public func applyGradient(colors: [UIColor], direction: GradientDirection, style: GradientStyle) {
         
        
         self.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
