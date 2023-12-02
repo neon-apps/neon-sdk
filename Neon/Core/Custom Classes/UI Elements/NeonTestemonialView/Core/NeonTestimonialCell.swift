@@ -14,7 +14,7 @@ class NeonTestimonialCell: NeonCollectionViewCell<NeonTestimonial> {
     public let testimonialLabel = UILabel()
     public let imgStars = UIImageView()
     public let authorLabel = UILabel()
-    let stackView = UIStackView()
+    public let stackView = UIStackView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
