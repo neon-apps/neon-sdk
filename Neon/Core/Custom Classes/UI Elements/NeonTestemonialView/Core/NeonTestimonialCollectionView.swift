@@ -32,10 +32,10 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
          NeonTestimonial.arrTestimonials = []
         self.init(
             objects: NeonTestimonial.arrTestimonials,
-            leftPadding: 25,
-            rightPadding: 25,
-            horizontalItemSpacing: 10,
-            widthForItem: UIScreen.main.bounds.width - 50
+            leftPadding: 0,
+            rightPadding: 0,
+            horizontalItemSpacing: 0,
+            widthForItem: 0
         )
         self.didSelect = didSelect
         startAnimation()
@@ -45,9 +45,10 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     private func updateUI(){
         backgroundColor = .clear
         showsHorizontalScrollIndicator = false
-      
+        isScrollEnabled = false
     }
     private func startAnimation(){
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.scrollToNextCell()
         })
@@ -71,15 +72,24 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! NeonTestimonialCell
-        cell.backgroundColor = testimonialbackgroundColor
+        cell.stackView.backgroundColor = testimonialbackgroundColor
         cell.authorLabel.textColor = testimonialTextColor
         cell.titleLabel.textColor = testimonialTextColor
         cell.testimonialLabel.textColor = testimonialTextColor
-        cell.layer.cornerRadius = CGFloat(testimonialbackgroundCornerRadious)
+        cell.stackView.layer.cornerRadius = CGFloat(testimonialbackgroundCornerRadious)
+        cell.stackView.layer.masksToBounds =  true
+        cell.backgroundColor = .clear
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
     
+        let collectionViewHeight = collectionView.bounds.height
+        let collectionViewWidth = collectionView.bounds.width
+        return CGSize(width: collectionViewWidth, height: collectionViewHeight)
+
+    }
 }
 
 #endif

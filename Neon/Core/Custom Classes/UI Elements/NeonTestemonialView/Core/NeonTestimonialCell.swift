@@ -8,14 +8,13 @@
 import Foundation
 import UIKit
 
-
 class NeonTestimonialCell: NeonCollectionViewCell<NeonTestimonial> {
     
     public let titleLabel = UILabel()
     public let testimonialLabel = UILabel()
     public let imgStars = UIImageView()
     public let authorLabel = UILabel()
-   
+    let stackView = UIStackView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -37,12 +36,13 @@ class NeonTestimonialCell: NeonCollectionViewCell<NeonTestimonial> {
         
         layer.masksToBounds = true
         
-        let stackView = UIStackView()
+       
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         contentView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.bottom.top.equalToSuperview()
+            make.left.right.equalToSuperview().inset(10)
         }
         
         let topSpacer = UIView() // Add top spacer view

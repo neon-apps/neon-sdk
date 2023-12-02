@@ -26,7 +26,7 @@ public class Font {
              fontWeightStr = fontWeightStr.capitalized
          }
 #if !os(xrOS)
-        return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size * UIScreen.main.bounds.height * 0.00115)!
+        return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
 #else
         return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
 #endif
