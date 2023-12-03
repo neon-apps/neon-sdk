@@ -24,7 +24,7 @@ open class BaseNeonLongPaywallSectionView: UIView {
     }
     
 
-    public func configureSection(type : NeonLongPaywallSectionType) {
+    open func configureSection(type : NeonLongPaywallSectionType) {
         
     }
     
