@@ -162,7 +162,7 @@ public class AdaptyManager {
     
     
     
-    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
         guard let package = AdaptyManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
@@ -172,15 +172,24 @@ public class AdaptyManager {
             LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(purchaseInfo):
-                if purchaseInfo.profile.accessLevels[self.accessLevel]?.isActive ?? false {
-                    Neon.isUserPremium = true
-                    UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                
+                if NeonPaywallManager.isSubscription(product: package.skProduct){
+                    if purchaseInfo.profile.accessLevels[self.accessLevel]?.isActive ?? false {
+                        Neon.isUserPremium = true
+                        UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                        guard let completionSuccess else { return }
+                        completionSuccess()
+                    } else {
+                        guard let completionFailure else { return }
+                        completionFailure()
+                    }
+                    
+                }else{
                     guard let completionSuccess else { return }
                     completionSuccess()
-                } else {
-                    guard let completionFailure else { return }
-                    completionFailure()
+                    break
                 }
+          
                 break
                 // successful purchase
             case let .failure(error):
@@ -193,29 +202,7 @@ public class AdaptyManager {
         
     }
     
-    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
-        guard let package = AdaptyManager.selectedPackage else {
-            LottieManager.removeFullScreenLottie()
-            return }
-
-        Adapty.makePurchase(product: package) { result in
-            LottieManager.removeFullScreenLottie()
-            switch result {
-            case let .success(purchaseInfo):
-                guard let completionSuccess else { return }
-                completionSuccess()
-                break
-                // successful purchase
-            case let .failure(error):
-                guard let completionFailure else { return }
-                completionFailure()
-                break
-                // handle the error
-            }
-        }
-        
-    }
+ 
 
     
     public static func restorePurchases(vc: UIViewController, animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil, showAlerts : Bool = true, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {

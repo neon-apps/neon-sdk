@@ -86,27 +86,7 @@ public class RevenueCatManager {
     
     
     
-    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
-        LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
-        guard let package = RevenueCatManager.selectedPackage else {
-            LottieManager.removeFullScreenLottie()
-            return }
-        
-        Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, _, _ in
-            LottieManager.removeFullScreenLottie()
-            if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
-                Neon.isUserPremium = true
-                UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
-                guard let completionSuccess else { return }
-                completionSuccess()
-            } else {
-                guard let completionFailure else { return }
-                completionFailure()
-            }
-        }
-    }
-    
-    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor = UIColor.clear, animationWidth : Int? = nil, completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+    public static func purchase(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         LottieManager.showFullScreenLottie(animation: animation, width : animationWidth, color: animationColor)
         guard let package = RevenueCatManager.selectedPackage else {
             LottieManager.removeFullScreenLottie()
@@ -114,15 +94,35 @@ public class RevenueCatManager {
         
         Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, error, _ in
             LottieManager.removeFullScreenLottie()
-            if error == nil{
-                guard let completionSuccess else { return }
-                completionSuccess()
-            } else {
-                guard let completionFailure else { return }
-                completionFailure()
+            
+            if NeonPaywallManager.isSubscription(product: package.storeProduct.sk1Product){
+                
+                
+                if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
+                    Neon.isUserPremium = true
+                    UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                    guard let completionSuccess else { return }
+                    completionSuccess()
+                } else {
+                    guard let completionFailure else { return }
+                    completionFailure()
+                }
+                
+            }else{
+                if error == nil{
+                    guard let completionSuccess else { return }
+                    completionSuccess()
+                } else {
+                    guard let completionFailure else { return }
+                    completionFailure()
+                }
             }
+            
+            
+            
         }
     }
+    
     
     
     
