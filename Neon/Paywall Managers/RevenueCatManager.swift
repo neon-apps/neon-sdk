@@ -22,16 +22,15 @@ public class RevenueCatManager {
     public static var delegate: RevenueCatManagerDelegate?
     public static var selectedPackage : Package?
     
-    public static func configure(withAPIKey : String,
-                            products : [String]) {
+    public static func configure(withAPIKey : String) {
         Purchases.configure(withAPIKey: withAPIKey)
-        fetchPackages(products: products)
+        fetchPackages()
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
     }
     
-    internal static func fetchPackages(products : [String]) {
-        Purchases.shared.getOfferings { [self] offerings, _ in
+    internal static func fetchPackages() {
+        Purchases.shared.getOfferings { offerings, _ in
 
             if let offerings = offerings {
                 let offer = offerings.current
