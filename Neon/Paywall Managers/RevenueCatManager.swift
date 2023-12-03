@@ -21,8 +21,10 @@ public class RevenueCatManager {
     public static var packages = [Package]()
     public static var delegate: RevenueCatManagerDelegate?
     public static var selectedPackage : Package?
+    private static var accessLevel = String()
     
-    public static func configure(withAPIKey : String) {
+    public static func configure(withAPIKey : String, accessLevel : String = "pro") {
+        self.accessLevel = accessLevel
         Purchases.configure(withAPIKey: withAPIKey)
         fetchPackages()
         verifySubscription(completionSuccess: nil, completionFailure: nil)
@@ -129,7 +131,7 @@ public class RevenueCatManager {
 
         Purchases.shared.restorePurchases {  purchaserInfo, _ in
             LottieManager.removeFullScreenLottie()
-            if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
+            if purchaserInfo?.entitlements.all[accessLevel]?.isActive == true {
                 Neon.isUserPremium = true
                 UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                 
@@ -164,7 +166,7 @@ public class RevenueCatManager {
     
     public static func verifySubscription(completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         Purchases.shared.getCustomerInfo { purchaserInfo, _ in
-            if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
+            if purchaserInfo?.entitlements.all[accessLevel]?.isActive == true {
                 Neon.isUserPremium = true
                 UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                 guard let completionSuccess else { return }
