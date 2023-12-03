@@ -187,6 +187,9 @@ public class RevenueCatManager {
             RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
         }
     }
+    
+    @available(*, unavailable, renamed: "purchase")
+    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {}
 }
 
 
