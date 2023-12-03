@@ -12,6 +12,7 @@ import UIKit
 import StoreKit
 
 
+@available(iOS 15.0, *)
 class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     
     let manager = NeonLongPaywallPlanManager()

@@ -8,7 +8,8 @@
 import Foundation
 
 
-class NeonLongPaywallSection{
+@available(iOS 15.0, *)
+public class NeonLongPaywallSection{
     
     var view : BaseNeonLongPaywallSectionView{
         switch type {
@@ -46,7 +47,7 @@ class NeonLongPaywallSection{
     
     let type : NeonLongPaywallSectionType
     
-    init(type: NeonLongPaywallSectionType) {
+    public init(type: NeonLongPaywallSectionType) {
         self.type = type
     }
     

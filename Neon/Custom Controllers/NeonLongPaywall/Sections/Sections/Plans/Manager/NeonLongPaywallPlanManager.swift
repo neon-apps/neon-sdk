@@ -19,6 +19,7 @@ protocol NeonLongPaywallPlanViewDelegate{
     func planSelected()
 }
 
+@available(iOS 15.0, *)
 class NeonLongPaywallPlanManager {
   
     var allPlans = [NeonLongPaywallPlan]()

@@ -11,6 +11,7 @@ import UIKit
 import StoreKit
 
 
+@available(iOS 15.0, *)
 class NeonLongPaywallVerticalPlanView : UIView, AdaptyManagerDelegate{
     
     let manager = NeonLongPaywallPlanManager()

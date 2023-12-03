@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import NeonSDK
+
+@available(iOS 15.0, *)
 class NeonLongPaywallTestimonialsView : BaseNeonLongPaywallSectionView{
     
     

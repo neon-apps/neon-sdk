@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import NeonSDK
 import UIKit
 import Adapty
 
+@available(iOS 15.0, *)
 public class NeonLongPaywallController : UIViewController{
     let scrollView = UIScrollView()
     let mainStack = UIStackView()
@@ -140,6 +140,7 @@ public class NeonLongPaywallController : UIViewController{
       
     }
 
+
     @objc func continueButtonClicked(){
         
         vibrate(style: .heavy)
@@ -225,6 +226,7 @@ public class NeonLongPaywallController : UIViewController{
   
     }
 }
+@available(iOS 15.0, *)
 extension NeonLongPaywallController :  RevenueCatManagerDelegate, AdaptyManagerDelegate{
     public func packageFetched() {
         for section in mainStack.subviews{

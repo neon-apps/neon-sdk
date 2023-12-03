@@ -16,6 +16,7 @@ protocol NeonLongPaywallDelegate {
     func dismissed(from controller : UIViewController)
     
 }
+@available(iOS 15.0, *)
 public class NeonLongPaywallManager{
     
     static var paywall : NeonLongPaywallController?

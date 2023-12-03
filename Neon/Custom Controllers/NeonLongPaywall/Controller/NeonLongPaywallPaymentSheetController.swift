@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import NeonSDK
 
+@available(iOS 15.0, *)
 public class NeonLongPaywallPaymentSheetController : UIViewController{
 
     let manager = NeonLongPaywallPlanManager()
@@ -118,6 +119,7 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
         }
     }
   
+    
     func configureDetent(){
         if let presentationController = presentationController as? UISheetPresentationController {
             if #available(iOS 16.0, *) {
