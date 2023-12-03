@@ -212,7 +212,7 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
         if AdaptyManager.selectedPackage == nil{
             AdaptyManager.selectPackage(id: AdaptyPaywallBuilder.shared.weeklyProductID)
         }
-        AdaptyManager.subscribe(animation: .loadingCircle, animationColor: AdaptyPaywallBuilder.shared.mainColor) { [self] in
+        AdaptyManager.purchase(animation: .loadingCircle, animationColor: AdaptyPaywallBuilder.shared.mainColor) { [self] in
             if AdaptyPaywallBuilder.shared.canDismiss{
                 dismiss(animated: true)
             }else{

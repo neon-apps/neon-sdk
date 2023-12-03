@@ -307,7 +307,10 @@ public class AdaptyManager {
         return nil
     }
     
-    
+    @available(*, unavailable, renamed: "purchase")
+    public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
+        
+    }
 }
 
 
