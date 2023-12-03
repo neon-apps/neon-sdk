@@ -1,7 +1,7 @@
 //
 //  File.swift
 //  
-//
+    //
 //  Created by Tuna Öztürk on 3.12.2023.
 //
 
@@ -23,3 +23,4 @@ public class NeonPaywallManager{
     }
     
 }
+
