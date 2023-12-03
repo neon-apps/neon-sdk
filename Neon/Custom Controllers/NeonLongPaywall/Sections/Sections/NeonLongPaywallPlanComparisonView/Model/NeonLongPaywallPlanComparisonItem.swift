@@ -11,13 +11,13 @@ public class NeonLongPaywallPlanComparisonItem: Equatable {
     var feature: String
     var availability: Availability
 
-    enum Availability {
+    public enum Availability {
         case locked
         case available
         case limited
     }
 
-    init(feature: String, availability: Availability) {
+    public init(feature: String, availability: Availability) {
         self.feature = feature
         self.availability = availability
     }

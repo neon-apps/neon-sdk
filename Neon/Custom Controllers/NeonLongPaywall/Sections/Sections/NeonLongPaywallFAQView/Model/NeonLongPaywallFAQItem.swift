@@ -12,7 +12,7 @@ public class NeonLongPaywallFAQItem: Equatable{
     var answerTitle = String()
     var answerSubtitle = String()
     
-    init(question: String, answerTitle: String, answerSubtitle: String) {
+    public init(question: String, answerTitle: String, answerSubtitle: String) {
         self.question = question
         self.answerTitle = answerTitle
         self.answerSubtitle = answerSubtitle

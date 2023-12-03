@@ -12,7 +12,7 @@ public class NeonLongPaywallWhatYouWillGetItem{
     var title = String()
     var subtitle = String()
     
-    init(emoji: String, title: String, subtitle: String) {
+    public init(emoji: String, title: String, subtitle: String) {
         self.emoji = emoji
         self.title = title
         self.subtitle = subtitle

@@ -14,7 +14,7 @@ public class NeonLongPaywallTimelineItem{
     var subtitle = String()
     var description = String()
     
-    init(icon: UIImage, title: String, subtitle: String,  description: String) {
+    public init(icon: UIImage, title: String, subtitle: String,  description: String) {
         self.icon = icon
         self.title = title
         self.subtitle = subtitle

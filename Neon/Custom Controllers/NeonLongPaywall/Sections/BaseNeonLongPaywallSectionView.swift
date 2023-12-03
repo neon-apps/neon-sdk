@@ -11,7 +11,7 @@ import NeonSDK
 public class BaseNeonLongPaywallSectionView: UIView {
     
 
-    init(type: NeonLongPaywallSectionType) {
+    public init(type: NeonLongPaywallSectionType) {
         super.init(frame: .zero)
         configureSection(type : type)
     }
@@ -24,7 +24,7 @@ public class BaseNeonLongPaywallSectionView: UIView {
     }
     
 
-    func configureSection(type : NeonLongPaywallSectionType) {
+    public func configureSection(type : NeonLongPaywallSectionType) {
         
     }
     
