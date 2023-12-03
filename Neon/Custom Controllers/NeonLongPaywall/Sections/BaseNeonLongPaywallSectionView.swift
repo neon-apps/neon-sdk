@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-import NeonSDK
-public class BaseNeonLongPaywallSectionView: UIView {
+
+open class BaseNeonLongPaywallSectionView: UIView {
     
 
     public init(type: NeonLongPaywallSectionType) {
@@ -19,7 +19,7 @@ public class BaseNeonLongPaywallSectionView: UIView {
         
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
