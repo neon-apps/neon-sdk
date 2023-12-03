@@ -174,7 +174,14 @@ public class NeonLongPaywallController : UIViewController{
        
         
         for section in NeonLongPaywallManager.sections{
-            mainStack.addArrangedSubview(section.view)
+            switch section.type {
+            case .custom(let view):
+                mainStack.addArrangedSubview(view)
+                break
+            default :
+                mainStack.addArrangedSubview(section.view)
+                break
+            }
         }
         
         

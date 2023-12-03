@@ -23,5 +23,5 @@ public enum NeonLongPaywallSectionType{
     case planComparison(items : [NeonLongPaywallPlanComparisonItem] )
     case trustBadge(type : NeonLongPaywallTrustBadgeType )
     case slide(height : CGFloat = 400, showBeforeAfterBadges : Bool, items : [NeonSlideItem] )
-    case custom(view : BaseNeonLongPaywallSectionView)
+    case custom(view : UIView)
 }
