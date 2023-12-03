@@ -10,7 +10,7 @@ import StoreKit
 
 class NeonPaywallManager{
     
-    static func isSubscription(product : SKProduct?) -> Bool{
+   public static func isSubscription(product : SKProduct?) -> Bool{
         if let product{
             if let _ = product.subscriptionPeriod?.numberOfUnits,
                let _ = product.subscriptionPeriod?.unit{
