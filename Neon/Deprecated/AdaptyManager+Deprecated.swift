@@ -12,7 +12,7 @@ import UIKit
 @available(iOS 13.0, *)
 extension AdaptyManager{
     
-    @available(*, unavailable, renamed: "purchase")
+    @available(*, unavailable, renamed: "AdaptyManager.purchase")
     public static func subscribe(animation : LottieManager.AnimationType, animationColor : UIColor? = nil, animationWidth : Int? = nil,  completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         
     }
