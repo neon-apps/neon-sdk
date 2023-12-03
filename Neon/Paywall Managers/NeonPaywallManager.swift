@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-class NeonPaywallManager{
+public class NeonPaywallManager{
     
    public static func isSubscription(product : SKProduct?) -> Bool{
         if let product{
