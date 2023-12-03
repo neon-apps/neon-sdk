@@ -39,8 +39,8 @@ public class NeonLongPaywallSection{
             return NeonLongPaywallTrustBadgeView(type: type)
         case .slide:
             return NeonLongPaywallSlideView(type: type)
-        case .custom(let view):
-            return view
+        case .custom:
+            return BaseNeonLongPaywallSectionView(type: type)
         }
         
     }
