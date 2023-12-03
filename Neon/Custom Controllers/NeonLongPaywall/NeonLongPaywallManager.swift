@@ -10,7 +10,7 @@ import NeonSDK
 import UIKit
 
 
-protocol NeonLongPaywallDelegate {
+public protocol NeonLongPaywallDelegate {
     func purchased(from controller : UIViewController, identifier : String)
     func restored(from controller : UIViewController)
     func dismissed(from controller : UIViewController)
@@ -19,9 +19,9 @@ protocol NeonLongPaywallDelegate {
 @available(iOS 15.0, *)
 public class NeonLongPaywallManager{
     
-    static var paywall : NeonLongPaywallController?
-    static var sections = [NeonLongPaywallSection]()
-    static var delegate : NeonLongPaywallDelegate?
+    public static var paywall : NeonLongPaywallController?
+    public static var sections = [NeonLongPaywallSection]()
+    public static var delegate : NeonLongPaywallDelegate?
     
     public static func configure(
         provider : NeonLongPaywallProviderType,

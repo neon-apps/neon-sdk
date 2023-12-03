@@ -11,7 +11,7 @@ import UIKit
 
 public class NeonSlideItem{
     
-    init(firstImage: UIImage, secondImage: UIImage, title: String, subtitle: String) {
+    public init(firstImage: UIImage, secondImage: UIImage, title: String, subtitle: String) {
         self.firstImage = firstImage
         self.secondImage = secondImage
         self.title = title
