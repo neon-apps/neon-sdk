@@ -40,9 +40,9 @@ public class AdaptyPaywallBuilder{
     var termsURL = String()
     var privacyURL = String()
     
-    var feature1 = NeonPaywallFeature()
-    var feature2 = NeonPaywallFeature()
-    var feature3 = NeonPaywallFeature()
+    var feature1 : NeonPaywallFeature?
+    var feature2 : NeonPaywallFeature?
+    var feature3 : NeonPaywallFeature?
 
     var testimonial1 = NeonTestimonial()
     var testimonial2 = NeonTestimonial()

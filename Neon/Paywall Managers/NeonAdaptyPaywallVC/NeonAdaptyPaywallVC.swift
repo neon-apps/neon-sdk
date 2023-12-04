@@ -187,15 +187,15 @@ public class NeonAdaptyPaywallVC : UIViewController, AdaptyManagerDelegate{
             make.top.equalTo(testimonialView.snp.bottom).offset(5)
             make.bottom.equalTo(btnWeekly.snp.top).offset(-10)
         }
-        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature1.title, icon: AdaptyPaywallBuilder.shared.feature1.icon)
-        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature2.title, icon: AdaptyPaywallBuilder.shared.feature2.icon)
+        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature1!.title, icon: AdaptyPaywallBuilder.shared.feature1!.icon!)
+        featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature2!.title, icon: AdaptyPaywallBuilder.shared.feature2!.icon!)
       
         if UIScreen.main.bounds.height > 812{ // iPhone X
-            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3.title, icon: AdaptyPaywallBuilder.shared.feature3.icon)
+            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3!.title, icon: AdaptyPaywallBuilder.shared.feature3!.icon!)
         }
        
         if UIScreen.main.bounds.height <= 667{ // iPhone 8
-            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3.title, icon: AdaptyPaywallBuilder.shared.feature3.icon)
+            featuresView.addFeature(title: AdaptyPaywallBuilder.shared.feature3!.title, icon: AdaptyPaywallBuilder.shared.feature3!.icon!)
             testimonialView.isHidden = true
             
             featuresView.snp.remakeConstraints { make in

@@ -57,7 +57,12 @@ class NeonLongPaywallFeaturesView : BaseNeonLongPaywallSectionView{
         icon.image = item.icon
         if iconColor != nil{
             icon.tintColor = iconColor
-            icon.image = item.icon.withRenderingMode(.alwaysTemplate)
+            if let image = item.icon{
+                icon.image = image.withRenderingMode(.alwaysTemplate)
+            }else if let url = item.iconURL{
+                icon.setImage(urlString: url)
+                
+            }
         }
         icon.contentMode = .scaleAspectFit
         horizontalStack.addArrangedSubview(icon)

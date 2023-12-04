@@ -27,7 +27,12 @@ class NeonPaywallFeatureCell: NeonTableViewCell<NeonPaywallFeature> {
     override func configure(with feature: NeonPaywallFeature) {
         super.configure(with: feature)
         titleLabel.text = feature.title
-        imgIcon.image = feature.icon.withRenderingMode(.alwaysTemplate)
+            if let image = feature.icon{
+                imgIcon.image = image.withRenderingMode(.alwaysTemplate)
+            }else if let url = feature.iconURL{
+                imgIcon.setImage(urlString: url)
+                
+        }
     }
   
     private func setupSubviews() {
