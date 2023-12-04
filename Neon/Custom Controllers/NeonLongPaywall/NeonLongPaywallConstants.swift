@@ -12,7 +12,7 @@ import UIKit
 public class NeonLongPaywallConstants{
     static var termsURL : String?
     static var privacyURL : String?
-    static var provider = NeonLongPaywallProviderType.revenuecat
+    public static var provider = NeonLongPaywallProviderType.revenuecat
     static var isPaymentSheetActive = Bool()
     static var horizontalPadding = CGFloat()
     static var cornerRadius = CGFloat()
