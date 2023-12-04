@@ -29,6 +29,17 @@ class NeonLongPaywallImageView : BaseNeonLongPaywallSectionView{
                 make.height.equalTo(height)
                 make.left.right.equalToSuperview().inset(horizontalPadding)
             }
+            
+        case .imageWithURL(let height, let url, let cornerRadious, let horizontalPadding, let contentMode):
+            imageView.setImage(urlString: url)
+            imageView.contentMode = contentMode
+            imageView.layer.cornerRadius = cornerRadious
+            
+            imageView.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.height.equalTo(height)
+                make.left.right.equalToSuperview().inset(horizontalPadding)
+            }
             break
         default:
             fatalError("Something went wrong with NeonLongPaywall. Please consult to manager.")

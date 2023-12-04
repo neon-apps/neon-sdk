@@ -19,6 +19,8 @@ public class NeonLongPaywallSection{
             return NeonLongPaywallLabelView(type: type)
         case .image:
             return NeonLongPaywallImageView(type: type)
+        case .imageWithURL:
+            return NeonLongPaywallImageView(type: type)
         case .features:
             return NeonLongPaywallFeaturesView(type: type)
         case .testimonialCard:
