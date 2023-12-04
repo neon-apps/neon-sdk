@@ -13,6 +13,8 @@ public enum NeonLongPaywallSectionType{
     case spacing(height : CGFloat)
     case label(text : String, font : UIFont, overrideTextColor : UIColor? = nil, alignment : NSTextAlignment, horizontalPadding :CGFloat)
     case image(height : CGFloat, image : UIImage, cornerRadious : CGFloat, horizontalPadding :CGFloat, contentMode : UIView.ContentMode)
+    case image(height : CGFloat, url : String, cornerRadious : CGFloat, horizontalPadding :CGFloat, contentMode : UIView.ContentMode)
+    
     case features(items : [NeonPaywallFeature], overrideTextColor : UIColor? = nil,  font : UIFont? = nil, iconTintColor : UIColor? = nil, offset : CGFloat? = nil)
     case testimonialCard(title : String, subtitle : String, author : String? = nil, overrideImage : UIImage? = nil)
     case plans(type : NeonLongPaywallPlanViewType, items : [NeonLongPaywallPlan])
