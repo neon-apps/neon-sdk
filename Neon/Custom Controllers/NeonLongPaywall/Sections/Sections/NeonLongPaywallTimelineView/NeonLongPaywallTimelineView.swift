@@ -80,7 +80,11 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         let itemView = UIView()
         
         let iconImageView = UIImageView()
-        iconImageView.image = item.icon
+        if let iconURL = item.iconURL{
+            iconImageView.setImage(urlString: iconURL)
+        }else{
+            iconImageView.image = item.icon
+        }
         itemView.addSubview(iconImageView)
         iconImageView.tintColor = NeonLongPaywallConstants.ctaButtonTextColor
         iconImageView.contentMode = .scaleAspectFit
