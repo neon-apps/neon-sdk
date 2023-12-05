@@ -77,7 +77,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
         }
         
         let imgLaurelWreathLeft = UIImageView()
-        imgLaurelWreathLeft.image = UIImage(named: "laurelWreathLeft")
+        imgLaurelWreathLeft.image = UIImage(named: "laurelWreathLeft", in: Bundle.module, compatibleWith: nil)
         imgLaurelWreathLeft.contentMode = .scaleAspectFit
         addSubview(imgLaurelWreathLeft)
         imgLaurelWreathLeft.snp.makeConstraints { make in
@@ -86,7 +86,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
         }
         
         let imgLaurelWreathRight = UIImageView()
-        imgLaurelWreathRight.image = UIImage(named: "laurelWreathRight")
+        imgLaurelWreathRight.image = UIImage(named: "laurelWreathRight", in: Bundle.module, compatibleWith: nil)
         imgLaurelWreathRight.contentMode = .scaleAspectFit
         addSubview(imgLaurelWreathRight)
         imgLaurelWreathRight.snp.makeConstraints { make in
@@ -114,7 +114,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
     
     func configureStars(){
         let imgStars = UIImageView()
-        imgStars.image = UIImage(named: "trust_badge_stars")
+        imgStars.image = UIImage(named: "trust_badge_stars", in: Bundle.module, compatibleWith: nil)
         imgStars.contentMode = .scaleAspectFit
         addSubview(imgStars)
         imgStars.snp.makeConstraints { make in
@@ -135,7 +135,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
     func configureThropy(year : Int){
         
         let imgThropy = UIImageView()
-        imgThropy.image = UIImage(named: "trust_badge_thropy")
+        imgThropy.image = UIImage(named: "trust_badge_thropy", in: Bundle.module, compatibleWith: nil)
         imgThropy.contentMode = .scaleAspectFit
         addSubview(imgThropy)
         imgThropy.snp.makeConstraints { make in

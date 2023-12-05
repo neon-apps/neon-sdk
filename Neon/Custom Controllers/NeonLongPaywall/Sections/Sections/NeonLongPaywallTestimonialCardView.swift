@@ -24,11 +24,17 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
         setConstraint()
         
         switch type {
-        case .testimonialCard(let title, let subtitle, let author, let overrideImage):
+        case .testimonialCard(let title, let subtitle, let author, let overrideImage, let overrideImageWithURL):
             titleLabel.text = title
             subtitleLabel.text = subtitle
-            confettiImageView.image = overrideImage ?? UIImage(named: "img_confeti")
-            starsImageView.image = UIImage(named: "img_stars")
+            if let overrideImage{
+                confettiImageView.image = overrideImage
+            }else if let overrideImageWithURL{
+                confettiImageView.setImage(urlString: overrideImageWithURL)
+            }else{
+                confettiImageView.image = UIImage(named: "img_confeti", in: Bundle.module, compatibleWith: nil)
+            }
+            starsImageView.image = UIImage(named: "img_stars", in: Bundle.module, compatibleWith: nil)
             break
         default:
             fatalError("Something went wrong with NeonLongPaywall. Please consult to manager.")

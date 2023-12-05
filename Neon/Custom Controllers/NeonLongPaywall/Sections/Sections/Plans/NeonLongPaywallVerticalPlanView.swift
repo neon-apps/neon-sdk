@@ -124,7 +124,7 @@ class NeonLongPaywallVerticalPlanView : UIView, AdaptyManagerDelegate{
             make.centerY.equalTo(unitCostLabel)
         }
         
-        iconSelected.image = UIImage(named: "btn_radio_unselected")
+        iconSelected.image = UIImage(named: "btn_radio_unselected", in: Bundle.module, compatibleWith: nil)
         iconSelected.tintColor = NeonLongPaywallConstants.mainColor
         addSubview(iconSelected)
         iconSelected.snp.makeConstraints { make in
@@ -163,7 +163,7 @@ class NeonLongPaywallVerticalPlanView : UIView, AdaptyManagerDelegate{
         
         backgroundColor = NeonLongPaywallConstants.selectedContainerColor
         layer.borderColor = NeonLongPaywallConstants.selectedContainerBorderColor.cgColor
-        iconSelected.image = UIImage(named: "btn_radio_selected")
+        iconSelected.image = UIImage(named: "btn_radio_selected", in: Bundle.module, compatibleWith: nil)
         
         UIView.animate(withDuration: 0.3) {
             self.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
@@ -176,7 +176,7 @@ class NeonLongPaywallVerticalPlanView : UIView, AdaptyManagerDelegate{
         
         backgroundColor = NeonLongPaywallConstants.containerColor
         layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor
-        iconSelected.image = UIImage(named: "btn_radio_unselected")
+        iconSelected.image = UIImage(named: "btn_radio_unselected", in: Bundle.module, compatibleWith: nil)
         
         UIView.animate(withDuration: 0.3) {
             self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)

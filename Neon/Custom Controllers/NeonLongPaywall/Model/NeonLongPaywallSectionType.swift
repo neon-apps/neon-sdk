@@ -15,7 +15,7 @@ public enum NeonLongPaywallSectionType{
     case image(height : CGFloat, image : UIImage, cornerRadious : CGFloat, horizontalPadding :CGFloat, contentMode : UIView.ContentMode)
     case imageWithURL(height : CGFloat, url : String, cornerRadious : CGFloat, horizontalPadding :CGFloat, contentMode : UIView.ContentMode)
     case features(items : [NeonPaywallFeature], overrideTextColor : UIColor? = nil,  font : UIFont? = nil, iconTintColor : UIColor? = nil, offset : CGFloat? = nil)
-    case testimonialCard(title : String, subtitle : String, author : String? = nil, overrideImage : UIImage? = nil)
+    case testimonialCard(title : String, subtitle : String, author : String? = nil, overrideImage : UIImage? = nil,  overrideImageWithURL : String? = nil)
     case plans(type : NeonLongPaywallPlanViewType, items : [NeonLongPaywallPlan])
     case whatYouWillGet(title : String, hasContainer : Bool, items : [NeonLongPaywallWhatYouWillGetItem])
     case timeline(hasContainer : Bool, items : [NeonLongPaywallTimelineItem] )

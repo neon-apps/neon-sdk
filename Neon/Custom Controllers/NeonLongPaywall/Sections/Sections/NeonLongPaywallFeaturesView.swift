@@ -54,16 +54,24 @@ class NeonLongPaywallFeaturesView : BaseNeonLongPaywallSectionView{
         horizontalStack.alignment = .center
         horizontalStack.spacing = 10
         let icon = UIImageView()
-        icon.image = item.icon
-        if iconColor != nil{
-            icon.tintColor = iconColor
+       
+       
+            
             if let image = item.icon{
-                icon.image = image.withRenderingMode(.alwaysTemplate)
+                if iconColor != nil{
+                    icon.image = image.withRenderingMode(.alwaysTemplate)
+                    icon.tintColor = iconColor
+                }else{
+                    icon.image = item.icon
+                }
             }else if let url = item.iconURL{
+                if iconColor != nil{
+                    icon.tintColor = iconColor
+                }
                 icon.setImage(urlString: url)
                 
             }
-        }
+        
         icon.contentMode = .scaleAspectFit
         horizontalStack.addArrangedSubview(icon)
         
