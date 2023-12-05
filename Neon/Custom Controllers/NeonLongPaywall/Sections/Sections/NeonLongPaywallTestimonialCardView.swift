@@ -22,13 +22,15 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     override func configureSection(type: NeonLongPaywallSectionType) {
         
         
-       
+        
         
         switch type {
         case .testimonialCard(let title, let subtitle, let author, let overrideImage, let overrideImageWithURL):
             titleLabel.text = title
             subtitleLabel.text = subtitle
-            authorLabel.text = author
+            if let author,  author != ""{
+                authorLabel.text = "- \(author)"
+            }
             if let overrideImage{
                 confettiImageView.image = overrideImage
             }else if let overrideImageWithURL{
@@ -47,11 +49,11 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     
     func configureView(){
         containerView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-        containerView.layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor 
+        containerView.layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor
         containerView.backgroundColor = NeonLongPaywallConstants.containerColor
         containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
         addSubview(containerView)
-    
+        
         
         containerView.addSubview(starsImageView)
         starsImageView.contentMode = .scaleAspectFit
@@ -81,7 +83,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.equalTo(starsImageView)
             make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
+            
         }
         authorLabel.textColor = NeonLongPaywallConstants.primaryTextColor
         authorLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
@@ -92,7 +94,8 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.top.equalTo(subtitleLabel.snp.bottom).offset(10)
             make.left.equalTo(starsImageView)
             make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
+            
+            
         }
         
         
@@ -104,11 +107,11 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             }else{
                 make.bottom.equalTo(authorLabel.snp.bottom).offset(20)
             }
-          
+            
         }
         
         
-       
+        
         addSubview(containerView)
         
         addSubview(confettiImageView)
@@ -119,7 +122,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
         }
         
         
-      
+        
         
     }
     
