@@ -17,9 +17,21 @@ public class NeonSlideItem{
         self.title = title
         self.subtitle = subtitle
     }
+    
+    public init(firstImageURL: String, secondImageURL: String, title: String, subtitle: String) {
+        self.firstImageURL = firstImageURL
+        self.secondImageURL = secondImageURL
+        self.title = title
+        self.subtitle = subtitle
+    }
+    
 
-    public var firstImage : UIImage
-    public var secondImage : UIImage
+    public var firstImage : UIImage?
+    public var secondImage : UIImage?
+    
+    public var firstImageURL : String?
+    public var secondImageURL : String?
+    
     public var title = String()
     public var subtitle = String()
   

@@ -31,8 +31,15 @@ class NeonSlideCell: NeonCollectionViewCell<NeonSlideItem> {
         super.configure(with: slide)
         titleLabel.text = slide.title
         subtitleLabel.text = slide.subtitle
-        firstImage.image = slide.firstImage
-        secondImage.image = slide.secondImage
+       if let firstImageURL = slide.firstImageURL, let secondImageURL = slide.secondImageURL{
+            self.firstImage.setImage(urlString: firstImageURL)
+            self.secondImage.setImage(urlString: secondImageURL)
+        }else{
+            self.firstImage.image = slide.firstImage
+            self.secondImage.image = slide.secondImage
+        }
+      
+       
     }
   
     private func setupSubviews() {

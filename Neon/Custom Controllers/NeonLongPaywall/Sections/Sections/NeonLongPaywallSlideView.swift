@@ -30,7 +30,12 @@ class NeonLongPaywallSlideView : BaseNeonLongPaywallSectionView{
             
  
             items.forEach { item in
-                slidesView.addSlide(firstImage: item.firstImage, secondImage: item.secondImage, title: item.title, subtitle: item.subtitle)
+                if let firstImage = item.firstImage, let secondImage = item.secondImage{
+                    slidesView.addSlide(firstImage: firstImage, secondImage: secondImage, title: item.title, subtitle: item.subtitle)
+                }else if let firstImageURL = item.firstImageURL, let secondImageURL = item.secondImageURL{
+                    slidesView.addSlide(firstImageURL: firstImageURL, secondImageURL: secondImageURL, title: item.title, subtitle: item.subtitle)
+                }
+              
             }
             
             break

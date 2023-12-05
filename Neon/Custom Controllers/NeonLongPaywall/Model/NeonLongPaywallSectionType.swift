@@ -20,7 +20,7 @@ public enum NeonLongPaywallSectionType{
     case whatYouWillGet(title : String, hasContainer : Bool, items : [NeonLongPaywallWhatYouWillGetItem])
     case timeline(hasContainer : Bool, items : [NeonLongPaywallTimelineItem] )
     case testimonials(height : CGFloat = 220, items : [NeonTestimonial] )
-    case faq(title : String, hasContainer : Bool, items : [NeonLongPaywallFAQItem] )
+    case faq(title : String, hasContainer : Bool, items : [NeonLongPaywallFAQItem])
     case planComparison(items : [NeonLongPaywallPlanComparisonItem] )
     case trustBadge(type : NeonLongPaywallTrustBadgeType )
     case slide(height : CGFloat = 400, showBeforeAfterBadges : Bool, items : [NeonSlideItem] )

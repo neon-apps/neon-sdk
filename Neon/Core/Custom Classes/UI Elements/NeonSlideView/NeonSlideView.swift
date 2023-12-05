@@ -136,6 +136,13 @@ public class NeonSlideView: UIView, NeonSlideCollectionViewDelegate {
         slideCollectionView.objects = NeonSlideItem.arrSlides
         pageControl.numberOfPages = NeonSlideItem.arrSlides.count
     }
+    
+    public func addSlide(firstImageURL : String, secondImageURL : String, title : String, subtitle : String){
+        NeonSlideItem.arrSlides.append(NeonSlideItem(firstImageURL: firstImageURL, secondImageURL: secondImageURL, title: title, subtitle: subtitle))
+        slideCollectionView.objects = NeonSlideItem.arrSlides
+        pageControl.numberOfPages = NeonSlideItem.arrSlides.count
+    }
+    
     func slideCollectionView(_ collectionView: NeonSlideCollectionView, destinationPage pageIndex: Int) {
         pageControl.set(progress: pageIndex, animated: true)
     }
