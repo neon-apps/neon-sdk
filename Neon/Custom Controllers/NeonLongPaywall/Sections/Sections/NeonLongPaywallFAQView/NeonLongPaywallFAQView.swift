@@ -21,9 +21,7 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
            configureView()
            setConstraint()
            switch type {
-           case .faq(let title, let hasContainer, let items):
-               containerView.backgroundColor = hasContainer ? NeonLongPaywallConstants.containerColor : .clear
-               containerView.layer.borderColor = hasContainer ? NeonLongPaywallConstants.containerBorderColor.cgColor : UIColor.clear.cgColor
+           case .faq(let title, let items):
                allItems = items
                items.enumerated().forEach { item, index in
                    addItem(index, item)
