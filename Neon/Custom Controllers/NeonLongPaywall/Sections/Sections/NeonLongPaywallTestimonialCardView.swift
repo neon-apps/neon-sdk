@@ -22,7 +22,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     override func configureSection(type: NeonLongPaywallSectionType) {
         
         
-        setConstraint()
+       
         
         switch type {
         case .testimonialCard(let title, let subtitle, let author, let overrideImage, let overrideImageWithURL):
@@ -42,6 +42,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             fatalError("Something went wrong with NeonLongPaywall. Please consult to manager.")
         }
         configureView()
+        setConstraint()
     }
     
     func configureView(){
