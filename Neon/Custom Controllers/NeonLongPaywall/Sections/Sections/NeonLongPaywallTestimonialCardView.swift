@@ -15,6 +15,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     var containerView = UIView()
     var titleLabel = UILabel()
     var subtitleLabel = UILabel()
+    var authorLabel = UILabel()
     var starsImageView = UIImageView()
     var confettiImageView = UIImageView()
     
@@ -27,6 +28,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
         case .testimonialCard(let title, let subtitle, let author, let overrideImage, let overrideImageWithURL):
             titleLabel.text = title
             subtitleLabel.text = subtitle
+            authorLabel.text = author
             if let overrideImage{
                 confettiImageView.image = overrideImage
             }else if let overrideImageWithURL{
@@ -58,7 +60,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.width.equalTo(100)
         }
         
-        titleLabel.font = Font.custom(size: 16, fontWeight: .Bold)
+        titleLabel.font = Font.custom(size: 16, fontWeight: .SemiBold)
         containerView.addSubview(titleLabel)
         titleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
         titleLabel.numberOfLines = 0
@@ -79,12 +81,28 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-20)
         }
+        authorLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        authorLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
+        authorLabel.numberOfLines = 0
+        
+        containerView.addSubview(authorLabel)
+        authorLabel.snp.makeConstraints { make in
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(10)
+            make.left.equalTo(starsImageView)
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
+        }
         
         
         containerView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview().offset(20)
-            make.bottom.equalTo(subtitleLabel.snp.bottom).offset(20)
+            if authorLabel.text == ""{
+                make.bottom.equalTo(subtitleLabel.snp.bottom).offset(20)
+            }else{
+                make.bottom.equalTo(authorLabel.snp.bottom).offset(20)
+            }
+          
         }
         
         
