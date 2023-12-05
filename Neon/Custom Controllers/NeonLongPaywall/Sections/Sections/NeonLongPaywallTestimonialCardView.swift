@@ -21,7 +21,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     
     override func configureSection(type: NeonLongPaywallSectionType) {
         
-        configureView()
+        
         setConstraint()
         
         switch type {
@@ -41,6 +41,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
         default:
             fatalError("Something went wrong with NeonLongPaywall. Please consult to manager.")
         }
+        configureView()
     }
     
     func configureView(){
