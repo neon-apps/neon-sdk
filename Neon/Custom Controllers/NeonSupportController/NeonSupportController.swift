@@ -228,13 +228,13 @@ open class NeonSupportController: UIViewController {
             buttons: [
                 CustomAlertButton(title: "Okay!",
                                   buttonType: .background,
-                                  overrideTextColor: NeonSupportControllerConstants.textColor,
+                                  overrideTextColor: NeonSupportControllerConstants.buttonTextColor,
                                   completion: {
                                       self.dismiss(animated: true)
                                   }),
                 CustomAlertButton(title: "Send Another",
                                   buttonType: .text,
-                                  overrideTextColor: NeonSupportControllerConstants.textColor,
+                                  overrideTextColor: NeonSupportControllerConstants.buttonTextColor,
                                   completion: {
                                       self.messageTextView.text = ""
                                   })
