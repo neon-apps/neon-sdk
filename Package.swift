@@ -44,8 +44,9 @@ let package = Package(
                 .product(name: "FirebaseFirestoreSwift", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseCrashlytics", package: "Firebase", condition: .when(platforms: [.iOS])),
-                .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS]))
-
+                .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS])),
+                .product(name: "FirebaseMessaging", package: "Firebase", condition: .when(platforms: [.iOS]))
+                
             
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts"), .process("Core/Resources/Assets")])
         
