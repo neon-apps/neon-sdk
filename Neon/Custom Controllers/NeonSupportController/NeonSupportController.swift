@@ -234,7 +234,7 @@ open class NeonSupportController: UIViewController {
                                   }),
                 CustomAlertButton(title: "Send Another",
                                   buttonType: .text,
-                                  overrideTextColor: NeonSupportControllerConstants.buttonTextColor,
+                                  overrideTextColor: NeonSupportControllerConstants.textColor,
                                   completion: {
                                       self.messageTextView.text = ""
                                   })
