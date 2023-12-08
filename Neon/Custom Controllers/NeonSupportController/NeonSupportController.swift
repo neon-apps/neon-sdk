@@ -392,7 +392,7 @@ open class NeonSupportController: UIViewController {
             buttons: [
                 CustomAlertButton(title: "Add My Contact Details",
                                   buttonType: .background,
-                                  overrideTextColor: NeonSupportControllerConstants.textColor,
+                                  overrideTextColor: NeonSupportControllerConstants.buttonTextColor,
                                   completion: { [self] in
                                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [self] in
                                           toggleContact.setOn(true, animated: true)
