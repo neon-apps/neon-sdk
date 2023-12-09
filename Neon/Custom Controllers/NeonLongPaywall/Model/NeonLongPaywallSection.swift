@@ -11,7 +11,7 @@ import Foundation
 @available(iOS 15.0, *)
 public class NeonLongPaywallSection{
     
-    var view : BaseNeonLongPaywallSectionView{
+    public var view : BaseNeonLongPaywallSectionView{
         switch type {
         case .spacing:
             return NeonLongPaywallSpacingView(type: type)
