@@ -10,7 +10,7 @@ import NeonSDK
 import UIKit
 
 @available(iOS 15.0, *)
-class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLongPaywallPlanViewDelegate{
+public class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLongPaywallPlanViewDelegate{
     
     
 
@@ -19,7 +19,7 @@ class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLongPaywall
     let stackView = UIStackView()
     var type = NeonLongPaywallPlanViewType.horizontal
     
-    override func configureSection(type: NeonLongPaywallSectionType) {
+    public override func configureSection(type: NeonLongPaywallSectionType) {
         
       
        
