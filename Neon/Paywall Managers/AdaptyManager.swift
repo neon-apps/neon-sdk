@@ -50,7 +50,7 @@ public class AdaptyManager {
     private static func fetchPaywall(id : String){
         
         let locale = Locale.current.identifier
-        Adapty.getPaywall(id, locale: locale) { result in
+        Adapty.getPaywall(placementId: id, locale: locale) { result in
             switch result {
             case let .success(paywall):
                 paywalls.append(paywall)
@@ -108,7 +108,7 @@ public class AdaptyManager {
     
     public static func getPaywall(placementID : String) -> AdaptyPaywall?{
         for paywall in paywalls {
-            if paywall.id == placementID{
+            if paywall.placementId == placementID{
                 return paywall
             }
         }
@@ -299,7 +299,7 @@ public class AdaptyManager {
     @available(*, deprecated, renamed: "getPaywall(placementID:)")
     public static func getPaywall(id : String) -> AdaptyPaywall?{
         for paywall in paywalls {
-            if paywall.id == id{
+            if paywall.placementId == id{
                 return paywall
             }
         }
