@@ -24,7 +24,7 @@ public class CustomAlertManager {
     private static var verticalPadding : CGFloat = 20
     public static var isConfigured = false
     
-    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType, fixedWidth : CGFloat?) {
+    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType, fixedWidth : CGFloat? = nil) {
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.buttonColor = buttonColor
