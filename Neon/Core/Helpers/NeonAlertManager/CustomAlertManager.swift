@@ -289,6 +289,7 @@ public class CustomAlertManager {
                     alertView.snp.remakeConstraints { make in
                         make.bottom.equalTo(controller.view.snp.top)
                         make.width.equalTo(fixedWidth)
+                        make.centerX.equalToSuperview()
                         make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
                     }
                 }else{
