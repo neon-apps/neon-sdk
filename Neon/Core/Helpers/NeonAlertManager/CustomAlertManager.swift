@@ -20,16 +20,18 @@ public class CustomAlertManager {
    
     private static let backgroundView = UIView()
     private static var blurBackgroundView = UIVisualEffectView()
+    private static var fixedWidth : CGFloat?
     private static var verticalPadding : CGFloat = 20
     public static var isConfigured = false
     
-    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType) {
+    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType, fixedWidth : CGFloat?) {
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.buttonColor = buttonColor
             self.layerType = layerType
             self.animationType = animationType
             self.isConfigured = true
+            self.fixedWidth = fixedWidth
         }
     
     
@@ -163,18 +165,42 @@ public class CustomAlertManager {
         viewController.view.addSubview(alertView)
         
         if animationType == .slideVertically{
-            alertView.snp.makeConstraints { make in
-                make.top.equalTo(viewController.view.snp.bottom)
-                make.leading.trailing.equalToSuperview().inset(50)
-                make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+       
+            if let fixedWidth{
+                alertView.snp.makeConstraints { make in
+                    make.top.equalTo(viewController.view.snp.bottom)
+                    make.width.equalTo(fixedWidth)
+                    make.centerX.equalToSuperview()
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
+            }else{
+                alertView.snp.makeConstraints { make in
+                    make.top.equalTo(viewController.view.snp.bottom)
+                    make.leading.trailing.equalToSuperview().inset(50)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
             }
+           
         }else{
-            alertView.snp.makeConstraints { make in
-                make.right.equalTo(viewController.view.snp.left)
-                make.centerY.equalToSuperview()
-                make.width.equalToSuperview().inset(50)
-                make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+            
+            if let fixedWidth{
+                alertView.snp.makeConstraints { make in
+                    make.centerX.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                    make.width.equalTo(fixedWidth)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
+                
+            }else{
+                alertView.snp.makeConstraints { make in
+                    make.right.equalTo(viewController.view.snp.left)
+                    make.centerY.equalToSuperview()
+                    make.width.equalToSuperview().inset(50)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
             }
+            
+           
         }
       
         
@@ -226,11 +252,22 @@ public class CustomAlertManager {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: {
             
             guard let alertView = currentAlertView else { return }
-            alertView.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.leading.trailing.equalToSuperview().inset(50)
-                make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+            
+            if let fixedWidth{
+                alertView.snp.remakeConstraints { make in
+                    make.centerY.equalToSuperview()
+                    make.width.equalTo(fixedWidth)
+                    make.centerX.equalToSuperview()
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
+            }else{
+                alertView.snp.remakeConstraints { make in
+                    make.centerY.equalToSuperview()
+                    make.leading.trailing.equalToSuperview().inset(50)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                }
             }
+            
             
             UIView.animate(withDuration: 0.5, animations: {
                 showBackground()
@@ -247,19 +284,42 @@ public class CustomAlertManager {
             
             
             if animationType == .slideVertically{
-                alertView.snp.remakeConstraints { make in
-                    make.bottom.equalTo(controller.view.snp.top)
-                    make.leading.trailing.equalToSuperview().inset(50)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                
+                if let fixedWidth{
+                    alertView.snp.remakeConstraints { make in
+                        make.bottom.equalTo(controller.view.snp.top)
+                        make.width.equalTo(fixedWidth)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    }
+                }else{
+                    alertView.snp.remakeConstraints { make in
+                        make.bottom.equalTo(controller.view.snp.top)
+                        make.leading.trailing.equalToSuperview().inset(50)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    }
                 }
                 
+               
+                
             }else{
-                alertView.snp.remakeConstraints { make in
-                    make.left.equalTo(controller.view.snp.right)
-                    make.centerY.equalToSuperview()
-                    make.width.equalToSuperview().inset(50)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                
+                if let fixedWidth{
+                    alertView.snp.remakeConstraints { make in
+                        make.left.equalTo(controller.view.snp.right)
+                        make.centerY.equalToSuperview()
+                        make.width.equalTo(fixedWidth)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    }
+                }else{
+                    alertView.snp.remakeConstraints { make in
+                        make.left.equalTo(controller.view.snp.right)
+                        make.centerY.equalToSuperview()
+                        make.width.equalToSuperview().inset(50)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    }
                 }
+                
+               
             }
            
             UIView.animate(withDuration: 0.5, animations: {
