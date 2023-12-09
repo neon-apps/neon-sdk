@@ -234,7 +234,7 @@ open class NeonSupportController: UIViewController {
                                   }),
                 CustomAlertButton(title: "Send Another",
                                   buttonType: .text,
-                                  overrideTextColor: NeonSupportControllerConstants.textColor,
+                                  overrideTextColor: NeonSupportControllerConstants.textButtonColor,
                                   completion: {
                                       self.messageTextView.text = ""
                                   })
@@ -401,7 +401,7 @@ open class NeonSupportController: UIViewController {
                                   }),
                 CustomAlertButton(title: "Send Anyway",
                                   buttonType: .text,
-                                  overrideTextColor: NeonSupportControllerConstants.textColor,
+                                  overrideTextColor: NeonSupportControllerConstants.textButtonColor,
                                   completion: { [self] in
                                       DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
                                           if areFieldsValid(){

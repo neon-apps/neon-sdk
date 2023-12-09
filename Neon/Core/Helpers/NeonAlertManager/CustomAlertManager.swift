@@ -185,7 +185,7 @@ public class CustomAlertManager {
             
             if let fixedWidth{
                 alertView.snp.makeConstraints { make in
-                    make.right.equalTo(viewController.view.snp.left)
+                    make.centerX.equalToSuperview()
                     make.centerY.equalToSuperview()
                     make.width.equalTo(fixedWidth)
                     make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
