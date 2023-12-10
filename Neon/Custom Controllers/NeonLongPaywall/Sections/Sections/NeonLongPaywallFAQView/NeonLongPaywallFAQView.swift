@@ -34,7 +34,6 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
        
        func configureView() {
     
-           containerView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
            containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
            addSubview(containerView)
        
