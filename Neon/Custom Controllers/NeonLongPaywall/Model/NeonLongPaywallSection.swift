@@ -47,10 +47,11 @@ public class NeonLongPaywallSection{
         
     }
     
-    public let type : NeonLongPaywallSectionType
+    public var type : NeonLongPaywallSectionType
     
     public init(type: NeonLongPaywallSectionType) {
         self.type = type
     }
     
 }
+
