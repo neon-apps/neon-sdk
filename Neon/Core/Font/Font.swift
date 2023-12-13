@@ -12,6 +12,8 @@ import UIKit
 public class Font {
   
     
+    public var adjustSizeWithScreen : Bool = false
+    
     public static func configureFonts(font : FontManager.FontType){
         FontManager.shared.registerFonts()
         FontManager.shared.choosenFontType = font
@@ -25,11 +27,16 @@ public class Font {
              fontWeightStr = fontWeightStr.lowercased()
              fontWeightStr = fontWeightStr.capitalized
          }
-#if !os(xrOS)
-        return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
-#else
-        return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
-#endif
+
+
+        if adjustSizeWithScreen{
+            return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size * UIScreen.main.bounds.height * 0.00115)!
+        }else{
+            return UIFont(name: "\(FontManager.shared.choosenFontType)-\(fontWeightStr)", size: size)!
+        }
+      
+
+
     }
     
 }
