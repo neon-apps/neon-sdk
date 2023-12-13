@@ -12,7 +12,7 @@ import UIKit
 public class Font {
   
     
-    public var adjustSizeWithScreen : Bool = false
+    public static var adjustSizeWithScreen : Bool = false
     
     public static func configureFonts(font : FontManager.FontType){
         FontManager.shared.registerFonts()
