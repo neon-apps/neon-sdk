@@ -16,7 +16,7 @@ public class StorageManager{
         
         let storage = Storage.storage()
         let storageReferance = storage.reference()
-        let data = image.jpegData(compressionQuality: 0.5)
+        let data = image.pngData()
         let imageID = UUID().uuidString
         let imageRef = storageReferance.child("\(storageRef ?? imageID).png")
         
