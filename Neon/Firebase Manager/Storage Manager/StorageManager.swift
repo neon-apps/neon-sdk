@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 
 public class StorageManager{
-    
+        
     public static func uploadImage(image : UIImage, storageRef : String? = nil, completion : @escaping (_ downloadURL : String?) -> ()){
         
         
