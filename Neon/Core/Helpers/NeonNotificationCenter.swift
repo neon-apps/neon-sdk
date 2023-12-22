@@ -39,9 +39,12 @@ public class NeonNotificationCenter{
         activeObservers.append((notificationObject,id))
     }
     
-    public static func removeAllObservers(){
+    public static func removeObserver(id : String){
         for observer in activeObservers {
-            NotificationCenter.removeObserver(observer.0, forKeyPath: observer.1)
+            if observer.1 == id{
+                NotificationCenter.removeObserver(observer.0, forKeyPath: observer.1)
+            }
+           
         }
     }
     
