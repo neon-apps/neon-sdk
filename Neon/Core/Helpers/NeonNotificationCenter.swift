@@ -22,6 +22,7 @@ public class NeonNotificationCenter{
     }
     
     public static func observe(id : String, completion: @escaping (_ object : Any?) -> ()){
+        removeObserver(id: id)
         var notificationObject = NotificationCenter.observe(name: Notification.Name(rawValue: id)) { notification in
             if let userInfo = notification.userInfo as? [String : Any], let object = userInfo["neon-object"]{
                     completion(object)
@@ -33,6 +34,7 @@ public class NeonNotificationCenter{
     }
     
     public static func observe(id : String, completion: @escaping () -> ()){
+        removeObserver(id: id)
         var notificationObject =  NotificationCenter.observe(name: Notification.Name(rawValue: id)) { notification in
             completion()
         }
