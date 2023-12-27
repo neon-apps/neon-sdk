@@ -12,29 +12,28 @@ import UIKit
 @available(iOS 13.0, *)
 public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate {
     
-    var arrTestimonials = [NeonTestimonial]()
-    var testimonialCollectionView : NeonTestimonialCollectionView?
+    let testimonialCollectionView = NeonTestimonialCollectionView()
     var pageControl = NeonBasePageControl()
 
     public var intervalBetweenTestimonials = 5.0{
         didSet{
-            testimonialCollectionView!.intervalBetweenTestimonials = intervalBetweenTestimonials
+            testimonialCollectionView.intervalBetweenTestimonials = intervalBetweenTestimonials
         }
     }
     
     public var testimonialTextColor = UIColor.black{
         didSet{
-            testimonialCollectionView!.testimonialTextColor = testimonialTextColor
+            testimonialCollectionView.testimonialTextColor = testimonialTextColor
         }
     }
     public var testimonialbackgroundColor = UIColor.white{
         didSet{
-            testimonialCollectionView!.testimonialbackgroundColor = testimonialbackgroundColor
+            testimonialCollectionView.testimonialbackgroundColor = testimonialbackgroundColor
         }
     }
     public var testimonialbackgroundCornerRadious = 12{
         didSet{
-            testimonialCollectionView!.testimonialbackgroundCornerRadious = testimonialbackgroundCornerRadious
+            testimonialCollectionView.testimonialbackgroundCornerRadious = testimonialbackgroundCornerRadious
         }
     }
     
@@ -92,14 +91,14 @@ public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate 
         super.init(frame: .zero)
 
         
-        testimonialCollectionView = NeonTestimonialCollectionView(arrTestimonials: arrTestimonials)
-        addSubview(testimonialCollectionView!)
-        testimonialCollectionView!.snp.makeConstraints { make in
+      
+        addSubview(testimonialCollectionView)
+        testimonialCollectionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview().inset(30)
         }
-        testimonialCollectionView!.testimonialCollectionViewDelegate = self
+        testimonialCollectionView.testimonialCollectionViewDelegate = self
      
    
     }
@@ -111,17 +110,17 @@ public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate 
         pageControl.currentPageTintColor = currentTestimonialPageTintColor
         pageControl.tintColor = testimonialPageTintColor
         pageControl.padding = 6
-        pageControl.numberOfPages = arrTestimonials.count
+        pageControl.numberOfPages = testimonialCollectionView.arrTestimonials.count
         pageControl.snp.makeConstraints { make in
-            make.top.equalTo(testimonialCollectionView!.snp.bottom).offset(10)
+            make.top.equalTo(testimonialCollectionView.snp.bottom).offset(10)
             make.bottom.equalTo(self.snp.bottom)
             make.centerX.equalToSuperview()
         }
     }
     public func addTestimonial(title : String, testimonial : String, author : String){
-        arrTestimonials.append(NeonTestimonial(title: title, testimonial: testimonial,author: author))
-        testimonialCollectionView!.objects = arrTestimonials
-        pageControl.numberOfPages = arrTestimonials.count
+        testimonialCollectionView.arrTestimonials.append(NeonTestimonial(title: title, testimonial: testimonial,author: author))
+        testimonialCollectionView.objects = testimonialCollectionView.arrTestimonials
+        pageControl.numberOfPages = testimonialCollectionView.arrTestimonials.count
     }
     func testimonialCollectionView(_ collectionView: NeonTestimonialCollectionView, destinationPage pageIndex: Int) {
         pageControl.set(progress: pageIndex, animated: true)

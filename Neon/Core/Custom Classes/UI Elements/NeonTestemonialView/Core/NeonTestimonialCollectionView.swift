@@ -30,15 +30,15 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     var arrTestimonials = [NeonTestimonial]()
 
     
-    convenience init(arrTestimonials : [NeonTestimonial]) {
+    convenience init() {
         self.init(
-            objects: arrTestimonials,
+            objects: [],
             leftPadding: 0,
             rightPadding: 0,
             horizontalItemSpacing: 0,
             widthForItem: 0
         )
-        self.arrTestimonials = arrTestimonials
+        self.objects = arrTestimonials
         self.didSelect = didSelect
         startAnimation()
         updateUI()
