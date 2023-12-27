@@ -12,6 +12,7 @@ import UIKit
 @available(iOS 13.0, *)
 public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate {
     
+    var arrTestimonials = [NeonTestimonial]()
     let testimonialCollectionView = NeonTestimonialCollectionView()
     var pageControl = NeonBasePageControl()
 
@@ -110,7 +111,7 @@ public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate 
         pageControl.currentPageTintColor = currentTestimonialPageTintColor
         pageControl.tintColor = testimonialPageTintColor
         pageControl.padding = 6
-        pageControl.numberOfPages = NeonTestimonial.arrTestimonials.count
+        pageControl.numberOfPages = arrTestimonials.count
         pageControl.snp.makeConstraints { make in
             make.top.equalTo(testimonialCollectionView.snp.bottom).offset(10)
             make.bottom.equalTo(self.snp.bottom)
@@ -118,9 +119,9 @@ public class NeonTestimonialView: UIView, NeonTestimonialCollectionViewDelegate 
         }
     }
     public func addTestimonial(title : String, testimonial : String, author : String){
-        NeonTestimonial.arrTestimonials.append(NeonTestimonial(title: title, testimonial: testimonial,author: author))
-        testimonialCollectionView.objects = NeonTestimonial.arrTestimonials
-        pageControl.numberOfPages = NeonTestimonial.arrTestimonials.count
+        arrTestimonials.append(NeonTestimonial(title: title, testimonial: testimonial,author: author))
+        testimonialCollectionView.objects = arrTestimonials
+        pageControl.numberOfPages = arrTestimonials.count
     }
     func testimonialCollectionView(_ collectionView: NeonTestimonialCollectionView, destinationPage pageIndex: Int) {
         pageControl.set(progress: pageIndex, animated: true)

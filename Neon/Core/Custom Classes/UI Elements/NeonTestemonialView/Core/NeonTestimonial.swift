@@ -20,6 +20,5 @@ public class NeonTestimonial{
     public var testimonial = String()
     public var author = String()
     
-    static var arrTestimonials = [NeonTestimonial]()
 }
 #endif
