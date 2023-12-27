@@ -27,16 +27,18 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     public var testimonialbackgroundColor = UIColor.white
     public var testimonialbackgroundCornerRadious = 12
     
+    var arrTestimonials = [NeonTestimonial]()
+
     
-     convenience init() {
-         NeonTestimonial.arrTestimonials = []
+    convenience init(arrTestimonials : [NeonTestimonial]) {
         self.init(
-            objects: NeonTestimonial.arrTestimonials,
+            objects: arrTestimonials,
             leftPadding: 0,
             rightPadding: 0,
             horizontalItemSpacing: 0,
             widthForItem: 0
         )
+        self.arrTestimonials = arrTestimonials
         self.didSelect = didSelect
         startAnimation()
         updateUI()
@@ -58,7 +60,7 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     
     @objc private func scrollToNextCell(){
         
-        if nextPageIndex == NeonTestimonial.arrTestimonials.count{
+        if nextPageIndex == arrTestimonials.count{
             self.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             testimonialCollectionViewDelegate?.testimonialCollectionView(self, destinationPage: 0)
             nextPageIndex = 1
