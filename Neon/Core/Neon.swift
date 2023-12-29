@@ -28,9 +28,11 @@ public class Neon{
         window?.rootViewController = destinationVC
     }
     
-    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController, splashVC : UIViewController? = nil){
+    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController, splashVC : UIViewController? = nil, enableKeyboardManager : Bool = true){
 #if !os(xrOS)
-        configureIQKeyboard()
+        if enableKeyboardManager{
+            configureIQKeyboard()
+        }
 #endif
         
         self.homeVC = homeVC
