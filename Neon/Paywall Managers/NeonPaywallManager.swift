@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 
+@available(iOS 11.2, *)
 public class NeonPaywallManager{
     
    public static func isSubscription(product : SKProduct?) -> Bool{
