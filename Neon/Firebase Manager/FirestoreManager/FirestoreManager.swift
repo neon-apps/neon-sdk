@@ -70,6 +70,9 @@ public class FirestoreManager{
                 let documentData = document.data()
                 guard let documentData else {
                     print("Document couldn't fetched because it does not have any fields")
+                    if let isDocumentNotExist{
+                        isDocumentNotExist()
+                    }
                     return
                 }
                 completion(documentID, documentData)
@@ -86,7 +89,7 @@ public class FirestoreManager{
     
     
     ///  The object should be from Codable class. Ex : public class Country: Codable {}
-    public static func getDocument<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> ()){
+    public static func getDocument<T: Decodable>(path : [FirestoreReferance], objectType : T.Type, completion : @escaping (_ object : Encodable) -> (), isDocumentNotExist :  (() -> ())? = nil){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         referance.getDocument(as: objectType) { result in
             
@@ -96,9 +99,15 @@ public class FirestoreManager{
                     completion(encodableObject)
                 }else{
                     print("Fetched object is not encodable")
+                    if let isDocumentNotExist{
+                        isDocumentNotExist()
+                    }
                 }
             case .failure(let error):
                 print("Error decoding object: \(error)")
+                if let isDocumentNotExist{
+                    isDocumentNotExist()
+                }
             }
         }
     }
