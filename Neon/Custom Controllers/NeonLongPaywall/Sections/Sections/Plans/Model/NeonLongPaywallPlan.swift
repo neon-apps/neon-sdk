@@ -10,10 +10,10 @@ import Foundation
 
 public class NeonLongPaywallPlan{
     
-    var productIdentifier : String
-    var tag : String?
-    var priceType = PriceType.default
-    var isDefaultSelected = Bool()
+    public var productIdentifier : String
+    public var tag : String?
+    public var priceType = PriceType.default
+    public var isDefaultSelected = Bool()
     public init(productIdentifier: String = String(), tag: String? = nil, priceType : PriceType = .default, isDefaultSelected : Bool = false) {
         self.productIdentifier = productIdentifier
         self.tag = tag

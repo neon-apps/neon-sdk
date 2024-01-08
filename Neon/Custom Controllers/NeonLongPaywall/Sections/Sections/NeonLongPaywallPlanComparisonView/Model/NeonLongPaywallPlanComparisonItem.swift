@@ -8,8 +8,8 @@
 import Foundation
 
 public class NeonLongPaywallPlanComparisonItem: Equatable {
-    var feature: String
-    var availability: Availability
+    public var feature: String
+    public var availability: Availability
 
     public enum Availability {
         case locked

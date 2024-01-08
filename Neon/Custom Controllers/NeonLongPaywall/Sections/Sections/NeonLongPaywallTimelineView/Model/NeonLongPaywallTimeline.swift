@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 public class NeonLongPaywallTimelineItem{
-    var icon : UIImage?
-    var iconURL : String?
-    var title = String()
-    var subtitle = String()
-    var description = String()
+   public var icon : UIImage?
+   public var iconURL : String?
+   public var title = String()
+   public var subtitle = String()
+   public var description = String()
     
     public init(icon: UIImage, title: String, subtitle: String,  description: String) {
         self.icon = icon

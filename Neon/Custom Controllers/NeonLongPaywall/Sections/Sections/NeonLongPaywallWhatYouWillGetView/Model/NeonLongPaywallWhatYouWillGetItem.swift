@@ -8,9 +8,9 @@
 import Foundation
 
 public class NeonLongPaywallWhatYouWillGetItem{
-    var emoji = String()
-    var title = String()
-    var subtitle = String()
+    public var emoji = String()
+    public var title = String()
+    public var subtitle = String()
     
     public init(emoji: String, title: String, subtitle: String) {
         self.emoji = emoji

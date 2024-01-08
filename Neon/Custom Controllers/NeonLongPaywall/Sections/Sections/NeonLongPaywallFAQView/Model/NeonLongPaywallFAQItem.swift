@@ -8,9 +8,9 @@
 import Foundation
 
 public class NeonLongPaywallFAQItem: Equatable{
-    var question = String()
-    var answerTitle = String()
-    var answerSubtitle = String()
+    public var question = String()
+    public var answerTitle = String()
+    public var answerSubtitle = String()
     
     public init(question: String, answerTitle: String, answerSubtitle: String) {
         self.question = question
