@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 extension UIColor {
-    static func fromHex(_ hex: String) -> UIColor? {
+    public static func fromHex(_ hex: String) -> UIColor? {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
@@ -25,7 +25,7 @@ extension UIColor {
 }
 
 extension UIColor {
-    func toHex() -> String {
+    public func toHex() -> String {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
