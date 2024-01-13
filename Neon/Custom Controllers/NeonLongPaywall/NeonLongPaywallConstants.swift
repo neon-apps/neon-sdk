@@ -37,4 +37,8 @@ public class NeonLongPaywallConstants{
         }
     }
     public var allPlans = [NeonLongPaywallPlan]()
+    
+    public init(){
+        
+    }
 }
