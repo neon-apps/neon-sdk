@@ -23,6 +23,9 @@ public class NeonLongPaywallManager{
     public static var sections = [NeonLongPaywallSection]()
     public static var delegate : NeonLongPaywallDelegate?
     
+    public init(){
+        
+    }
     public static func configure(
         provider : NeonLongPaywallProviderType,
         isPaymentSheetActive : Bool,
