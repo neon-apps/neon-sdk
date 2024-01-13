@@ -12,8 +12,8 @@ import UIKit
 @available(iOS 15.0, *)
 class NeonLongPaywallPurchaseManager{
     
-    static func subscribe(completionSuccess : @escaping () -> ()){
-        let plan = NeonLongPaywallConstants.selectedPlan
+    static func subscribe(paywallManager : NeonLongPaywallManager, completionSuccess : @escaping () -> ()){
+        let plan = paywallManager.constants.selectedPlan
         
         if let adaptyPackage = AdaptyManager.getPackage(id: plan.productIdentifier){
             
@@ -21,7 +21,7 @@ class NeonLongPaywallPurchaseManager{
             
             AdaptyManager.selectPackage(id: product.productIdentifier)
             
-            AdaptyManager.purchase(animation: .loadingCircle, animationColor: NeonLongPaywallConstants.mainColor) {
+            AdaptyManager.purchase(animation: .loadingCircle, animationColor: paywallManager.constants.mainColor) {
                 completionSuccess()
                 } completionFailure: {
                     
@@ -32,7 +32,7 @@ class NeonLongPaywallPurchaseManager{
        
             RevenueCatManager.selectPackage(id: product.productIdentifier)
             
-            RevenueCatManager.purchase(animation: .loadingCircle, animationColor: NeonLongPaywallConstants.mainColor) {
+            RevenueCatManager.purchase(animation: .loadingCircle, animationColor: paywallManager.constants.mainColor) {
                 completionSuccess()
                 } completionFailure: {
                     
@@ -43,14 +43,14 @@ class NeonLongPaywallPurchaseManager{
         }
     }
     
-    static func restore(controller : UIViewController, completionSuccess : @escaping () -> ()){
+    static func restore(paywallManager : NeonLongPaywallManager, controller : UIViewController, completionSuccess : @escaping () -> ()){
         
-        let provider = NeonLongPaywallConstants.provider
+        let provider = paywallManager.constants.provider
         switch provider {
         case .adapty:
             AdaptyManager.restorePurchases(
                 vc: controller,
-                animation: .loadingCircle, animationColor: NeonLongPaywallConstants.mainColor) {
+                animation: .loadingCircle, animationColor: paywallManager.constants.mainColor) {
                     completionSuccess()
                 } completionFailure: {
                     
@@ -58,7 +58,7 @@ class NeonLongPaywallPurchaseManager{
         case .revenuecat:
             RevenueCatManager.restorePurchases(
                 vc: controller,
-                animation: .loadingCircle, animationColor: NeonLongPaywallConstants.mainColor) {
+                animation: .loadingCircle, animationColor: paywallManager.constants.mainColor) {
                     completionSuccess()
                 } completionFailure: {
                     

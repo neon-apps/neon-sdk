@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallSpacingView : BaseNeonLongPaywallSectionView{
     
     

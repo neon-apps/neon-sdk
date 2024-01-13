@@ -15,7 +15,8 @@ import StoreKit
 @available(iOS 15.0, *)
 class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     
-    let manager = NeonLongPaywallPlanManager()
+    let planManager = NeonLongPaywallPlanManager()
+    var paywallManager = NeonLongPaywallManager()
     let unitCostLabel = UILabel()
     let durationLabel = UILabel()
     let saveLabel = UILabel()
@@ -25,9 +26,9 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     var plan : NeonLongPaywallPlan? = nil{
         didSet{
             packageFetched()
-            manager.calculateSaveLabel(saveLabel: saveLabel)
-            manager.calculateTagLabel(tagLabel: tagLabel)
-            if manager.isDefaultPlan(){
+            planManager.calculateSaveLabel(saveLabel: saveLabel)
+            planManager.calculateTagLabel(tagLabel: tagLabel)
+            if planManager.isDefaultPlan(){
                 selectPlan()
             }
         }
@@ -36,8 +37,9 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     
     var delegate : NeonLongPaywallPlanViewDelegate?
     
-    init() {
+    init(paywallManager : NeonLongPaywallManager) {
         super.init(frame: .zero)
+        self.paywallManager = paywallManager
         configureView()
        
         
@@ -50,9 +52,9 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     
     func reloadPackage(){
         packageFetched()
-        manager.calculateSaveLabel(saveLabel: saveLabel)
-        manager.calculateTagLabel(tagLabel: tagLabel)
-        if manager.isDefaultPlan(){
+        planManager.calculateSaveLabel(saveLabel: saveLabel)
+        planManager.calculateTagLabel(tagLabel: tagLabel)
+        if planManager.isDefaultPlan(){
             selectPlan()
         }
     }
@@ -64,10 +66,10 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         spacing = 10
         distribution = .fillProportionally
         alignment = .center
-        layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
-        backgroundColor = NeonLongPaywallConstants.containerColor
-        layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor
-        layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
+        layer.cornerRadius = paywallManager.constants.cornerRadius
+        backgroundColor = paywallManager.constants.containerColor
+        layer.borderColor = paywallManager.constants.containerBorderColor.cgColor
+        layer.borderWidth = paywallManager.constants.containerBorderWidth
         isUserInteractionEnabled = true
         
         
@@ -75,7 +77,7 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         
         
         
-        tagLabel.textColor = NeonLongPaywallConstants.ctaButtonTextColor
+        tagLabel.textColor = paywallManager.constants.ctaButtonTextColor
         tagLabel.font = Font.custom(size: 10, fontWeight: .Bold)
         tagLabel.numberOfLines = 0
         tagLabel.textAlignment = .center
@@ -91,7 +93,7 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         tagLabel.bottomInset = 2
         
         
-        durationLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        durationLabel.textColor = paywallManager.constants.primaryTextColor
         durationLabel.font = Font.custom(size: 15, fontWeight: .SemiBold)
         durationLabel.numberOfLines = 0
         durationLabel.textAlignment = .center
@@ -101,7 +103,7 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         
         
         unitCostLabel.text = "..."
-        unitCostLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        unitCostLabel.textColor = paywallManager.constants.primaryTextColor
         unitCostLabel.font = Font.custom(size: 10, fontWeight: .Medium)
         unitCostLabel.numberOfLines = 0
         unitCostLabel.textAlignment = .center
@@ -109,7 +111,7 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         
         
         saveLabel.text = " "
-        saveLabel.textColor = NeonLongPaywallConstants.mainColor
+        saveLabel.textColor = paywallManager.constants.mainColor
         saveLabel.font = Font.custom(size: 14, fontWeight: .SemiBold)
         saveLabel.numberOfLines = 0
         saveLabel.textAlignment = .center
@@ -117,7 +119,7 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         
         
         iconSelected.image =  UIImage(named: "btn_radio_unselected", in: Bundle.module, compatibleWith: nil)
-        iconSelected.tintColor = NeonLongPaywallConstants.mainColor
+        iconSelected.tintColor = paywallManager.constants.mainColor
         addArrangedSubview(iconSelected)
         iconSelected.snp.makeConstraints { make in
             make.width.height.equalTo(40)
@@ -139,8 +141,8 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
       
         guard let plan else { return }
         
-        if NeonLongPaywallConstants.selectedPlan.productIdentifier != plan.productIdentifier{
-            NeonLongPaywallConstants.selectedPlan = plan
+        if paywallManager.constants.selectedPlan.productIdentifier != plan.productIdentifier{
+            paywallManager.constants.selectedPlan = plan
         }
      
         
@@ -149,13 +151,13 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         }
         
         if tagLabel.text != " "{
-            tagLabel.backgroundColor = NeonLongPaywallConstants.mainColor
-            tagLabel.textColor = NeonLongPaywallConstants.ctaButtonTextColor
+            tagLabel.backgroundColor = paywallManager.constants.mainColor
+            tagLabel.textColor = paywallManager.constants.ctaButtonTextColor
         }
         
         
-        backgroundColor = NeonLongPaywallConstants.selectedContainerColor
-        layer.borderColor = NeonLongPaywallConstants.selectedContainerBorderColor.cgColor
+        backgroundColor = paywallManager.constants.selectedContainerColor
+        layer.borderColor = paywallManager.constants.selectedContainerBorderColor.cgColor
         iconSelected.image = UIImage(named: "btn_radio_selected", in: Bundle.module, compatibleWith: nil)
         
         UIView.animate(withDuration: 0.3) {
@@ -165,10 +167,10 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
     
     @objc func deselectPlan(){
         tagLabel.backgroundColor = .clear
-        tagLabel.textColor = NeonLongPaywallConstants.mainColor
+        tagLabel.textColor = paywallManager.constants.mainColor
         
-        backgroundColor = NeonLongPaywallConstants.containerColor
-        layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor
+        backgroundColor = paywallManager.constants.containerColor
+        layer.borderColor = paywallManager.constants.containerBorderColor.cgColor
         iconSelected.image = UIImage(named: "btn_radio_unselected", in: Bundle.module, compatibleWith: nil)
         
         UIView.animate(withDuration: 0.3) {
@@ -181,8 +183,8 @@ class NeonLongPaywallHorizontalPlanView : UIStackView, AdaptyManagerDelegate{
         
         guard let plan else { return }
         
-        if let product = manager.fetchProduct(for: plan){
-            manager.configurePriceWithProduct(product: product, durationLabel: durationLabel, unitCostLabel: unitCostLabel, plan: plan, allPlans: allPlans)
+        if let product = planManager.fetchProduct(for: plan){
+            planManager.configurePriceWithProduct(product: product, durationLabel: durationLabel, unitCostLabel: unitCostLabel, plan: plan, allPlans: allPlans)
         }else{
             // Couldn't fetch product
         }

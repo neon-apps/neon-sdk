@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallLabelView : BaseNeonLongPaywallSectionView{
     
     
@@ -24,7 +25,7 @@ class NeonLongPaywallLabelView : BaseNeonLongPaywallSectionView{
             label.text = text
             label.font = font
             label.textAlignment = alignment
-            label.textColor = color ??  NeonLongPaywallConstants.primaryTextColor
+            label.textColor = color ??  manager.constants.primaryTextColor
             label.snp.makeConstraints { make in
                 make.left.right.equalToSuperview().inset(horizontalPadding)
                 make.top.equalToSuperview()

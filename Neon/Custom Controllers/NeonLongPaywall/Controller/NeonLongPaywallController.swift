@@ -19,7 +19,8 @@ public class NeonLongPaywallController : UIViewController{
     let paywallBackgroundView = UIView()
     let legalView = NeonLegalView()
     let continueButton = NeonBouncingButton()
-    let manager = NeonLongPaywallPlanManager()
+    let planManager = NeonLongPaywallPlanManager()
+    let paywallManager = NeonLongPaywallManager()
     public override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -44,7 +45,7 @@ public class NeonLongPaywallController : UIViewController{
         }
        
     func configureUI(){
-        view.backgroundColor = NeonLongPaywallConstants.backgroundColor
+        view.backgroundColor = paywallManager.constants.backgroundColor
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.showsVerticalScrollIndicator = false
         view.addSubview(scrollView)
@@ -65,19 +66,19 @@ public class NeonLongPaywallController : UIViewController{
         mainStack.distribution = .equalSpacing
         mainStack.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
       
         }
 
        
         view.addSubview(continueButton)
-        continueButton.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
-        continueButton.backgroundColor = NeonLongPaywallConstants.mainColor
+        continueButton.layer.cornerRadius = paywallManager.constants.cornerRadius
+        continueButton.backgroundColor = paywallManager.constants.mainColor
         continueButton.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
         continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
         continueButton.setTitle("Continue", for: .normal)
         continueButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.height.equalTo(60)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
@@ -94,10 +95,10 @@ public class NeonLongPaywallController : UIViewController{
         addGradientToPaywallBackground()
         
         
-        if !NeonLongPaywallConstants.isPaymentSheetActive{
+        if !paywallManager.constants.isPaymentSheetActive{
             configureLegalView()
             continueButton.snp.remakeConstraints { make in
-                make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+                make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
                 make.height.equalTo(60)
                 make.bottom.equalTo(view.safeAreaLayoutGuide).inset(40)
             }
@@ -111,28 +112,28 @@ public class NeonLongPaywallController : UIViewController{
     func configureLegalView(){
         
         
-        legalView.restoreButtonClicked = {
-            NeonLongPaywallPurchaseManager.restore(controller: self){
-                NeonLongPaywallManager.delegate?.restored(from: self)
+        legalView.restoreButtonClicked = { [self] in
+            NeonLongPaywallPurchaseManager.restore(paywallManager: paywallManager, controller: self){ [self] in
+                paywallManager.delegate?.restored(from: self)
             }
         }
-        if let termsURL = NeonLongPaywallConstants.termsURL, let privacyURL = NeonLongPaywallConstants.privacyURL{
+        if let termsURL = paywallManager.constants.termsURL, let privacyURL = paywallManager.constants.privacyURL{
             legalView.termsURL = termsURL
             legalView.privacyURL = privacyURL
         }else{
-            legalView.configureLegalController(onVC: self, backgroundColor: NeonLongPaywallConstants.backgroundColor, headerColor: NeonLongPaywallConstants.mainColor, titleColor: NeonLongPaywallConstants.ctaButtonTextColor, textColor: NeonLongPaywallConstants.primaryTextColor)
+            legalView.configureLegalController(onVC: self, backgroundColor: paywallManager.constants.backgroundColor, headerColor: paywallManager.constants.mainColor, titleColor: paywallManager.constants.ctaButtonTextColor, textColor: paywallManager.constants.primaryTextColor)
         }
-        legalView.textColor = NeonLongPaywallConstants.primaryTextColor
+        legalView.textColor = paywallManager.constants.primaryTextColor
         view.addSubview(legalView)
         legalView.snp.makeConstraints { make in
             make.top.equalTo(continueButton.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.height.equalTo(70)
         }
     }
     func addGradientToPaywallBackground() {
        
-        gradientLayer.colors = [NeonLongPaywallConstants.backgroundColor.withAlphaComponent(0).cgColor, NeonLongPaywallConstants.backgroundColor.cgColor]
+        gradientLayer.colors = [paywallManager.constants.backgroundColor.withAlphaComponent(0).cgColor, paywallManager.constants.backgroundColor.cgColor]
         gradientLayer.locations = [0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
@@ -144,12 +145,13 @@ public class NeonLongPaywallController : UIViewController{
     @objc func continueButtonClicked(){
         
         vibrate(style: .heavy)
-        if NeonLongPaywallConstants.isPaymentSheetActive{
+        if paywallManager.constants.isPaymentSheetActive{
             let paymentSheetController = NeonLongPaywallPaymentSheetController()
+            paymentSheetController.paywallManager = paywallManager
             self.present(paymentSheetController, animated: true, completion: nil)
         }else{
-            NeonLongPaywallPurchaseManager.subscribe {
-                NeonLongPaywallManager.delegate?.purchased(from: self, identifier:  NeonLongPaywallConstants.selectedPlan.productIdentifier)
+            NeonLongPaywallPurchaseManager.subscribe(paywallManager: paywallManager) { [self] in
+                paywallManager.delegate?.purchased(from: self, identifier:  paywallManager.constants.selectedPlan.productIdentifier)
             }
         }
        
@@ -160,10 +162,10 @@ public class NeonLongPaywallController : UIViewController{
     func addSections(){
 
         let btnCross = UIButton()
-        btnCross.tintColor = NeonLongPaywallConstants.primaryTextColor
+        btnCross.tintColor = paywallManager.constants.primaryTextColor
         btnCross.setImage(NeonSymbols.xmark, for: .normal)
-        btnCross.addAction {
-            NeonLongPaywallManager.delegate?.dismissed(from: self)
+        btnCross.addAction { [self] in
+            paywallManager.delegate?.dismissed(from: self)
         }
         scrollView.addSubview(btnCross)
         btnCross.snp.makeConstraints { make in
@@ -173,7 +175,7 @@ public class NeonLongPaywallController : UIViewController{
         }
        
         
-        for section in NeonLongPaywallManager.sections{
+        for section in paywallManager.sections{
             switch section.type {
             case .custom(let view):
                 mainStack.addArrangedSubview(view)
@@ -201,7 +203,7 @@ public class NeonLongPaywallController : UIViewController{
     }
     
     func logPaywallView(){
-        let provider = NeonLongPaywallConstants.provider
+        let provider = paywallManager.constants.provider
         
         switch provider {
         case .adapty(let placementID):
@@ -214,8 +216,8 @@ public class NeonLongPaywallController : UIViewController{
         }
     }
     func fetchSelectedPlanDetails(){
-        if let product = manager.fetchProduct(for: NeonLongPaywallConstants.selectedPlan){
-            if let  trialDuration = manager.getTrialDuration(product: product), trialDuration != 0{
+        if let product = planManager.fetchProduct(for: paywallManager.constants.selectedPlan){
+            if let  trialDuration = planManager.getTrialDuration(product: product), trialDuration != 0{
                 continueButton.setTitle("Start my \(trialDuration)-day free trial", for: .normal)
             }else{
                 continueButton.setTitle("Continue", for: .normal)
@@ -227,7 +229,7 @@ public class NeonLongPaywallController : UIViewController{
     func setPlanViews(){
         for section in mainStack.subviews{
             if let planView = section as? NeonLongPaywallPlansView{
-                planView.select(plan: NeonLongPaywallConstants.selectedPlan)
+                planView.select(plan: paywallManager.constants.selectedPlan)
             }
         }
   

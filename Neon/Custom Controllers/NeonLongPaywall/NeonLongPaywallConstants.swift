@@ -1,5 +1,5 @@
 //
-//  NeonLongPaywallConstants.swift
+//  manager.constants.swift
 //  NeonLongOnboardingPlayground
 //
 //  Created by Tuna Öztürk on 19.11.2023.
@@ -10,31 +10,31 @@ import NeonSDK
 import UIKit
 
 public class NeonLongPaywallConstants{
-    public static var termsURL : String?
-    public static var privacyURL : String?
-    public static var provider = NeonLongPaywallProviderType.revenuecat
-    public static var isPaymentSheetActive = Bool()
-    public static var horizontalPadding = CGFloat()
-    public static var cornerRadius = CGFloat()
-    public static var containerBorderWidth = CGFloat()
+    public var termsURL : String?
+    public var privacyURL : String?
+    public var provider = NeonLongPaywallProviderType.revenuecat
+    public var isPaymentSheetActive = Bool()
+    public var horizontalPadding = CGFloat()
+    public var cornerRadius = CGFloat()
+    public var containerBorderWidth = CGFloat()
     // Colors
     
-    public static var primaryTextColor = UIColor()
-    public static var secondaryTextColor = UIColor()
-    public static var selectedContainerColor = UIColor()
-    public static var containerColor = UIColor()
-    public static var selectedContainerBorderColor = UIColor()
-    public static var containerBorderColor = UIColor()
-    public static var mainColor = UIColor()
-    public static var backgroundColor = UIColor()
-    public static var ctaButtonTextColor = UIColor()
+    public var primaryTextColor = UIColor()
+    public var secondaryTextColor = UIColor()
+    public var selectedContainerColor = UIColor()
+    public var containerColor = UIColor()
+    public var selectedContainerBorderColor = UIColor()
+    public var containerBorderColor = UIColor()
+    public var mainColor = UIColor()
+    public var backgroundColor = UIColor()
+    public var ctaButtonTextColor = UIColor()
     
     // Variables
     
-    public static var selectedPlan = NeonLongPaywallPlan(){
+    public var selectedPlan = NeonLongPaywallPlan(){
         didSet{
             NeonNotificationCenter.post(id: "plan_selected", object: selectedPlan)
         }
     }
-    public static var allPlans = [NeonLongPaywallPlan]()
+    public var allPlans = [NeonLongPaywallPlan]()
 }

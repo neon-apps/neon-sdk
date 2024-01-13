@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallFeaturesView : BaseNeonLongPaywallSectionView{
     
     
@@ -77,7 +78,7 @@ class NeonLongPaywallFeaturesView : BaseNeonLongPaywallSectionView{
         
         let label = UILabel()
         label.text = item.title
-        label.textColor = textColor ?? NeonLongPaywallConstants.primaryTextColor
+        label.textColor = textColor ?? manager.constants.primaryTextColor
         label.font = font ?? Font.custom(size: 14, fontWeight: .SemiBold)
         label.numberOfLines = 0
         horizontalStack.addArrangedSubview(label)

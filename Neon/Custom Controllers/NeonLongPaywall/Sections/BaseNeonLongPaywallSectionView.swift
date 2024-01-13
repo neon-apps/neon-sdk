@@ -8,11 +8,14 @@
 import Foundation
 import UIKit
 
+@available(iOS 15.0, *)
 open class BaseNeonLongPaywallSectionView: UIView {
     
-
-    public init(type: NeonLongPaywallSectionType) {
+    var manager = NeonLongPaywallManager()
+    
+    public init(type: NeonLongPaywallSectionType, manager : NeonLongPaywallManager) {
         super.init(frame: .zero)
+        self.manager = manager
         configureSection(type : type)
     }
     public override func didMoveToSuperview() {
@@ -30,6 +33,6 @@ open class BaseNeonLongPaywallSectionView: UIView {
     
     func showContainer(){
         layer.cornerRadius = 10
-        backgroundColor = NeonLongPaywallConstants.containerColor
+        backgroundColor = manager.constants.containerColor
     }
 }

@@ -12,7 +12,7 @@ import NeonSDK
 @available(iOS 15.0, *)
 public class NeonLongPaywallPaymentSheetController : UIViewController{
 
-    let manager = NeonLongPaywallPlanManager()
+    let planManager = NeonLongPaywallPlanManager()
     let continueButton = NeonBouncingButton()
     let saveLabel = UILabel()
     let unitCostLabel = UILabel()
@@ -21,6 +21,7 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
     let totalPriceLabel = UILabel()
     var trialDuration : Int?
     let legalView = NeonLegalView()
+    var paywallManager = NeonLongPaywallManager()
     public override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -40,19 +41,19 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
     
 
     func configureUI(){
-        view.backgroundColor = NeonLongPaywallConstants.backgroundColor
+        view.backgroundColor = paywallManager.constants.backgroundColor
         
    
     
         let getPremiumLabel = UILabel()
         getPremiumLabel.text = "Get Premium"
-        getPremiumLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        getPremiumLabel.textColor = paywallManager.constants.primaryTextColor
         getPremiumLabel.font = Font.custom(size: 20, fontWeight: .SemiBold)
         getPremiumLabel.numberOfLines = 0
         getPremiumLabel.textAlignment = .center
         view.addSubview(getPremiumLabel)
         getPremiumLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalToSuperview().inset(40)
         }
       
@@ -70,51 +71,51 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
         
         let lblMoneyBack = UILabel()
         lblMoneyBack.text = "6 MONTHS MONEY BACK GUARANTEE"
-        lblMoneyBack.textColor = NeonLongPaywallConstants.primaryTextColor
+        lblMoneyBack.textColor = paywallManager.constants.primaryTextColor
         lblMoneyBack.font = Font.custom(size: 14, fontWeight: .Medium)
         lblMoneyBack.numberOfLines = 0
         lblMoneyBack.textAlignment = .center
         view.addSubview(lblMoneyBack)
         lblMoneyBack.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(lastViewFromTotalLine.snp.bottom).offset(30)
         }
         
         
         view.addSubview(continueButton)
         continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
-        continueButton.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+        continueButton.layer.cornerRadius = paywallManager.constants.cornerRadius
         continueButton.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
-        continueButton.backgroundColor = NeonLongPaywallConstants.mainColor
+        continueButton.backgroundColor = paywallManager.constants.mainColor
         continueButton.addAction {
    
             
         }
      
         continueButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.height.equalTo(60)
             make.top.equalTo(lblMoneyBack.snp.bottom).offset(20)
         }
         
         
        
-        legalView.restoreButtonClicked = {
-            NeonLongPaywallPurchaseManager.restore(controller: self){
-                NeonLongPaywallManager.delegate?.restored(from: self)
+        legalView.restoreButtonClicked = { [self] in
+            NeonLongPaywallPurchaseManager.restore(paywallManager: paywallManager, controller: self){ [self] in
+                paywallManager.delegate?.restored(from: self)
             }
         }
-        if let termsURL = NeonLongPaywallConstants.termsURL, let privacyURL = NeonLongPaywallConstants.privacyURL{
+        if let termsURL = paywallManager.constants.termsURL, let privacyURL = paywallManager.constants.privacyURL{
             legalView.termsURL = termsURL
             legalView.privacyURL = privacyURL
         }else{
-            legalView.configureLegalController(onVC: self, backgroundColor: NeonLongPaywallConstants.backgroundColor, headerColor: NeonLongPaywallConstants.mainColor, titleColor: NeonLongPaywallConstants.ctaButtonTextColor, textColor: NeonLongPaywallConstants.primaryTextColor)
+            legalView.configureLegalController(onVC: self, backgroundColor: paywallManager.constants.backgroundColor, headerColor: paywallManager.constants.mainColor, titleColor: paywallManager.constants.ctaButtonTextColor, textColor: paywallManager.constants.primaryTextColor)
         }
-        legalView.textColor = NeonLongPaywallConstants.primaryTextColor
+        legalView.textColor = paywallManager.constants.primaryTextColor
         view.addSubview(legalView)
         legalView.snp.makeConstraints { make in
             make.top.equalTo(continueButton.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.height.equalTo(40)
         }
     }
@@ -140,19 +141,19 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
     func addTrialLine(previousView : UIView, trialDuration : Int) -> UIView{
         let trialLabel  = UILabel()
         trialLabel.text = "\(trialDuration)-DAY FREE TRIAL"
-        trialLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        trialLabel.textColor = paywallManager.constants.primaryTextColor
         trialLabel.font = Font.custom(size: 14, fontWeight: .SemiBold)
         trialLabel.numberOfLines = 0
         trialLabel.textAlignment = .center
         view.addSubview(trialLabel)
         trialLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(previousView.snp.bottom).offset(20)
         }
         
         let lblPremium = NeonPaddingLabel()
         lblPremium.text = "NO PAYMENT NOW"
-        lblPremium.textColor = NeonLongPaywallConstants.mainColor
+        lblPremium.textColor = paywallManager.constants.mainColor
         lblPremium.font = Font.custom(size: 13, fontWeight: .Bold)
         lblPremium.numberOfLines = 0
         lblPremium.textAlignment = .center
@@ -160,19 +161,19 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
         lblPremium.layer.masksToBounds = true
         view.addSubview(lblPremium)
         lblPremium.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.centerY.equalTo(trialLabel)
         }
 
         
 
         let lineView = UIView()
-        lineView.backgroundColor = NeonLongPaywallConstants.primaryTextColor
+        lineView.backgroundColor = paywallManager.constants.primaryTextColor
         view.addSubview(lineView)
         lineView.alpha = 0.4
         lineView.snp.makeConstraints { make in
             make.height.equalTo(0.5)
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(trialLabel.snp.bottom).offset(20)
         }
         return lineView
@@ -181,20 +182,20 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
     }
     
     func addUnitCostLine(previousView : UIView) -> UIView{
-        durationLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        durationLabel.textColor = paywallManager.constants.primaryTextColor
         durationLabel.font = Font.custom(size: 14, fontWeight: .Medium)
         durationLabel.numberOfLines = 0
         durationLabel.textAlignment = .center
         view.addSubview(durationLabel)
         durationLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(previousView.snp.bottom).offset(20)
         }
         
         let lblPremium = NeonPaddingLabel()
         lblPremium.text = "PRO"
-        lblPremium.backgroundColor = NeonLongPaywallConstants.mainColor
-        lblPremium.textColor = NeonLongPaywallConstants.ctaButtonTextColor
+        lblPremium.backgroundColor = paywallManager.constants.mainColor
+        lblPremium.textColor = paywallManager.constants.ctaButtonTextColor
         lblPremium.font = Font.custom(size: 13, fontWeight: .Bold)
         lblPremium.numberOfLines = 0
         lblPremium.textAlignment = .center
@@ -210,23 +211,23 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
         lblPremium.topInset = 2
         lblPremium.bottomInset = 2
         
-        unitCostLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        unitCostLabel.textColor = paywallManager.constants.primaryTextColor
         unitCostLabel.font = Font.custom(size: 14, fontWeight: .Medium)
         unitCostLabel.numberOfLines = 0
         unitCostLabel.textAlignment = .center
         view.addSubview(unitCostLabel)
         unitCostLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.centerY.equalTo(durationLabel)
         }
         
         let lineView = UIView()
-        lineView.backgroundColor = NeonLongPaywallConstants.primaryTextColor
+        lineView.backgroundColor = paywallManager.constants.primaryTextColor
         view.addSubview(lineView)
         lineView.alpha = 0.4
         lineView.snp.makeConstraints { make in
             make.height.equalTo(0.5)
-            make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(unitCostLabel.snp.bottom).offset(20)
         }
         return lineView
@@ -238,25 +239,25 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
         
         let totalLabel = UILabel()
         totalLabel.text = "Total"
-        totalLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        totalLabel.textColor = paywallManager.constants.primaryTextColor
         totalLabel.font = Font.custom(size: 15, fontWeight: .Medium)
         totalLabel.numberOfLines = 0
         totalLabel.textAlignment = .center
         view.addSubview(totalLabel)
         totalLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.left.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.top.equalTo(previousView.snp.bottom).offset(20)
         }
         
       
        
-        totalPriceLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        totalPriceLabel.textColor = paywallManager.constants.primaryTextColor
         totalPriceLabel.font = Font.custom(size: 15, fontWeight: .SemiBold)
         totalPriceLabel.numberOfLines = 0
         totalPriceLabel.textAlignment = .center
         view.addSubview(totalPriceLabel)
         totalPriceLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+            make.right.equalToSuperview().inset(paywallManager.constants.horizontalPadding)
             make.centerY.equalTo(totalLabel)
         }
         
@@ -264,7 +265,7 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
        
       
         saveLabel.text = " "
-        saveLabel.textColor = NeonLongPaywallConstants.mainColor
+        saveLabel.textColor = paywallManager.constants.mainColor
         saveLabel.font = Font.custom(size: 15, fontWeight: .SemiBold)
         saveLabel.numberOfLines = 0
         saveLabel.textAlignment = .right
@@ -282,18 +283,18 @@ public class NeonLongPaywallPaymentSheetController : UIViewController{
     @objc func continueButtonClicked(){
         
         vibrate(style: .heavy)
-        NeonLongPaywallPurchaseManager.subscribe {
-            NeonLongPaywallManager.delegate?.purchased(from: self, identifier: NeonLongPaywallConstants.selectedPlan.productIdentifier)
+        NeonLongPaywallPurchaseManager.subscribe(paywallManager: paywallManager) { [self] in
+            paywallManager.delegate?.purchased(from: self, identifier: paywallManager.constants.selectedPlan.productIdentifier)
         }
     }
     
     func fetchSelectedPlanDetails(){
-        if let product = manager.fetchProduct(for: NeonLongPaywallConstants.selectedPlan){
-            manager.configurePriceWithProduct(product: product, durationLabel: durationLabel, unitCostLabel: unitCostLabel, plan: NeonLongPaywallConstants.selectedPlan, allPlans: NeonLongPaywallConstants.allPlans)
-            manager.calculateSaveLabel(saveLabel: saveLabel)
-            manager.calculateTagLabel(tagLabel: tagLabel)
-            totalPriceLabel.text = manager.getDefaultPrice(product: product)
-            trialDuration = manager.getTrialDuration(product: product)
+        if let product = planManager.fetchProduct(for: paywallManager.constants.selectedPlan){
+            planManager.configurePriceWithProduct(product: product, durationLabel: durationLabel, unitCostLabel: unitCostLabel, plan: paywallManager.constants.selectedPlan, allPlans: paywallManager.constants.allPlans)
+            planManager.calculateSaveLabel(saveLabel: saveLabel)
+            planManager.calculateTagLabel(tagLabel: tagLabel)
+            totalPriceLabel.text = planManager.getDefaultPrice(product: product)
+            trialDuration = planManager.getTrialDuration(product: product)
             
         }else{
             // Couldn't fetch product

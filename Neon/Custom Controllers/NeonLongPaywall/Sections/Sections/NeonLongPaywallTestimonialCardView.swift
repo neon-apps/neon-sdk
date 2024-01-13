@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     
     
@@ -48,10 +49,10 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
     }
     
     func configureView(){
-        containerView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-        containerView.layer.borderColor = NeonLongPaywallConstants.containerBorderColor.cgColor
-        containerView.backgroundColor = NeonLongPaywallConstants.containerColor
-        containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+        containerView.layer.borderWidth = manager.constants.containerBorderWidth
+        containerView.layer.borderColor = manager.constants.containerBorderColor.cgColor
+        containerView.backgroundColor = manager.constants.containerColor
+        containerView.layer.cornerRadius = manager.constants.cornerRadius
         addSubview(containerView)
         
         
@@ -66,7 +67,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
         
         titleLabel.font = Font.custom(size: 16, fontWeight: .SemiBold)
         containerView.addSubview(titleLabel)
-        titleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        titleLabel.textColor = manager.constants.primaryTextColor
         titleLabel.numberOfLines = 0
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(starsImageView.snp.bottom).offset(10)
@@ -74,7 +75,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.right.equalToSuperview().offset(-20)
         }
         
-        subtitleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        subtitleLabel.textColor = manager.constants.primaryTextColor
         subtitleLabel.font = Font.custom(size: 14, fontWeight: .Medium)
         subtitleLabel.numberOfLines = 0
         
@@ -85,7 +86,7 @@ class NeonLongPaywallTestimonialCardView : BaseNeonLongPaywallSectionView{
             make.right.equalToSuperview().offset(-20)
             
         }
-        authorLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        authorLabel.textColor = manager.constants.primaryTextColor
         authorLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
         authorLabel.numberOfLines = 0
         

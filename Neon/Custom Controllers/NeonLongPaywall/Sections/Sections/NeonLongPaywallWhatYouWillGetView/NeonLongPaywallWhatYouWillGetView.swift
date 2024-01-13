@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallWhatYouWillGetView : BaseNeonLongPaywallSectionView{
     
     
@@ -21,8 +22,8 @@ class NeonLongPaywallWhatYouWillGetView : BaseNeonLongPaywallSectionView{
            setConstraint()
            switch type {
            case .whatYouWillGet(let title, let hasContainer, let items):
-               containerView.backgroundColor = hasContainer ? NeonLongPaywallConstants.containerColor : .clear
-               containerView.layer.borderColor = hasContainer ? NeonLongPaywallConstants.containerBorderColor.cgColor : UIColor.clear.cgColor
+               containerView.backgroundColor = hasContainer ? manager.constants.containerColor : .clear
+               containerView.layer.borderColor = hasContainer ? manager.constants.containerBorderColor.cgColor : UIColor.clear.cgColor
                items.forEach { addItem($0) }
                titleLabel.text = title
            default:
@@ -32,26 +33,26 @@ class NeonLongPaywallWhatYouWillGetView : BaseNeonLongPaywallSectionView{
        
        func configureView() {
     
-           containerView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-           containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+           containerView.layer.borderWidth = manager.constants.containerBorderWidth
+           containerView.layer.cornerRadius = manager.constants.cornerRadius
            addSubview(containerView)
        
-           titleLabel.textColor = NeonLongPaywallConstants.mainColor
+           titleLabel.textColor = manager.constants.mainColor
            titleLabel.font = Font.custom(size: 18, fontWeight: .SemiBold)
            containerView.addSubview(titleLabel)
            titleLabel.numberOfLines = 0
            titleLabel.snp.makeConstraints { make in
                make.top.equalToSuperview().offset(20)
-               make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+               make.left.right.equalToSuperview().inset(manager.constants.horizontalPadding)
            }
            titleLabel.sizeToFit()
            
            let lineView = UIView()
-           lineView.backgroundColor = NeonLongPaywallConstants.secondaryTextColor.withAlphaComponent(0.4)
+           lineView.backgroundColor = manager.constants.secondaryTextColor.withAlphaComponent(0.4)
            containerView.addSubview(lineView)
            lineView.snp.makeConstraints { make in
                make.top.equalTo(titleLabel.snp.bottom).offset(15)
-               make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+               make.left.right.equalToSuperview().inset(manager.constants.horizontalPadding)
                make.height.equalTo(1)
            }
            
@@ -96,7 +97,7 @@ class NeonLongPaywallWhatYouWillGetView : BaseNeonLongPaywallSectionView{
         titleLabel.text = item.title
         titleLabel.textAlignment = .left
         titleLabel.font = Font.custom(size: 14, fontWeight: .SemiBold)
-        titleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        titleLabel.textColor = manager.constants.primaryTextColor
         itemView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(emojiLabel.snp.right).offset(8)
@@ -109,7 +110,7 @@ class NeonLongPaywallWhatYouWillGetView : BaseNeonLongPaywallSectionView{
         subtitleLabel.text = item.subtitle
         subtitleLabel.textAlignment = .left
         subtitleLabel.font = Font.custom(size: 12, fontWeight: .Medium)
-        subtitleLabel.textColor = NeonLongPaywallConstants.secondaryTextColor
+        subtitleLabel.textColor = manager.constants.secondaryTextColor
         subtitleLabel.numberOfLines = 0
         itemView.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints { make in

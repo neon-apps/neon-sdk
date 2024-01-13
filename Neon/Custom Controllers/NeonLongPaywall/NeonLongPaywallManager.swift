@@ -19,14 +19,15 @@ public protocol NeonLongPaywallDelegate {
 @available(iOS 15.0, *)
 public class NeonLongPaywallManager{
     
-    public static var paywall : NeonLongPaywallController?
-    public static var sections = [NeonLongPaywallSection]()
-    public static var delegate : NeonLongPaywallDelegate?
+    public var paywall : NeonLongPaywallController?
+    public var sections = [NeonLongPaywallSection]()
+    public var delegate : NeonLongPaywallDelegate?
+    public var constants = NeonLongPaywallConstants()
     
     public init(){
         
     }
-    public static func configure(
+    public func configure(
         provider : NeonLongPaywallProviderType,
         isPaymentSheetActive : Bool,
         horizontalPadding: CGFloat,
@@ -45,25 +46,25 @@ public class NeonLongPaywallManager{
         privacyURL : String? = nil
         
     ) {
-        NeonLongPaywallConstants.provider = provider
-        NeonLongPaywallConstants.isPaymentSheetActive = isPaymentSheetActive
-        NeonLongPaywallConstants.horizontalPadding = horizontalPadding
-        NeonLongPaywallConstants.cornerRadius = cornerRadius
-        NeonLongPaywallConstants.containerBorderWidth = containerBorderWidth
-        NeonLongPaywallConstants.primaryTextColor = primaryTextColor
-        NeonLongPaywallConstants.secondaryTextColor = secondaryTextColor
-        NeonLongPaywallConstants.containerColor = containerColor
-        NeonLongPaywallConstants.selectedContainerColor = selectedContainerColor
-        NeonLongPaywallConstants.containerBorderColor = containerBorderColor
-        NeonLongPaywallConstants.selectedContainerBorderColor = selectedContainerBorderColor
-        NeonLongPaywallConstants.mainColor = mainColor
-        NeonLongPaywallConstants.backgroundColor = backgroundColor
-        NeonLongPaywallConstants.ctaButtonTextColor = ctaButtonTextColor
-        NeonLongPaywallConstants.termsURL = termsURL
-        NeonLongPaywallConstants.privacyURL = privacyURL
+        constants.provider = provider
+        constants.isPaymentSheetActive = isPaymentSheetActive
+        constants.horizontalPadding = horizontalPadding
+        constants.cornerRadius = cornerRadius
+        constants.containerBorderWidth = containerBorderWidth
+        constants.primaryTextColor = primaryTextColor
+        constants.secondaryTextColor = secondaryTextColor
+        constants.containerColor = containerColor
+        constants.selectedContainerColor = selectedContainerColor
+        constants.containerBorderColor = containerBorderColor
+        constants.selectedContainerBorderColor = selectedContainerBorderColor
+        constants.mainColor = mainColor
+        constants.backgroundColor = backgroundColor
+        constants.ctaButtonTextColor = ctaButtonTextColor
+        constants.termsURL = termsURL
+        constants.privacyURL = privacyURL
           paywall = NeonLongPaywallController()
       }
-    public static func present(from controller : UIViewController){
+    public func present(from controller : UIViewController){
         if paywall != nil{
             controller.present(destinationVC: paywall!, slideDirection: .up)
         }else{
@@ -71,7 +72,7 @@ public class NeonLongPaywallManager{
         }
       
     }
-    public static func getPaywall() -> UIViewController{
+    public func getPaywall() -> UIViewController{
         if paywall != nil{
             return paywall!
         }else{
@@ -80,9 +81,9 @@ public class NeonLongPaywallManager{
       
     }
     
-    public static func addSection(type : NeonLongPaywallSectionType){
+    public func addSection(type : NeonLongPaywallSectionType){
         if paywall != nil{
-            NeonLongPaywallManager.sections.append(NeonLongPaywallSection(type: type))
+            sections.append(NeonLongPaywallSection(type: type, manager: self))
         }else{
            fatalError("You should configure paywall with NeonLongPaywallManager.configure method before adding sections.")
         }

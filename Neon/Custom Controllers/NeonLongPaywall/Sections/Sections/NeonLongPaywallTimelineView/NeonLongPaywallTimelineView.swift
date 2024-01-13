@@ -9,6 +9,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
     
     
@@ -21,8 +22,8 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
            setConstraint()
            switch type {
            case .timeline(let hasContainer, let items):
-               containerView.backgroundColor = hasContainer ? NeonLongPaywallConstants.containerColor : .clear
-               containerView.layer.borderColor = hasContainer ? NeonLongPaywallConstants.containerBorderColor.cgColor : UIColor.clear.cgColor
+               containerView.backgroundColor = hasContainer ? manager.constants.containerColor : .clear
+               containerView.layer.borderColor = hasContainer ? manager.constants.containerBorderColor.cgColor : UIColor.clear.cgColor
                items.forEach { addItem($0) }
            default:
                fatalError("Something went wrong with NeonLongPaywall. Please consult to manager.")
@@ -32,8 +33,8 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
        
        func configureView() {
     
-           containerView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-           containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+           containerView.layer.borderWidth = manager.constants.containerBorderWidth
+           containerView.layer.cornerRadius = manager.constants.cornerRadius
            addSubview(containerView)
       
            
@@ -45,7 +46,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
    
            itemsStackView.snp.makeConstraints { make in
                make.top.equalToSuperview().offset(30)
-               make.left.right.equalToSuperview().inset(NeonLongPaywallConstants.horizontalPadding)
+               make.left.right.equalToSuperview().inset(manager.constants.horizontalPadding)
            }
        }
        
@@ -56,7 +57,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         }
         
         let lineView = UIView()
-        lineView.backgroundColor = NeonLongPaywallConstants.mainColor.withAlphaComponent(0.4)
+        lineView.backgroundColor = manager.constants.mainColor.withAlphaComponent(0.4)
         containerView.addSubview(lineView)
         lineView.snp.makeConstraints { make in
             make.top.equalTo(itemsStackView.subviews.first!.subviews.first!.snp.bottom)
@@ -86,7 +87,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
             iconImageView.image = item.icon
         }
         itemView.addSubview(iconImageView)
-        iconImageView.tintColor = NeonLongPaywallConstants.ctaButtonTextColor
+        iconImageView.tintColor = manager.constants.ctaButtonTextColor
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -98,7 +99,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         itemView.addSubview(iconCircleView1)
         iconCircleView1.layer.cornerRadius = 12
         iconCircleView1.layer.masksToBounds = true
-        iconCircleView1.backgroundColor = NeonLongPaywallConstants.mainColor
+        iconCircleView1.backgroundColor = manager.constants.mainColor
         iconCircleView1.snp.makeConstraints { make in
             make.center.equalTo(iconImageView)
             make.width.height.equalTo(24)
@@ -110,7 +111,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         itemView.addSubview(iconCircleView2)
         iconCircleView2.layer.cornerRadius = 16
         iconCircleView2.layer.masksToBounds = true
-        iconCircleView2.backgroundColor = NeonLongPaywallConstants.mainColor.withAlphaComponent(0.4)
+        iconCircleView2.backgroundColor = manager.constants.mainColor.withAlphaComponent(0.4)
         iconCircleView2.snp.makeConstraints { make in
             make.center.equalTo(iconImageView)
             make.width.height.equalTo(32)
@@ -122,7 +123,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         titleLabel.text = item.title
         titleLabel.textAlignment = .left
         titleLabel.font = Font.custom(size: 20, fontWeight: .SemiBold)
-        titleLabel.textColor = NeonLongPaywallConstants.mainColor
+        titleLabel.textColor = manager.constants.mainColor
         itemView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(iconCircleView2.snp.right).offset(20)
@@ -134,7 +135,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         subtitleLabel.text = item.subtitle
         subtitleLabel.textAlignment = .left
         subtitleLabel.font = Font.custom(size: 16, fontWeight: .Medium)
-        subtitleLabel.textColor = NeonLongPaywallConstants.secondaryTextColor
+        subtitleLabel.textColor = manager.constants.secondaryTextColor
         itemView.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel.snp.right).offset(10)
@@ -146,7 +147,7 @@ class NeonLongPaywallTimelineView : BaseNeonLongPaywallSectionView{
         descriptionLabel.text = item.description
         descriptionLabel.textAlignment = .left
         descriptionLabel.font = Font.custom(size: 14, fontWeight: .Medium)
-        descriptionLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        descriptionLabel.textColor = manager.constants.primaryTextColor
         descriptionLabel.numberOfLines = 0
         itemView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in

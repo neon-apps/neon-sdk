@@ -45,11 +45,11 @@ class NeonLongPaywallTestimonialsView : BaseNeonLongPaywallSectionView{
         
        
         
-        testimonialView.testimonialTextColor = NeonLongPaywallConstants.primaryTextColor
-        testimonialView.testimonialbackgroundColor = NeonLongPaywallConstants.containerColor
-        testimonialView.currentTestimonialPageTintColor = NeonLongPaywallConstants.mainColor
-        testimonialView.testimonialPageTintColor = NeonLongPaywallConstants.secondaryTextColor
-        testimonialView.testimonialbackgroundCornerRadious = Int(NeonLongPaywallConstants.cornerRadius)
+        testimonialView.testimonialTextColor = manager.constants.primaryTextColor
+        testimonialView.testimonialbackgroundColor = manager.constants.containerColor
+        testimonialView.currentTestimonialPageTintColor = manager.constants.mainColor
+        testimonialView.testimonialPageTintColor = manager.constants.secondaryTextColor
+        testimonialView.testimonialbackgroundCornerRadious = Int(manager.constants.cornerRadius)
         
         testimonialView.pageControlType = .V1
         

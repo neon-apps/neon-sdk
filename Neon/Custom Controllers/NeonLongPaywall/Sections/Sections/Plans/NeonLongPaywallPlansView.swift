@@ -27,7 +27,7 @@ public class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLong
         switch type {
         case .plans(let type, let plans):
             self.type = type
-            NeonLongPaywallConstants.allPlans = plans
+            manager.constants.allPlans = plans
             plans.forEach({addItem(item: $0, allItems: plans)})
             break
         default:
@@ -49,8 +49,8 @@ public class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLong
             stackView.distribution = .fillEqually
             addSubview(stackView)
             stackView.snp.makeConstraints { make in
-                if NeonLongPaywallConstants.allPlans.count < 3{
-                    make.width.equalTo(NeonLongPaywallConstants.allPlans.count * 130)
+                if manager.constants.allPlans.count < 3{
+                    make.width.equalTo(manager.constants.allPlans.count * 130)
                     stackView.spacing = 20
                 }else{
                     make.left.right.equalToSuperview()
@@ -79,13 +79,13 @@ public class NeonLongPaywallPlansView : BaseNeonLongPaywallSectionView, NeonLong
         
         switch type {
         case .horizontal:
-            let planView = NeonLongPaywallHorizontalPlanView()
+            let planView = NeonLongPaywallHorizontalPlanView(paywallManager: manager)
             planView.allPlans = allItems
             planView.plan = item
             planView.delegate = self
             stackView.addArrangedSubview(planView)
         case .vertical:
-            let planView = NeonLongPaywallVerticalPlanView()
+            let planView = NeonLongPaywallVerticalPlanView(paywallManager: manager)
             planView.allPlans = allItems
             planView.plan = item
             planView.delegate = self

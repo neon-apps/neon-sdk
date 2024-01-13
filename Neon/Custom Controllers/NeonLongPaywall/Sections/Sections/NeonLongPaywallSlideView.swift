@@ -50,12 +50,12 @@ class NeonLongPaywallSlideView : BaseNeonLongPaywallSectionView{
         
        
         
-        slidesView.textColor = NeonLongPaywallConstants.primaryTextColor
-        slidesView.beforeAfterBadgesTextColor = NeonLongPaywallConstants.ctaButtonTextColor
-        slidesView.slideBackgroundColor = NeonLongPaywallConstants.containerColor
-        slidesView.mainColor = NeonLongPaywallConstants.mainColor
-        slidesView.pageTintColor = NeonLongPaywallConstants.secondaryTextColor
-        slidesView.slideBackgroundCornerRadious = Int(NeonLongPaywallConstants.cornerRadius)
+        slidesView.textColor = manager.constants.primaryTextColor
+        slidesView.beforeAfterBadgesTextColor = manager.constants.ctaButtonTextColor
+        slidesView.slideBackgroundColor = manager.constants.containerColor
+        slidesView.mainColor = manager.constants.mainColor
+        slidesView.pageTintColor = manager.constants.secondaryTextColor
+        slidesView.slideBackgroundCornerRadious = Int(manager.constants.cornerRadius)
         slidesView.pageControlType = .V1
         
      }

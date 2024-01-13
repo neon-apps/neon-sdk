@@ -47,8 +47,8 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
            addSubview(containerView)
         
            lblPremium.text = "PRO"
-           lblPremium.backgroundColor = NeonLongPaywallConstants.mainColor
-           lblPremium.textColor = NeonLongPaywallConstants.ctaButtonTextColor
+           lblPremium.backgroundColor = manager.constants.mainColor
+           lblPremium.textColor = manager.constants.ctaButtonTextColor
            lblPremium.font = Font.custom(size: 13, fontWeight: .Bold)
            lblPremium.numberOfLines = 0
            lblPremium.textAlignment = .center
@@ -63,7 +63,7 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
            
       
            basicLabel.text = "Basic"
-           basicLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+           basicLabel.textColor = manager.constants.primaryTextColor
            basicLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
            containerView.addSubview(basicLabel)
            basicLabel.numberOfLines = 0
@@ -102,7 +102,7 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
        
         let featureLabel = UILabel()
         featureLabel.text = item.feature
-        featureLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        featureLabel.textColor = manager.constants.primaryTextColor
         featureLabel.textAlignment = .left
         featureLabel.font = Font.custom(size: 12, fontWeight: .SemiBold)
         featureView.addSubview(featureLabel)
@@ -132,7 +132,7 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
         
         switch item.availability {
         case .locked:
-            imgCheckmarkBasic.tintColor = NeonLongPaywallConstants.primaryTextColor
+            imgCheckmarkBasic.tintColor = manager.constants.primaryTextColor
             imgCheckmarkBasic.image = NeonSymbols.lock
         case .available:
             imgCheckmarkBasic.tintColor = UIColor(red: 0.23, green: 0.68, blue: 0.27, alpha: 1)
@@ -142,7 +142,7 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
             
             let limitedLabel = UILabel()
             limitedLabel.text = "Limited"
-            limitedLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+            limitedLabel.textColor = manager.constants.primaryTextColor
             limitedLabel.textAlignment = .center
             limitedLabel.font = Font.custom(size: 12, fontWeight: .Medium)
             featureView.addSubview(limitedLabel)
@@ -153,11 +153,11 @@ class NeonLongPaywallPlanComparisonView : BaseNeonLongPaywallSectionView{
         
         
         itemsStackView.addArrangedSubview(featureView)
-        featureView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+        featureView.layer.cornerRadius = manager.constants.cornerRadius
         featureView.layer.masksToBounds = true
         featureView.layer.borderColor = UIColor.clear.cgColor
-        featureView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-        featureView.backgroundColor = NeonLongPaywallConstants.containerColor
+        featureView.layer.borderWidth = manager.constants.containerBorderWidth
+        featureView.backgroundColor = manager.constants.containerColor
         featureView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalTo(featureLabel.snp.bottom).offset(15)

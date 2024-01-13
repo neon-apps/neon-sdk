@@ -34,10 +34,10 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
        
        func configureView() {
     
-           containerView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+           containerView.layer.cornerRadius = manager.constants.cornerRadius
            addSubview(containerView)
        
-           titleLabel.textColor = NeonLongPaywallConstants.mainColor
+           titleLabel.textColor = manager.constants.mainColor
            titleLabel.font = Font.custom(size: 18, fontWeight: .SemiBold)
            containerView.addSubview(titleLabel)
            titleLabel.numberOfLines = 0
@@ -81,9 +81,9 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
         let fullText = "\(index + 1) - \(item.question)"
         let attributedString = NSMutableAttributedString(string: fullText)
         let rangeOfIndex = NSRange(location: 0, length: String("\(index + 1) -").count)
-        attributedString.addAttribute(.foregroundColor, value: NeonLongPaywallConstants.mainColor, range: rangeOfIndex)
+        attributedString.addAttribute(.foregroundColor, value: manager.constants.mainColor, range: rangeOfIndex)
         let rangeOfRemainingText = NSRange(location: rangeOfIndex.length, length: fullText.count - rangeOfIndex.length)
-        attributedString.addAttribute(.foregroundColor, value: NeonLongPaywallConstants.primaryTextColor, range: rangeOfRemainingText)
+        attributedString.addAttribute(.foregroundColor, value: manager.constants.primaryTextColor, range: rangeOfRemainingText)
         titleLabel.attributedText = attributedString
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 0
@@ -100,7 +100,7 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
       
         arrowImage.image = NeonSymbols.chevron_down
         arrowImage.contentMode = .scaleAspectFit
-        arrowImage.tintColor = NeonLongPaywallConstants.mainColor
+        arrowImage.tintColor = manager.constants.mainColor
         arrowImage.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(15)
             make.centerY.equalTo(titleLabel)
@@ -109,11 +109,11 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
         
         
         itemsStackView.addArrangedSubview(questionView)
-        questionView.layer.cornerRadius = NeonLongPaywallConstants.cornerRadius
+        questionView.layer.cornerRadius = manager.constants.cornerRadius
         questionView.layer.masksToBounds = true
         questionView.layer.borderColor = UIColor.clear.cgColor
-        questionView.layer.borderWidth = NeonLongPaywallConstants.containerBorderWidth
-        questionView.backgroundColor = NeonLongPaywallConstants.containerColor
+        questionView.layer.borderWidth = manager.constants.containerBorderWidth
+        questionView.backgroundColor = manager.constants.containerColor
         questionView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.bottom.equalTo(titleLabel.snp.bottom).offset(15)
@@ -127,7 +127,7 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
         answerTitleLabel.text = item.answerTitle
         answerTitleLabel.textAlignment = .left
         answerTitleLabel.font = Font.custom(size: 12, fontWeight: .Medium)
-        answerTitleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        answerTitleLabel.textColor = manager.constants.primaryTextColor
         answerTitleLabel.numberOfLines = 0
         questionView.addSubview(answerTitleLabel)
         answerTitleLabel.snp.makeConstraints { make in
@@ -142,7 +142,7 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
         answerSubtitleLabel.text = item.answerSubtitle
         answerSubtitleLabel.textAlignment = .left
         answerSubtitleLabel.font = Font.custom(size: 10, fontWeight: .Medium)
-        answerSubtitleLabel.textColor = NeonLongPaywallConstants.secondaryTextColor
+        answerSubtitleLabel.textColor = manager.constants.secondaryTextColor
         answerSubtitleLabel.numberOfLines = 0
         questionView.addSubview(answerSubtitleLabel)
         answerSubtitleLabel.snp.makeConstraints { make in
@@ -176,7 +176,7 @@ class NeonLongPaywallFAQView : BaseNeonLongPaywallSectionView{
                 
                 
             }else{
-                questionView.layer.borderColor = NeonLongPaywallConstants.selectedContainerBorderColor.cgColor
+                questionView.layer.borderColor = self.manager.constants.selectedContainerBorderColor.cgColor
                 questionView.snp.remakeConstraints { make in
                     make.left.right.equalToSuperview()
                     make.bottom.equalTo(answerSubtitleLabel.snp.bottom).offset(15)

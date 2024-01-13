@@ -10,6 +10,7 @@ import Foundation
 import NeonSDK
 import UIKit
 
+@available(iOS 15.0, *)
 class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
     
     
@@ -46,7 +47,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
        
         titleLabel.font = Font.custom(size: 20, fontWeight: .Bold)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = NeonLongPaywallConstants.primaryTextColor
+        titleLabel.textColor = manager.constants.primaryTextColor
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -63,7 +64,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
         lblRating.text = "\(rating)"
         lblRating.font = Font.custom(size: 36, fontWeight: .SemiBold)
         lblRating.textAlignment = .center
-        lblRating.textColor = NeonLongPaywallConstants.primaryTextColor
+        lblRating.textColor = manager.constants.primaryTextColor
         lblRating.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -99,7 +100,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
         lblYear.text = "\(year)"
         lblYear.font = Font.custom(size: 16, fontWeight: .Medium)
         lblYear.textAlignment = .center
-        lblYear.textColor = NeonLongPaywallConstants.primaryTextColor
+        lblYear.textColor = manager.constants.primaryTextColor
         lblYear.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
@@ -155,7 +156,7 @@ class NeonLongPaywallTrustBadgeView : BaseNeonLongPaywallSectionView{
         lblYear.text = "\(year)"
         lblYear.font = Font.custom(size: 14, fontWeight: .Medium)
         lblYear.textAlignment = .center
-        lblYear.textColor = NeonLongPaywallConstants.primaryTextColor
+        lblYear.textColor = manager.constants.primaryTextColor
         lblYear.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
