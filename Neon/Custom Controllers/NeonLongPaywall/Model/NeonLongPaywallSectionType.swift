@@ -25,4 +25,45 @@ public enum NeonLongPaywallSectionType{
     case trustBadge(type : NeonLongPaywallTrustBadgeType )
     case slide(height : CGFloat = 400, showBeforeAfterBadges : Bool, items : [NeonSlideItem] )
     case custom(view : UIView)
+    
+    public func copy() -> NeonLongPaywallSectionType {
+         switch self {
+         case .spacing(let height):
+             return .spacing(height: height)
+         case .label(let text, let font, let overrideTextColor, let alignment, let horizontalPadding):
+             return .label(text: text, font: font, overrideTextColor: overrideTextColor, alignment: alignment, horizontalPadding: horizontalPadding)
+         case .image(let height, let image, let cornerRadius, let horizontalPadding, let contentMode):
+             return .image(height: height, image: image, cornerRadious: cornerRadius, horizontalPadding: horizontalPadding, contentMode: contentMode)
+         case .imageWithURL(let height, let url, let cornerRadius, let horizontalPadding, let contentMode):
+             return .imageWithURL(height: height, url: url, cornerRadious: cornerRadius, horizontalPadding: horizontalPadding, contentMode: contentMode)
+         case .features(let items, let overrideTextColor, let font, let iconTintColor, let offset):
+             return .features(items: items, overrideTextColor: overrideTextColor, font: font, iconTintColor: iconTintColor, offset: offset)
+         case .testimonialCard(let title, let subtitle, let author, let overrideImage, let overrideImageWithURL):
+             return .testimonialCard(title: title, subtitle: subtitle, author: author, overrideImage: overrideImage, overrideImageWithURL: overrideImageWithURL)
+         case .plans(let type, let items):
+             return .plans(type: type, items: items)
+         case .whatYouWillGet(let title, let hasContainer, let items):
+             return .whatYouWillGet(title: title, hasContainer: hasContainer, items: items)
+         case .timeline(let hasContainer, let items):
+             return .timeline(hasContainer: hasContainer, items: items)
+         case .testimonials(let height, let items):
+             return .testimonials(height: height, items: items)
+         case .faq(let title, let items):
+             return .faq(title: title, items: items)
+         case .planComparison(let items):
+             return .planComparison(items: items)
+         case .trustBadge(let type):
+             return .trustBadge(type: type)
+         case .slide(let height, let showBeforeAfterBadges, let items):
+             return .slide(height: height, showBeforeAfterBadges: showBeforeAfterBadges, items: items)
+         case .custom(let view):
+             // Handle the custom case by creating a copy of the UIView or whatever type it represents.
+             if let viewCopyable = view.copy() as? UIView {
+                 return .custom(view: viewCopyable)
+             } else {
+                 // Return the original custom case if it cannot be copied.
+                 return .custom(view: view)
+             }
+         }
+     }
 }

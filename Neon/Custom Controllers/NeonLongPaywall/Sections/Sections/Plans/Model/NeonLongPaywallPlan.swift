@@ -26,6 +26,10 @@ public class NeonLongPaywallPlan{
         case perWeek
         case perMonth
     }
+    public func copy() -> NeonLongPaywallPlan {
+          return NeonLongPaywallPlan(productIdentifier: self.productIdentifier, tag: self.tag, priceType: self.priceType, isDefaultSelected: self.isDefaultSelected)
+      }
+      
     
     
 }

@@ -41,4 +41,30 @@ public class NeonLongPaywallConstants{
     public init(){
         
     }
+    
+    public func copy() -> NeonLongPaywallConstants {
+            let copiedConstants = NeonLongPaywallConstants()
+
+        
+            copiedConstants.termsURL = self.termsURL
+            copiedConstants.privacyURL = self.privacyURL
+            copiedConstants.provider = self.provider
+            copiedConstants.isPaymentSheetActive = self.isPaymentSheetActive
+            copiedConstants.horizontalPadding = self.horizontalPadding
+            copiedConstants.cornerRadius = self.cornerRadius
+            copiedConstants.containerBorderWidth = self.containerBorderWidth
+            copiedConstants.primaryTextColor = self.primaryTextColor
+            copiedConstants.secondaryTextColor = self.secondaryTextColor
+            copiedConstants.selectedContainerColor = self.selectedContainerColor
+            copiedConstants.containerColor = self.containerColor
+            copiedConstants.selectedContainerBorderColor = self.selectedContainerBorderColor
+            copiedConstants.containerBorderColor = self.containerBorderColor
+            copiedConstants.mainColor = self.mainColor
+            copiedConstants.backgroundColor = self.backgroundColor
+            copiedConstants.ctaButtonTextColor = self.ctaButtonTextColor
+            copiedConstants.selectedPlan = self.selectedPlan.copy()
+            copiedConstants.allPlans = self.allPlans.map { $0.copy() }
+
+            return copiedConstants
+        }
 }

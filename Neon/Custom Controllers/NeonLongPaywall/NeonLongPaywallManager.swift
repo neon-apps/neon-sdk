@@ -64,6 +64,7 @@ public class NeonLongPaywallManager{
         constants.privacyURL = privacyURL
           paywall = NeonLongPaywallController()
       }
+    
     public func present(from controller : UIViewController){
         if paywall != nil{
             controller.present(destinationVC: paywall!, slideDirection: .up)
@@ -89,5 +90,18 @@ public class NeonLongPaywallManager{
         }
        
     }
+    
+    public func copy() -> NeonLongPaywallManager {
+            let copiedManager = NeonLongPaywallManager()
+
+            copiedManager.paywall = self.paywall
+            copiedManager.delegate = self.delegate
+            copiedManager.constants = self.constants.copy()
+            for section in self.sections {
+                copiedManager.sections.append(section.copy())
+            }
+
+            return copiedManager
+        }
     
 }

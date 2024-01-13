@@ -55,5 +55,9 @@ public class NeonLongPaywallSection{
         self.manager = manager
     }
     
+    public func copy() -> NeonLongPaywallSection {
+        let copiedSection = NeonLongPaywallSection(type: self.type.copy(), manager: self.manager.copy())
+         return copiedSection
+     }
 }
 
