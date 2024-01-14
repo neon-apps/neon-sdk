@@ -98,7 +98,7 @@ public class NeonLongPaywallManager{
             copiedManager.delegate = self.delegate
             copiedManager.constants = self.constants.copy()
             for section in self.sections {
-                copiedManager.sections.append(section.copy())
+                copiedManager.sections.append(section.copy(with: copiedManager))
             }
 
             return copiedManager
