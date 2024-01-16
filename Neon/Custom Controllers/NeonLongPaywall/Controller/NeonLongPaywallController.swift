@@ -20,7 +20,7 @@ public class NeonLongPaywallController : UIViewController{
     let legalView = NeonLegalView()
     let continueButton = NeonBouncingButton()
     let planManager = NeonLongPaywallPlanManager()
-    let paywallManager = NeonLongPaywallManager()
+    public let paywallManager = NeonLongPaywallManager()
     public override func viewDidLoad() {
         super.viewDidLoad()
        
