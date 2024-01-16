@@ -33,21 +33,29 @@ public class AdaptyManager {
   
  
     
-    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium") {
+    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", completion : (() -> ())? = nil) {
         self.accessLevel = accessLevel
         Adapty.activate(withAPIKey)
-        fetchPaywalls(paywallIDs: placementIDs)
+        fetchPaywalls(paywallIDs: placementIDs,completion: completion)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
     }
     
     
-    private static func fetchPaywalls(paywallIDs : [String]){
+    private static func fetchPaywalls(paywallIDs : [String], completion : (() -> ())? = nil){
+        var fetchedPaywallCount = 0
         for paywallID in paywallIDs{
-            fetchPaywall(id: paywallID)
+            fetchPaywall(id: paywallID,completion: {
+                fetchedPaywallCount += 1
+                if fetchedPaywallCount == paywallIDs.count{
+                    if let completion{
+                        completion()
+                    }
+                }
+            })
         }
     }
-    private static func fetchPaywall(id : String){
+    private static func fetchPaywall(id : String,  completion : (@escaping () -> ())){
         
         let locale = Locale.current.identifier
         Adapty.getPaywall(placementId: id, locale: locale) { result in
@@ -55,6 +63,7 @@ public class AdaptyManager {
             case let .success(paywall):
                 paywalls.append(paywall)
                 fetchPackages(paywall: paywall)
+                completion()
                 break
                 // the requested paywall
             case let .failure(error):
