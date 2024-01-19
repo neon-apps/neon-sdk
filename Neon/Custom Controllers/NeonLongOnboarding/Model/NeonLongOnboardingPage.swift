@@ -101,7 +101,7 @@ public class NeonLongOnboardingPage{
         self.type = type
         
         switch type {
-        case .singleSelection(_,_,_,_):
+        case .singleSelection(_,_,_,_,_):
             isQuestion = true
         case .multipleSelection(_,_,_,_):
             isQuestion = true
