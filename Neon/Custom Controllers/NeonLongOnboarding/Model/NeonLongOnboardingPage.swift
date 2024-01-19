@@ -57,7 +57,7 @@ public class NeonLongOnboardingPage{
     
     var controller : UIViewController{
         switch self.type {
-        case .singleSelection(_,_,_,_):
+        case .singleSelection(_,_,_,_,_):
             return NeonLongOnboardingSingleSelectionPage()
         case .multipleSelection(_,_,_,_):
             return NeonLongOnboardingMultipleSelectionPage()
