@@ -103,6 +103,8 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
             super.animateViews()
             isViewsAnimated = true
             animationDelay += 0.2
+            btnContinue.animate(type: .fadeInAndSlideInBottom, delay: animationDelay)
+            animationDelay += 0.2
             whyWeAskLabel.animate(type: .fadeInAndSlideInBottom, delay: animationDelay)
         }
     }
