@@ -40,9 +40,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
         }
         
        
-        if shouldContinueWhenSelected{
-            hideButton()
-        }
+       
         configureOptions()
     }
     
@@ -58,6 +56,10 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
             titleLabel.text = question.changeUsername()
             if subtitle != nil{
                 subtitleLabel.text = subtitle.changeUsername()
+            }
+            
+            if shouldContinueWhenSelected{
+                hideButton()
             }
             
             if !shouldContinueWhenSelected{
