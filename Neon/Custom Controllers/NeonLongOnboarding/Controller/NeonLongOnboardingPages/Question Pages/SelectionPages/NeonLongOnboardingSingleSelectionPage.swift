@@ -68,7 +68,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
                     make.left.right.equalToSuperview().inset(20)
                     make.height.equalTo(65)
                 }
-                disableButton()
+                adjustButton()
                 showButton()
             }
         default:
@@ -111,6 +111,18 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
         }
     }
     
+    func adjustButton(){
+        disableButton()
+        if let optionViews = mainStack.arrangedSubviews as? [NeonLongOnboardingPageOptionView]{
+            for optionView in optionViews {
+                if optionView.isSelected{
+                    enableButton()
+                }
+            }
+        }
+    }
+    
+    
     @objc override func btnContinueClicked(){
         super.btnContinueClicked()
         if !isContinueButtonEnabled{
@@ -130,7 +142,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
             })
         }else{
             
-            enableButton()
+            adjustButton()
         }
        
         if let optionViews = mainStack.arrangedSubviews as? [NeonLongOnboardingPageOptionView]{

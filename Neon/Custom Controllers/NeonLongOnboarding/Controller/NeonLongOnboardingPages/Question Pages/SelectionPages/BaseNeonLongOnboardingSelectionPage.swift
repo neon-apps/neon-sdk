@@ -75,6 +75,7 @@ class BaseNeonLongOnboardingSelectionPage: BaseNeonLongOnboardingPage, NeonLongO
         return selectedOptions
     }
     
+ 
     func configurePage(){}
     
     func configureOptions(options : [NeonLongOnboardingOption]){}
