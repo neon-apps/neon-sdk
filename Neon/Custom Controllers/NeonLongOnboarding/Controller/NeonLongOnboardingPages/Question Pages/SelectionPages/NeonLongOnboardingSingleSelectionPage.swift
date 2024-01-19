@@ -12,6 +12,7 @@ import NeonSDK
 @available(iOS 13.0, *)
 class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage {
   
+    var shouldContinueWhenSelected = Bool()
     var animationDelay = 1.2
 
     override func viewDidLoad() {
@@ -38,6 +39,8 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
             make.bottom.equalTo(whyWeAskLabel.snp.top).offset(-20)
         }
         
+       
+        
         hideButton()
         configureOptions()
     }
@@ -45,7 +48,8 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
 
     override func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .singleSelection(let question, let subtitle, _, let whyDoWeAsk):
+        case .singleSelection(let question, let subtitle, _, let whyDoWeAsk, let shouldContinueWhenSelected):
+            self.shouldContinueWhenSelected = shouldContinueWhenSelected
             if whyDoWeAsk == nil{
                 whyWeAskLabel.isHidden = true
             }
@@ -53,6 +57,16 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
             titleLabel.text = question.changeUsername()
             if subtitle != nil{
                 subtitleLabel.text = subtitle.changeUsername()
+            }
+            
+            if !shouldContinueWhenSelected{
+                btnContinue.snp.remakeConstraints { make in
+                    make.bottom.equalToSuperview().inset(70)
+                    make.left.right.equalToSuperview().inset(20)
+                    make.height.equalTo(65)
+                }
+                disableButton()
+
             }
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
@@ -62,7 +76,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
     func configureOptions(){
         
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .singleSelection(_, _, let options, _):
+        case .singleSelection(_, _, let options, _, _):
             for option in options {
                 animationDelay += 0.2
                 let newOptionView = NeonLongOnboardingPageOptionView()
@@ -92,12 +106,27 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
         }
     }
     
+    @objc override func btnContinueClicked(){
+        super.btnContinueClicked()
+        if !isContinueButtonEnabled{
+            return
+        }
+        NeonLongOnboardingManager.saveResponse(question: titleLabel.text!, responses: getSelectedOptions())
+        NeonLongOnboardingManager.moveToNextPage(controller: self)
+    }
+    
+    
     override func optionDidSelect(_ option: NeonLongOnboardingPageOptionView) {
         vibrate(style: .medium)
         NeonLongOnboardingManager.saveResponse(question: titleLabel.text!, responses: getSelectedOptions())
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            NeonLongOnboardingManager.moveToNextPage(controller: self)
-        })
+        if shouldContinueWhenSelected{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                NeonLongOnboardingManager.moveToNextPage(controller: self)
+            })
+        }else{
+            enableButton()
+        }
+       
         if let optionViews = mainStack.arrangedSubviews as? [NeonLongOnboardingPageOptionView]{
             for optionView in optionViews {
                 if optionView.id != option.id{
