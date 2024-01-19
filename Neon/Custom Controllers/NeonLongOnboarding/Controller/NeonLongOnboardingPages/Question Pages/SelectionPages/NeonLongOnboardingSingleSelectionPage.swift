@@ -40,8 +40,9 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
         }
         
        
-        
-        hideButton()
+        if shouldContinueWhenSelected{
+            hideButton()
+        }
         configureOptions()
     }
     
@@ -66,7 +67,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
                     make.height.equalTo(65)
                 }
                 disableButton()
-
+                showButton()
             }
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
@@ -118,12 +119,13 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
     
     override func optionDidSelect(_ option: NeonLongOnboardingPageOptionView) {
         vibrate(style: .medium)
-        NeonLongOnboardingManager.saveResponse(question: titleLabel.text!, responses: getSelectedOptions())
         if shouldContinueWhenSelected{
+            NeonLongOnboardingManager.saveResponse(question: titleLabel.text!, responses: getSelectedOptions())
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 NeonLongOnboardingManager.moveToNextPage(controller: self)
             })
         }else{
+            
             enableButton()
         }
        
