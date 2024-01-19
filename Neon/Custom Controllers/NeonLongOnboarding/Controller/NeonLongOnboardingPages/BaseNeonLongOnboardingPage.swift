@@ -155,7 +155,7 @@ public class BaseNeonLongOnboardingPage: UIViewController {
         btnContinue.isHidden = true
     }
     func showButton(){
-        btnContinue.isHidden = true
+        btnContinue.isHidden = false
     }
     
     @objc open func btnContinueClicked(){
