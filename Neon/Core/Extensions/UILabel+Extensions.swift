@@ -30,3 +30,51 @@ extension UILabel {
         self.attributedText = mutableAttributedString
     }
 }
+
+public enum AttributeType {
+    case color(UIColor)
+    case underline
+    case font(UIFont)
+    case backgroundColor(UIColor)
+    case strikethrough
+    case kerning(CGFloat)
+    case lineSpacing(CGFloat)
+    case shadow(NSShadow)
+}
+
+extension UILabel {
+    
+    public func applyAttribute(substring: String, type: AttributeType) {
+        guard let attributedText = self.attributedText else {
+            return
+        }
+        
+        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+        let range = (attributedText.string as NSString).range(of: substring)
+        
+        if range.location != NSNotFound {
+            switch type {
+            case .color(let color):
+                mutableAttributedText.addAttribute(.foregroundColor, value: color, range: range)
+            case .underline:
+                mutableAttributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+            case .font(let font):
+                mutableAttributedText.addAttribute(.font, value: font, range: range)
+            case .backgroundColor(let backgroundColor):
+                mutableAttributedText.addAttribute(.backgroundColor, value: backgroundColor, range: range)
+            case .strikethrough:
+                mutableAttributedText.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+            case .kerning(let kerning):
+                mutableAttributedText.addAttribute(.kern, value: kerning, range: range)
+            case .lineSpacing(let lineSpacing):
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = lineSpacing
+                mutableAttributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+            case .shadow(let shadow):
+                mutableAttributedText.addAttribute(.shadow, value: shadow, range: range)
+            }
+            
+            self.attributedText = mutableAttributedText
+        }
+    }
+}
