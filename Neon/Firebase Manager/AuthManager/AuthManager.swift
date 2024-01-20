@@ -19,5 +19,29 @@ public class AuthManager{
         return Auth.auth().currentUser?.uid
     }
     
+    
+    public static func createUser(withEmail : String, password : String, completion : @escaping  (_ authResult : AuthDataResult?, _ error : Error?) -> ()){
+        Auth.auth().createUser(withEmail: withEmail, password: password) { authResult, error in
+          completion(authResult,error)
+        }
+    }
+    
+    public static func signIn(withEmail : String, password : String, completion : @escaping (_ authResult : AuthDataResult?, _ error : Error?) -> ()){
+        Auth.auth().signIn(withEmail: withEmail, password: password) { authResult, error in
+          completion(authResult,error)
+        }
+    }
+    
+    public static func signOut(withEmail : String, password : String, completion : (_ success : Bool,_ error : Error?) -> ()){
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+            completion(true, nil)
+        } catch let signOutError as NSError {
+            completion(false, signOutError)
+        }
+    }
+    
+    
 }
 #endif
