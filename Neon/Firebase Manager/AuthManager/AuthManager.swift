@@ -32,7 +32,7 @@ public class AuthManager{
         }
     }
     
-    public static func signOut(withEmail : String, password : String, completion : (_ success : Bool,_ error : Error?) -> ()){
+    public static func signOut(completion : (_ success : Bool,_ error : Error?) -> ()){
         let firebaseAuth = Auth.auth()
         do {
           try firebaseAuth.signOut()
