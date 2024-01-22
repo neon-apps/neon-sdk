@@ -12,7 +12,7 @@ import UIKit
 
 
 @available(iOS 13.0, *)
-open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     public var contextMenuActions = [ContextMenuAction<T>]()
     
@@ -186,6 +186,9 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         return false
     }
     
+    open override func moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+        
+    }
 }
 
 protocol ConfigurableCell {
