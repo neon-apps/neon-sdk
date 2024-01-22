@@ -186,9 +186,9 @@ open class NeonCollectionView<T, Cell: NeonCollectionViewCell<T>>: UICollectionV
         return false
     }
     
-    open override func moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-    }
+     }
 }
 
 protocol ConfigurableCell {
