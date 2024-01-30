@@ -135,11 +135,16 @@ class NeonLongOnboardingPageOptionView: UIView {
   
         
         if let emoji = option.emoji{
-            emojiLabel.text = option.emoji
+            emojiLabel.text = emoji
         }
         
         if let icon = option.icon{
             iconImageView.image = icon
+            titleLabel.snp.remakeConstraints { make in
+                make.left.equalTo(iconImageView.snp.right).offset(20)
+                make.right.equalTo(selectedIcon.snp.left).offset(-20)
+                make.top.equalToSuperview().offset(20)
+            }
         }
     }
 }
