@@ -23,6 +23,7 @@ class NeonLongOnboardingPageOptionView: UIView {
     
     let titleLabel = UILabel()
     let emojiLabel = UILabel()
+    let iconImageView = UIImageView()
     var isSelected = false
     var selectedIcon = UIImageView()
     var id = UUID().uuidString
@@ -52,6 +53,14 @@ class NeonLongOnboardingPageOptionView: UIView {
         emojiLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
+        }
+        
+        iconImageView.contentMode = .scaleAspectFit
+        addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(30)
         }
         
      
@@ -121,8 +130,16 @@ class NeonLongOnboardingPageOptionView: UIView {
         layer.borderColor = NeonLongOnboardingConstants.optionBorderColor.cgColor
     }
     // MARK: - Public Methods
-    func configure(title: String, emoji: String) {
-        titleLabel.text = title.changeUsername()
-        emojiLabel.text = emoji
+    func configure(option: NeonLongOnboardingOption) {
+        titleLabel.text = option.title.changeUsername()
+  
+        
+        if let emoji = option.emoji{
+            emojiLabel.text = option.emoji
+        }
+        
+        if let icon = option.icon{
+            iconImageView.image = icon
+        }
     }
 }

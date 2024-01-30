@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 public class NeonLongOnboardingOption{
@@ -15,6 +16,12 @@ public class NeonLongOnboardingOption{
         self.emoji = emoji
     }
     
+    public init(title: String, icon: UIImage) {
+        self.title = title
+        self.icon = icon
+    }
+    
     var title : String
-    var emoji : String
+    var emoji : String?
+    var icon : UIImage?
 }

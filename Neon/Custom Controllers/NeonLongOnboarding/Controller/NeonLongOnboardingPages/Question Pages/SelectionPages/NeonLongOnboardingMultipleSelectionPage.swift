@@ -80,7 +80,7 @@ class NeonLongOnboardingMultipleSelectionPage: BaseNeonLongOnboardingSelectionPa
             for option in options {
                 animationDelay += 0.2
                 let newOptionView = NeonLongOnboardingPageOptionView()
-                newOptionView.configure(title: option.title, emoji: option.emoji)
+                newOptionView.configure(option: option)
                 newOptionView.delegate = self
                 newOptionView.isMultipleSelectionEnabled = true
                 newOptionView.snp.makeConstraints { make in
