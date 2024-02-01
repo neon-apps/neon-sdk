@@ -40,6 +40,11 @@ class NeonLongOnboardingProgressView: UIView {
     
     
     private func setupViews() {
+        
+        if numberOfSteps == 0{
+            return
+        }
+        
         for i in 1...numberOfSteps {
             let circle = UIView()
             circle.layer.cornerRadius = 15 // Adjust if circle size changes

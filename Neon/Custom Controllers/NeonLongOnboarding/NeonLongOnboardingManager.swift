@@ -28,7 +28,8 @@ public class NeonLongOnboardingManager{
                                 optionBorderColor: UIColor,
                                 selectedOptionBackgroundColor: UIColor,
                                 selectedOptionBorderColor: UIColor,
-                                textColor: UIColor,
+                                textColor: UIColor, 
+                                selectedOptionTextColor: UIColor,
                                 upcomingProgressBackgroundColor: UIColor,
                                 upcomingProgressTextColor: UIColor,
                                 completedProgressBackgroundColor: UIColor,
@@ -44,6 +45,7 @@ public class NeonLongOnboardingManager{
         NeonLongOnboardingConstants.selectedOptionBackgroundColor = selectedOptionBackgroundColor
         NeonLongOnboardingConstants.selectedOptionBorderColor = selectedOptionBorderColor
         NeonLongOnboardingConstants.textColor = textColor
+        NeonLongOnboardingConstants.selectedOptionTextColor = selectedOptionTextColor
 
   
         NeonLongOnboardingConstants.upcomingProgressBackgroundColor = upcomingProgressBackgroundColor
