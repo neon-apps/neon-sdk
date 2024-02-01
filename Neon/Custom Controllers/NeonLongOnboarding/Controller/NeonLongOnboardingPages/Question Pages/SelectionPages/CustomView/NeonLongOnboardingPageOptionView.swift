@@ -118,6 +118,7 @@ class NeonLongOnboardingPageOptionView: UIView {
         selectedIcon.animate(type: .scaleIn, duration: 0.4)
         selectedIcon.isHidden = false
         delegate?.optionDidSelect(self)
+        titleLabel.textColor = NeonLongOnboardingConstants.selectedOptionTextColor
         backgroundColor = NeonLongOnboardingConstants.selectedOptionBackgroundColor
         layer.borderColor = NeonLongOnboardingConstants.selectedOptionBorderColor.cgColor
     }
@@ -125,6 +126,8 @@ class NeonLongOnboardingPageOptionView: UIView {
     func setDeselected(){
         isSelected = false
         selectedIcon.isHidden = true
+        titleLabel.textColor = NeonLongOnboardingConstants.textColor
+
         delegate?.optionDidDeselect(self)
         backgroundColor = NeonLongOnboardingConstants.optionBackgroundColor
         layer.borderColor = NeonLongOnboardingConstants.optionBorderColor.cgColor
