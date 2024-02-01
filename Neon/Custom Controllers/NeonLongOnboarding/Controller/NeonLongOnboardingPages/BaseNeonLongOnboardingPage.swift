@@ -66,6 +66,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         
         enableButton()
         
+        
         progressView = NeonLongOnboardingProgressView(title: currentSection.title, currentIndex: indexInSectionQuestions + 1, numberOfSteps: currentSection.questionPages.count)
         progressView!.upcomingProgressBackgroundColor = NeonLongOnboardingConstants.upcomingProgressBackgroundColor
         progressView!.upcomingProgressTextColor = NeonLongOnboardingConstants.upcomingProgressTextColor
