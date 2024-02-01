@@ -11,7 +11,7 @@ import NeonSDK
 
 
 @available(iOS 13.0, *)
-public class BaseNeonLongOnboardingPage: UIViewController {
+open class BaseNeonLongOnboardingPage: UIViewController {
     
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
@@ -23,14 +23,14 @@ public class BaseNeonLongOnboardingPage: UIViewController {
     var progressView : NeonLongOnboardingProgressView?
     let backButton = UIButton()
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         createUI()
         
     }
     
-    override public func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         animateViews()
     }
     func createUI(){
