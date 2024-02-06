@@ -30,8 +30,7 @@ class NeonLongOnboardingProgressView: UIView {
         self.numberOfSteps = numberOfSteps
         self.title = title
         super.init(frame: CGRect.zero)
-        setupTitleLabel()
-        setupViews()
+   
     }
     
     required init?(coder: NSCoder) {
@@ -188,6 +187,11 @@ class NeonLongOnboardingProgressView: UIView {
             upcomingDashedLineLayer.path = upcomingLinePath.cgPath
             layer.addSublayer(upcomingDashedLineLayer)
         }
+    }
+    
+    func configure(){
+        setupTitleLabel()
+        setupViews()
     }
     
 }

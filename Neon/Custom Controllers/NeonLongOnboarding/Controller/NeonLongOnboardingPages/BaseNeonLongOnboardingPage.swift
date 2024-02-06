@@ -72,6 +72,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         progressView!.upcomingProgressTextColor = NeonLongOnboardingConstants.upcomingProgressTextColor
         progressView!.completedProgressBackgroundColor = NeonLongOnboardingConstants.completedProgressBackgroundColor
         progressView!.completedProgressTextColor = NeonLongOnboardingConstants.completedProgressTextColor
+        progressView!.configure()
         view.addSubview(progressView!)
         progressView!.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
