@@ -10,7 +10,7 @@ import Foundation
 import NeonSDK
 
 @available(iOS 13.0, *)
-class NeonLongOnboardingProgressView: UIView {
+public class NeonLongOnboardingProgressView: UIView {
     
     // Define color properties
     var upcomingProgressBackgroundColor: UIColor = .white
@@ -131,7 +131,7 @@ class NeonLongOnboardingProgressView: UIView {
         }
    
     }
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
         // Remove old layers to prevent duplicates

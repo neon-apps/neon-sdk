@@ -20,7 +20,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
     var btnContinue = UIButton()
     var isContinueButtonEnabled = true
     var isViewsAnimated = false
-    var progressView : NeonLongOnboardingProgressView?
+    public var progressView : NeonLongOnboardingProgressView?
     let backButton = UIButton()
     
     override open func viewDidLoad() {
@@ -79,6 +79,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
             make.centerX.equalToSuperview()
             make.height.equalTo(70)
         }
+        
         
  
         view.addSubview(backButton)
