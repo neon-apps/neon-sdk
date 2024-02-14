@@ -24,7 +24,8 @@ public class NeonLongOnboardingConstants{
     static var optionBackgroundColor = UIColor()
     static var optionBorderColor = UIColor()
     static var selectedOptionBackgroundColor = UIColor()
-    static var selectedOptionBorderColor = UIColor()
+    static var selectedOptionBorderColor = UIColor()  
+    static var selectedOptionIconTintColor = UIColor()
     static var textColor = UIColor()
     static var selectedOptionTextColor = UIColor()
     

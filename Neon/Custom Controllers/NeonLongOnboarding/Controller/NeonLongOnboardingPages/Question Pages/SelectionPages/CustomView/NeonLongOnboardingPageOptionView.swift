@@ -65,7 +65,7 @@ class NeonLongOnboardingPageOptionView: UIView {
         
      
         selectedIcon.contentMode = .scaleAspectFit
-        selectedIcon.tintColor = NeonLongOnboardingConstants.selectedOptionBorderColor
+        selectedIcon.tintColor = NeonLongOnboardingConstants.selectedOptionIconTintColor
         selectedIcon.isHidden = true
         selectedIcon.image = NeonSymbols.checkmark_seal_fill
         addSubview(selectedIcon)
