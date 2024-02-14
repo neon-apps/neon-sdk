@@ -90,7 +90,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
             make.width.height.equalTo(50)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.centerY.equalTo(progressView?.titleLabel.snp.centerY)
         }
         
       
