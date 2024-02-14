@@ -97,7 +97,7 @@ class NeonLongOnboardingNamePage: BaseNeonLongOnboardingPage, UITextFieldDelegat
         super.btnContinueClicked()
         if isContinueButtonEnabled{
             NeonLongOnboardingConstants.firstName = nameTextfield.text!
-            NeonLongOnboardingManager.saveResponse(question: "What is your first name?", responses: [NeonLongOnboardingConstants.firstName!])
+            NeonLongOnboardingManager.saveResponse(question: titleLabel.text!, responses: [NeonLongOnboardingConstants.firstName!])
             NeonLongOnboardingManager.moveToNextPage(controller: self)
         }
 
