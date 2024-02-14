@@ -145,12 +145,12 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         }
     }
     
-    func enableButton(){
+    public func enableButton(){
         isContinueButtonEnabled = true
         btnContinue.backgroundColor = NeonLongOnboardingConstants.buttonColor
         btnContinue.setTitleColor(NeonLongOnboardingConstants.buttonTextColor, for: .normal)
     }
-    func disableButton(){
+    public func disableButton(){
         isContinueButtonEnabled = false
         btnContinue.backgroundColor = NeonLongOnboardingConstants.disabledButtonColor
         btnContinue.setTitleColor(NeonLongOnboardingConstants.disabledButtonTextColor, for: .normal)
