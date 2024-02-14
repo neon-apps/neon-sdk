@@ -137,10 +137,12 @@ open class BaseNeonLongOnboardingPage: UIViewController {
     }
     
     func animateViews(){
+        if !isViewsAnimated{
             isViewsAnimated = true
             progressView!.animate(type: .fadeInAndSlideInLeft, delay: 0.5)
         titleLabel.animate(type: .fadeInAndSlideInLeft, delay: 0.7)
         subtitleLabel.animate(type: .fadeInAndSlideInLeft, delay: 1)
+        }
     }
     
     func enableButton(){
