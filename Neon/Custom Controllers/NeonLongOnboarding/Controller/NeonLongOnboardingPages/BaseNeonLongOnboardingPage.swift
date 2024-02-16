@@ -156,10 +156,10 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         btnContinue.setTitleColor(NeonLongOnboardingConstants.disabledButtonTextColor, for: .normal)
     }
     
-    func hideButton(){
+    public func hideButton(){
         btnContinue.isHidden = true
     }
-    func showButton(){
+    public func showButton(){
         btnContinue.isHidden = false
     }
     
