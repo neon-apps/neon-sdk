@@ -17,7 +17,7 @@ open class BaseNeonLongOnboardingPage: UIViewController {
     let subtitleLabel = UILabel()
     let contentView = UIView()
     let scrollView = UIScrollView()
-    var btnContinue = UIButton()
+    public var btnContinue = UIButton()
     var isContinueButtonEnabled = true
     var isViewsAnimated = false
     public var progressView : NeonLongOnboardingProgressView?
