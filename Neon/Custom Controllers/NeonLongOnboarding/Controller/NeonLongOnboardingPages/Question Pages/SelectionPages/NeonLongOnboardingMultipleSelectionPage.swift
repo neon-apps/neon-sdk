@@ -13,7 +13,7 @@ import NeonSDK
 class NeonLongOnboardingMultipleSelectionPage: BaseNeonLongOnboardingSelectionPage {
   
   
-    var animationDelay = 1.2
+    var animationDelay = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ class NeonLongOnboardingMultipleSelectionPage: BaseNeonLongOnboardingSelectionPa
         switch NeonLongOnboardingConstants.currentPage?.type {
         case .multipleSelection(_, _, let options, _):
             for option in options {
-                animationDelay += 0.2
+                animationDelay += 0.1
                 let newOptionView = NeonLongOnboardingPageOptionView()
                 newOptionView.configure(option: option)
                 newOptionView.delegate = self
@@ -127,9 +127,9 @@ class NeonLongOnboardingMultipleSelectionPage: BaseNeonLongOnboardingSelectionPa
         if !isViewsAnimated{
             super.animateViews()
             isViewsAnimated = true
-            animationDelay += 0.2
+            animationDelay += 0.1
             btnContinue.animate(type: .fadeInAndSlideInBottom, delay: animationDelay)
-            animationDelay += 0.2
+            animationDelay += 0.1
             whyWeAskLabel.animate(type: .fadeInAndSlideInBottom, delay: animationDelay)
         }
     }
