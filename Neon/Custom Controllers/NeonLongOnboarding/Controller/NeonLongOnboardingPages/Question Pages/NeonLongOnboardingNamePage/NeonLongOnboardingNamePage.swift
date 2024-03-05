@@ -12,7 +12,7 @@ import NeonSDK
 @available(iOS 13.0, *)
 class NeonLongOnboardingNamePage: BaseNeonLongOnboardingPage, UITextFieldDelegate{
   
-    var animationDelay = 1.2
+    var animationDelay = 0.9
     let descriptionLabel = UILabel()
     let nameTextfield = NeonTextField()
     
@@ -108,11 +108,17 @@ class NeonLongOnboardingNamePage: BaseNeonLongOnboardingPage, UITextFieldDelegat
         if !isViewsAnimated{
             super.animateViews()
             isViewsAnimated = true
-            animationDelay += 0.5
-            descriptionLabel.animate(type: .fadeInAndSlideInLeft, delay: animationDelay)
-            animationDelay += 0.5
+            if subtitleLabel.text == ""{
+                animationDelay = 0.5
+            }
+            if descriptionLabel.text != ""{
+                animationDelay += 0.3
+                descriptionLabel.animate(type: .fadeInAndSlideInLeft, delay: animationDelay)
+            }
+           
+            animationDelay += 0.3
             nameTextfield.animate(type: .fadeInAndSlideInLeft, delay: animationDelay)
-            animationDelay += 1
+            animationDelay += 0.3
             btnContinue.animate(type: .fadeInAndSlideInLeft, delay: animationDelay)
         }
     }
