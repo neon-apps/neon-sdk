@@ -75,6 +75,7 @@ open class NeonOnboardingController: UIViewController {
         if pages.count > nextIndex{
             vibrate(style: .medium)
             currentPage = pages[nextIndex]
+            pagePresented(index: nextIndex)
             setContent()
         }else{
             vibrate(style: .heavy)
@@ -222,6 +223,11 @@ extension NeonOnboardingController{
         NeonOnboardingPageCell.subtitleFont = subtitleFont
     }
     
+    
+    @objc open func pagePresented(index : Int){
+           
+       }
+       
  @objc open func onboardingCompleted(){
         
     }
