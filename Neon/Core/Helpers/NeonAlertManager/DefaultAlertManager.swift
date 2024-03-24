@@ -37,9 +37,11 @@ public class DefaultAlertManager{
         title: String = "",
         message: String = "",
         viewController: UIViewController,
-        height : CGFloat = 130
+        height : CGFloat = 130,
+        overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified
     ) {
         alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController?.overrideUserInterfaceStyle = overrideUserInterfaceStyle
         let spinner = UIActivityIndicatorView(style: .medium)
         alertController?.view.addSubview(spinner)
         
