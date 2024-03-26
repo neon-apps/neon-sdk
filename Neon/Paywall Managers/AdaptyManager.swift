@@ -169,8 +169,15 @@ public class AdaptyManager {
         return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
     }
     
-    public static func getPrice(package : AdaptyPaywallProduct) -> String{
-        return package.localizedPrice ?? "..."
+    public static func getPrice(package : AdaptyPaywallProduct, type : AdaptyPriceType = .default) -> String{
+        switch type {
+        case .default:
+            return NeonPaywallManager.getDefaultPrice(product: package.skProduct)
+        case .weekly:
+            return NeonPaywallManager.getWeeklyPriceFor(product: package.skProduct)
+        case .monthly:
+            return NeonPaywallManager.getMonthlyPriceFor(product: package.skProduct)
+        }
     }
     
     public static func selectPackage(id : String){
