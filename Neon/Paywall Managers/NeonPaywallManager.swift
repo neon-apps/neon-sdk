@@ -163,7 +163,7 @@ public class NeonPaywallManager{
         return String(format: "%.2f", Double(truncating: price) / Double(numberOfUnits))
     }
     
-    private staticfunc formatPrice(price : NSDecimalNumber) -> String{
+    private static func formatPrice(price : NSDecimalNumber) -> String{
         return String(format: "%.2f", Double(truncating: price))
     }
     
