@@ -19,6 +19,11 @@ public protocol AdaptyManagerDelegate: AnyObject {
 @available(iOS 13.0, *)
 public class AdaptyManager {
 
+    public enum AdaptyPriceType {
+        case `default`
+        case weekly
+        case monthly
+    }
     public static var paywalls = [AdaptyPaywall]()
     public static var packages = [AdaptyPaywallProduct]()
     
@@ -143,13 +148,22 @@ public class AdaptyManager {
     }
     
     
-    public static func getPackagePrice(id : String) -> String{
+    public static func getPackagePrice(id : String, type : AdaptyPriceType = .default) -> String{
+        
         for package in packages {
-            if package.vendorProductId == id{
-                return package.localizedPrice ?? "..."
-            }else{
-                return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
+            switch type {
+            case .default:
+                if package.vendorProductId == id{
+                    return NeonPaywallManager.getDefaultPrice(product: package.skProduct)
+                }else{
+                    return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
+                }
+            case .weekly:
+                return NeonPaywallManager.getWeeklyPriceFor(product: package.skProduct)
+            case .monthly:
+                return NeonPaywallManager.getMonthlyPriceFor(product: package.skProduct)
             }
+          
         }
         
         return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
