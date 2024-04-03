@@ -155,6 +155,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
     }
+    
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.setTemplateWithSubviews(isShimmerActive, animate: true, viewBackgroundColor: ShimmerManager.shimmerBackgroundColor)
     }
