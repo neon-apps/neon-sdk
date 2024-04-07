@@ -40,8 +40,8 @@ public class AdaptyManager {
     
     public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", customerUserId : String? = nil, completion : (() -> ())? = nil) {
         self.accessLevel = accessLevel
-        if let customUserId{
-            Adapty.activate(withAPIKey, customerUserId: customUserId)
+        if let customerUserId{
+            Adapty.activate(withAPIKey, customerUserId: customerUserId)
         }else{
             Adapty.activate(withAPIKey)
         }
