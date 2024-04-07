@@ -38,9 +38,13 @@ public class AdaptyManager {
   
  
     
-    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", completion : (() -> ())? = nil) {
+    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", customerUserId : String? = nil, completion : (() -> ())? = nil) {
         self.accessLevel = accessLevel
-        Adapty.activate(withAPIKey)
+        if let customUserId{
+            Adapty.activate(withAPIKey, customerUserId: customUserId)
+        }else{
+            Adapty.activate(withAPIKey)
+        }
         fetchPaywalls(paywallIDs: placementIDs,completion: completion)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
