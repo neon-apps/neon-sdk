@@ -302,7 +302,7 @@ public class FirestoreManager{
     }
     
     
-    static var activeListeners = [ListenerRegistration]()
+    public static var activeListeners = [ListenerRegistration]()
     
     public static func listenDocument(path : [FirestoreReferance], completion : @escaping ( _ documentData : [String : Any], _ source : WriteSource) -> ()){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
