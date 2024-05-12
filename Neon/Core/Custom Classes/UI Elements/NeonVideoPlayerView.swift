@@ -74,9 +74,7 @@ public class NeonVideoPlayerView: UIView {
         playerViewController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        // You can customize playerViewController's properties as needed.
-        playerViewController.showsPlaybackControls = true
+    
     }
     
     
