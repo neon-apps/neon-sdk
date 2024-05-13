@@ -144,7 +144,8 @@ public class AdaptyManager {
         guard let selectedPaywall else{
             fatalError("Currently you didn't set any paywall as selected. If you need to use remoteConfig, you have to select the paywall with it's placement ID in the first line of viewDidLoad of the paywall. Use AdaptyManager.selectPaywall function to set selected paywall.")
         }
-        if let remoteConfig = selectedPaywall.remoteConfig{
+        
+        if let remoteConfig = selectedPaywall.remoteConfig?.dictionary{
             let value = remoteConfig[id]
             UserDefaults.standard.set(value, forKey: "Neon-Adapty-\(id)")
             return value

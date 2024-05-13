@@ -74,7 +74,7 @@ public class NeonVideoPlayerView: UIView {
         playerViewController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    
+        
     }
     
     
