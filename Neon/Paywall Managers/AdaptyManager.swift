@@ -77,6 +77,7 @@ public class AdaptyManager {
                 break
                 // the requested paywall
             case let .failure(error):
+                completion()
                 break
                 // handle the error
             }
