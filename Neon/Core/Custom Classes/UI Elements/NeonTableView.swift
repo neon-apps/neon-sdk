@@ -10,9 +10,9 @@ import UIKit
 
 
 public struct SwipeAction<T> {
-    let title: String
-    let color: UIColor
-    let action: (T, IndexPath) -> Void
+    public let title: String
+    public let color: UIColor
+    public let action: (T, IndexPath) -> Void
     
     public init(title: String, color: UIColor, action: @escaping (T, IndexPath) -> Void) {
         self.title = title
