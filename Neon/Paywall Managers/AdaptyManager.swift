@@ -46,6 +46,9 @@ public class AdaptyManager {
             Adapty.activate(withAPIKey)
         }
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
+        if Neon.isPremiumTestActive{
+            isUserPremium = true
+        }
         fetchPaywalls(paywallIDs: placementIDs,completion: completion)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
@@ -310,6 +313,8 @@ public class AdaptyManager {
                     if !Neon.isPremiumTestActive{
                         Neon.isUserPremium = false
                         UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                    }else{
+                        Neon.isUserPremium = true
                     }
                     guard let completionFailure else { return }
                     completionFailure()
