@@ -175,6 +175,8 @@ public class RevenueCatManager {
                 if !Neon.isPremiumTestActive{
                     Neon.isUserPremium = false
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                }else{
+                    Neon.isUserPremium = true
                 }
                 guard let completionFailure else { return }
                 completionFailure()
