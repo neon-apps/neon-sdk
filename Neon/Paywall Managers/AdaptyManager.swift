@@ -47,7 +47,7 @@ public class AdaptyManager {
         }
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
         if Neon.isPremiumTestActive{
-            isUserPremium = true
+            Neon.isUserPremium = true
         }
         fetchPaywalls(paywallIDs: placementIDs,completion: completion)
         verifySubscription(completionSuccess: nil, completionFailure: nil)
