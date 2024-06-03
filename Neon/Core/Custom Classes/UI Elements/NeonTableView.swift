@@ -81,6 +81,10 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
             didSelect?(object, indexPath)
         }
     }
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+        
   
     open override func layoutSubviews() {
         super.layoutSubviews()
