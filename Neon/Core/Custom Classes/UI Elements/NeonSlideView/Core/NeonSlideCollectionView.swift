@@ -61,6 +61,10 @@ class NeonSlideCollectionView: NeonCollectionView<NeonSlideItem, NeonSlideCell> 
     
     @objc private func scrollToNextCell(){
         
+        if NeonSlideItem.arrSlides.isEmpty{
+            return
+        }
+        
         if nextPageIndex == NeonSlideItem.arrSlides.count{
             self.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             slideCollectionViewDelegate?.slideCollectionView(self, destinationPage: 0)

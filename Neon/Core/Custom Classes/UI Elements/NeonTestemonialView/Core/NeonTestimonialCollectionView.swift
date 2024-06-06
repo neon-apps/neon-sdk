@@ -60,6 +60,9 @@ class NeonTestimonialCollectionView: NeonCollectionView<NeonTestimonial, NeonTes
     
     @objc private func scrollToNextCell(){
         
+        if arrTestimonials.isEmpty{
+            return
+        }
         if nextPageIndex == arrTestimonials.count{
             self.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             testimonialCollectionViewDelegate?.testimonialCollectionView(self, destinationPage: 0)
