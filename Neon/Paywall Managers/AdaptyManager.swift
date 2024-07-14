@@ -27,7 +27,7 @@ public class AdaptyManager {
     }
     public static var paywalls = [AdaptyPaywall]()
     public static var packages = [AdaptyPaywallProduct]()
-    public static var paywallViewConfigurations = [AdaptyPaywall: AdaptyUI.LocalizedViewConfiguration]()
+    public static var adaptyBuilderPaywalls = [AdaptyBuilderPaywall]()
 
     public static var selectedPaywall : AdaptyPaywall?
     public static var selectedPackage : AdaptyPaywallProduct?
@@ -80,7 +80,6 @@ public class AdaptyManager {
             case let .success(paywall):
                 paywalls.append(paywall)
                 fetchPackages(paywall: paywall)
-                fetchViewConfiguration(paywall : paywall)
                 completion()
                 break
                 // the requested paywall
@@ -103,6 +102,8 @@ public class AdaptyManager {
                         self.packages.append(package)
                         UserDefaults.standard.setValue(package.localizedPrice, forKey: "Neon-\(package.vendorProductId)")
                         AdaptyManager.delegate?.packageFetched()
+                        fetchViewConfiguration(paywall : paywall, and :  packages)
+
                     }
                 }
                 break
@@ -114,9 +115,11 @@ public class AdaptyManager {
         }
     }
 
+    public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
     
+    }
     
-    public static func fetchViewConfiguration(paywall : AdaptyPaywall){
+    public static func fetchViewConfiguration(paywall : AdaptyPaywall, and packages : [AdaptyPaywallProduct]){
         guard paywall.hasViewConfiguration else {
             //  use your custom logic
               return
@@ -124,7 +127,7 @@ public class AdaptyManager {
         AdaptyUI.getViewConfiguration(forPaywall: paywall) { result in
             switch result {
             case let .success(viewConfiguration):
-                paywallViewConfigurations.insert[paywall] = viewConfiguration
+                adaptyBuilderPaywalls.append(AdaptyBuilderPaywall(paywall: paywall, configuration: viewConfiguration, packages: packages))
                 break
                 // use loaded configuration
             case let .failure(error):
@@ -380,4 +383,15 @@ public class AdaptyManager {
 }
 
 
+class AdaptyBuilderPaywall{
+    var paywall = AdaptyPaywall()
+    var configuration = AdaptyUI.LocalizedViewConfiguration
+    var packages = [AdaptyPaywallProduct]()
+    
+    init(paywall: AdaptyPaywall = AdaptyPaywall(), configuration: AdaptyUI.LocalizedViewConfiguration.Type = AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct] = [AdaptyPaywallProduct]()) {
+        self.paywall = paywall
+        self.configuration = configuration
+        self.packages = packages
+    }
+}
 #endif
