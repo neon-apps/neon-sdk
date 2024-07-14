@@ -48,7 +48,11 @@ public class AdaptyManager {
             Adapty.activate(withAPIKey)
         }
         
-        AdaptyUI.activate()
+        if @available(iOS 15.0, *){
+            AdaptyUI.activate()
+
+        }
+
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
         if Neon.isPremiumTestActive{
             Neon.isUserPremium = true
@@ -57,6 +61,7 @@ public class AdaptyManager {
         verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
     }
+    
     
     
     private static func fetchPaywalls(paywallIDs : [String], completion : (() -> ())? = nil){
