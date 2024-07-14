@@ -122,7 +122,7 @@ public class AdaptyManager {
             }
         }
     }
-
+    @available(iOS 15.0, *)
     public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : AdaptyPaywallControllerDelegate){
         
         for adaptyBuilderPaywall in adaptyBuilderPaywalls {
