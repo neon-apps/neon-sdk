@@ -138,7 +138,7 @@ public class AdaptyManager {
                     for: adaptyBuilderPaywall.paywall,
                     products: nil,
                     viewConfiguration: adaptyBuilderPaywall.configuration,
-                    delegate: controller as! AdaptyPaywallControllerDelegate
+                    delegate: self as! AdaptyPaywallControllerDelegate
                 )
                 controller.present(visualPaywall, animated: true)
                 
@@ -424,3 +424,62 @@ public class AdaptyBuilderPaywall{
     }
 }
 #endif
+
+extension AdaptyManager{
+    func paywallControllerDidStartRestore(_ controller: AdaptyPaywallController) {
+        
+    }
+    func paywallController(_ controller: AdaptyPaywallController, didFailPurchase product: AdaptyPaywallProduct, error: AdaptyError) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didSelectProduct product: AdaptyPaywallProduct) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didStartPurchase product: AdaptyPaywallProduct) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didCancelPurchase product: AdaptyPaywallProduct) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didFailRestoreWith error: AdaptyError) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didFailRenderingWith error: AdaptyError) {
+        
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController, didFailLoadingProductsWith error: AdaptyError) -> Bool {
+        return true
+    }
+    func paywallController(_ controller: AdaptyPaywallController,
+                           didPerform action: AdaptyUI.Action) {
+
+        switch action {
+            case .close:
+                controller.dismiss(animated: true)
+            case let .openURL(url):
+                      // handle URL opens (incl. terms and privacy links)
+                UIApplication.shared.open(url, options: [:])
+            case let .custom(id):
+                if id == "login" {
+                   // implement login flow
+                }
+                break
+        }
+    }
+    
+    func paywallController(_ controller: AdaptyPaywallController,
+                           didFinishPurchase product: AdaptyPaywallProduct,
+                           purchasedInfo: AdaptyPurchasedInfo) {
+        controller.dismiss(animated: true)
+    }
+    func paywallController(_ controller: AdaptyPaywallController,
+                           didFinishRestoreWith profile: AdaptyProfile) {
+    }
+    
+}
