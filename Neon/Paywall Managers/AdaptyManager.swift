@@ -48,7 +48,7 @@ public class AdaptyManager {
             Adapty.activate(withAPIKey)
         }
         
-        if @available(iOS 15.0, *){
+        if #available(iOS 15, *){
             AdaptyUI.activate()
 
         }
@@ -107,7 +107,7 @@ public class AdaptyManager {
                         self.packages.append(package)
                         UserDefaults.standard.setValue(package.localizedPrice, forKey: "Neon-\(package.vendorProductId)")
                         AdaptyManager.delegate?.packageFetched()
-                        if @available(iOS 15.0, *){
+                        if #available(iOS 15, *){
                             fetchViewConfiguration(paywall : paywall, and :  packages)
                         }
                        
