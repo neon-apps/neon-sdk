@@ -425,7 +425,8 @@ public class AdaptyBuilderPaywall{
 }
 #endif
 
-extension AdaptyManager{
+@available(iOS 15.0, *)
+extension AdaptyManager : AdaptyPaywallControllerDelegate{
     func paywallControllerDidStartRestore(_ controller: AdaptyPaywallController) {
         
     }
