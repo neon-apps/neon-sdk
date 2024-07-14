@@ -123,7 +123,7 @@ public class AdaptyManager {
         }
     }
     @available(iOS 15.0, *)
-    public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : AdaptyPaywallControllerDelegate){
+    public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
         
         for adaptyBuilderPaywall in adaptyBuilderPaywalls {
             if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
@@ -138,7 +138,7 @@ public class AdaptyManager {
                     for: adaptyBuilderPaywall.paywall,
                     products: nil,
                     viewConfiguration: adaptyBuilderPaywall.configuration,
-                    delegate: controller
+                    delegate: controller as! AdaptyPaywallControllerDelegate
                 )
                 controller.present(visualPaywall, animated: true)
                 
