@@ -10,6 +10,7 @@ import Adapty
 import StoreKit
 import UIKit
 import Lottie
+import AdaptyUI
 
 
 public protocol AdaptyManagerDelegate: AnyObject {
@@ -26,7 +27,8 @@ public class AdaptyManager {
     }
     public static var paywalls = [AdaptyPaywall]()
     public static var packages = [AdaptyPaywallProduct]()
-    
+    public static var paywallViewConfigurations = [AdaptyPaywall: AdaptyUI.LocalizedViewConfiguration]()
+
     public static var selectedPaywall : AdaptyPaywall?
     public static var selectedPackage : AdaptyPaywallProduct?
     
@@ -45,6 +47,8 @@ public class AdaptyManager {
         }else{
             Adapty.activate(withAPIKey)
         }
+        
+        AdaptyUI.activate()
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
         if Neon.isPremiumTestActive{
             Neon.isUserPremium = true
@@ -76,6 +80,7 @@ public class AdaptyManager {
             case let .success(paywall):
                 paywalls.append(paywall)
                 fetchPackages(paywall: paywall)
+                fetchViewConfiguration(paywall : paywall)
                 completion()
                 break
                 // the requested paywall
@@ -109,6 +114,25 @@ public class AdaptyManager {
         }
     }
 
+    
+    
+    public static func fetchViewConfiguration(paywall : AdaptyPaywall){
+        guard paywall.hasViewConfiguration else {
+            //  use your custom logic
+              return
+        }
+        AdaptyUI.getViewConfiguration(forPaywall: paywall) { result in
+            switch result {
+            case let .success(viewConfiguration):
+                paywallViewConfigurations.insert[paywall] = viewConfiguration
+                break
+                // use loaded configuration
+            case let .failure(error):
+                break
+                // handle the error
+            }
+        }
+    }
     
     public static func getPackage(id : String) -> AdaptyPaywallProduct?{
         for package in packages {
