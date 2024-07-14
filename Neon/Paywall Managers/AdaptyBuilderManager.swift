@@ -14,9 +14,9 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     
     public static let shared = AdaptyBuilderManager()
     
-    var purchased: (() -> ()) = nil
-    var dismissed: (() -> ()) = nil
-    var restored: (() -> ()) = nil
+    var purchased: (() -> ())? = nil
+    var dismissed: (() -> ())? = nil
+    var restored: (() -> ())? = nil
 
     @available(iOS 15.0, *)
     public func present(
