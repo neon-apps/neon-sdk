@@ -123,7 +123,7 @@ public class AdaptyManager {
         }
     }
 
-    public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
+    public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : AdaptyPaywallControllerDelegate){
         
         for adaptyBuilderPaywall in adaptyBuilderPaywalls {
             if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
