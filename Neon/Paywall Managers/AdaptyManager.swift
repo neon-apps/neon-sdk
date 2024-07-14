@@ -107,7 +107,10 @@ public class AdaptyManager {
                         self.packages.append(package)
                         UserDefaults.standard.setValue(package.localizedPrice, forKey: "Neon-\(package.vendorProductId)")
                         AdaptyManager.delegate?.packageFetched()
-                        fetchViewConfiguration(paywall : paywall, and :  packages)
+                        if @available(iOS 15.0, *){
+                            fetchViewConfiguration(paywall : paywall, and :  packages)
+                        }
+                       
 
                     }
                 }
@@ -124,6 +127,7 @@ public class AdaptyManager {
     
     }
     
+    @available(iOS 15.0, *)
     public static func fetchViewConfiguration(paywall : AdaptyPaywall, and packages : [AdaptyPaywallProduct]){
         guard paywall.hasViewConfiguration else {
             //  use your custom logic
@@ -389,9 +393,9 @@ public class AdaptyManager {
 
 
 public class AdaptyBuilderPaywall{
-    var paywall = AdaptyPaywall()
-    var configuration = AdaptyUI.LocalizedViewConfiguration
-    var packages = [AdaptyPaywallProduct]()
+    var paywall : AdaptyPaywall
+    var configuration : AdaptyUI.LocalizedViewConfiguration
+    var packages : [AdaptyPaywallProduct]
     
     init(paywall: AdaptyPaywall, configuration: AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct]) {
         self.paywall = paywall
