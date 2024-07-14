@@ -10,12 +10,12 @@ import Adapty
 import UIKit
 import AdaptyUI
 
-public class AdaptyBuilderManager : NSObject{
+public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     
     public static let shared = AdaptyBuilderManager()
     
     @available(iOS 15.0, *)
-    public func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
+    public func present(paywall : AdaptyPaywall, from controller : UIViewController){
         
         for adaptyBuilderPaywall in AdaptyManager.adaptyBuilderPaywalls {
             if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
@@ -30,7 +30,7 @@ public class AdaptyBuilderManager : NSObject{
                     for: adaptyBuilderPaywall.paywall,
                     products: nil,
                     viewConfiguration: adaptyBuilderPaywall.configuration,
-                    delegate: self as! AdaptyPaywallControllerDelegate
+                    delegate: self
                 )
                 controller.present(visualPaywall, animated: true)
                 
