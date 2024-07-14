@@ -10,9 +10,9 @@ import Adapty
 import UIKit
 import AdaptyUI
 
-class AdaptyBuilderManager : NSObject{
+public class AdaptyBuilderManager : NSObject{
     
-    static let shared = AdaptyBuilderManager()
+    public static let shared = AdaptyBuilderManager()
     
     @available(iOS 15.0, *)
     public func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
