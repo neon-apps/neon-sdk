@@ -23,7 +23,8 @@ let package = Package(
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.4.0")),
         .package(name: "Localize_Swift", url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0")),
-        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .upToNextMajor(from: "2.11.0"))
+        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .upToNextMajor(from: "2.11.0")),
+        .package(name: "AdaptyUI", url: "https://github.com/adaptyteam/AdaptyUI-iOS.git", .upToNextMajor(from: "2.11.2"))
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -38,6 +39,7 @@ let package = Package(
                 "SnapKit",
                 "Localize_Swift",
                 .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
+                .product(name: "AdaptyUI", package: "AdaptyUI", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
                 .product(name: "Lottie", package: "Lottie", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAnalytics", package: "Firebase", condition: .when(platforms: [.iOS])),

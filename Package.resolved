@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "adaptyui-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adaptyteam/AdaptyUI-iOS.git",
+      "state" : {
+        "revision" : "3e2afa6a3bd7d0f3dbba6a387553cd0ef639a37f",
+        "version" : "2.11.2"
+      }
+    },
+    {
       "identity" : "boringssl-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
