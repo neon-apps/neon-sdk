@@ -138,7 +138,7 @@ public class AdaptyManager {
                     for: adaptyBuilderPaywall.paywall,
                     products: nil,
                     viewConfiguration: adaptyBuilderPaywall.configuration,
-                    delegate: self
+                    delegate: controller
                 )
                 controller.present(visualPaywall, animated: true)
                 
