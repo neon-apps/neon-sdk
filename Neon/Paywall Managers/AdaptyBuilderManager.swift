@@ -14,9 +14,9 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     
     public static let shared = AdaptyBuilderManager()
     
-    public var purchased: () -> ()
-    public var dismissed: () -> ()
-    public var restored: () -> ()
+    var purchased: (() -> ()) = nil
+    var dismissed: (() -> ()) = nil
+    var restored: (() -> ()) = nil
 
     @available(iOS 15.0, *)
     public func present(
@@ -93,7 +93,9 @@ extension AdaptyBuilderManager{
         switch action {
             case .close:
                 controller.dismiss(animated: true)
-                self.dismissed()
+            if let dismissed{
+                dismissed()
+            }
             case let .openURL(url):
                       // handle URL opens (incl. terms and privacy links)
                 UIApplication.shared.open(url, options: [:])
@@ -109,12 +111,16 @@ extension AdaptyBuilderManager{
                            didFinishPurchase product: AdaptyPaywallProduct,
                            purchasedInfo: AdaptyPurchasedInfo) {
         controller.dismiss(animated: true)
-        self.purchased()
+        if let purchased{
+            purchased()
+        }
     }
     public func paywallController(_ controller: AdaptyPaywallController,
                            didFinishRestoreWith profile: AdaptyProfile) {
         controller.dismiss(animated: true)
-        self.restored()
+        if let restored{
+            restored()
+        }
     }
     
 }
