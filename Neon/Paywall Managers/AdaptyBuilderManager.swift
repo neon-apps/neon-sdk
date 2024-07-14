@@ -8,6 +8,7 @@
 import Foundation
 import Adapty
 import UIKit
+import AdaptyUI
 
 class AdaptyBuilderManager : NSObject{
     
