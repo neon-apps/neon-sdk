@@ -110,17 +110,21 @@ extension AdaptyBuilderManager{
     public func paywallController(_ controller: AdaptyPaywallController,
                            didFinishPurchase product: AdaptyPaywallProduct,
                            purchasedInfo: AdaptyPurchasedInfo) {
-        controller.dismiss(animated: true)
+        Neon.isUserPremium = true
         if let purchased{
             purchased()
         }
+        controller.dismiss(animated: true)
+       
     }
     public func paywallController(_ controller: AdaptyPaywallController,
                            didFinishRestoreWith profile: AdaptyProfile) {
-        controller.dismiss(animated: true)
+        Neon.isUserPremium = true
         if let restored{
             restored()
         }
+        controller.dismiss(animated: true)
+       
     }
     
 }
