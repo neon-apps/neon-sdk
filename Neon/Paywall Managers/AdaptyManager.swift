@@ -124,6 +124,26 @@ public class AdaptyManager {
     }
 
     public static func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
+        
+        for adaptyBuilderPaywall in adaptyBuilderPaywalls {
+            if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
+                
+                guard paywall.hasViewConfiguration else {
+                    //  use your custom logic
+                    print("This paywall does not contain viewConfiguration")
+                      return
+                }
+                
+                let visualPaywall = try! AdaptyUI.paywallController(
+                    for: adaptyBuilderPaywall.paywall,
+                    products: nil,
+                    viewConfiguration: adaptyBuilderPaywall.configuration,
+                    delegate: self
+                )
+                controller.present(visualPaywall, animated: true)
+                
+            }
+        }
     
     }
     
