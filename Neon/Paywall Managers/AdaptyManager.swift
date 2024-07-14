@@ -18,7 +18,7 @@ public protocol AdaptyManagerDelegate: AnyObject {
 }
 
 @available(iOS 13.0, *)
-public class AdaptyManager {
+public class AdaptyManager : NSObject {
 
     public enum AdaptyPriceType {
         case `default`
