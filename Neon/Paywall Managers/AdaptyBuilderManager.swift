@@ -17,7 +17,7 @@ class AdaptyBuilderManager : NSObject{
     @available(iOS 15.0, *)
     public func presentAdaptyBuilderPaywall(paywall : AdaptyPaywall, from controller : UIViewController){
         
-        for adaptyBuilderPaywall in adaptyBuilderPaywalls {
+        for adaptyBuilderPaywall in AdaptyManager.adaptyBuilderPaywalls {
             if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
                 
                 guard paywall.hasViewConfiguration else {
