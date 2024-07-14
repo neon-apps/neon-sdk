@@ -383,12 +383,12 @@ public class AdaptyManager {
 }
 
 
-class AdaptyBuilderPaywall{
+public class AdaptyBuilderPaywall{
     var paywall = AdaptyPaywall()
     var configuration = AdaptyUI.LocalizedViewConfiguration
     var packages = [AdaptyPaywallProduct]()
     
-    init(paywall: AdaptyPaywall = AdaptyPaywall(), configuration: AdaptyUI.LocalizedViewConfiguration.Type = AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct] = [AdaptyPaywallProduct]()) {
+    init(paywall: AdaptyPaywall, configuration: AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct]) {
         self.paywall = paywall
         self.configuration = configuration
         self.packages = packages
