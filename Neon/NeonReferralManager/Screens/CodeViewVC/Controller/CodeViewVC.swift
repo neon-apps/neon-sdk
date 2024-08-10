@@ -9,6 +9,7 @@ import UIKit
 import NeonSDK
 import FirebaseFirestore
 
+@available(iOS 15.0, *)
 class CodeViewVC: UIViewController {
     //MARK: Properties
     var newUserID = String()

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseStorage
 import FirebaseFirestore
 
+@available(iOS 15.0, *)
 final class NeonReferralDatabase {
     static let shared = NeonReferralDatabase()
     
