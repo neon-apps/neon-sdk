@@ -145,7 +145,7 @@ class CodeViewVC: UIViewController {
         if NeonReferralConstants.prizeAmount > 1{
             thirdLabel.text = "3. You’ll receive \(NeonReferralConstants.prizeAmount) credits for free \(NeonReferralConstants.prizeTerminology.lowercased())s"
         }else{
-            thirdLabel.text = "3. You’ll receive \(NeonReferralConstants.prizeAmount) credit for free \(NeonReferralConstants.prizeTerminology.lowercased())s"
+            thirdLabel.text = "3. You & your friend will receive \(NeonReferralConstants.prizeAmount) credit for free \(NeonReferralConstants.prizeTerminology.lowercased())s"
         }
       
         thirdLabel.font = Font.custom(size: 16, fontWeight: .Regular)

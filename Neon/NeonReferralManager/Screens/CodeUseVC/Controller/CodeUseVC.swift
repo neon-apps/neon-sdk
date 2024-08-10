@@ -167,24 +167,46 @@ class CodeUseVC: UIViewController {
                }
     }
     
-    @objc func codeCheckButtonClicked(){
-        let promotionCode = self.codeUseTextField.text ?? "n/A"
-        NeonReferralDatabase.shared.scanAllUsers(promotionCode: promotionCode) { result in
+    @objc func codeCheckButtonClicked() {
+        let enteredCode = self.codeUseTextField.text ?? "n/A"
+        
+        NeonReferralDatabase.shared.scanAllUsers(promotionCode: enteredCode) { result in
             switch result {
             case "badCode":
-                NeonAlertManager.default.present(title: "Error!", message: "There is no such promo code", style: .actionSheet, viewController: self)
+                NeonAlertManager.default.present(
+                    title: "Invalid Code",
+                    message: "The promo code you entered does not exist. Please check and try again.",
+                    style: .actionSheet,
+                    viewController: self
+                )
             case "yourCode":
-                NeonAlertManager.default.present(title: "Error!", message: "This code is your code. Please enter another code.", style: .actionSheet, viewController: self)
+                NeonAlertManager.default.present(
+                    title: "Invalid Entry",
+                    message: "You cannot use your own promo code. Please enter a different code.",
+                    style: .actionSheet,
+                    viewController: self
+                )
             case "promoCodeAdded":
                 self.addOffer()
-                NeonAlertManager.default.present(title: "Succesful", message: "Congratulations! You and your friend earned \(String(NeonReferralConstants.prizeAmount)) credits.", style: .actionSheet, viewController: self)
+                NeonAlertManager.default.present(
+                    title: "Success!",
+                    message: "Congratulations! You and your friend have both earned \(String(NeonReferralConstants.prizeAmount)) credits.",
+                    style: .actionSheet,
+                    viewController: self
+                )
             case "noPromoCodeAdded":
-                NeonAlertManager.default.present(title: "Error!", message: "You can only use a promo code once.", style: .actionSheet, viewController: self)
+                NeonAlertManager.default.present(
+                    title: "Promo Code Already Used",
+                    message: "You have already used this promo code. Each promo code can only be used once.",
+                    style: .actionSheet,
+                    viewController: self
+                )
             default:
-                print("Unknown result: \(result)")
+                print("Unexpected result: \(result)")
             }
         }
     }
+
 }
 
 
