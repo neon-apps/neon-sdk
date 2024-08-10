@@ -45,7 +45,8 @@ class CodeViewVC: UIViewController {
     func setupUI(){
         view.backgroundColor = NeonReferralConstants.backgroundColor
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: "referral_crossButton") , for: .normal)
+    
+        backButton.setImage( UIImage(named: "referral_crossButton", in: Bundle.module, compatibleWith: nil) , for: .normal)
         backButton.addTarget(self, action: #selector(backButtonClicked), for: .touchUpInside)
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
@@ -111,7 +112,7 @@ class CodeViewVC: UIViewController {
             make.left.equalToSuperview().inset(35)
             make.height.equalTo(24)
         }
-        let firstImageView = UIImageView(image: UIImage(named: "referral_selfieIcon"))
+        let firstImageView = UIImageView(image: UIImage(named: "referral_selfieIcon", in: Bundle.module, compatibleWith: nil))
         firstImageView.contentMode = .scaleAspectFit
         firstImageView.tintColor = .white
         view.addSubview(firstImageView)
@@ -130,7 +131,7 @@ class CodeViewVC: UIViewController {
             make.left.equalToSuperview().inset(35)
             make.height.equalTo(24)
         }
-        let secondImageView = UIImageView(image: UIImage(named: "referral_PhoneIcon"))
+        let secondImageView = UIImageView(image: UIImage(named: "referral_PhoneIcon", in: Bundle.module, compatibleWith: nil))
         secondImageView.contentMode = .scaleAspectFit
         secondImageView.tintColor = .white
         view.addSubview(secondImageView)
@@ -155,7 +156,7 @@ class CodeViewVC: UIViewController {
             make.left.equalToSuperview().inset(35)
             make.height.equalTo(24)
         }
-        let thirdImageView = UIImageView(image: UIImage(named: "referral_groupIcon"))
+        let thirdImageView = UIImageView(image: UIImage(named: "referral_groupIcon", in: Bundle.module, compatibleWith: nil))
         thirdImageView.contentMode = .scaleAspectFit
         thirdImageView.tintColor = .white
         view.addSubview(thirdImageView)
@@ -274,7 +275,7 @@ class CodeViewVC: UIViewController {
             make.left.equalToSuperview().inset(64)
         }
         let iconImageView = UIImageView()
-        iconImageView.image = UIImage(named: "referral_copiedIcon")!.withRenderingMode(.alwaysTemplate)
+        iconImageView.image = UIImage(named: "referral_copiedIcon", in: Bundle.module, compatibleWith: nil)!.withRenderingMode(.alwaysTemplate)
         iconImageView.tintColor = NeonReferralConstants.mainColor
         notificationView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
