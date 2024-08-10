@@ -177,14 +177,16 @@ class CodeUseVC: UIViewController {
                     title: "Invalid Code",
                     message: "The promo code you entered does not exist. Please check and try again.",
                     style: .actionSheet,
-                    viewController: self
+                    viewController: self,
+                    overrideUserInterfaceStyle: NeonReferralConstants.overrideUserInterfaceStyle
                 )
             case "yourCode":
                 NeonAlertManager.default.present(
                     title: "Invalid Entry",
                     message: "You cannot use your own promo code. Please enter a different code.",
                     style: .actionSheet,
-                    viewController: self
+                    viewController: self,
+                    overrideUserInterfaceStyle: NeonReferralConstants.overrideUserInterfaceStyle
                 )
             case "promoCodeAdded":
                 self.addOffer()
@@ -192,14 +194,16 @@ class CodeUseVC: UIViewController {
                     title: "Success!",
                     message: "Congratulations! You and your friend have both earned \(String(NeonReferralConstants.prizeAmount)) credits.",
                     style: .actionSheet,
-                    viewController: self
+                    viewController: self,
+                    overrideUserInterfaceStyle: NeonReferralConstants.overrideUserInterfaceStyle
                 )
             case "noPromoCodeAdded":
                 NeonAlertManager.default.present(
                     title: "Promo Code Already Used",
                     message: "You have already used this promo code. Each promo code can only be used once.",
                     style: .actionSheet,
-                    viewController: self
+                    viewController: self,
+                    overrideUserInterfaceStyle: NeonReferralConstants.overrideUserInterfaceStyle
                 )
             default:
                 print("Unexpected result: \(result)")

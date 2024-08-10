@@ -68,7 +68,8 @@ public class NeonReferralManager {
                                  secondaryTextColor: UIColor,
                                  buttonTextColor: UIColor,
                                  backgroundColor: UIColor,
-                                 containerColor: UIColor) {
+                                 containerColor: UIColor,
+                                 overrideUserInterfaceStyle : UIUserInterfaceStyle = .light) {
         setDatabase()
         
         NeonReferralConstants.prizeAmount = prizeAmount
@@ -79,6 +80,7 @@ public class NeonReferralManager {
         NeonReferralConstants.buttonTextColor = buttonTextColor
         NeonReferralConstants.backgroundColor = backgroundColor
         NeonReferralConstants.containerColor = containerColor
+        NeonReferralConstants.overrideUserInterfaceStyle = overrideUserInterfaceStyle
     }
     
     private static func fetchUserCredit(){

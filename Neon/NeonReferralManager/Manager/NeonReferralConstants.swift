@@ -25,4 +25,5 @@ class NeonReferralConstants{
     static var backgroundColor = UIColor()
     static var containerColor = UIColor()
     static var buttonTextColor = UIColor()
+    static var overrideUserInterfaceStyle : UIUserInterfaceStyle = .unspecified
 }
