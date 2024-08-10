@@ -102,7 +102,7 @@ public class NeonReferralManager {
         NeonReferralDatabase.shared.decreaseCredit(userId: userID, amount: amount)
         NeonReferralConstants.remainingCredit -= amount
         }
-    }
+    
     
     public static func earnCredit(amount : Int){
         guard let userID = AuthManager.currentUserID else { return }
