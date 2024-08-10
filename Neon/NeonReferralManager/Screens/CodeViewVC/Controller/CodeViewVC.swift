@@ -241,7 +241,7 @@ class CodeViewVC: UIViewController {
     
     func gradientConfigure(){
         var gradientTopColor = UIColor()
-        gradientTopColor = NeonReferralConstants.mainColor.withAlphaComponent(0.2)
+        gradientTopColor = NeonReferralConstants.mainColor.withAlphaComponent(0.1)
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [
