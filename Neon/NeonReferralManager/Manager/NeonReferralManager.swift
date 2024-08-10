@@ -10,7 +10,7 @@ import NeonSDK
 import FirebaseFirestore
 
 @available(iOS 16.0, *)
-class NeonReferralManager {
+public class NeonReferralManager {
     //MARK: presentReferralController
     
     public static var remainingCredit : Int{
@@ -63,12 +63,12 @@ class NeonReferralManager {
     
     public static func configure(prizeAmount: Int,
                                  prizeTerminology: String,
-                                 primaryTextColor: UIColor,
                                  mainColor: UIColor,
+                                 primaryTextColor: UIColor,
                                  secondaryTextColor: UIColor,
+                                 buttonTextColor: UIColor,
                                  backgroundColor: UIColor,
-                                 containerColor: UIColor,
-                                 buttonTextColor: UIColor) {
+                                 containerColor: UIColor) {
         setDatabase()
         
         NeonReferralConstants.prizeAmount = prizeAmount
