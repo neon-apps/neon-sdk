@@ -199,7 +199,7 @@ class CodeViewVC: UIViewController {
         ReferanceCodeLabel.text = newUserID
         ReferanceCodeLabel.textColor = NeonReferralConstants.primaryTextColor
         ReferanceCodeLabel.backgroundColor = NeonReferralConstants.containerColor
-        ReferanceCodeLabel.layer.borderWidth = 1
+        ReferanceCodeLabel.layer.borderWidth = 0
         ReferanceCodeLabel.layer.masksToBounds = true
         ReferanceCodeLabel.layer.cornerRadius = 12
         ReferanceCodeLabel.leftInset = 15
@@ -236,7 +236,7 @@ class CodeViewVC: UIViewController {
     }
     
     func fetchCredit(){
-        remainingCredit.text = "Remaining Invite Credits: \(NeonReferralConstants.remainingCredit) "
+        remainingCredit.text = "Remaining \(NeonReferralConstants.prizeTerminology.capitalized) Credits: \(NeonReferralConstants.remainingCredit) "
     }
     
     func gradientConfigure(){
