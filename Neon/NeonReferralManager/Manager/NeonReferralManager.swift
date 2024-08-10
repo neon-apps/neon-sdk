@@ -24,8 +24,7 @@ class NeonReferralManager {
     //MARK: presentReddemController
     public static func presentReddemController(from viewController: UIViewController) {
         let reddemVC = CodeUseVC()
-        let sheetVC = NeonSheetManager()
-        sheetVC.custom(presentingVC: viewController, destinationVC: reddemVC, height: 224, cornerRadius: 24)
+        custom(presentingVC: viewController, destinationVC: reddemVC, height: 224, cornerRadius: 24)
     }
 
     //MARK: Configure
@@ -107,5 +106,19 @@ class NeonReferralManager {
         NeonReferralDatabase.shared.addCredit(for: userID, amount: amount)
         NeonReferralConstants.remainingCredit += amount
         print(NeonReferralConstants.remainingCredit)
+    }
+    
+    private func custom(presentingVC: UIViewController, destinationVC: UIViewController, height: Int , cornerRadius: Int ) {
+        DispatchQueue.main.async {
+            destinationVC.modalPresentationStyle = .formSheet
+            if let sheet = destinationVC.sheetPresentationController {
+                sheet.detents = [.custom { _ in
+                    return CGFloat(height)
+                }]
+                sheet.preferredCornerRadius = CGFloat(cornerRadius)
+                sheet.prefersGrabberVisible = true
+            }
+            presentingVC.present(destinationVC, animated: true, completion: nil)
+        }
     }
 }
