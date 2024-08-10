@@ -69,6 +69,7 @@ public class NeonReferralManager {
                                  buttonTextColor: UIColor,
                                  backgroundColor: UIColor,
                                  containerColor: UIColor,
+                                 appId : String,
                                  overrideUserInterfaceStyle : UIUserInterfaceStyle = .light) {
         setDatabase()
         
@@ -79,7 +80,8 @@ public class NeonReferralManager {
         NeonReferralConstants.secondaryTextColor = secondaryTextColor
         NeonReferralConstants.buttonTextColor = buttonTextColor
         NeonReferralConstants.backgroundColor = backgroundColor
-        NeonReferralConstants.containerColor = containerColor
+        NeonReferralConstants.containerColor = containerColor       
+        NeonReferralConstants.appId = appId
         NeonReferralConstants.overrideUserInterfaceStyle = overrideUserInterfaceStyle
     }
     

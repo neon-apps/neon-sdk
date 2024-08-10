@@ -308,7 +308,8 @@ class CodeViewVC: UIViewController {
         showNotification()
     }
     @objc func inviteButtonClicked(){
-        let activityVC = UIActivityViewController(activityItems: [newUserID], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: ["Check out this amazing app I found! Download it here: https://apps.apple.com/app/id\(NeonReferralConstants.appId) and use my referral code to get free \(NeonReferralConstants.prizeTerminology) credits. Here is my referral code : \(newUserId)"], applicationActivities: nil)
+
         present(activityVC, animated: true, completion: nil)
     }
 }
