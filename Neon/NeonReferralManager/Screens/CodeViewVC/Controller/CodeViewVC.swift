@@ -273,7 +273,7 @@ class CodeViewVC: UIViewController {
             make.left.equalToSuperview().inset(64)
         }
         let iconImageView = UIImageView()
-        iconImageView.image = UIImage(named: "referral_copiedIcon").withRenderingMode(.alwaysTemplate)
+        iconImageView.image = UIImage(named: "referral_copiedIcon")!.withRenderingMode(.alwaysTemplate)
         iconImageView.tintColor = NeonReferralConstants.mainColor
         notificationView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in

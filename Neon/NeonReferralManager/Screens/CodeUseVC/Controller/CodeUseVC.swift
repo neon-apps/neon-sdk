@@ -90,7 +90,7 @@ class CodeUseVC: UIViewController {
             make.left.equalToSuperview().inset(24)
             make.height.equalTo(24)
         }
-        backButton.setImage(.back, for: .normal)
+        backButton.setImage(UIImage(named: "referral_crossButton"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonClicked), for: .touchUpInside)
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
