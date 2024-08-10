@@ -10,7 +10,7 @@ import NeonSDK
 import FirebaseFirestore
 import FirebaseAuth
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 class CodeUseVC: UIViewController {
     //MARK: Properties
     var codeUseTextField = TextField(placeholder: "Enter code")
