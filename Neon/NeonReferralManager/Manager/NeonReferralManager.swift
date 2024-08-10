@@ -93,21 +93,10 @@ public class NeonReferralManager {
             }
         }
     }
-    public static func useCredit(amount: Int, completion: @escaping (Bool, String?) -> Void) {
+    public static func useCredit(amount: Int) {
         let currentCredit = NeonReferralConstants.remainingCredit
-        if currentCredit == 0 {
-            completion(false, "No credit left")
-        } else if currentCredit < amount {
-            completion(false, "You don't have enough credit")
-        } else {
-            guard let userID = AuthManager.currentUserID else {
-                completion(false, "User ID not found")
-                return
-            }
-            NeonReferralDatabase.shared.decreaseCredit(userId: userID, amount: amount)
-            NeonReferralConstants.remainingCredit -= amount
-            print(NeonReferralConstants.remainingCredit)
-            completion(true, nil)
+        NeonReferralDatabase.shared.decreaseCredit(userId: userID, amount: amount)
+        NeonReferralConstants.remainingCredit -= amount
         }
     }
     
@@ -115,7 +104,6 @@ public class NeonReferralManager {
         guard let userID = AuthManager.currentUserID else { return }
         NeonReferralDatabase.shared.addCredit(for: userID, amount: amount)
         NeonReferralConstants.remainingCredit += amount
-        print(NeonReferralConstants.remainingCredit)
     }
     
     
