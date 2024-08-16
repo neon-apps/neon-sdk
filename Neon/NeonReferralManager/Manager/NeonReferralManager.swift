@@ -57,7 +57,17 @@ public class NeonReferralManager {
                         }
                     }
                 }
+            } else {
+                userRef.setData([
+                    "Credit": 0
+                ], merge: true) { error in
+                    if let error = error {
+                    } else {
+                        self.fetchUserCredit()
+                    }
+                }
             }
+        }
         }
     }
     
