@@ -41,7 +41,7 @@ public class NeonReferralManager {
     private static func setDatabase() {
         guard let userID = AuthManager.currentUserID else { return }
         let db = Firestore.firestore()
-        let userRef = db.collection("Users").document(userID)
+        let userRef = db.collection("ReferralManagerUsers").document(userID)
         
         userRef.getDocument { document, error in
             if let document = document, document.exists {
