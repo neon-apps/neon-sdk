@@ -24,7 +24,7 @@ final class NeonReferralDatabase {
     }
 
     func fetchUsers(completion: @escaping (Bool) -> Void) {
-        db.collection("Users").getDocuments { (querySnapshot, error) in
+        db.collection("ReferralManagerUsers").getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
                 completion(false)
@@ -41,7 +41,7 @@ final class NeonReferralDatabase {
 
     func setDatabase(userID: String, completion: @escaping (String) -> Void) {
         let db = Firestore.firestore()
-        let userRef = db.collection("Users").document(userID)
+        let userRef = db.collection("ReferralManagerUsers").document(userID)
 
         userRef.getDocument { document, error in
             if let document = document, document.exists {
@@ -68,7 +68,7 @@ final class NeonReferralDatabase {
     }
 
     private func checkPromoCode(for userID: String, promoCode: String, completion: @escaping (Bool) -> Void) {
-        let userDocRef = db.collection("Users").document(userID)
+        let userDocRef = db.collection("ReferralManagerUsers").document(userID)
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if let usedPromoCodes = document.data()?["Used Promo Codes"] as? [String] {
@@ -84,7 +84,7 @@ final class NeonReferralDatabase {
 
     func addCredit(for userID: String, amount: Int) {
         
-        let userDocRef = db.collection("Users").document(userID)
+        let userDocRef = db.collection("ReferralManagerUsers").document(userID)
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if let currentCredit = document.data()?["Credit"] as? Int {
@@ -129,7 +129,7 @@ final class NeonReferralDatabase {
         guard let userID = AuthManager.currentUserID else { return }
 
         let db = Firestore.firestore()
-        let userRef = db.collection("Users").document(userID)
+        let userRef = db.collection("ReferralManagerUsers").document(userID)
         userRef.getDocument { (document, error) in
             if let error = error {
                 completion(nil, error)
@@ -146,7 +146,7 @@ final class NeonReferralDatabase {
     }
     func decreaseCredit(userId: String , amount : Int) {
         let db = Firestore.firestore()
-        let userRef = db.collection("Users").document(userId)
+        let userRef = db.collection("ReferralManagerUsers").document(userId)
         
         userRef.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -176,7 +176,7 @@ final class NeonReferralDatabase {
             completion(false)
             return
         }
-        let userDocRef = db.collection("Users").document(userID)
+        let userDocRef = db.collection("ReferralManagerUsers").document(userID)
         userDocRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 if var usedPromoCodes = document.get("Used Promo Codes") as? [String] {
@@ -200,7 +200,7 @@ final class NeonReferralDatabase {
     }
 
     private func updatePromoCodes(for userID: String, with usedPromoCodes: [String], completion: @escaping (Bool) -> Void) {
-        let userDocRef = db.collection("Users").document(userID)
+        let userDocRef = db.collection("ReferralManagerUsers").document(userID)
         userDocRef.updateData(["Used Promo Codes": usedPromoCodes]) { error in
             if let error = error {
                 print("Error updating document: \(error)")
