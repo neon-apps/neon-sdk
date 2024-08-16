@@ -69,6 +69,7 @@ public class NeonReferralManager {
             }
         }
     }
+
     
     public static func configure(prizeAmount: Int,
                                  prizeTerminology: String,
