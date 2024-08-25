@@ -10,7 +10,8 @@ import Foundation
 public class NeonEachLabsManager {
     
     public static func startTask(apiKey: String, flowId: String, parameters: [String: Any], completion: @escaping (String?) -> Void) {
-        let endpoint = NeonEachLabsEndpoint.startTask(flowId: flowId, parameters: parameters, apiKey: apiKey)
+        let wrappedParameters = ["parameters": parameters]  // Wrap the parameters in another dictionary
+        let endpoint = NeonEachLabsEndpoint.startTask(flowId: flowId, parameters: wrappedParameters, apiKey: apiKey)
         
         sendRequest(endpoint: endpoint) { json in
             guard let json = json else {
