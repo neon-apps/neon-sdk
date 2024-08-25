@@ -25,7 +25,7 @@ class PlayerManager: NSObject {
             return
         }
         
-        let filePath = getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(localAudioFileName).m4a").path
+        let filePath = getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(localAudioFileName).wav").path
         
         guard FileManager.default.fileExists(atPath: filePath) else {
             print("Audio file not found at path: \(filePath)")
