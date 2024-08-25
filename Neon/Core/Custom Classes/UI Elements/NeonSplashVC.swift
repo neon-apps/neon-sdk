@@ -17,11 +17,18 @@ public class NeonSplashVC: UIViewController {
     var appName : String
     var progressBarColors : [UIColor]
     var appIcon : UIImage
-    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3){
+    let lblAppTitle = UILabel()
+    var backgroundColor : UIColor
+    var textColor : UIColor
+    
+    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3, backgroundColor : UIColor = .white, textColor : UIColor = .black){
         self.animationDuration = animationDuration
         self.progressBarColors = progressBarColors
         self.appName = appName
         self.appIcon = appIcon
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -46,7 +53,8 @@ public class NeonSplashVC: UIViewController {
     }
     
     func createUI(){
-        view.backgroundColor = .black
+        
+        view.backgroundColor = backgroundColor
         
         let imgAppIcon = UIImageView()
         imgAppIcon.image = appIcon
@@ -61,10 +69,9 @@ public class NeonSplashVC: UIViewController {
             make.centerX.equalToSuperview()
         }
         
-        let lblAppTitle = UILabel()
         lblAppTitle.text = appName
+        lblAppTitle.textColor = textColor
         lblAppTitle.font = Font.custom(size: 30, fontWeight: .SemiBold)
-        lblAppTitle.textColor = .white
         lblAppTitle.textAlignment = .center
         lblAppTitle.sizeToFit()
         view.addSubview(lblAppTitle)
