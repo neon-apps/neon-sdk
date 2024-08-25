@@ -15,6 +15,7 @@ public class CustomAlertManager {
     private static var backgroundColor: UIColor = .white
     private static var textColor: UIColor = .black
     private static var buttonColor: UIColor = .blue
+    private static var buttonTextColor: UIColor = .white
     private static var layerType: LayerType = .clear
     private static var animationType: AnimationType = .slideVertically
    
@@ -24,10 +25,11 @@ public class CustomAlertManager {
     private static var verticalPadding : CGFloat = 20
     public static var isConfigured = false
     
-    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, layerType: LayerType, animationType: AnimationType, fixedWidth : CGFloat? = nil) {
+    public static func configure(backgroundColor: UIColor, textColor: UIColor, buttonColor: UIColor, buttonTextColor: UIColor, layerType: LayerType, animationType: AnimationType, fixedWidth : CGFloat? = nil) {
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.buttonColor = buttonColor
+            self.buttonTextColor = buttonTextColor
             self.layerType = layerType
             self.animationType = animationType
             self.isConfigured = true
@@ -124,7 +126,7 @@ public class CustomAlertManager {
             
             let buttonView = UIButton()
             buttonView.setTitle(button.title, for: .normal)
-            buttonView.setTitleColor(button.overrideTextColor ?? textColor, for: .normal)
+            buttonView.setTitleColor(button.overrideTextColor ?? buttonTextColor, for: .normal)
             buttonView.addAction {
                 dismissCurrentAlertView(controller: viewController, stackView: stackView, alertView: alertView)
                 if let completion = button.completion{
