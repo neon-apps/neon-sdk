@@ -9,16 +9,12 @@ import Foundation
 import UIKit
 import NeonSDK
 
-enum PurchaseService {
+public enum PurchaseService {
     case revenueCat
     case adapty
 }
 
-import Foundation
-import UIKit
-import NeonSDK
-
-enum NeonSettingsSection {
+public enum NeonSettingsSection {
     
     case linkButton(title: String, url: String, icon: UIImage? = nil)
     case rateButton(title: String, icon: UIImage? = nil)

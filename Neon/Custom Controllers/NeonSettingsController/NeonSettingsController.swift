@@ -72,7 +72,7 @@ open class NeonSettingsController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    func configure(
+    public func configure(
         buttonTextColor: UIColor = .black,
         buttonBackgroundColor: UIColor = .white,
         buttonBorderColor: UIColor = .lightGray,
@@ -95,7 +95,7 @@ open class NeonSettingsController: UIViewController {
         self.backButton.tintColor = primaryTextColor
     }
 
-    func addSection(_ section: NeonSettingsSection) {
+    public func addSection(_ section: NeonSettingsSection) {
         guard let controller = NeonSettingsControllerConstants.controller else { return }
         guard let sectionView = section.view(
             buttonTextColor: NeonSettingsControllerConstants.buttonTextColor,

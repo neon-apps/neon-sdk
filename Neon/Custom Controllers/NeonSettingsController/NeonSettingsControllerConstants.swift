@@ -10,7 +10,7 @@ import UIKit
 
 import UIKit
 
-struct NeonSettingsControllerConstants {
+public struct NeonSettingsControllerConstants {
     static var buttonTextColor: UIColor = .black
     static var buttonBackgroundColor: UIColor = .white
     static var buttonBorderColor: UIColor = .lightGray
