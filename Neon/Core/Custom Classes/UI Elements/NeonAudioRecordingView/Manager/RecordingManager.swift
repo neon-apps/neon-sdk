@@ -59,7 +59,7 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
     private func startRecordingSession() {
         let audioID = UUID().uuidString
         PlayerManager.shared.localAudioFileName = audioID
-        audioFileName = getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(audioID).m4a")
+        audioFileName = getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(audioID).mp3")
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -101,7 +101,7 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
     private func uploadAudio(fileURL: URL, completion: @escaping (URL?, Error?) -> Void) {
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let audioRef = storageRef.child("audios/\(UUID().uuidString).m4a")
+        let audioRef = storageRef.child("audios/\(UUID().uuidString).mp3")
 
         uploadTask = audioRef.putFile(from: fileURL, metadata: nil) { metadata, error in
             if let error = error {
