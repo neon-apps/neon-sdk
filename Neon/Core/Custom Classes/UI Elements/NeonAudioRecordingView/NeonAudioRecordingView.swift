@@ -17,7 +17,7 @@ public class NeonAudioRecordingView: UIView {
     public var configureActions: ((_ action: NeonAudioRecordingAction) -> ())?
 
     public enum NeonAudioRecordingAction{
-        case recordingCompleted(_ url: String)
+        case recordingCompleted(_ url: String, _ recordingDurationInSeconds : Int)
         case recordingDeleted
     }
     var progressBarView: ProgressBarView?
@@ -168,7 +168,10 @@ public class NeonAudioRecordingView: UIView {
     }
     
     private func stopRecording() {
-        if progressBarView?.seconds ?? 0 < 1 {
+        
+        var recordingDurationInSeconds =  progressBarView?.seconds ?? 0
+        
+        if recordingDurationInSeconds < 1 {
             resetRecordYourOwnVoiceView()
             return
         }
@@ -194,7 +197,7 @@ public class NeonAudioRecordingView: UIView {
                         self.sliderView?.updateInitialLabels()
                         
                         if let configureActions{
-                            configureActions(.recordingCompleted(audioURL.absoluteString))
+                            configureActions(.recordingCompleted(audioURL.absoluteString, recordingDurationInSeconds))
                         }
                     }
                 }
