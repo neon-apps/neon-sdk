@@ -97,38 +97,47 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
     }
 
     private func uploadAudio(fileURL: URL, completion: @escaping (URL?, Error?) -> Void) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let audioRef = storageRef.child("audios/\(UUID().uuidString).wav")
+        do {
+            // Convert the audio file to Data
+            let audioData = try Data(contentsOf: fileURL)
+            
+            let storage = Storage.storage()
+            let storageRef = storage.reference()
+            let audioRef = storageRef.child("audios/\(UUID().uuidString).wav")
+            
+            // Use putData instead of putFile
+            uploadTask = audioRef.putData(audioData, metadata: nil) { metadata, error in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
 
-        uploadTask = audioRef.putFile(from: fileURL, metadata: nil) { metadata, error in
-            if let error = error {
-                completion(nil, error)
-                return
+                audioRef.downloadURL { url, error in
+                    completion(url, error)
+                }
             }
 
-            audioRef.downloadURL { url, error in
-                completion(url, error)
+            // Show loading indicator
+            uploadTask?.observe(.progress) { snapshot in
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                // Update loading indicator (e.g., show percentComplete to the user)
             }
-        }
 
-        // Show loading indicator
-        uploadTask?.observe(.progress) { snapshot in
-            let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            // Update loading indicator (e.g., show percentComplete to the user)
-        }
-
-        uploadTask?.observe(.success) { snapshot in
-            // Hide loading indicator
-        }
-
-        uploadTask?.observe(.failure) { snapshot in
-            // Hide loading indicator
-            if let error = snapshot.error {
-                completion(nil, error)
+            uploadTask?.observe(.success) { snapshot in
+                // Hide loading indicator
             }
+
+            uploadTask?.observe(.failure) { snapshot in
+                // Hide loading indicator
+                if let error = snapshot.error {
+                    completion(nil, error)
+                }
+            }
+        } catch {
+            completion(nil, error)
         }
     }
+
 
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
