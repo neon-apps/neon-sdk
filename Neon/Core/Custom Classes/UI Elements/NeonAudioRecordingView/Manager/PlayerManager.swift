@@ -63,6 +63,12 @@ class PlayerManager: NSObject {
         updateProgress()
     }
     
+    func pause(){
+        audioPlayer?.pause()
+        audioPlayer = nil
+        timer?.invalidate()
+        timer = nil
+    }
     func forward() {
         guard let audioPlayer = audioPlayer else { return }
         

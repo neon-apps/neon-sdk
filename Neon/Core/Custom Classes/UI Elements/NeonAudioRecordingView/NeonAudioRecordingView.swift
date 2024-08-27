@@ -205,6 +205,9 @@ public class NeonAudioRecordingView: UIView {
         }
     }
     
+    public func stopPlayer(){
+        PlayerManager.shared.playPause()
+    }
     func resetRecordYourOwnVoiceView() {
         isRecording = false
         recordButtonView?.infoLabel.text = "Tap to start recording"
@@ -218,6 +221,9 @@ public class NeonAudioRecordingView: UIView {
         playButtonView?.update()
     }
     
+    public func pausePlayer(){
+        PlayerManager.shared.pause()
+    }
     @objc func trashButtonClick() {
         sliderView?.isHidden = true
         playButtonView?.isHidden = true
