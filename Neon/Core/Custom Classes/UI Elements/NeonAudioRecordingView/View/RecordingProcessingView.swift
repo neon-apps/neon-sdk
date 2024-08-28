@@ -31,7 +31,7 @@ class RecordingProcessingView: UIView {
         }
 
         let titleLabel = UILabel()
-        titleLabel.text = "Record processing"
+        titleLabel.text = "Recording processing…"
         titleLabel.textColor = NeonAudioRecordingViewConstants.primaryTextColor
         titleLabel.font = Font.custom(size: 16, fontWeight: .Bold)
         titleLabel.textAlignment = .center
