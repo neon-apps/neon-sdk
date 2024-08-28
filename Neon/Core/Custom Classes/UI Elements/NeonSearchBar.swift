@@ -12,40 +12,40 @@ import UIKit
 public class NeonSearchBar : UIView{
     
     var imgIcon = UIImageView()
-    let textfield = NeonTextField()
+    public let textfield = NeonTextField()
     
-    var cornerRadious : CGFloat = 15 {
+    public var cornerRadious : CGFloat = 15 {
         didSet{
             self.layer.cornerRadius = cornerRadious
         }
     }
     
-    var borderColor : UIColor = .clear {
+    public  var borderColor : UIColor = .clear {
         didSet{
             self.layer.borderColor = borderColor.cgColor
         }
     }
     
-    var borderWidth : CGFloat = 0 {
+    public  var borderWidth : CGFloat = 0 {
         didSet{
             self.layer.borderWidth = borderWidth
         }
     }
     
-    var icon : UIImage? = nil{
+    public  var icon : UIImage? = nil{
         didSet{
             imgIcon.image = icon?.withRenderingMode(.alwaysTemplate)
         }
     }
     
-    var iconTintColor : UIColor? = nil{
+    public  var iconTintColor : UIColor? = nil{
         didSet{
             imgIcon.tintColor = iconTintColor
         }
     }
     
    
-    var iconSize : CGFloat = 20{
+    public  var iconSize : CGFloat = 20{
         didSet{
             imgIcon.snp.updateConstraints { make in
                 make.height.width.equalTo(iconSize)
@@ -53,13 +53,13 @@ public class NeonSearchBar : UIView{
         }
     }
     
-    var placeholder : String = "Search Contacts"{
+    public  var placeholder : String = "Search Contacts"{
         didSet{
             textfield.placeholder = placeholder
         }
     }
     
-    var didSearched: ((String) -> Void)?
+    public  var didSearched: ((String) -> Void)?
     
     public init(){
         super.init(frame: .zero)
