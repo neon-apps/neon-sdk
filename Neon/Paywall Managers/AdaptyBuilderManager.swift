@@ -17,26 +17,31 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     var purchased: (() -> ())? = nil
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
-
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
         from controller : UIViewController,
         purchased: @escaping () -> (),
         dismissed: @escaping () -> (),
-        restored: @escaping () -> ()
+        restored: @escaping () -> (),
+        failedToPresent: @escaping () -> ()
     ){
         
         self.purchased = purchased
         self.dismissed = dismissed
         self.restored = restored
         
+        if AdaptyManager.adaptyBuilderPaywalls.contains(where: {$0.paywall.placementId != paywall.placementId}){
+            failedToPresent()
+            return
+        }
         for adaptyBuilderPaywall in AdaptyManager.adaptyBuilderPaywalls {
             if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
                 
                 guard paywall.hasViewConfiguration else {
                     //  use your custom logic
                     print("This paywall does not contain viewConfiguration")
+                    failedToPresent()
                       return
                 }
                 
