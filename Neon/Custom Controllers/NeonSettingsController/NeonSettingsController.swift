@@ -77,6 +77,7 @@ open class NeonSettingsController: UIViewController {
         buttonBackgroundColor: UIColor = .white,
         buttonBorderColor: UIColor = .lightGray,
         buttonCornerRadius: CGFloat = 8.0,
+        buttonHeight: CGFloat = 50.0,
         iconTintColor: UIColor? = nil,
         primaryTextColor: UIColor = .black,
         mainColor: UIColor = .blue,
@@ -86,6 +87,7 @@ open class NeonSettingsController: UIViewController {
         NeonSettingsControllerConstants.buttonBackgroundColor = buttonBackgroundColor
         NeonSettingsControllerConstants.buttonBorderColor = buttonBorderColor
         NeonSettingsControllerConstants.buttonCornerRadius = buttonCornerRadius
+        NeonSettingsControllerConstants.buttonHeight = buttonHeight
         NeonSettingsControllerConstants.iconTintColor = iconTintColor
         NeonSettingsControllerConstants.primaryTextColor = primaryTextColor
         NeonSettingsControllerConstants.mainColor = mainColor
@@ -102,6 +104,7 @@ open class NeonSettingsController: UIViewController {
             buttonBackgroundColor: NeonSettingsControllerConstants.buttonBackgroundColor,
             buttonBorderColor: NeonSettingsControllerConstants.buttonBorderColor,
             buttonCornerRadius: NeonSettingsControllerConstants.buttonCornerRadius,
+            buttonHeight: NeonSettingsControllerConstants.buttonHeight,
             iconTintColor: NeonSettingsControllerConstants.iconTintColor,
             primaryTextColor: NeonSettingsControllerConstants.primaryTextColor,
             mainColor: NeonSettingsControllerConstants.mainColor,

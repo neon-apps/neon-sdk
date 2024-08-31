@@ -14,7 +14,8 @@ public struct NeonSettingsControllerConstants {
     static var buttonTextColor: UIColor = .black
     static var buttonBackgroundColor: UIColor = .white
     static var buttonBorderColor: UIColor = .lightGray
-    static var buttonCornerRadius: CGFloat = 8.0
+    static var buttonCornerRadius: CGFloat = 8.0  
+    static var buttonHeight: CGFloat = 50.0
     static var iconTintColor: UIColor? = nil
     static var primaryTextColor: UIColor = .black
     static var mainColor: UIColor = .blue

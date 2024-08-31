@@ -29,50 +29,50 @@ public enum NeonSettingsSection {
     case customView(view: UIView, height: CGFloat)
     case spacing(height: CGFloat)
     
-    func view(buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, iconTintColor: UIColor?, primaryTextColor: UIColor, mainColor: UIColor, controller: UIViewController) -> UIView? {
+    func view(buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?, primaryTextColor: UIColor, mainColor: UIColor, controller: UIViewController) -> UIView? {
         switch self {
         case .linkButton(let title, let url, let icon):
             return createButton(title: title, icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.openURL(url)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
             
         case .rateButton(let title, let icon):
             return createButton(title: title, icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.rateApp()
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .reviewButton(let title, let appId, let icon):
             return createButton(title: title ?? "Write a Review", icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.writeReview(appId: appId)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .shareButton(let title, let appId, let icon):
             return createButton(title: title ?? "Share the App", icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.shareApp(from: controller, appId: appId)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .copyUserIdButton(let title, let icon):
             return createButton(title: title ?? "Copy User ID", icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.copyUserID(controller: controller)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .contactButton(let title, let email, let icon):
             return createButton(title: title ?? "Contact Support", icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.contactSupport(email: email)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .customButton(let title, let icon, let action):
-            return createButton(title: title, icon: icon, chevron: true, action: action, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            return createButton(title: title, icon: icon, chevron: true, action: action, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .premiumButton(let title, let icon, let backgroundColor, let borderColor, let titleColor, let iconTintColor, let completion):
             return createButton(title: title ?? "Upgrade to Premium", icon: icon, chevron: false, action: {
                 NeonSettingsActionManager.upgradeToPremium(completion: completion)
-            }, buttonTextColor: titleColor, buttonBackgroundColor: backgroundColor, buttonBorderColor: borderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: titleColor, buttonBackgroundColor: backgroundColor, buttonBorderColor: borderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .restorePurchaseButton(let title, let icon, let service):
             return createButton(title: title ?? "Restore Purchases", icon: icon, chevron: true, action: {
                 NeonSettingsActionManager.restorePurchases(using: service, mainColor: mainColor, controller: controller)
-            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, iconTintColor: iconTintColor)
+            }, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         
         case .titleSection(let title, let textColor):
             return createTitleView(title: title, textColor: textColor ?? primaryTextColor)
@@ -92,7 +92,7 @@ public enum NeonSettingsSection {
         }
     }
     
-    private func createButton(title: String, icon: UIImage?, chevron: Bool, action: (() -> Void)? = nil, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, iconTintColor: UIColor?) -> UIButton {
+    private func createButton(title: String, icon: UIImage?, chevron: Bool, action: (() -> Void)? = nil, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setTitleColor(buttonTextColor, for: .normal)
@@ -104,7 +104,7 @@ public enum NeonSettingsSection {
         button.layer.borderColor = buttonBorderColor.cgColor
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: icon == nil ? 20 : 40, bottom: 0, right: 0)
         button.snp.makeConstraints { make in
-            make.height.equalTo(50)
+            make.height.equalTo(buttonHeight)
         }
         
         if let icon = icon {
