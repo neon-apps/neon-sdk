@@ -71,6 +71,9 @@ public class Neon{
     public static var isOnboardingCompleted : Bool{
         return UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted")
     }
+    public static func paywallPresented(){
+        NeonAppTracking.trackPaywallView()
+    }
     
     public static func activatePremiumTest(){
         #if DEBUG
