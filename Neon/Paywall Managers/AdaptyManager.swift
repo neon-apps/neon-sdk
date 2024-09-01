@@ -338,6 +338,7 @@ public class AdaptyManager {
                 if let profile = try? result.get(),
                    profile.accessLevels[self.accessLevel]?.isActive ?? false {
                     Neon.isUserPremium = true
+                    trackTrialConversionIfNeeded(for: profile)
                     UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                     guard let completionSuccess else { return }
                     completionSuccess()
@@ -353,6 +354,18 @@ public class AdaptyManager {
                 }
             }
 
+    }
+    
+    internal static func trackTrialConversionIfNeeded(for profile : AdaptyProfile){
+        for package in packages{
+            let identifier = package.vendorProductId
+            let hasIntorductoryPeriod = NeonPaywallManager.hasIntorductoryPeriod(product: package.skProduct)
+            if let subscription = profile.subscriptions[identifier]{
+                if subscription.isActive && hasIntorductoryPeriod && subscription.activeIntroductoryOfferType == nil{
+                    NeonAppTracking.trackTrialConversion()
+                }
+            }
+        }
     }
     
     internal static func configureNotification(){

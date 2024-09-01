@@ -159,6 +159,16 @@ public class NeonPaywallManager{
         
     }
     
+    public static func hasIntorductoryPeriod(product : SKProduct) -> Bool{
+        var hasIntorductoryPeriod = false
+        getIntroductoryPeriod(product: product) { duration, price in
+            if let duration, duration != 0{
+                hasIntorductoryPeriod = true
+            }
+        }
+        return hasIntorductoryPeriod
+    }
+    
     public static func trackPurchase(product : SKProduct){
         getIntroductoryPeriod(product: product) { duration, price in
             if let duration, duration != 0{

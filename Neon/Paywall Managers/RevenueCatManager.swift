@@ -172,6 +172,9 @@ public class RevenueCatManager {
         Purchases.shared.getCustomerInfo { purchaserInfo, _ in
             if purchaserInfo?.entitlements.all[accessLevel]?.isActive == true {
                 Neon.isUserPremium = true
+                if let purchaserInfo{
+                    trackTrialConversionIfNeeded(for: purchaserInfo)
+                }
                 UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                 guard let completionSuccess else { return }
                 completionSuccess()
@@ -188,6 +191,18 @@ public class RevenueCatManager {
         }
     }
     
+    internal static func trackTrialConversionIfNeeded(for purchaserInfo : CustomerInfo){
+        for package in packages{
+            let identifier = package.storeProduct.productIdentifier
+            guard let product = package.storeProduct.sk1Product else { return}
+            let hasIntorductoryPeriod = NeonPaywallManager.hasIntorductoryPeriod(product: product)
+            if let entitlement = purchaserInfo.entitlements.all[accessLevel]{
+                if entitlement.productIdentifier == identifier, entitlement.isActive && hasIntorductoryPeriod && entitlement.periodType == .normal{
+                    NeonAppTracking.trackTrialConversion()
+                }
+            }
+        }
+    }
     internal static func configureNotification(){
         NotificationCenter.observe(name: UIApplication.willEnterForegroundNotification) { Notification in
             RevenueCatManager.verifySubscription(completionSuccess: nil, completionFailure: nil)
