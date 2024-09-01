@@ -37,7 +37,7 @@ class NeonAppTracking {
 
     static func createDevice() {
         let endpoint = "/api/v1/devices/create"
-        let currentDate = Date().returnString(format: "MM/dd/yyyy hh:mm:ss")
+        let currentDate = Date().returnString(format: "MM/dd/yyyy hh:mm:ss", timeZone: "America/New_York")
         let parameters: [String: Any] = [
             "bundle_id": bundleID,
             "device_id": deviceID,
@@ -138,5 +138,6 @@ class NeonAppTracking {
         task.resume()
     }
 }
+
 
 
