@@ -45,6 +45,8 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
                       return
                 }
                 
+                NeonAppTracking.trackPaywallView()
+                
                 let visualPaywall = try! AdaptyUI.paywallController(
                     for: adaptyBuilderPaywall.paywall,
                     products: nil,
