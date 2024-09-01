@@ -8,13 +8,12 @@
 import Foundation
 import UIKit
 
-
 class NeonAppTracking {
 
     private static let baseURL: String = "https://web.paywaller.io"
     
     private static var bundleID: String {
-        guard let id = Bundle.module.bundleIdentifier else {
+        guard let id = Bundle.main.bundleIdentifier else {
             fatalError("Bundle Identifier is necessary but could not be accessed.")
         }
         return id
@@ -28,13 +27,13 @@ class NeonAppTracking {
     }
 
     private static var appName: String {
-        guard let name = Bundle.module.infoDictionary?["CFBundleName"] as? String else {
+        guard let name = Bundle.main.infoDictionary?["CFBundleName"] as? String else {
             fatalError("App Name is necessary but could not be accessed.")
         }
         return name
     }
-    
-    private static let deviceModel: String = UIDevice.current.model
+
+    private static let deviceModel: String = NeonDeviceManager.currentDeviceModel.stringValue
 
     static func createDevice() {
         let endpoint = "/api/v1/devices/create"
@@ -46,6 +45,7 @@ class NeonAppTracking {
             "device_model": deviceModel,
             "created_at": currentDate
         ]
+        print(parameters)
         makeRequest(endpoint: endpoint, parameters: parameters)
     }
 
@@ -138,3 +138,5 @@ class NeonAppTracking {
         task.resume()
     }
 }
+
+
