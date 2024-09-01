@@ -7,6 +7,8 @@
 
 import UIKit
 import Foundation
+import AppTrackingTransparency
+import AdSupport
 
 public class Neon{
     public static var isUserPremium = false
@@ -71,6 +73,23 @@ public class Neon{
     public static var isOnboardingCompleted : Bool{
         return UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted")
     }
+
+    public static func requestIDFA(completion: ((_ authorized: Bool) -> Void)? = nil) {
+        ATTrackingManager.requestTrackingAuthorization { status in
+            switch status {
+            case .authorized:
+                let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                NeonAppTracking.updateIdfa(idfa: idfa)
+                completion?(true)
+            case .denied, .restricted, .notDetermined:
+                completion?(false)
+            @unknown default:
+                completion?(false)
+            }
+        }
+    }
+
+
     public static func paywallPresented(){
         NeonAppTracking.trackPaywallView()
     }
