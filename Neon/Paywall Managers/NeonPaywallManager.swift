@@ -125,7 +125,53 @@ public class NeonPaywallManager{
         }
         
     }
+    public static func getIntroductoryPeriod(product : SKProduct, completion : (_ duration: Int?, _ price: String?) -> ()){
+        
+        if let numberOfUnits = product.introductoryPrice?.subscriptionPeriod.numberOfUnits,
+           let unit = product.introductoryPrice?.subscriptionPeriod.unit{
+            
+            var introductoryPrice : String?
+            
+            if let price = product.introductoryPrice?.price{
+                if price != 0.0{
+                    let currencyCode = product.priceLocale.currencyCode
+                    let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
+                    introductoryPrice = "\(currencySymbol)\(formatPrice(price: price))"
+                }
+            }
+  
+            switch unit {
+            case .day:
+                completion(numberOfUnits, introductoryPrice)
+            case .week:
+                completion (numberOfUnits * 7, introductoryPrice)
+            case .month:
+                completion (numberOfUnits * 30, introductoryPrice)
+            case .year:
+                completion (numberOfUnits * 365, introductoryPrice)
+            default :
+                completion (nil,nil)
+            }
+            
+        }else{
+            completion (nil,nil)
+        }
+        
+    }
+    
+    public static func trackPurchase(product : SKProduct){
+        getIntroductoryPeriod(product: product) { duration, price in
+            if let duration, duration != 0{
+                NeonAppTracking.trackTrialStart()
+            }else{
+                NeonAppTracking.trackDirectSubscription()
+            }
+        }
+    }
  
+    func formatPrice(price : NSDecimalNumber) -> String{
+        return String(format: "%.2f", Double(truncating: price))
+    }
     
     private static func calculateWeekCount(unit : SKProduct.PeriodUnit, numberOfUnits : Int) -> Int{
         switch unit {

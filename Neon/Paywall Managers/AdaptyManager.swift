@@ -244,7 +244,7 @@ public class AdaptyManager {
             LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(purchaseInfo):
-                
+                NeonPaywallManager.trackPurchase(product: package.skProduct)
                 if NeonPaywallManager.isSubscription(product: package.skProduct){
                     if purchaseInfo.profile.accessLevels[self.accessLevel]?.isActive ?? false {
                         Neon.isUserPremium = true

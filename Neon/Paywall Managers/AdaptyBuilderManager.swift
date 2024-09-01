@@ -119,6 +119,8 @@ extension AdaptyBuilderManager{
                            purchasedInfo: AdaptyPurchasedInfo) {
         Neon.isUserPremium = true
       
+        NeonPaywallManager.trackPurchase(product: product.skProduct)
+        
         controller.dismiss(animated: true)
         
         if let purchased{

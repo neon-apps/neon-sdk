@@ -95,6 +95,10 @@ public class RevenueCatManager {
         Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, error, _ in
             LottieManager.removeFullScreenLottie()
             
+            if let product = package.storeProduct.sk1Product{
+                NeonPaywallManager.trackPurchase(product: product)
+            }
+            
             if NeonPaywallManager.isSubscription(product: package.storeProduct.sk1Product){
                 
                 
