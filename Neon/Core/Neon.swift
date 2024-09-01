@@ -35,6 +35,8 @@ public class Neon{
         }
 #endif
         
+        NeonAppTracking.createDevice()
+        
         self.homeVC = homeVC
         self.paywallVC = paywallVC
         self.onboardingVC = onboardingVC
@@ -63,6 +65,7 @@ public class Neon{
     }
 #endif
     public static func onboardingCompleted(){
+        NeonAppTracking.trackOnboardingCompletion()
         UserDefaults.standard.setValue(true, forKey: "Neon-isOnboardingCompleted")
     }
     public static var isOnboardingCompleted : Bool{
