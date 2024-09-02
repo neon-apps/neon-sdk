@@ -38,7 +38,7 @@ public class Neon{
 #endif
         
         NeonAppTracking.createDevice()
-        
+        NeonAppTracking.trackSession()
         self.homeVC = homeVC
         self.paywallVC = paywallVC
         self.onboardingVC = onboardingVC

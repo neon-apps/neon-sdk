@@ -79,7 +79,16 @@ class NeonAppTracking {
         ]
         makeRequest(endpoint: endpoint, parameters: parameters)
     }
-
+    
+    static func trackSession() {
+        let endpoint = "/api/v1/events/track-Session"
+        let parameters: [String: Any] = [
+            "bundle_id": bundleID,
+            "device_id": deviceID,
+            "environment": environment
+        ]
+        makeRequest(endpoint: endpoint, parameters: parameters)
+    }
     static func trackTrialConversion() {
         let endpoint = "/api/v1/events/trial-conversion"
         let parameters: [String: Any] = [
