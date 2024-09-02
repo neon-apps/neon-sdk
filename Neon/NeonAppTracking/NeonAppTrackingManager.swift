@@ -45,7 +45,7 @@ class NeonAppTracking {
 
     private static let deviceModel: String = NeonDeviceManager.currentDeviceModel.stringValue
 
-    static func createDevice() {
+    static func createDevice(completion : (() -> ())? = nil) {
         let endpoint = "/api/v1/devices/create"
         let currentDate = Date().returnString(format: "MM/dd/yyyy hh:mm:ss", timeZone: "America/New_York")
         let parameters: [String: Any] = [
@@ -56,7 +56,7 @@ class NeonAppTracking {
             "created_at": currentDate,
             "environment": environment
         ]
-        makeRequest(endpoint: endpoint, parameters: parameters)
+        makeRequest(endpoint: endpoint, parameters: parameters, completion: completion)
     }
 
     static func updateIdfa(idfa: String) {
@@ -129,7 +129,7 @@ class NeonAppTracking {
         makeRequest(endpoint: endpoint, parameters: parameters)
     }
 
-    private static func makeRequest(endpoint: String, parameters: [String: Any]) {
+    private static func makeRequest(endpoint: String, parameters: [String: Any], completion : (() -> ())? = nil) {
         guard let url = URL(string: "\(baseURL)\(endpoint)") else {
             fatalError("The URL could not be formed. Ensure the baseURL is correct.")
         }
@@ -145,6 +145,9 @@ class NeonAppTracking {
         }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let completion{
+                completion()
+            }
             if let httpResponse = response as? HTTPURLResponse {
                 print("Status Code: \(httpResponse.statusCode)")
                 if let data = data {
