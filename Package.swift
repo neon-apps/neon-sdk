@@ -23,7 +23,7 @@ let package = Package(
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.4.0")),
         .package(name: "Localize_Swift", url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0")),
-        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("3.0.0-beta.2"))
+        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("2.9.6"))
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -37,18 +37,14 @@ let package = Package(
                 "SnapKit",
                 "Localize_Swift",
                 .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
-                .product(name: "AdaptyUI", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
                 .product(name: "Lottie", package: "Lottie", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAnalytics", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseRemoteConfig", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseStorage", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseFirestore", package: "Firebase", condition: .when(platforms: [.iOS])),
-                .product(name: "FirebaseFirestoreSwift", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseCrashlytics", package: "Firebase", condition: .when(platforms: [.iOS])),
-                .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS])),
-                .product(name: "FirebaseMessaging", package: "Firebase", condition: .when(platforms: [.iOS]))
                 
             
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts"), .process("Core/Resources/Assets")])

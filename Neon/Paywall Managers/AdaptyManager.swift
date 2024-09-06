@@ -10,7 +10,6 @@ import Adapty
 import StoreKit
 import UIKit
 import Lottie
-import AdaptyUI
 
 
 public protocol AdaptyManagerDelegate: AnyObject {
@@ -27,7 +26,6 @@ public class AdaptyManager {
     }
     public static var paywalls = [AdaptyPaywall]()
     public static var packages = [AdaptyPaywallProduct]()
-    public static var adaptyBuilderPaywalls = [AdaptyBuilderPaywall]()
 
     public static var selectedPaywall : AdaptyPaywall?
     public static var selectedPackage : AdaptyPaywallProduct?
@@ -47,11 +45,7 @@ public class AdaptyManager {
         }else{
             Adapty.activate(withAPIKey)
         }
-        
-        if #available(iOS 15, *){
-            AdaptyUI.activate()
-
-        }
+       
 
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
         if Neon.isPremiumTestActive{
@@ -107,10 +101,7 @@ public class AdaptyManager {
                         self.packages.append(package)
                         UserDefaults.standard.setValue(package.localizedPrice, forKey: "Neon-\(package.vendorProductId)")
                         AdaptyManager.delegate?.packageFetched()
-                        if #available(iOS 15, *){
-                            fetchViewConfiguration(paywall : paywall, and :  packages)
-                        }
-                       
+                        
 
                     }
                 }
@@ -123,25 +114,7 @@ public class AdaptyManager {
         }
     }
 
-    @available(iOS 15.0, *)
-    public static func fetchViewConfiguration(paywall : AdaptyPaywall, and packages : [AdaptyPaywallProduct]){
-        guard paywall.hasViewConfiguration else {
-            //  use your custom logic
-              return
-        }
-        AdaptyUI.getViewConfiguration(forPaywall: paywall) { result in
-            switch result {
-            case let .success(viewConfiguration):
-                adaptyBuilderPaywalls.append(AdaptyBuilderPaywall(paywall: paywall, configuration: viewConfiguration, packages: packages))
-                break
-                // use loaded configuration
-            case let .failure(error):
-                break
-                // handle the error
-            }
-        }
-    }
-    
+  
     public static func getPackage(id : String) -> AdaptyPaywallProduct?{
         for package in packages {
             if package.vendorProductId == id{
