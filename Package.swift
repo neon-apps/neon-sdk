@@ -21,7 +21,7 @@ let package = Package(
         .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.0.0"),
         .package(name: "Hero", url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.4.0")),
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "9.0.0")),
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.15.0")),
         .package(name: "Localize_Swift", url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0")),
         .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("2.9.6"))
         // Dependencies declare other packages that this package depends on.
@@ -43,8 +43,11 @@ let package = Package(
                 .product(name: "FirebaseRemoteConfig", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseStorage", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseFirestore", package: "Firebase", condition: .when(platforms: [.iOS])),
+                .product(name: "FirebaseFirestoreSwift", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseCrashlytics", package: "Firebase", condition: .when(platforms: [.iOS])),
+                .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS])),
+                .product(name: "FirebaseMessaging", package: "Firebase", condition: .when(platforms: [.iOS]))
                 
             
             ], path: "Neon", resources: [.process("Core/Resources/Animations"), .process("Core/Resources/Fonts"), .process("Core/Resources/Assets")])
