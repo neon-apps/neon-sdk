@@ -87,5 +87,32 @@ public class SettingsManager{
 
         }
       }
+    
+    static func fetchAppID(completion: @escaping (String?) -> Void) {
+        let bundleID = Bundle.main.bundleIdentifier ?? ""
+        let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(bundleID)")!
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let results = json["results"] as? [[String: Any]],
+                   let appStoreID = results.first?["trackId"] as? Int {
+                    completion(String(appStoreID))
+                } else {
+                    completion(nil)
+                }
+            } catch {
+                completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
+
 #endif
 }

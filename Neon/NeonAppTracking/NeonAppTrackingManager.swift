@@ -45,12 +45,13 @@ class NeonAppTracking {
 
     private static let deviceModel: String = NeonDeviceManager.currentDeviceModel.stringValue
 
-    static func createDevice(completion : (() -> ())? = nil) {
+    static func createDevice(appID : String?, completion : (() -> ())? = nil) {
         let endpoint = "/api/v1/devices/create"
         let currentDate = Date().returnString(format: "MM/dd/yyyy hh:mm:ss", timeZone: "America/New_York")
         let parameters: [String: Any] = [
             "bundle_id": bundleID,
             "device_id": deviceID,
+            "app_id": appID,
             "app_name": appName,
             "device_model": deviceModel,
             "created_at": currentDate,

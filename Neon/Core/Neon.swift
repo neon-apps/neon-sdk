@@ -36,10 +36,12 @@ public class Neon{
             configureIQKeyboard()
         }
 #endif
+        SettingsManager.fetchAppID { appID in
+            NeonAppTracking.createDevice(appID : appID, completion: {
+                NeonAppTracking.trackSession()
+            })
+        }
         
-        NeonAppTracking.createDevice(completion: {
-            NeonAppTracking.trackSession()
-        })
         
         self.homeVC = homeVC
         self.paywallVC = paywallVC
