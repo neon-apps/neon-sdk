@@ -11,7 +11,7 @@ import UIKit
 
 class NeonAppTracking {
 
-    private static let baseURL: String = "https://web.paywaller.io"
+    private static let baseURL: String = "https://neonapptracking.com"
     
     // Set the environment based on the build configuration
     private static let environment: String = {
