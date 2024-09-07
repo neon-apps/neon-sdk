@@ -86,6 +86,7 @@ public class NeonAudioRecordingView: UIView {
         
         playButtonView = PlayButtonView()
         guard let playButtonView = playButtonView else { return }
+        self.recordButtonView?.voiceButton.setImage(NeonSymbols.mic_fill, for: .normal)
         playButtonView.playButton.addTarget(self, action: #selector(handlePlayButtonClick), for: .touchUpInside)
         playButtonView.trashButton.addTarget(self, action: #selector(trashButtonClick), for: .touchUpInside)
         playButtonView.isHidden = true
