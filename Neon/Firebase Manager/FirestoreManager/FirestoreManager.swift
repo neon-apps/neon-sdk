@@ -7,7 +7,6 @@
 #if !os(xrOS)
 import Foundation
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 
 
