@@ -10,6 +10,7 @@ import NeonSDK
 import Firebase
 import FirebaseStorage
 import FirebaseFirestore
+import FirebaseAuth
 
 @available(iOS 16.0, *)
 final class NeonReferralDatabase {
