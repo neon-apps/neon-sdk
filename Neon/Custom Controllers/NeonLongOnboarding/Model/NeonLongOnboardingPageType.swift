@@ -20,7 +20,7 @@ public enum NeonLongOnboardingPageType{
     case customPlan(mainTitle: String, planTitle: String,planSubtitle: String, planItems : [String], secondTitle : String, descriptionTitle : String, description : String)
     case contract(emoji : String, title : String, items : [String], confirmLabel : String = "Long press to confirm")
     case letsGo(question : String, image : UIImage, hideNoButton : Bool = false)
-    case statement(title : String, statement : String, image : UIImage)
+    case statement(title : String, statement : String, image : UIImage, yesButtonTitle : String = "Yes", noButtonTitle : String = "No")
     case slider(question : String, item: String, descripiton: String, symbol: String, min : Float, max : Float, isSymbolBeforeValue : Bool = true)
     case text(question : String, subtitle: String?, placeholder: String)
     case sayGoodbye(title : String, items : [String])
