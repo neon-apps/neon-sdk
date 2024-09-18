@@ -11,8 +11,8 @@ import UIKit
 @available(iOS 13.0, *)
 public class NeonLongOnboardingConstants{
     
-    static var currentPage : NeonLongOnboardingPage?
-    static var currentSection : NeonLongOnboardingSection?
+    public static var currentPage : NeonLongOnboardingPage?
+    public static var currentSection : NeonLongOnboardingSection?
     static var responses = [NeonLongOnboardingResponse]()
     static var sections = [NeonLongOnboardingSection]()
     
