@@ -29,7 +29,7 @@ public class NeonLongOnboardingPage{
         }
        
     }
-    var indexInSection : Int{
+    public var indexInSection : Int{
         get{
             for (_, section) in NeonLongOnboardingConstants.sections.enumerated(){
                 for (pageIndex, page) in section.pages.enumerated(){

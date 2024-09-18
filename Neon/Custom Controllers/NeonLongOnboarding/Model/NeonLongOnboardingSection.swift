@@ -19,7 +19,7 @@ public class NeonLongOnboardingSection{
             return pages.filter({$0.isQuestion})
         }
     }
-    var index = Int()
+    public var index = Int()
     
     internal init(title: String) {
         self.title = title
