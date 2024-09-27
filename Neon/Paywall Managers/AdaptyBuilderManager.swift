@@ -130,12 +130,19 @@ extension AdaptyBuilderManager{
     }
     public func paywallController(_ controller: AdaptyPaywallController,
                            didFinishRestoreWith profile: AdaptyProfile) {
-        Neon.isUserPremium = true
- 
+      
         controller.dismiss(animated: true)
-        if let restored{
-            restored()
+        if profile.accessLevels[AdaptyManager.accessLevel]?.isActive ?? false {
+            Neon.isUserPremium = true
+            if let restored{
+                restored()
+            }
+
         }
+        
+      
+       
+       
        
     }
     

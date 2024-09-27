@@ -34,7 +34,7 @@ public class AdaptyManager {
     
     
     public static var delegate: AdaptyManagerDelegate?
-    private static var accessLevel = String()
+    public static var accessLevel = String()
 
     
   
