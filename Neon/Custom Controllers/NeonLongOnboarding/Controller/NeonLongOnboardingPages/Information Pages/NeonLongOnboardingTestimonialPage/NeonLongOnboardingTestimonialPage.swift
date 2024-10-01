@@ -209,7 +209,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
                 }
             }
             UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
-                self.view.layoutIfNeeded()
+                stack.layoutIfNeeded()
             })
      
         })
