@@ -129,6 +129,11 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         }
         animateStack(stack: secondTestimonialStack, toLeft: false)
         
+        
+        UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
+            self.stackView.layoutIfNeeded()
+        })
+        
         if NeonDeviceManager.isCurrentDeviceEqualOrSmallerThan(.iPhone8){
             secondTestimonialStack.isHidden = true
         }
@@ -214,9 +219,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
                     make.right.equalToSuperview().offset(1900)
                 }
             }
-            UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
-                self.stackView.layoutSubviews()
-            })
+       
      
         })
     }
