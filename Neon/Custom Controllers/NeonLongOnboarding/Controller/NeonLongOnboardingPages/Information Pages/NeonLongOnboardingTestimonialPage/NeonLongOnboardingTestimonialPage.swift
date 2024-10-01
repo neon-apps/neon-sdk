@@ -21,6 +21,8 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
     var isTimerStarted = false
     var processingAnimationView : NeonAnimationView?
     var processingDuration = Double()
+    let stackView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -98,11 +100,15 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
       
         
         
-        
+        view.addSubview(stackView)
+        stackView.isUserInteractionEnabled = false
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         firstTestimonialStack.axis = .horizontal
         firstTestimonialStack.spacing = 20
         firstTestimonialStack.distribution = .equalSpacing
-        view.addSubview(firstTestimonialStack)
+        stackView.addSubview(firstTestimonialStack)
         firstTestimonialStack.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-30)
             make.height.equalTo(180)
@@ -114,7 +120,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         secondTestimonialStack.axis = .horizontal
         secondTestimonialStack.spacing = 20
         secondTestimonialStack.distribution = .equalSpacing
-        view.addSubview(secondTestimonialStack)
+        stackView.addSubview(secondTestimonialStack)
         secondTestimonialStack.snp.makeConstraints { make in
             make.bottom.equalTo(firstTestimonialStack.snp.top).offset(-20)
             make.height.equalTo(180)
@@ -209,7 +215,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
                 }
             }
             UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
-                stack.layoutIfNeeded()
+                self.stackView.layoutIfNeeded()
             })
      
         })
