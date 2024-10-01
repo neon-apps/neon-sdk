@@ -129,11 +129,12 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         }
         animateStack(stack: secondTestimonialStack, toLeft: false)
         
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [self] in
+
         UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
             self.stackView.layoutIfNeeded()
         })
-        
+        })
         if NeonDeviceManager.isCurrentDeviceEqualOrSmallerThan(.iPhone8){
             secondTestimonialStack.isHidden = true
         }
@@ -210,7 +211,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
     
 
     func animateStack(stack : UIStackView, toLeft : Bool){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [self] in
+     
             
             stack.snp.updateConstraints { make in
                 if toLeft{
@@ -220,8 +221,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
                 }
             }
        
-     
-        })
+       
     }
     
     func addTestimonials(testimonials : [NeonTestimonial]){
