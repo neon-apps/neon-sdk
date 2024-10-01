@@ -11,7 +11,7 @@ import NeonSDK
 
 @available(iOS 13.0, *)
 class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
-    
+  
     var animationDelay = 1.2
     let descriptionLabel = UILabel()
     let firstTestimonialStack = UIStackView()
@@ -21,14 +21,9 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
     var isTimerStarted = false
     var processingAnimationView : NeonAnimationView?
     var processingDuration = Double()
-    let stackView = UIView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
-            self.stackView.layoutIfNeeded()
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +34,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         super.createUI()
         configurePage()
         
-        
+      
         processingAnimationView = NeonAnimationView(animation: .sdk(name: "processing"), color: NeonLongOnboardingConstants.selectedOptionBorderColor)
         view.addSubview(processingAnimationView!)
         processingAnimationView!.snp.makeConstraints { make in
@@ -57,17 +52,17 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         processingLabel.font = Font.custom(size: 14, fontWeight: .SemiBold)
         processingLabel.textAlignment = .center
         processingAnimationView!.addSubview(processingLabel)
-        
+
         processingLabel.snp.makeConstraints { make in
             make.center.equalTo(processingAnimationView!)
         }
-        
+    
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { [self] in
             animateProcessingLabel(processingLabel, duration: TimeInterval(processingDuration))
             processingAnimationView?.lottieAnimationView.play()
             
         })
-        
+       
         
         titleLabel.removeFromSuperview()
         titleLabel.textAlignment = .center
@@ -87,7 +82,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             make.top.equalTo(titleLabel.snp.bottom).offset(40)
             make.left.right.equalToSuperview().inset(20)
         }
-        
+     
         
         
         descriptionLabel.font = Font.custom(size: 20, fontWeight: .SemiBold)
@@ -100,18 +95,14 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             make.top.equalTo(subtitleLabel.snp.bottom).offset(10)
         }
         
+      
         
         
         
-        view.addSubview(stackView)
-        stackView.isUserInteractionEnabled = false
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
         firstTestimonialStack.axis = .horizontal
         firstTestimonialStack.spacing = 20
         firstTestimonialStack.distribution = .equalSpacing
-        stackView.addSubview(firstTestimonialStack)
+        view.addSubview(firstTestimonialStack)
         firstTestimonialStack.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-30)
             make.height.equalTo(180)
@@ -123,7 +114,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         secondTestimonialStack.axis = .horizontal
         secondTestimonialStack.spacing = 20
         secondTestimonialStack.distribution = .equalSpacing
-        stackView.addSubview(secondTestimonialStack)
+        view.addSubview(secondTestimonialStack)
         secondTestimonialStack.snp.makeConstraints { make in
             make.bottom.equalTo(firstTestimonialStack.snp.top).offset(-20)
             make.height.equalTo(180)
@@ -132,9 +123,6 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         }
         animateStack(stack: secondTestimonialStack, toLeft: false)
         
- 
-    
-
         if NeonDeviceManager.isCurrentDeviceEqualOrSmallerThan(.iPhone8){
             secondTestimonialStack.isHidden = true
         }
@@ -146,8 +134,8 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             make.left.right.equalToSuperview()
         }
         
-        
-        
+
+
         view.addSubview(btnContinue)
         btnContinue.alpha = 1
         
@@ -159,10 +147,10 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
         }
         
         progressView?.isHidden = true
-        
-        
+     
+       
     }
-    
+  
     func adjustUIIfProcessDone(){
         if isTimerStarted{
             backButton.isHidden = false
@@ -172,23 +160,23 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             btnContinue.isHidden = true
         }
     }
-    
-    func animateProcessingLabel(_ label: UILabel, duration: TimeInterval) {
-        if isTimerStarted{
-            return
-        }
-        isTimerStarted = true
-        var currentPercentage = 0
-        Timer.scheduledTimer(withTimeInterval: duration / 100, repeats: true) { timer in
-            currentPercentage += 1
-            if currentPercentage <= 100 {
-                label.text = "\(currentPercentage)%"
-            } else {
-                timer.invalidate()
-                self.btnContinueClicked()
+  
+        func animateProcessingLabel(_ label: UILabel, duration: TimeInterval) {
+            if isTimerStarted{
+                return
+            }
+            isTimerStarted = true
+            var currentPercentage = 0
+            Timer.scheduledTimer(withTimeInterval: duration / 100, repeats: true) { timer in
+                currentPercentage += 1
+                if currentPercentage <= 100 {
+                    label.text = "\(currentPercentage)%"
+                } else {
+                    timer.invalidate()
+                    self.btnContinueClicked()
+                }
             }
         }
-    }
     func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
         case .testimonial(let firstTitle, let firstSubtitle, let processingDuration, let processingTitle, let testimonials):
@@ -201,27 +189,32 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             if !isTestimonialsAdded{
                 addTestimonials(testimonials: testimonials)
             }
-            
-            
-            break
+           
+           
+        break
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     
-    
+
     func animateStack(stack : UIStackView, toLeft : Bool){
-        
-        
-        stack.snp.updateConstraints { make in
-            if toLeft{
-                make.left.equalToSuperview().offset(-1900)
-            }else{
-                make.right.equalToSuperview().offset(1900)
+        /*
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [self] in
+            
+            stack.snp.updateConstraints { make in
+                if toLeft{
+                    make.left.equalToSuperview().offset(-1900)
+                }else{
+                    make.right.equalToSuperview().offset(1900)
+                }
             }
-        }
-        
-        
+            UIView.animate(withDuration: 40, delay: 0, options: .curveLinear , animations: {
+                self.view.layoutIfNeeded()
+            })
+     
+        })
+         */
     }
     
     func addTestimonials(testimonials : [NeonTestimonial]){
@@ -247,7 +240,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
                 make.height.equalToSuperview()
             }
         }
-        
+      
     }
     
     @objc override func btnContinueClicked(){
@@ -259,7 +252,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
     override func animateViews() {
         if !isViewsAnimated{
             isViewsAnimated = true
-            
+         
             subtitleLabel.animate(type: .fadeInAndSlideInLeft, delay: 0.5)
             descriptionLabel.animate(type: .fadeInAndSlideInLeft, delay: 1)
             
@@ -269,11 +262,11 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             secondTestimonialStack.animate(type: .fadeIn, duration: 1, delay: 2.5)
             firstTestimonialStack.animate(type: .fadeIn, duration: 1, delay: 2.75)
             peopleImageView.animate(type: .fadeInAndSlideInBottom, delay: 3)
-            
+          
         }
     }
     
     
-    
+
 }
 
