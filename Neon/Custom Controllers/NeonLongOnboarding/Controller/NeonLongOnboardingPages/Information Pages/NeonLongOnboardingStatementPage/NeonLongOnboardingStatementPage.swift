@@ -27,10 +27,10 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         super.createUI()
         configurePage()
         
-        titleLabel.numberOfLines = 2
         titleLabel.snp.remakeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(backButton.snp.bottom).offset(20)
+            make.height.equalTo(50)
         }
         
         
