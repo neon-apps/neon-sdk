@@ -30,10 +30,10 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         titleLabel.snp.remakeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(backButton.snp.bottom).offset(20)
-            make.height.equalTo(50)
+            make.height.equalTo(70)
         }
-        
-        
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .center
         
        
         
