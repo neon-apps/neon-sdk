@@ -33,7 +33,7 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
             make.height.equalTo(75)
         }
         titleLabel.numberOfLines = 2
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
         titleLabel.font = Font.custom(size: 20, fontWeight: .SemiBold)
        
         
