@@ -66,7 +66,11 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
             make.bottom.left.right.equalToSuperview()
         }
         
-
+        subtitleLabel.snp.remakeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(imageView.snp.top).offset(-10)
+        }
         
       
         
