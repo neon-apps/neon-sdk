@@ -8,7 +8,6 @@
 import Foundation
 import Foundation
 import UIKit
-import NeonSDK
 import StoreKit
 
 class NeonSettingsActionManager {
@@ -60,8 +59,6 @@ class NeonSettingsActionManager {
     
     static func restorePurchases(using service: PurchaseService, mainColor: UIColor, controller: UIViewController) {
         switch service {
-        case .revenueCat:
-            RevenueCatManager.restorePurchases(vc: controller, animation: .loadingCircle2, animationColor: mainColor, completionSuccess: nil, completionFailure: nil)
         case .adapty:
             AdaptyManager.restorePurchases(vc: controller, animation: .loadingCircle2, animationColor: mainColor, completionSuccess: nil, completionFailure: nil)
         }

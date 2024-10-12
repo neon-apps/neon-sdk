@@ -10,7 +10,6 @@ import UIKit
 import NeonSDK
 
 public enum PurchaseService {
-    case revenueCat
     case adapty
 }
 
