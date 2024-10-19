@@ -180,7 +180,7 @@ public class NeonAudioRecordingView: UIView {
             guard let self = self else { return }
             if granted {
                 self.isRecording = false
-                self.recordButtonView?.voiceButton.setImage(UIImage(named: "microphone"), for: .normal)
+                self.recordButtonView?.voiceButton.setImage(NeonSymbols.mic_fill, for: .normal)
                 self.recordButtonView?.infoLabel.text = "Tap to start recording"
                 self.progressBarView?.stopTimer()
                 self.progressBarView?.isHidden = true
