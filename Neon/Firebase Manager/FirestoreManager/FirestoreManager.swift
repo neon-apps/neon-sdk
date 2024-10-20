@@ -20,7 +20,6 @@ public class FirestoreManager{
     public static func setDocument(path : [FirestoreReferance], fields : [String : Any]){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         referance.setData(fields)
-        addTimestamp(referance: referance)
     }
     
     ///  The object should be from Codable class. Ex : public class Country: Codable {}
@@ -31,7 +30,6 @@ public class FirestoreManager{
         
         do {
             try referance.setData(from: object)
-            addTimestamp(referance: referance)
         } catch let error {
             print("Error writing object to Firestore: \(error)")
         }
@@ -41,7 +39,6 @@ public class FirestoreManager{
     public static func updateDocument(path : [FirestoreReferance], fields : [String : Any]){
         let referance = FirestoreReferanceManager.shared.prepareFirebaseDocumentRef(path)
         referance.updateData(fields)
-        addTimestamp(referance: referance)
     }
     
     /// This function won't delete sub-collections. You should delete all of the sub-documents one-by-one to delete sub-collections.
