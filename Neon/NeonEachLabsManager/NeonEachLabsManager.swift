@@ -22,8 +22,12 @@ public class NeonEachLabsManager {
             completion(triggerId)
         }
     }
-    public static func startBulkTask(apiKey: String, flowId: String, parameters: [String: Any], completion: @escaping ([String]?) -> Void) {
-        let wrappedParameters = ["parameters": parameters]  // Wrap the parameters in another dictionary
+    public static func startBulkTask(apiKey: String, flowId: String, parameters: [String: Any],count: Int = 0, completion: @escaping ([String]?) -> Void) {
+        var wrappedParameters: [String: Any] = [
+                    "parameters": parameters,
+                    "count": count,
+                ]
+        
         let bulkEndpoint = NeonEachLabsEndpoint.startTask(flowId: flowId, parameters: wrappedParameters, apiKey: apiKey)
         
         sendRequest(endpoint: bulkEndpoint) { jsons in
