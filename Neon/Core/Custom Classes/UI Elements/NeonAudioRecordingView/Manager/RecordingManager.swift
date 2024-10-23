@@ -38,7 +38,7 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         recordingSession = AVAudioSession.sharedInstance()
         
         do {
-            try recordingSession?.setCategory(.playAndRecord, options: [.defaultToSpeaker])
+            try recordingSession?.setCategory(.playAndRecord, options: [.defaultToSpeaker, .allowBluetooth, .mixWithOthers])
             try recordingSession?.setActive(true)
             recordingSession?.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
