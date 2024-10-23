@@ -28,7 +28,8 @@ public class NeonEachLabsManager {
                     "count": count,
                 ]
         
-        let bulkEndpoint = NeonEachLabsEndpoint.startTask(flowId: flowId, parameters: wrappedParameters, apiKey: apiKey)
+        let bulkEndpoint = NeonEachLabsEndpoint.startBulkTask(flowId: flowId, parameters: wrappedParameters, apiKey: apiKey)
+        /*NeonEachLabsEndpoint.startTask(flowId: flowId, parameters: wrappedParameters, apiKey: apiKey)*/
         
         sendRequest(endpoint: bulkEndpoint) { jsons in
             guard let json = jsons else {
