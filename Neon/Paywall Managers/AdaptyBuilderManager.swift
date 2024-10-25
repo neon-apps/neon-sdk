@@ -31,7 +31,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         self.dismissed = dismissed
         self.restored = restored
         
-        if AdaptyManager.adaptyBuilderPaywalls.contains(where: {$0.paywall.placementId != paywall.placementId}){
+        if !AdaptyManager.adaptyBuilderPaywalls.contains(where: {$0.paywall.placementId == paywall.placementId}){
             failedToPresent()
             return
         }
