@@ -131,7 +131,7 @@ public class NeonAudioRecordingView: UIView {
         }
     }
     
-    private func startRecording() {
+    open func startRecording() {
         RecordingManager.shared.requestRecordPermission { [weak self] granted, status in
             guard let self = self else { return }
             if granted {
