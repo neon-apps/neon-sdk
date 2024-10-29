@@ -10,7 +10,7 @@ import UIKit
 
 public class FontManager{
     
-    static let shared = FontManager()
+    public static let shared = FontManager()
     
     public enum FontWeight {
         case Light

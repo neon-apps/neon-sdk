@@ -25,11 +25,11 @@ open class NeonLegalController: UIViewController {
         case privacyPolicy
         case termsOfUse
     }
-    var controllerType = LegalControllerType.termsOfUse
-    var titleColor = UIColor()
-    var backgroundColor = UIColor()
-    var headerColor = UIColor()
-    var legalTextColor = UIColor()
+    public var controllerType = LegalControllerType.termsOfUse
+    public var titleColor = UIColor()
+    public var backgroundColor = UIColor()
+    public var headerColor = UIColor()
+    public var legalTextColor = UIColor()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
