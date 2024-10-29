@@ -14,8 +14,12 @@ public class Font {
     public static var adjustSizeWithScreen : Bool = false
     
     public static func configureFonts(font : FontManager.FontType){
-        FontManager.shared.registerFonts()
-        FontManager.shared.choosenFontType = font
+        do {
+            try FontManager.shared.registerFonts()
+            FontManager.shared.choosenFontType = font
+        } catch {
+            print("Font error: ", error)
+        }
     }
     
     public static func custom(size: CGFloat, fontWeight: FontManager.FontWeight) -> UIFont {

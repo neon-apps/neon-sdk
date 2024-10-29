@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+enum FontManagerError: Error {
+    case failedToRegisterFont
+}
+
 public class FontManager{
     
     public static let shared = FontManager()
@@ -29,25 +33,23 @@ public class FontManager{
         case Montserrat
         case None
     }
-     var choosenFontType = FontType.None
-    
-    public func registerFonts() {
+
+    public var choosenFontType = FontType.None
+
+    public func registerFonts() throws {
         for font in arrFonts{
-            registerFont(bundle: .module, fontName: font.fileName, fontExtension: font.fileExtension)
+            try registerFont(bundle: .module, fontName: font.fileName, fontExtension: font.fileExtension)
         }
     }
 
-   fileprivate func registerFont(bundle: Bundle, fontName: String, fontExtension: String) {
-
-       guard let fontURL = bundle.url(forResource: fontName, withExtension: fontExtension),
-             let fontDataProvider = CGDataProvider(url: fontURL as CFURL),
-             let font = CGFont(fontDataProvider) else {
-                 fatalError("Couldn't create font from data")
-       }
-
-       var error: Unmanaged<CFError>?
-
-       CTFontManagerRegisterGraphicsFont(font, &error)
+   fileprivate func registerFont(bundle: Bundle, fontName: String, fontExtension: String) throws{
+       guard let asset = NSDataAsset(name: "Fonts/\(fontName)", bundle: bundle),
+             let provider = CGDataProvider(data: asset.data as NSData),
+             let font = CGFont(provider),
+             CTFontManagerRegisterGraphicsFont(font, nil) else {
+           print("Mert1: ", FontManagerError.failedToRegisterFont)
+           throw FontManagerError.failedToRegisterFont
+          }
    }
     
 }
