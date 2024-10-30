@@ -70,6 +70,7 @@ open class NeonSettingsController: UIViewController {
     
     @objc private func backButtonTapped() {
         dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     public func configure(
