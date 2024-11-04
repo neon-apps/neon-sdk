@@ -296,7 +296,7 @@ extension NeonOnboardingController{
                           completion: nil)
     }
     
-    private func configurePageControl(buttonType:ButtonType, type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
+    public func configurePageControl(buttonType:ButtonType, type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
         
         switch type {
         case .V1:
