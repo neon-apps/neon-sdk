@@ -49,7 +49,9 @@ open class NeonOnboardingController: UIViewController {
         backgroundImageView.layer.masksToBounds = true
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
-        
+        view.addSubview(continueButton)
+        view.addSubview(bouncingButton)
+
         
         view.addSubview(fadeView)
         fadeLayer.locations = [0, 1]
@@ -206,7 +208,8 @@ extension NeonOnboardingController{
                 bouncingButton.layer.borderWidth = borderWidth
             }
             
-            view.addSubview(bouncingButton)
+            bouncingButton.isHidden = false
+            continueButton.isHidden = true
             bouncingButton.bouncingDuration = 0.8
             bouncingButton.bouncingScale = 1.15
             bouncingButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
@@ -215,6 +218,7 @@ extension NeonOnboardingController{
             bouncingButton.setTitleColor(titleColor, for: .normal)
             bouncingButton.layer.cornerRadius = cornerRadious
             bouncingButton.layer.masksToBounds = true
+
             bouncingButton.snp.makeConstraints { make in
                 make.left.right.equalToSuperview().inset(horizontalPadding)
                 make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
@@ -230,7 +234,8 @@ extension NeonOnboardingController{
                 continueButton.layer.borderColor = borderColor.cgColor
                 continueButton.layer.borderWidth = borderWidth
             }
-            view.addSubview(continueButton)
+            bouncingButton.isHidden = true
+            continueButton.isHidden = false
             continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
             continueButton.titleLabel?.font = font
             continueButton.setTitle(title, for: .normal)
