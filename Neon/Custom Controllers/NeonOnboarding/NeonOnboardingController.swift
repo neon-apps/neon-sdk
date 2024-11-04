@@ -18,11 +18,18 @@ open class NeonOnboardingController: UIViewController {
     private var pages = [NeonOnboardingPage]()
     private var currentPage = NeonOnboardingPage()
     private var contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>()
+    private var bouncingButton = NeonBouncingButton()
     
     public enum BackgroundType{
         case fullBackgroundImage(layerColor : UIColor, layerOpacity : CGFloat)
         case halfBackgroundImage(backgroundColor : UIColor, offset : CGFloat, isFaded : Bool)
         case topVectorImage(backgroundColor : UIColor, offset : CGFloat, horizontalPadding : CGFloat)
+    }
+    
+    
+    public enum ButtonType{
+        case bouncing
+        case defaultButton
     }
     
     open override func viewDidLayoutSubviews() {
@@ -47,11 +54,7 @@ open class NeonOnboardingController: UIViewController {
         view.addSubview(fadeView)
         fadeLayer.locations = [0, 1]
         fadeView.layer.insertSublayer(fadeLayer, at: 0)
-        
-        continueButton.layer.masksToBounds = true
-        view.addSubview(continueButton)
-        continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
-        
+   
          contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>(
             objects: pages,
             leftPadding: 0,
@@ -190,26 +193,58 @@ extension NeonOnboardingController{
                                 bottomPadding : CGFloat,
                                 backgroundColor : UIColor?,
                                 borderColor : UIColor?,
-                                borderWidth : CGFloat?){
-        
-        if let backgroundColor{
-            continueButton.backgroundColor = backgroundColor
+                                borderWidth : CGFloat?,
+                                type : ButtonType = .defaultButton){
+        switch type {
+            
+        case .bouncing:
+            if let backgroundColor{
+                bouncingButton.backgroundColor = backgroundColor
+            }
+            if let borderColor, let borderWidth{
+                bouncingButton.layer.borderColor = borderColor.cgColor
+                bouncingButton.layer.borderWidth = borderWidth
+            }
+            
+            view.addSubview(bouncingButton)
+            bouncingButton.bouncingDuration = 0.8
+            bouncingButton.bouncingScale = 1.15
+            bouncingButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
+            bouncingButton.titleLabel?.font = font
+            bouncingButton.setTitle(title, for: .normal)
+            bouncingButton.setTitleColor(titleColor, for: .normal)
+            bouncingButton.layer.cornerRadius = cornerRadious
+            bouncingButton.layer.masksToBounds = true
+            bouncingButton.snp.makeConstraints { make in
+                make.left.right.equalToSuperview().inset(horizontalPadding)
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
+                make.height.equalTo(height)
+            }
+            
+        case .defaultButton:
+            if let backgroundColor{
+                continueButton.backgroundColor = backgroundColor
+            }
+            
+            if let borderColor, let borderWidth{
+                continueButton.layer.borderColor = borderColor.cgColor
+                continueButton.layer.borderWidth = borderWidth
+            }
+            view.addSubview(continueButton)
+            continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
+            continueButton.titleLabel?.font = font
+            continueButton.setTitle(title, for: .normal)
+            continueButton.setTitleColor(titleColor, for: .normal)
+            continueButton.layer.cornerRadius = cornerRadious
+            continueButton.layer.masksToBounds = true
+            continueButton.snp.makeConstraints { make in
+                make.left.right.equalToSuperview().inset(horizontalPadding)
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
+                make.height.equalTo(height)
+            }
         }
         
-        if let borderColor, let borderWidth{
-            continueButton.layer.borderColor = borderColor.cgColor
-            continueButton.layer.borderWidth = borderWidth
-        }
-        
-        continueButton.titleLabel?.font = font
-        continueButton.setTitle(title, for: .normal)
-        continueButton.setTitleColor(titleColor, for: .normal)
-        continueButton.layer.cornerRadius = cornerRadious
-        continueButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(horizontalPadding)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
-            make.height.equalTo(height)
-        }
+
         
         configurePageControl(type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
         
