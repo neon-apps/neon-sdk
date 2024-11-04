@@ -19,7 +19,7 @@ open class NeonOnboardingController: UIViewController {
     private var currentPage = NeonOnboardingPage()
     private var contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>()
     private var bouncingButton = NeonBouncingButton()
-    
+    private var buttonType = ButtonType.defaultButton
     public enum BackgroundType{
         case fullBackgroundImage(layerColor : UIColor, layerOpacity : CGFloat)
         case halfBackgroundImage(backgroundColor : UIColor, offset : CGFloat, isFaded : Bool)
@@ -198,6 +198,7 @@ extension NeonOnboardingController{
                                 borderColor : UIColor?,
                                 borderWidth : CGFloat?,
                                 type : ButtonType = .defaultButton){
+        self.buttonType = type
         switch type {
             
         case .bouncing:
@@ -252,7 +253,7 @@ extension NeonOnboardingController{
         
 
         
-        configurePageControl(buttonType: type, type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
+        configurePageControl(type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
         
         
     }
@@ -296,7 +297,7 @@ extension NeonOnboardingController{
                           completion: nil)
     }
     
-    public func configurePageControl(buttonType:ButtonType, type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
+    public func configurePageControl(type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
         
         switch type {
         case .V1:
@@ -327,7 +328,7 @@ extension NeonOnboardingController{
         pageControl.tintColor = tintColor
         pageControl.padding = padding
         pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(buttonType == .defaultButton ? continueButton.snp.top : bouncingButton.snp.top).offset(-40)
+            make.bottom.equalTo(self.buttonType == .defaultButton ? continueButton.snp.top : bouncingButton.snp.top).offset(-40)
             make.centerX.equalToSuperview()
         }
      
