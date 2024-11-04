@@ -49,8 +49,7 @@ open class NeonOnboardingController: UIViewController {
         backgroundImageView.layer.masksToBounds = true
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
-        view.addSubview(continueButton)
-        view.addSubview(bouncingButton)
+       
 
         
         view.addSubview(fadeView)
@@ -66,6 +65,8 @@ open class NeonOnboardingController: UIViewController {
         contentCollectionView.backgroundColor = .clear
         contentCollectionView.isScrollEnabled = false
         view.addSubview(contentCollectionView)
+        view.addSubview(continueButton)
+        view.addSubview(bouncingButton)
         
      
     }
@@ -251,7 +252,7 @@ extension NeonOnboardingController{
         
 
         
-        configurePageControl(type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
+        configurePageControl(buttonType: type, type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
         
         
     }
@@ -295,7 +296,7 @@ extension NeonOnboardingController{
                           completion: nil)
     }
     
-    public func configurePageControl(type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
+    private func configurePageControl(buttonType:ButtonType, type : PageControlType, currentPageTintColor : UIColor, tintColor : UIColor, radius : CGFloat = 3, padding : CGFloat = 6){
         
         switch type {
         case .V1:
@@ -326,7 +327,7 @@ extension NeonOnboardingController{
         pageControl.tintColor = tintColor
         pageControl.padding = padding
         pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(continueButton.snp.top).offset(-40)
+            make.bottom.equalTo(buttonType == .defaultButton ? continueButton.snp.top : bouncingButton.snp.top).offset(-40)
             make.centerX.equalToSuperview()
         }
      
