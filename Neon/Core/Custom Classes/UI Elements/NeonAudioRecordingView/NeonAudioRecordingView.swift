@@ -17,6 +17,7 @@ public class NeonAudioRecordingView: UIView {
     public var configureActions: ((_ action: NeonAudioRecordingAction) -> ())?
 
     public enum NeonAudioRecordingAction{
+        case audioSavedLocally(_ audioId: String?)
         case recordingCompleted(_ url: String, _ recordingDurationInSeconds : Int)
         case recordingDeleted
     }
@@ -187,21 +188,28 @@ public class NeonAudioRecordingView: UIView {
                 self.processingView?.isHidden = false
                 self.recordButtonView?.isHidden = true
                 
-                RecordingManager.shared.stopRecording { [weak self] audioURL, error in
+                RecordingManager.shared.stopRecording(
+                    localCompletion: { [weak self] audioId, error in
+                        guard let self = self else { return }
+                        if let configureActions{
+                            configureActions(.audioSavedLocally(audioId))
+                        }
+                }, remoteCompletion: { [weak self] remoteURL, error in
                     guard let self = self else { return }
-                    if let audioURL, error == nil {
+                    if let remoteURL, error == nil {
                         self.playButtonView?.isHidden = false
                         self.processingView?.isHidden = true
                         self.sliderView?.isHidden = false
-                        PlayerManager.shared.remoteAudioUrl = audioURL.absoluteString
+                        PlayerManager.shared.remoteAudioUrl = remoteURL.absoluteString
                         PlayerManager.shared.setupAudioPlayer()
                         self.sliderView?.updateInitialLabels()
                         
                         if let configureActions{
-                            configureActions(.recordingCompleted(audioURL.absoluteString, recordingDurationInSeconds))
+                            configureActions(.recordingCompleted(remoteURL.absoluteString, recordingDurationInSeconds))
                         }
                     }
-                }
+                })
+       
             }
         }
     }

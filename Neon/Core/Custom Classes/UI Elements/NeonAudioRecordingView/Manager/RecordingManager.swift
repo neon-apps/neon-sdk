@@ -75,7 +75,7 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         }
     }
 
-    func stopRecording(localCompletion: @escaping (URL?, Error?) -> Void, remoteCompletion: @escaping (URL?, Error?) -> Void) {
+    func stopRecording(localCompletion: @escaping (String?, Error?) -> Void, remoteCompletion: @escaping (URL?, Error?) -> Void) {
         audioRecorder?.stop()
         audioRecorder = nil
 
@@ -92,7 +92,7 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
             return
         }
 
-        localCompletion(audioFileName, nil)
+        localCompletion(getAudioId(), nil)
         print("Audio file exists at path: \(audioFileName.path)")
         self.uploadAudio(fileURL: audioFileName, completion: remoteCompletion)
     }
@@ -135,8 +135,14 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         }
     }
 
-    func getLocalFileURL() -> URL? {
-        return audioFileName
+    public func getLocalFileURL() -> URL? {
+        guard let audioId = PlayerManager.shared.localAudioFileName else { return nil}
+        return  getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(audioId).wav")
+    }
+    
+    public func getAudioId() -> String?{
+        guard let audioId = PlayerManager.shared.localAudioFileName else { return nil}
+        return  audioId
     }
 
     private func getDocumentsDirectory() -> URL {
