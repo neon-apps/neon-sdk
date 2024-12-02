@@ -14,14 +14,14 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     
     public static let shared = AdaptyBuilderManager()
     
-    var purchased: ((_ product : String?) -> ())? = nil
+    var purchased: ((_ product : AdaptyPaywallProduct?) -> ())? = nil
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
         from controller : UIViewController,
-        purchased: @escaping (_ product : String?) -> (),
+        purchased: @escaping (_ product : AdaptyPaywallProduct?) -> (),
         dismissed: @escaping () -> (),
         restored: @escaping () -> (),
         failedToPresent: @escaping () -> ()
@@ -124,7 +124,7 @@ extension AdaptyBuilderManager{
         controller.dismiss(animated: true)
         
         if let purchased{
-            purchased(product.skProduct.productIdentifier)
+            purchased(product)
         }
        
     }
