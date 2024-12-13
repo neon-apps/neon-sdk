@@ -12,7 +12,7 @@ import AdSupport
 
 public class Neon{
     public static var isUserPremium = false
-    static var isPremiumTestActive = false
+    public static var isPremiumTestActive = false
     static var homeVC = UIViewController()
     static var onboardingVC = UIViewController()
     static var paywallVC = UIViewController()
