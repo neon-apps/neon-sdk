@@ -10,6 +10,7 @@ import Adapty
 import UIKit
 import AdaptyUI
 
+
 public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     
     public static let shared = AdaptyBuilderManager()
@@ -17,6 +18,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     var purchased: ((_ product : AdaptyPaywallProduct?) -> ())? = nil
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
+    var customButtonHandlers = [String: () -> Void]()
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
@@ -107,9 +109,9 @@ extension AdaptyBuilderManager{
                       // handle URL opens (incl. terms and privacy links)
                 UIApplication.shared.open(url, options: [:])
             case let .custom(id):
-                if id == "login" {
-                   // implement login flow
-                }
+            if let action = customButtonHandlers[id]{
+                action()
+            }
                 break
         }
     }
@@ -146,6 +148,10 @@ extension AdaptyBuilderManager{
        
     }
     
+    public func addCustomButtonHandler(buttonId : String, action : @escaping () -> Void){
+        customButtonHandlers[buttonId] = action
+    }
+    
 }
 
 public class AdaptyBuilderPaywall{
@@ -158,4 +164,6 @@ public class AdaptyBuilderPaywall{
         self.configuration = configuration
         self.packages = packages
     }
+    
+  
 }
