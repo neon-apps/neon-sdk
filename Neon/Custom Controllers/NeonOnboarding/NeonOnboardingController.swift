@@ -11,7 +11,7 @@ import UIKit
 open class NeonOnboardingController: UIViewController {
     
     private let backgroundImageView = UIImageView()
-    private let continueButton = UIButton()
+    open var continueButton = UIButton()
     private var pageControl = NeonBasePageControl()
     private let fadeView = UIView()
     private let fadeLayer = CAGradientLayer()
