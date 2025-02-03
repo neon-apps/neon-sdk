@@ -74,7 +74,7 @@ open class NeonOnboardingController: UIViewController {
    
   
     
-    @objc private func continueButtonClicked(){
+    @objc open func continueButtonClicked(){
         
       
         let nextIndex = currentPage.index + 1
@@ -187,7 +187,7 @@ extension NeonOnboardingController{
     }
     
     
-    public func configureButton(title : String,
+    open func configureButton(title : String,
                                 titleColor : UIColor,
                                 font : UIFont,
                                 cornerRadious : CGFloat,
