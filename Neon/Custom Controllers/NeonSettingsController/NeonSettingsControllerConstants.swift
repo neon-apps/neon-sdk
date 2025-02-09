@@ -20,5 +20,8 @@ public struct NeonSettingsControllerConstants {
     static var primaryTextColor: UIColor = .black
     static var mainColor: UIColor = .blue
     static var controller: UIViewController? = nil
+    static var pageTitleFont: UIFont = Font.custom(size: 24, fontWeight: .SemiBold)
+    static var sectionTitleFont: UIFont = Font.custom(size: 18, fontWeight: .Bold)
+    static var buttonTitleFont: UIFont = Font.custom(size: 16, fontWeight: .Medium)
 }
 

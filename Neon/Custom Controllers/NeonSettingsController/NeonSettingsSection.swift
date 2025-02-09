@@ -96,7 +96,7 @@ public enum NeonSettingsSection {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
         button.setTitleColor(buttonTextColor, for: .normal)
-        button.titleLabel?.font = Font.custom(size: 16, fontWeight: .Medium)
+        button.titleLabel?.font = NeonSettingsControllerConstants.buttonTitleFont
         button.contentHorizontalAlignment = .left
         button.backgroundColor = buttonBackgroundColor
         button.layer.cornerRadius = buttonCornerRadius
@@ -143,7 +143,7 @@ public enum NeonSettingsSection {
     private func createTitleView(title: String, textColor: UIColor) -> UILabel {
         let label = UILabel()
         label.text = title
-        label.font = Font.custom(size: 18, fontWeight: .Bold)
+        label.font = NeonSettingsControllerConstants.sectionTitleFont
         label.textAlignment = .left
         label.textColor = textColor
         return label

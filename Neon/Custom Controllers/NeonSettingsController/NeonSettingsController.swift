@@ -81,7 +81,10 @@ open class NeonSettingsController: UIViewController {
         iconTintColor: UIColor? = nil,
         primaryTextColor: UIColor = .black,
         mainColor: UIColor = .blue,
-        controller: UIViewController
+        controller: UIViewController,
+        pageTitleFont : UIFont = Font.custom(size: 24, fontWeight: .SemiBold),
+        sectionTitleFont : UIFont = Font.custom(size: 18, fontWeight: .Bold),
+        buttonTitleFont : UIFont = Font.custom(size: 16, fontWeight: .Medium)
     ) {
         NeonSettingsControllerConstants.buttonTextColor = buttonTextColor
         NeonSettingsControllerConstants.buttonBackgroundColor = buttonBackgroundColor
@@ -92,9 +95,13 @@ open class NeonSettingsController: UIViewController {
         NeonSettingsControllerConstants.primaryTextColor = primaryTextColor
         NeonSettingsControllerConstants.mainColor = mainColor
         NeonSettingsControllerConstants.controller = controller
+        NeonSettingsControllerConstants.pageTitleFont = pageTitleFont
+        NeonSettingsControllerConstants.sectionTitleFont = sectionTitleFont
+        NeonSettingsControllerConstants.buttonTitleFont = buttonTitleFont
         
         self.titleLabel.textColor = primaryTextColor
         self.backButton.tintColor = primaryTextColor
+        titleLabel.font = NeonSettingsControllerConstants.pageTitleFont
     }
 
     public func addSection(_ section: NeonSettingsSection) {
