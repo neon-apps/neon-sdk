@@ -17,6 +17,7 @@ public enum PurchaseService {
 public enum NeonSettingsSection {
     
     case linkButton(title: String, url: String, icon: UIImage? = nil)
+    case toggleButton(title: String? = nil, icon: UIImage? = nil, completion: ((_ isOn : Bool) -> Void)?)
     case rateButton(title: String, icon: UIImage? = nil)
     case reviewButton(title: String? = nil, appId: String, icon: UIImage? = nil)
     case shareButton(title: String? = nil, appId: String, icon: UIImage? = nil)
@@ -89,7 +90,66 @@ public enum NeonSettingsSection {
                 make.height.equalTo(height)
             }
             return spacerView
+        case .toggleButton(title: let title, icon: let icon, completion: let completion):
+            return createToggleButton(title: title, icon: icon, completion: completion, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
         }
+    }
+    
+    private func createToggleButton(title: String?, icon: UIImage?, completion: ((_ isOn: Bool) -> Void)?, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?) -> UIView {
+        let containerView = UIView()
+        containerView.backgroundColor = buttonBackgroundColor
+        containerView.layer.cornerRadius = buttonCornerRadius
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = buttonBorderColor.cgColor
+        containerView.snp.makeConstraints { make in
+            make.height.equalTo(buttonHeight)
+        }
+
+        let label = UILabel()
+        label.text = title
+        label.textColor = buttonTextColor
+        label.font = NeonSettingsControllerConstants.buttonTitleFont
+        
+        let toggleSwitch = UISwitch()
+        toggleSwitch.addAction(UIAction { _ in
+            completion?(toggleSwitch.isOn)
+        }, for: .valueChanged)
+
+        containerView.addSubview(label)
+        containerView.addSubview(toggleSwitch)
+
+        label.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(icon == nil ? 20 : 40)
+            make.centerY.equalToSuperview()
+        }
+
+        toggleSwitch.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-12)
+            make.centerY.equalToSuperview()
+        }
+
+        if let icon = icon {
+            let iconImageView = UIImageView(image: icon)
+            iconImageView.contentMode = .scaleAspectFit
+            containerView.addSubview(iconImageView)
+            
+            iconImageView.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(12)
+                make.centerY.equalToSuperview()
+                make.width.height.equalTo(20)
+            }
+            
+            label.snp.remakeConstraints { make in
+                make.left.equalTo(iconImageView.snp.right).offset(8)
+                make.centerY.equalToSuperview()
+            }
+            
+            if let tintColor = iconTintColor {
+                iconImageView.tintColor = tintColor
+            }
+        }
+
+        return containerView
     }
     
     private func createButton(title: String, icon: UIImage?, chevron: Bool, action: (() -> Void)? = nil, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?) -> UIButton {
