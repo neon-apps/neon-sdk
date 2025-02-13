@@ -91,11 +91,11 @@ public enum NeonSettingsSection {
             }
             return spacerView
         case .toggleButton(title: let title, icon: let icon, completion: let completion):
-            return createToggleButton(title: title, icon: icon, completion: completion, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor)
+            return createToggleButton(title: title, icon: icon, completion: completion, buttonTextColor: buttonTextColor, buttonBackgroundColor: buttonBackgroundColor, buttonBorderColor: buttonBorderColor, buttonCornerRadius: buttonCornerRadius, buttonHeight: buttonHeight, iconTintColor: iconTintColor, mainColor: mainColor)
         }
     }
     
-    private func createToggleButton(title: String?, icon: UIImage?, completion: ((_ isOn: Bool) -> Void)?, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?) -> UIView {
+    private func createToggleButton(title: String?, icon: UIImage?, completion: ((_ isOn: Bool) -> Void)?, buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?, mainColor : UIColor) -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = buttonBackgroundColor
         containerView.layer.cornerRadius = buttonCornerRadius
@@ -111,6 +111,7 @@ public enum NeonSettingsSection {
         label.font = NeonSettingsControllerConstants.buttonTitleFont
         
         let toggleSwitch = UISwitch()
+        toggleSwitch.onTintColor = mainColor
         toggleSwitch.addAction(UIAction { _ in
             completion?(toggleSwitch.isOn)
         }, for: .valueChanged)
