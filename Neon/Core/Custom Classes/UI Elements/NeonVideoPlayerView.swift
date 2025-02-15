@@ -44,15 +44,19 @@ public class NeonVideoPlayerView: UIView {
         if let videoURL = Bundle.main.url(forResource: videoFileName, withExtension: fileExtension) {
             // Handle invalid URL
             player.replaceCurrentItem(with: AVPlayerItem(url: videoURL))
-        }
-        
-        if let videoURL = Bundle.module.url(forResource: videoFileName, withExtension: fileExtension) {
+        }else if let videoURL = Bundle.module.url(forResource: videoFileName, withExtension: fileExtension) {
             // Handle invalid URL
             player.replaceCurrentItem(with: AVPlayerItem(url: videoURL))
         }
     
     }
+    public func configure(remoteFileUrl: String){
+        
+        if let url = URL(string: remoteFileUrl) {
+            player.replaceCurrentItem(with: AVPlayerItem(url: url))
+        }
     
+    }
     
     public func deinitPlayer(){
         NotificationCenter.default.removeObserver(observer, name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
