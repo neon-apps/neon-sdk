@@ -135,9 +135,11 @@ public class CustomAlertManager {
             }
 
             buttonView.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
-            buttonView.layer.cornerRadius = 10
+            buttonView.layer.cornerRadius = 25
             buttonView.layer.masksToBounds = true
-            
+            buttonView.snp.makeConstraints { make in
+                make.height.equalTo(50)
+            }
             switch button.buttonType {
             case .background:
                 buttonView.backgroundColor = buttonColor
@@ -157,11 +159,6 @@ public class CustomAlertManager {
         stackView.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(verticalPadding)
             make.leading.trailing.equalToSuperview().inset(30)
-            if (buttons != nil){
-                make.height.equalTo(buttons!.count * 60)
-            }else{
-                make.height.equalTo(50)
-            }
         }
         
         viewController.view.addSubview(alertView)
