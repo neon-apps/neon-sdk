@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "aiproxyswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lzell/AIProxySwift.git",
+      "state" : {
+        "revision" : "061514a1a8809f584c77915a15add59e88639698",
+        "version" : "0.71.0"
+      }
+    },
+    {
       "identity" : "app-check",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/app-check.git",
