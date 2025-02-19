@@ -20,14 +20,16 @@ public class NeonSplashVC: UIViewController {
     let lblAppTitle = UILabel()
     var backgroundColor : UIColor
     var textColor : UIColor
+    private let numberOfLines : Int
     
-    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3, backgroundColor : UIColor = .white, textColor : UIColor = .black){
+    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3, backgroundColor : UIColor = .white, textColor : UIColor = .black, titleNumberOfLines : Int = 1){
         self.animationDuration = animationDuration
         self.progressBarColors = progressBarColors
         self.appName = appName
         self.appIcon = appIcon
         self.backgroundColor = backgroundColor
         self.textColor = textColor
+        self.numberOfLines = titleNumberOfLines
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,6 +76,7 @@ public class NeonSplashVC: UIViewController {
         lblAppTitle.font = Font.custom(size: 30, fontWeight: .SemiBold)
         lblAppTitle.textAlignment = .center
         lblAppTitle.sizeToFit()
+        lblAppTitle.numberOfLines = self.numberOfLines
         view.addSubview(lblAppTitle)
         
         lblAppTitle.snp.makeConstraints { make in
