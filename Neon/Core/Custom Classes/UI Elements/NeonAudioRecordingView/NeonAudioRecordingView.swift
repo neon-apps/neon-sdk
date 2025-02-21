@@ -179,6 +179,7 @@ public class NeonAudioRecordingView: UIView {
         }
         RecordingManager.shared.requestRecordPermission { [weak self] granted, status in
             guard let self = self else { return }
+            DispatchQueue.main.async {
             if granted {
                 self.isRecording = false
                 self.recordButtonView?.voiceButton.setImage(NeonSymbols.mic_fill, for: .normal)
@@ -209,7 +210,7 @@ public class NeonAudioRecordingView: UIView {
                         }
                     }
                 })
-       
+            }
             }
         }
     }
