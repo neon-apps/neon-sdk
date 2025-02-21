@@ -163,7 +163,13 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
                 completion(false, .undetermined)
             }
             
-            recordingSession?.requestRecordPermission() { allowed in }
+            recordingSession?.requestRecordPermission() { allowed in
+                if allowed {
+                    completion(true, .granted)
+                } else{
+                    completion(false, .denied)
+                }
+            }
         }
     }
 }
