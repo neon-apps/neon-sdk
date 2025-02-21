@@ -135,35 +135,37 @@ public class NeonAudioRecordingView: UIView {
     open func startRecording() {
         RecordingManager.shared.requestRecordPermission { [weak self] granted, status in
             guard let self = self else { return }
-            if granted {
-                self.isRecording = true
-                RecordingManager.shared.startRecording()
-                self.recordButtonView?.voiceButton.setImage(NeonSymbols.stop_fill, for: .normal)
-                self.recordButtonView?.infoLabel.text = "Tap to finish recording"
-                self.progressBarView?.startTimer(completion: { [weak self] in
-                    self?.stopRecording()
-                })
-                self.progressBarView?.isHidden = false
-            }
-            
-            if status == .denied {
-                NeonAlertManager.default.present(
-                    title: "Permission Needed",
-                    message: "To record audio, please enable microphone access in your device settings.",
-                    style: .alert,
-                    buttons: [
-                        AlertButton(title: "Settings", style: .default, completion: {
-                            if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
-                                if UIApplication.shared.canOpenURL(settingsUrl) {
-                                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+            DispatchQueue.main.async {
+                if granted {
+                    self.isRecording = true
+                    RecordingManager.shared.startRecording()
+                    self.recordButtonView?.voiceButton.setImage(NeonSymbols.stop_fill, for: .normal)
+                    self.recordButtonView?.infoLabel.text = "Tap to finish recording"
+                    self.progressBarView?.startTimer(completion: { [weak self] in
+                        self?.stopRecording()
+                    })
+                    self.progressBarView?.isHidden = false
+                }
+                
+                if status == .denied {
+                    NeonAlertManager.default.present(
+                        title: "Permission Needed",
+                        message: "To record audio, please enable microphone access in your device settings.",
+                        style: .alert,
+                        buttons: [
+                            AlertButton(title: "Settings", style: .default, completion: {
+                                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                                        UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                                    }
                                 }
-                            }
-                        }),
-                        AlertButton(title: "Cancel", style: .cancel, completion: {
-                        })
-                    ],
-                    viewController: NeonAudioRecordingViewConstants.controller
-                )
+                            }),
+                            AlertButton(title: "Cancel", style: .cancel, completion: {
+                            })
+                        ],
+                        viewController: NeonAudioRecordingViewConstants.controller
+                    )
+                }
             }
 
         }
