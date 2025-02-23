@@ -244,6 +244,7 @@ public class NeonAudioRecordingView: UIView {
         progressBarView?.resetTimer()
         PlayerManager.shared.localAudioFileName = nil
         PlayerManager.shared.remoteAudioUrl = nil
+        playButtonView?.update()
         if let configureActions{
             configureActions(.recordingDeleted)
         }
