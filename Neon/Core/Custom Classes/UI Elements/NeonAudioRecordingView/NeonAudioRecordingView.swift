@@ -237,6 +237,7 @@ public class NeonAudioRecordingView: UIView {
         PlayerManager.shared.pause()
     }
     @objc func trashButtonClick() {
+        PlayerManager.shared.pause()
         sliderView?.isHidden = true
         playButtonView?.isHidden = true
         recordButtonView?.isHidden = false
