@@ -27,7 +27,7 @@ public enum NeonSettingsSection {
     case premiumButton(title: String? = nil, icon: UIImage? = nil, backgroundColor: UIColor, borderColor: UIColor, titleColor: UIColor, iconTintColor: UIColor?, completion: (() -> Void)?)
     case restorePurchaseButton(title: String? = nil, icon: UIImage? = nil, service: PurchaseService)
     case titleSection(title: String, textColor: UIColor? = nil)
-    case customView(view: UIView, height: CGFloat)
+    case customView(view: UIView, height: CGFloat? = nil)
     case spacing(height: CGFloat)
     
     func view(buttonTextColor: UIColor, buttonBackgroundColor: UIColor, buttonBorderColor: UIColor, buttonCornerRadius: CGFloat, buttonHeight: CGFloat, iconTintColor: UIColor?, primaryTextColor: UIColor, mainColor: UIColor, controller: UIViewController) -> UIView? {
@@ -79,8 +79,10 @@ public enum NeonSettingsSection {
             return createTitleView(title: title, textColor: textColor ?? primaryTextColor)
             
         case .customView(let view, let height):
-            view.snp.makeConstraints { make in
-                make.height.equalTo(height)
+            if let height{
+                view.snp.makeConstraints { make in
+                    make.height.equalTo(height)
+                }
             }
             return view
             
