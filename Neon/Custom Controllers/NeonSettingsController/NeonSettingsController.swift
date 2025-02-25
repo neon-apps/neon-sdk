@@ -10,8 +10,8 @@ import NeonSDK
 
 open class NeonSettingsController: UIViewController {
     
-    private let scrollView = UIScrollView()
-    private let stackView = UIStackView()
+    public let scrollView = UIScrollView()
+    public let stackView = UIStackView()
     public let titleLabel = UILabel()
     public let backButton = NeonSymbolButton()
 
