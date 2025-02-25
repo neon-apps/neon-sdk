@@ -86,8 +86,10 @@ public class NeonVideoPlayerView: UIView {
     }
 
     @objc private func playerDidFinishPlaying() {
-        player.seek(to: .zero)
-        player.play()
+        if let player{
+            player.seek(to: .zero)
+            player.play()
+        }
     }
 
     // MARK: - Lifecycle Handling
