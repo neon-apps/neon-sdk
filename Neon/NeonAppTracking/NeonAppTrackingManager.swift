@@ -150,15 +150,11 @@ class NeonAppTracking {
                 completion()
             }
             if let httpResponse = response as? HTTPURLResponse {
-                print("Status Code: \(httpResponse.statusCode)")
                 if let data = data {
                     if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
-                        print("JSON Response: \(json)")
                     } else {
-                        print("Invalid JSON response")
                     }
                 } else {
-                    print("No data returned")
                 }
             }
         }
