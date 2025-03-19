@@ -11,7 +11,7 @@ import UIKit
 public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private var completionHandler: ((UIImage?) -> Void)?
-    static let shared = NeonImagePickerManager()
+    public  static let shared = NeonImagePickerManager()
     private var viewController: UIViewController?
 
     public func configure(with viewController: UIViewController) {
