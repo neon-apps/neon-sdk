@@ -133,21 +133,30 @@ extension AdaptyBuilderManager{
     public func paywallController(_ controller: AdaptyPaywallController,
                            didFinishRestoreWith profile: AdaptyProfile) {
       
-        controller.dismiss(animated: true)
         if profile.accessLevels[AdaptyManager.accessLevel]?.isActive ?? false {
             Neon.isUserPremium = true
+            if Neon.isUserPremium{
+                NeonAlertManager.default.present(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
+                    AlertButton(completion: {
+                        controller.dismiss(animated: true)
+
+                    })
+                ], viewController: controller)
+            }else{
+                NeonAlertManager.default.present(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
+                    AlertButton(completion: {
+              
+                    })
+                ], viewController: controller)
+            }
             if let restored{
                 restored()
             }
+            
 
         }
         
-      
-       
-       
-       
     }
-    
     public func addCustomButtonHandler(buttonId : String, action : @escaping () -> Void){
         customButtonHandlers[buttonId] = action
     }
