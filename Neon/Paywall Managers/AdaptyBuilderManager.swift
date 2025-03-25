@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Tuna Öztürk on 14.07.2024.
 //
@@ -44,7 +44,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
                     //  use your custom logic
                     print("This paywall does not contain viewConfiguration")
                     failedToPresent()
-                      return
+                    return
                 }
                 
                 NeonAppTracking.trackPaywallView()
@@ -59,7 +59,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
                 
             }
         }
-    
+        
     }
     
     
@@ -97,30 +97,30 @@ extension AdaptyBuilderManager{
         return true
     }
     public func paywallController(_ controller: AdaptyPaywallController,
-                           didPerform action: AdaptyUI.Action) {
-
+                                  didPerform action: AdaptyUI.Action) {
+        
         switch action {
-            case .close:
-                controller.dismiss(animated: true)
+        case .close:
+            controller.dismiss(animated: true)
             if let dismissed{
                 dismissed()
             }
-            case let .openURL(url):
-                      // handle URL opens (incl. terms and privacy links)
-                UIApplication.shared.open(url, options: [:])
-            case let .custom(id):
+        case let .openURL(url):
+            // handle URL opens (incl. terms and privacy links)
+            UIApplication.shared.open(url, options: [:])
+        case let .custom(id):
             if let action = customButtonHandlers[id]{
                 action()
             }
-                break
+            break
         }
     }
     
     public func paywallController(_ controller: AdaptyPaywallController,
-                           didFinishPurchase product: AdaptyPaywallProduct,
-                           purchasedInfo: AdaptyPurchasedInfo) {
+                                  didFinishPurchase product: AdaptyPaywallProduct,
+                                  purchasedInfo: AdaptyPurchasedInfo) {
         Neon.isUserPremium = true
-      
+        
         NeonPaywallManager.trackPurchase(product: product.skProduct)
         
         controller.dismiss(animated: true)
@@ -128,32 +128,30 @@ extension AdaptyBuilderManager{
         if let purchased{
             purchased(product)
         }
-       
+        
     }
     public func paywallController(_ controller: AdaptyPaywallController,
-                           didFinishRestoreWith profile: AdaptyProfile) {
-      
+                                  didFinishRestoreWith profile: AdaptyProfile) {
+        
         if profile.accessLevels[AdaptyManager.accessLevel]?.isActive ?? false {
             Neon.isUserPremium = true
-            if Neon.isUserPremium{
-                NeonAlertManager.default.present(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
-                    AlertButton(completion: {
-                        controller.dismiss(animated: true)
-
-                    })
-                ], viewController: controller)
-            }else{
-                NeonAlertManager.default.present(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
-                    AlertButton(completion: {
-              
-                    })
-                ], viewController: controller)
-            }
+            NeonAlertManager.default.present(title: "Restored Succesfully!", message: "Welcome back! We restored your subscription succesfully. Now you can use all of the premium features again.", style: .alert, buttons: [
+                AlertButton(completion: {
+                    controller.dismiss(animated: true)
+                    
+                })
+            ], viewController: controller)
             if let restored{
                 restored()
             }
             
-
+            
+        }else{
+            NeonAlertManager.default.present(title: "Oops!", message: "We couldn’t find any active subscription in your account.", style: .alert, buttons: [
+                AlertButton(completion: {
+                    
+                })
+            ], viewController: controller)
         }
         
     }
@@ -174,5 +172,5 @@ public class AdaptyBuilderPaywall{
         self.packages = packages
     }
     
-  
+    
 }
