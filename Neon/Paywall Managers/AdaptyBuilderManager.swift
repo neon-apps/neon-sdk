@@ -172,4 +172,4 @@ public class AdaptyBuilderPaywall{
     
     
 }
-'
+
