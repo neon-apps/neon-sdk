@@ -19,7 +19,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
     var customButtonHandlers = [String: () -> Void]()
-    
+    var isAdaptyUIActivated: Bool = false
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
@@ -34,10 +34,11 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         self.dismissed = dismissed
         self.restored = restored
         
-        if #available(iOS 15, *){
+        if !isAdaptyUIActivated{
             AdaptyUI.activate()
-
+            isAdaptyUIActivated = true
         }
+
         guard paywall.hasViewConfiguration else {
             //  use your custom logic
             print("This paywall does not contain viewConfiguration")
