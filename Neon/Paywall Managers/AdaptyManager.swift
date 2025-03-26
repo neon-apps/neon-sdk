@@ -48,10 +48,7 @@ public class AdaptyManager {
             Adapty.activate(withAPIKey)
         }
         
-        if #available(iOS 15, *){
-            AdaptyUI.activate()
-
-        }
+ 
 
         Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
         if Neon.isPremiumTestActive{
