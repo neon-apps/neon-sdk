@@ -34,6 +34,10 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         self.dismissed = dismissed
         self.restored = restored
         
+        if #available(iOS 15, *){
+            AdaptyUI.activate()
+
+        }
         guard paywall.hasViewConfiguration else {
             //  use your custom logic
             print("This paywall does not contain viewConfiguration")
