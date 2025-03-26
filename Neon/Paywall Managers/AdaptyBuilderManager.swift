@@ -1,4 +1,4 @@
-//
+'//
 //  File.swift
 //
 //
@@ -19,6 +19,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
     var customButtonHandlers = [String: () -> Void]()
+    
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
@@ -33,31 +34,32 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         self.dismissed = dismissed
         self.restored = restored
         
-        if !AdaptyManager.adaptyBuilderPaywalls.contains(where: {$0.paywall.placementId == paywall.placementId}){
+        guard paywall.hasViewConfiguration else {
+            //  use your custom logic
+            print("This paywall does not contain viewConfiguration")
             failedToPresent()
             return
         }
-        for adaptyBuilderPaywall in AdaptyManager.adaptyBuilderPaywalls {
-            if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
-                
-                guard paywall.hasViewConfiguration else {
-                    //  use your custom logic
-                    print("This paywall does not contain viewConfiguration")
-                    failedToPresent()
-                    return
+        
+        
+        AdaptyUI.getPaywallConfiguration(forPaywall: paywall) { result in
+            switch result {
+            case let .success(viewConfiguration):
+                DispatchQueue.main.async {
+                    NeonAppTracking.trackPaywallView()
+                    let visualPaywall = try! AdaptyUI.paywallController(with:  viewConfiguration, delegate: self)
+                    controller.present(visualPaywall, animated: true)
                 }
-                
-                NeonAppTracking.trackPaywallView()
-              
-                let visualPaywall = try! AdaptyUI.paywallController(with:  adaptyBuilderPaywall.configuration, delegate: self)
-                controller.present(visualPaywall, animated: true)
-                
+                break
+                // use loaded configuration
+            case let .failure(error):
+                break
+                // handle the error
             }
         }
         
+        
     }
-    
-    
 }
 @available(iOS 15.0, *)
 extension AdaptyBuilderManager{
@@ -111,7 +113,7 @@ extension AdaptyBuilderManager{
         }
     }
     
-
+    
     public func paywallController(_ controller: AdaptyPaywallController,
                                   didFinishPurchase product: AdaptyPaywallProduct,
                                   purchaseResult: AdaptyPurchaseResult) {
@@ -170,3 +172,4 @@ public class AdaptyBuilderPaywall{
     
     
 }
+'
