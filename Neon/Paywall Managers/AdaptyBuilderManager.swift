@@ -29,37 +29,39 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         restored: @escaping () -> (),
         failedToPresent: @escaping () -> ()
     ){
-        
-        self.purchased = purchased
-        self.dismissed = dismissed
-        self.restored = restored
-        
-        if !isAdaptyUIActivated{
-            AdaptyUI.activate()
-            isAdaptyUIActivated = true
-        }
-
-        guard paywall.hasViewConfiguration else {
-            //  use your custom logic
-            print("This paywall does not contain viewConfiguration")
-            failedToPresent()
-            return
-        }
-        
-        
-        AdaptyUI.getPaywallConfiguration(forPaywall: paywall) { result in
-            switch result {
-            case let .success(viewConfiguration):
-                DispatchQueue.main.async {
-                    NeonAppTracking.trackPaywallView()
-                    let visualPaywall = try! AdaptyUI.paywallController(with:  viewConfiguration, delegate: self)
-                    controller.present(visualPaywall, animated: true)
+        DispatchQueue.main.async { [self] in
+            
+            self.purchased = purchased
+            self.dismissed = dismissed
+            self.restored = restored
+            
+            if !isAdaptyUIActivated{
+                AdaptyUI.activate()
+                isAdaptyUIActivated = true
+            }
+            
+            guard paywall.hasViewConfiguration else {
+                //  use your custom logic
+                print("This paywall does not contain viewConfiguration")
+                failedToPresent()
+                return
+            }
+            
+            
+            AdaptyUI.getPaywallConfiguration(forPaywall: paywall) { result in
+                switch result {
+                case let .success(viewConfiguration):
+                    DispatchQueue.main.async {
+                        NeonAppTracking.trackPaywallView()
+                        let visualPaywall = try! AdaptyUI.paywallController(with:  viewConfiguration, delegate: self)
+                        controller.present(visualPaywall, animated: true)
+                    }
+                    break
+                    // use loaded configuration
+                case let .failure(error):
+                    break
+                    // handle the error
                 }
-                break
-                // use loaded configuration
-            case let .failure(error):
-                break
-                // handle the error
             }
         }
         
