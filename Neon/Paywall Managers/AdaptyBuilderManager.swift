@@ -5,6 +5,7 @@
 //  Created by Tuna Öztürk on 14.07.2024.
 //
 
+
 import Foundation
 import Adapty
 import UIKit
@@ -19,7 +20,6 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
     var dismissed: (() -> ())? = nil
     var restored: (() -> ())? = nil
     var customButtonHandlers = [String: () -> Void]()
-    var isAdaptyUIActivated: Bool = false
     @available(iOS 15.0, *)
     public func present(
         paywall : AdaptyPaywall,
@@ -29,44 +29,41 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
         restored: @escaping () -> (),
         failedToPresent: @escaping () -> ()
     ){
-        DispatchQueue.main.async { [self] in
-            
-            self.purchased = purchased
-            self.dismissed = dismissed
-            self.restored = restored
-            
-            if !isAdaptyUIActivated{
-                AdaptyUI.activate()
-                isAdaptyUIActivated = true
-            }
-            
-            guard paywall.hasViewConfiguration else {
-                //  use your custom logic
-                print("This paywall does not contain viewConfiguration")
-                failedToPresent()
-                return
-            }
-            
-            
-            AdaptyUI.getPaywallConfiguration(forPaywall: paywall) { result in
-                switch result {
-                case let .success(viewConfiguration):
-                    DispatchQueue.main.async {
-                        NeonAppTracking.trackPaywallView()
-                        let visualPaywall = try! AdaptyUI.paywallController(with:  viewConfiguration, delegate: self)
-                        controller.present(visualPaywall, animated: true)
-                    }
-                    break
-                    // use loaded configuration
-                case let .failure(error):
-                    break
-                    // handle the error
+        
+        self.purchased = purchased
+        self.dismissed = dismissed
+        self.restored = restored
+        
+        if !AdaptyManager.adaptyBuilderPaywalls.contains(where: {$0.paywall.placementId == paywall.placementId}){
+            failedToPresent()
+            return
+        }
+        for adaptyBuilderPaywall in AdaptyManager.adaptyBuilderPaywalls {
+            if adaptyBuilderPaywall.paywall.placementId == paywall.placementId{
+                
+                guard paywall.hasViewConfiguration else {
+                    //  use your custom logic
+                    print("This paywall does not contain viewConfiguration")
+                    failedToPresent()
+                    return
                 }
+                
+                NeonAppTracking.trackPaywallView()
+                
+                let visualPaywall = try! AdaptyUI.paywallController(
+                    for: adaptyBuilderPaywall.paywall,
+                    products: nil,
+                    viewConfiguration: adaptyBuilderPaywall.configuration,
+                    delegate: self
+                )
+                controller.present(visualPaywall, animated: true)
+                
             }
         }
         
-        
     }
+    
+    
 }
 @available(iOS 15.0, *)
 extension AdaptyBuilderManager{
@@ -120,13 +117,12 @@ extension AdaptyBuilderManager{
         }
     }
     
-    
     public func paywallController(_ controller: AdaptyPaywallController,
                                   didFinishPurchase product: AdaptyPaywallProduct,
-                                  purchaseResult: AdaptyPurchaseResult) {
+                                  purchasedInfo: AdaptyPurchasedInfo) {
         Neon.isUserPremium = true
         
-        NeonPaywallManager.trackPurchase(product: product.sk1Product)
+        NeonPaywallManager.trackPurchase(product: product.skProduct)
         
         controller.dismiss(animated: true)
         
@@ -168,10 +164,10 @@ extension AdaptyBuilderManager{
 
 public class AdaptyBuilderPaywall{
     var paywall : AdaptyPaywall
-    var configuration : AdaptyUI.PaywallConfiguration
+    var configuration : AdaptyUI.LocalizedViewConfiguration
     var packages : [AdaptyPaywallProduct]
     
-    init(paywall: AdaptyPaywall, configuration: AdaptyUI.PaywallConfiguration, packages: [AdaptyPaywallProduct]) {
+    init(paywall: AdaptyPaywall, configuration: AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct]) {
         self.paywall = paywall
         self.configuration = configuration
         self.packages = packages
@@ -179,4 +175,3 @@ public class AdaptyBuilderPaywall{
     
     
 }
-
