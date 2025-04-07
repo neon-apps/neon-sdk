@@ -23,7 +23,7 @@ let package = Package(
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "11.1.0")),
         .package(name: "Localize_Swift", url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0")),
-        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("3.0.0-beta.2")),
+        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("3.1.0")),
         .package(name: "AIProxy", url: "https://github.com/lzell/AIProxySwift.git", from: "0.71.0"),
 
         // Dependencies declare other packages that this package depends on.
