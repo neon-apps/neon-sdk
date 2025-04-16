@@ -14,8 +14,6 @@ open class NeonSettingsController: UIViewController {
     public let stackView = UIStackView()
     public let titleLabel = UILabel()
     public let backButton = NeonSymbolButton()
-    
-    private var addedSections: [NeonSettingsSection] = []
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +26,7 @@ open class NeonSettingsController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        
         view.backgroundColor = .white
         
         titleLabel.text = "Settings"
@@ -39,7 +38,6 @@ open class NeonSettingsController: UIViewController {
         backButton.snp.makeConstraints { make in
             make.width.height.equalTo(50)
         }
-
         let navBar = UIStackView(arrangedSubviews: [backButton, titleLabel, UIView()])
         navBar.axis = .horizontal
         navBar.alignment = .center
@@ -101,47 +99,13 @@ open class NeonSettingsController: UIViewController {
         NeonSettingsControllerConstants.sectionTitleFont = sectionTitleFont
         NeonSettingsControllerConstants.buttonTitleFont = buttonTitleFont
         
-        update()
-    }
-
-    public func update() {
-        titleLabel.textColor = NeonSettingsControllerConstants.primaryTextColor
+        self.titleLabel.textColor = primaryTextColor
+        self.backButton.tintColor = primaryTextColor
         titleLabel.font = NeonSettingsControllerConstants.pageTitleFont
-        backButton.tintColor = NeonSettingsControllerConstants.primaryTextColor
-        view.backgroundColor = .white
-
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        for section in addedSections {
-            guard let controller = NeonSettingsControllerConstants.controller else { continue }
-            guard let sectionView = section.view(
-                buttonTextColor: NeonSettingsControllerConstants.buttonTextColor,
-                buttonBackgroundColor: NeonSettingsControllerConstants.buttonBackgroundColor,
-                buttonBorderColor: NeonSettingsControllerConstants.buttonBorderColor,
-                buttonCornerRadius: NeonSettingsControllerConstants.buttonCornerRadius,
-                buttonHeight: NeonSettingsControllerConstants.buttonHeight,
-                iconTintColor: NeonSettingsControllerConstants.iconTintColor,
-                primaryTextColor: NeonSettingsControllerConstants.primaryTextColor,
-                mainColor: NeonSettingsControllerConstants.mainColor,
-                controller: controller
-            ) else { continue }
-
-            stackView.addArrangedSubview(sectionView)
-        }
     }
 
     public func addSection(_ section: NeonSettingsSection) {
         guard let controller = NeonSettingsControllerConstants.controller else { return }
-
-        switch section {
-        case .premiumButton(_, _, _, _, _, _, _), .restorePurchaseButton(_, _, _):
-            if Neon.isUserPremium { return }
-        default:
-            break
-        }
-
-        addedSections.append(section)
-
         guard let sectionView = section.view(
             buttonTextColor: NeonSettingsControllerConstants.buttonTextColor,
             buttonBackgroundColor: NeonSettingsControllerConstants.buttonBackgroundColor,
@@ -153,7 +117,22 @@ open class NeonSettingsController: UIViewController {
             mainColor: NeonSettingsControllerConstants.mainColor,
             controller: controller
         ) else { return }
+        
+        switch section {
 
+        case .premiumButton(_, _, _, _, _, _, _):
+            if Neon.isUserPremium{
+                return
+            }
+            break
+        case .restorePurchaseButton(_, _, _):
+            if Neon.isUserPremium{
+                return
+            }
+        default:
+            break
+        }
+    
         stackView.addArrangedSubview(sectionView)
     }
 }
