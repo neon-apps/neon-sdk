@@ -16,6 +16,7 @@ open class NeonOnboardingController: UIViewController {
     private let fadeView = UIView()
     private let fadeLayer = CAGradientLayer()
     private var pages = [NeonOnboardingPage]()
+    public var currentIndex: ((Int)->())?
     private var currentPage = NeonOnboardingPage()
     private var contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>()
     private var bouncingButton = NeonBouncingButton()
@@ -78,6 +79,7 @@ open class NeonOnboardingController: UIViewController {
         
       
         let nextIndex = currentPage.index + 1
+        self.currentIndex?(currentPage.index)
         if pages.count > nextIndex{
             vibrate(style: .medium)
             currentPage = pages[nextIndex]
