@@ -79,7 +79,7 @@ open class NeonOnboardingController: UIViewController {
         
       
         let nextIndex = currentPage.index + 1
-        self.currentIndex?(currentPage.index)
+        self.currentIndex?(nextIndex)
         if pages.count > nextIndex{
             vibrate(style: .medium)
             currentPage = pages[nextIndex]
