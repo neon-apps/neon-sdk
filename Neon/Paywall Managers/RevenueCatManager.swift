@@ -95,11 +95,11 @@ public class RevenueCatManager {
         Purchases.shared.purchase(package: package) {  transaction, purchaserInfo, error, _ in
             LottieManager.removeFullScreenLottie()
             
-            if let product = package.storeProduct.sk1Product{
+            if let product = package.storeProduct.sk2Product{
                 NeonPaywallManager.trackPurchase(product: product)
             }
             
-            if NeonPaywallManager.isSubscription(product: package.storeProduct.sk1Product){
+            if NeonPaywallManager.isSubscription(product: package.storeProduct.sk2Product){
                 
                 
                 if purchaserInfo?.entitlements.all["pro"]?.isActive == true {
@@ -194,7 +194,7 @@ public class RevenueCatManager {
     internal static func trackTrialConversionIfNeeded(for purchaserInfo : CustomerInfo){
         for package in packages{
             let identifier = package.storeProduct.productIdentifier
-            guard let product = package.storeProduct.sk1Product else { return}
+            guard let product = package.storeProduct.sk2Product else { return}
             let hasIntorductoryPeriod = NeonPaywallManager.hasIntorductoryPeriod(product: product)
             if let entitlement = purchaserInfo.entitlements.all[accessLevel]{
                 if entitlement.productIdentifier == identifier, entitlement.isActive && hasIntorductoryPeriod && entitlement.periodType == .normal{

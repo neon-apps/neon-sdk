@@ -130,16 +130,27 @@ public class AdaptyManager {
             //  use your custom logic
               return
         }
-        AdaptyUI.getViewConfiguration(forPaywall: paywall) { result in
-            switch result {
-            case let .success(viewConfiguration):
-                adaptyBuilderPaywalls.append(AdaptyBuilderPaywall(paywall: paywall, configuration: viewConfiguration, packages: packages))
-                break
-                // use loaded configuration
-            case let .failure(error):
-                break
-                // handle the error
-            }
+//        AdaptyUI.getViewConfiguration(forPaywall: paywall) { result in
+//            switch result {
+//            case let .success(viewConfiguration):
+//                adaptyBuilderPaywalls.append(AdaptyBuilderPaywall(paywall: paywall, configuration: viewConfiguration, packages: packages))
+//                break
+//                // use loaded configuration
+//            case let .failure(error):
+//                break
+//                // handle the error
+//            }
+//        }
+        AdaptyUI.getPaywallConfiguration(forPaywall: paywall) { result in
+                        switch result {
+                        case let .success(viewConfiguration):
+                            adaptyBuilderPaywalls.append(AdaptyBuilderPaywall(paywall: paywall, configuration: viewConfiguration, packages: packages))
+                            break
+                            // use loaded configuration
+                        case let .failure(error):
+                            break
+                            // handle the error
+                        }
         }
     }
     
@@ -164,7 +175,7 @@ public class AdaptyManager {
     
     public static func getPaywall(placementID : String) -> AdaptyPaywall?{
         for paywall in paywalls {
-            if paywall.placementId == placementID{
+            if paywall.placement.id == placementID{
                 return paywall
             }
         }
@@ -197,14 +208,14 @@ public class AdaptyManager {
             switch type {
             case .default:
                 if package.vendorProductId == id{
-                    return NeonPaywallManager.getDefaultPrice(product: package.skProduct)
+                    return NeonPaywallManager.getDefaultPrice(product: package.sk2Product)
                 }else{
                     return UserDefaults.standard.string(forKey: "Neon-\(id)") ?? "..."
                 }
             case .weekly:
-                return NeonPaywallManager.getWeeklyPriceFor(product: package.skProduct)
+                return NeonPaywallManager.getWeeklyPriceFor(product: package.sk2Product)
             case .monthly:
-                return NeonPaywallManager.getMonthlyPriceFor(product: package.skProduct)
+                return NeonPaywallManager.getMonthlyPriceFor(product: package.sk2Product)
             }
           
         }
@@ -215,11 +226,11 @@ public class AdaptyManager {
     public static func getPrice(package : AdaptyPaywallProduct, type : AdaptyPriceType = .default) -> String{
         switch type {
         case .default:
-            return NeonPaywallManager.getDefaultPrice(product: package.skProduct)
+            return NeonPaywallManager.getDefaultPrice(product: package.sk2Product)
         case .weekly:
-            return NeonPaywallManager.getWeeklyPriceFor(product: package.skProduct)
+            return NeonPaywallManager.getWeeklyPriceFor(product: package.sk2Product)
         case .monthly:
-            return NeonPaywallManager.getMonthlyPriceFor(product: package.skProduct)
+            return NeonPaywallManager.getMonthlyPriceFor(product: package.sk2Product)
         }
     }
     
@@ -245,9 +256,9 @@ public class AdaptyManager {
             LottieManager.removeFullScreenLottie()
             switch result {
             case let .success(purchaseInfo):
-                NeonPaywallManager.trackPurchase(product: package.skProduct)
-                if NeonPaywallManager.isSubscription(product: package.skProduct){
-                    if purchaseInfo.profile.accessLevels[self.accessLevel]?.isActive ?? false {
+                NeonPaywallManager.trackPurchase(product: package.sk2Product)
+                if NeonPaywallManager.isSubscription(product: package.sk2Product){
+                    if purchaseInfo.profile?.accessLevels[self.accessLevel]?.isActive ?? false {
                         Neon.isUserPremium = true
                         UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
                         guard let completionSuccess else { return }
@@ -360,7 +371,7 @@ public class AdaptyManager {
     internal static func trackTrialConversionIfNeeded(for profile : AdaptyProfile){
         for package in packages{
             let identifier = package.vendorProductId
-            let hasIntorductoryPeriod = NeonPaywallManager.hasIntorductoryPeriod(product: package.skProduct)
+            let hasIntorductoryPeriod = NeonPaywallManager.hasIntorductoryPeriod(product: package.sk2Product)
             if let subscription = profile.subscriptions[identifier]{
                 if subscription.isActive && hasIntorductoryPeriod && subscription.activeIntroductoryOfferType == nil{
                     NeonAppTracking.trackTrialConversion()

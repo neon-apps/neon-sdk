@@ -11,10 +11,10 @@ import StoreKit
 @available(iOS 11.2, *)
 public class NeonPaywallManager{
     
-   public static func isSubscription(product : SKProduct?) -> Bool{
+   public static func isSubscription(product : Product?) -> Bool{
         if let product{
-            if let _ = product.subscriptionPeriod?.numberOfUnits,
-               let _ = product.subscriptionPeriod?.unit{
+            if let _ = product.subscription?.subscriptionPeriod.value,
+               let _ = product.subscription?.subscriptionPeriod.unit{
                 return true
             }else{
                 return false
@@ -23,43 +23,61 @@ public class NeonPaywallManager{
         return false
     }
     
-    public static func getDefaultPrice(product : SKProduct?) -> String{
+    public static func getDefaultPrice(product : Product?) -> String{
         guard let product else {  return "..." }
         let price = product.price
-        let currencyCode = product.priceLocale.currencyCode
+        var currencyCode: String? = ""
+        
+        if #available(iOS 16, *) {
+            currencyCode = Locale().currency?.identifier
+        } else {
+            // Fallback on earlier versions
+        }
         let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
-        let formattedPrice = formatPrice(price: price)
+        let formattedPrice = formatPrice(price: price as NSDecimalNumber)
         return "\(currencySymbol)\(formattedPrice)"
     }
     
     
     
-    public static func getWeeklyPriceFor(product : SKProduct?) -> String{
+    public static func getWeeklyPriceFor(product : Product?) -> String{
         guard let product else {  return "..." }
-        if let numberOfUnits = product.subscriptionPeriod?.numberOfUnits,
-           let unit = product.subscriptionPeriod?.unit{
+        if let numberOfUnits = product.subscription?.subscriptionPeriod.value,
+           let unit = product.subscription?.subscriptionPeriod.unit{
             let price = product.price
             let weekCount = calculateWeekCount(unit: unit, numberOfUnits: numberOfUnits)
             let (_, durationLabelText) = getUnitString(unit: unit, numberOfUnits: numberOfUnits)
-            let currencyCode = product.priceLocale.currencyCode
+            var currencyCode: String? = ""
+            
+            if #available(iOS 16, *) {
+                currencyCode = Locale().currency?.identifier
+            } else {
+                // Fallback on earlier versions
+            }
             let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
-            let pricePerWeek = calculatePricePerUnit(numberOfUnits: weekCount, price: price)
+            let pricePerWeek = calculatePricePerUnit(numberOfUnits: weekCount, price: price as NSDecimalNumber)
             return "\(currencySymbol)\(pricePerWeek)"
         }else{
             return "..."
         }
     }
     
-    public static func getMonthlyPriceFor(product : SKProduct?) -> String{
+    public static func getMonthlyPriceFor(product : Product?) -> String{
         guard let product else {  return "..." }
-        if let numberOfUnits = product.subscriptionPeriod?.numberOfUnits,
-           let unit = product.subscriptionPeriod?.unit{
+        if let numberOfUnits = product.subscription?.subscriptionPeriod.value,
+           let unit = product.subscription?.subscriptionPeriod.unit{
             let price = product.price
             let monthCount = calculateMonthCount(unit: unit, numberOfUnits: numberOfUnits)
             let (_, durationLabelText) = getUnitString(unit: unit, numberOfUnits: numberOfUnits)
-            let currencyCode = product.priceLocale.currencyCode
+            var currencyCode: String? = ""
+            
+            if #available(iOS 16, *) {
+                currencyCode = Locale().currency?.identifier
+            } else {
+                // Fallback on earlier versions
+            }
             let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
-            let pricePerMonth = calculatePricePerUnit(numberOfUnits: monthCount, price: price)
+            let pricePerMonth = calculatePricePerUnit(numberOfUnits: monthCount, price: price as NSDecimalNumber)
             return "\(currencySymbol)\(pricePerMonth)"
         }else{
             return "..."
@@ -67,7 +85,7 @@ public class NeonPaywallManager{
     }
     
     
-    private static func getUnitString(unit : SKProduct.PeriodUnit, numberOfUnits : Int) -> (String?, String?){
+    private static func getUnitString(unit : Product.SubscriptionPeriod.Unit, numberOfUnits : Int) -> (String?, String?){
         switch unit {
         case .day:
             if numberOfUnits == 7{
@@ -128,18 +146,23 @@ public class NeonPaywallManager{
         }
         
     }
-    public static func getIntroductoryPeriod(product : SKProduct, completion : (_ duration: Int?, _ price: String?) -> ()){
+    public static func getIntroductoryPeriod(product : Product, completion : (_ duration: Int?, _ price: String?) -> ()){
         
-        if let numberOfUnits = product.introductoryPrice?.subscriptionPeriod.numberOfUnits,
-           let unit = product.introductoryPrice?.subscriptionPeriod.unit{
+        if let numberOfUnits = product.subscription?.introductoryOffer?.periodCount,
+           let unit = product.subscription?.introductoryOffer?.period.unit{
             
             var introductoryPrice : String?
             
-            if let price = product.introductoryPrice?.price{
+            if let price = product.subscription?.introductoryOffer?.price{
                 if price != 0.0{
-                    let currencyCode = product.priceLocale.currencyCode
+                    var currencyCode: String? = ""
+                    if #available(iOS 16, *) {
+                         currencyCode = Locale().currencySymbol
+                    } else {
+                        // Fallback on earlier versions
+                    }
                     let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
-                    introductoryPrice = "\(currencySymbol)\(formatPrice(price: price))"
+                    introductoryPrice = "\(currencySymbol)\(formatPrice(price: price as NSDecimalNumber))"
                 }
             }
   
@@ -162,7 +185,7 @@ public class NeonPaywallManager{
         
     }
     
-    public static func hasIntorductoryPeriod(product : SKProduct?) -> Bool{
+    public static func hasIntorductoryPeriod(product : Product?) -> Bool{
         guard let product else { return false }
         var hasIntorductoryPeriod = false
         getIntroductoryPeriod(product: product) { duration, price in
@@ -173,7 +196,7 @@ public class NeonPaywallManager{
         return hasIntorductoryPeriod
     }
     
-    public static func trackPurchase(product : SKProduct?){
+    public static func trackPurchase(product : Product?){
         guard let product else { return }
         getIntroductoryPeriod(product: product) { duration, price in
             if let duration, duration != 0{
@@ -188,7 +211,7 @@ public class NeonPaywallManager{
         return String(format: "%.2f", Double(truncating: price))
     }
     
-    private static func calculateWeekCount(unit : SKProduct.PeriodUnit, numberOfUnits : Int) -> Int{
+    private static func calculateWeekCount(unit : Product.SubscriptionPeriod.Unit, numberOfUnits : Int) -> Int{
         switch unit {
         case .day:
             return numberOfUnits / 7
@@ -203,7 +226,7 @@ public class NeonPaywallManager{
         }
     }
     
-    private static func calculateMonthCount(unit : SKProduct.PeriodUnit, numberOfUnits : Int) -> Int{
+    private static func calculateMonthCount(unit : Product.SubscriptionPeriod.Unit, numberOfUnits : Int) -> Int{
         switch unit {
         case .day:
             return 0

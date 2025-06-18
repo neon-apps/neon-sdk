@@ -50,12 +50,13 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
                 
                 NeonAppTracking.trackPaywallView()
                 
-                let visualPaywall = try! AdaptyUI.paywallController(
-                    for: adaptyBuilderPaywall.paywall,
-                    products: nil,
-                    viewConfiguration: adaptyBuilderPaywall.configuration,
-                    delegate: self
-                )
+//                let visualPaywall = try! AdaptyUI.paywallController(
+//                    for: adaptyBuilderPaywall.paywall,
+//                    products: nil,
+//                    viewConfiguration: adaptyBuilderPaywall.configuration,
+//                    delegate: self
+//                )
+                let visualPaywall = try! AdaptyUI.paywallController(with: adaptyBuilderPaywall.configuration, delegate: self)
                 
                 controller.present(visualPaywall, animated: true)
                 
@@ -120,10 +121,10 @@ extension AdaptyBuilderManager{
     
     public func paywallController(_ controller: AdaptyPaywallController,
                                   didFinishPurchase product: AdaptyPaywallProduct,
-                                  purchasedInfo: AdaptyPurchasedInfo) {
+                                  purchasedInfo: AdaptyPurchaseResult) {
         Neon.isUserPremium = true
         
-        NeonPaywallManager.trackPurchase(product: product.skProduct)
+        NeonPaywallManager.trackPurchase(product: product.sk2Product)
         
         controller.dismiss(animated: true)
         
@@ -165,10 +166,10 @@ extension AdaptyBuilderManager{
 
 public class AdaptyBuilderPaywall{
     var paywall : AdaptyPaywall
-    var configuration : AdaptyUI.LocalizedViewConfiguration
+    var configuration : AdaptyUI.PaywallConfiguration
     var packages : [AdaptyPaywallProduct]
     
-    init(paywall: AdaptyPaywall, configuration: AdaptyUI.LocalizedViewConfiguration, packages: [AdaptyPaywallProduct]) {
+    init(paywall: AdaptyPaywall, configuration: AdaptyUI.PaywallConfiguration, packages: [AdaptyPaywallProduct]) {
         self.paywall = paywall
         self.configuration = configuration
         self.packages = packages
