@@ -56,6 +56,7 @@ public class AdaptyBuilderManager : NSObject, AdaptyPaywallControllerDelegate{
                     viewConfiguration: adaptyBuilderPaywall.configuration,
                     delegate: self
                 )
+                
                 controller.present(visualPaywall, animated: true)
                 
             }
