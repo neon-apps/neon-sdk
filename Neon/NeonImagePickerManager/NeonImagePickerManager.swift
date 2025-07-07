@@ -128,7 +128,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
 
         viewController?.present(imagePickerController, animated: true, completion: nil)
     }
-
+    
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
 
