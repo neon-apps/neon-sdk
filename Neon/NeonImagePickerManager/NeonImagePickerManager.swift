@@ -18,6 +18,9 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
     public static let shared = NeonImagePickerManager()
     private var viewController: UIViewController?
 
+    private var cameraPermissionDenied = false
+    private var photoLibraryPermissionDenied = false
+
     public func configure(with viewController: UIViewController) {
         self.viewController = viewController
     }
@@ -30,13 +33,13 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { _ in
-                self.checkCameraPermission()
+                self.handleCameraSelection()
             }
             alertController.addAction(cameraAction)
         }
 
         let photoLibraryAction = UIAlertAction(title: "Choose from Library", style: .default) { _ in
-            self.checkPhotoLibraryPermission()
+            self.handlePhotoLibrarySelection()
         }
         alertController.addAction(photoLibraryAction)
 
@@ -46,60 +49,72 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
         viewController?.present(alertController, animated: true, completion: nil)
     }
 
-    private func checkCameraPermission() {
+    private func handleCameraSelection() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            showImagePicker(sourceType: .camera)
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 DispatchQueue.main.async {
                     if granted {
                         self.showImagePicker(sourceType: .camera)
                     } else {
-                        self.showPermissionAlert(for: "Camera")
+                        self.cameraPermissionDenied = true
+                        self.showCameraPermissionAlert()
                     }
                 }
             }
-        default:
-            showPermissionAlert(for: "Camera")
+        case .authorized:
+            showImagePicker(sourceType: .camera)
+        case .denied, .restricted:
+            cameraPermissionDenied = true
+            showCameraPermissionAlert()
+        @unknown default:
+            break
         }
     }
 
-    private func checkPhotoLibraryPermission() {
+    private func handlePhotoLibrarySelection() {
         switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized, .limited:
-            showImagePicker(sourceType: .photoLibrary)
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
                 DispatchQueue.main.async {
                     if status == .authorized || status == .limited {
                         self.showImagePicker(sourceType: .photoLibrary)
                     } else {
-                        self.showPermissionAlert(for: "Photo Library")
+                        self.photoLibraryPermissionDenied = true
+                        self.showPhotoLibraryPermissionAlert()
                     }
                 }
             }
-        default:
-            showPermissionAlert(for: "Photo Library")
+        case .authorized, .limited:
+            showImagePicker(sourceType: .photoLibrary)
+        case .denied, .restricted:
+            photoLibraryPermissionDenied = true
+            showPhotoLibraryPermissionAlert()
+        @unknown default:
+            break
         }
     }
 
-    private func showPermissionAlert(for type: String) {
-        let alert = UIAlertController(
-            title: "Access Needed",
-            message: "Please enable access to the \(type) in Settings to continue.",
-            preferredStyle: .alert
-        )
-
+    private func showCameraPermissionAlert() {
+        let alert = UIAlertController(title: "Camera Access Needed", message: "Please allow camera access in Settings to take photos.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        alert.addAction(UIAlertAction(title: "Go to Settings", style: .default) { _ in
-            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
             }
         })
+        viewController?.present(alert, animated: true)
+    }
 
-        viewController?.present(alert, animated: true, completion: nil)
+    private func showPhotoLibraryPermissionAlert() {
+        let alert = UIAlertController(title: "Photo Library Access Needed", message: "Please allow photo library access in Settings to choose photos.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        })
+        viewController?.present(alert, animated: true)
     }
 
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
@@ -114,7 +129,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
         viewController?.present(imagePickerController, animated: true, completion: nil)
     }
 
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
 
         if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
