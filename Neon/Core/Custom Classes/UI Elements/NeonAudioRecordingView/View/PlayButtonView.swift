@@ -32,7 +32,7 @@ class PlayButtonView: UIView {
         
         infoLabel.text = "You can listen to your recorded voice, delete\nor re-record."
         infoLabel.textColor = NeonAudioRecordingViewConstants.secondaryTextColor
-        infoLabel.font = Font.custom(size: 10, fontWeight: .Regular)
+        infoLabel.font = Font.custom(size: NeonAudioRecordingViewConstants.fontSize, fontWeight: .Regular)
         infoLabel.textAlignment = .center
         infoLabel.numberOfLines = 0
         addSubview(infoLabel)
