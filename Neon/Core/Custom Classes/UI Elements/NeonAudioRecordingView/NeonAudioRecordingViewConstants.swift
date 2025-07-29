@@ -18,6 +18,7 @@ class NeonAudioRecordingViewConstants{
     static var progressBarTrackColor = UIColor()
     static var sliderTrackColor = UIColor()
     static var title = String()
+    static var recordingButtonImage: UIImage = NeonSymbols.mic_fill
     static var description = String()
     static var fontSize = CGFloat()
     static var maximumRecordingDurationInSeconds = Int()

@@ -48,6 +48,7 @@ public class NeonAudioRecordingView: UIView {
                           title: String,
                           description: String,
                           fontSize: CGFloat = 14,
+                          recordButtonImage: UIImage = NeonSymbols.mic_fill,
                           maximumRecordingDurationInSeconds : Int) {
         
         NeonAudioRecordingViewConstants.controller = controller
@@ -60,6 +61,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.title = title
         NeonAudioRecordingViewConstants.description = description
         NeonAudioRecordingViewConstants.fontSize = fontSize
+        NeonAudioRecordingViewConstants.recordingButtonImage = recordButtonImage
         NeonAudioRecordingViewConstants.maximumRecordingDurationInSeconds = maximumRecordingDurationInSeconds
         
         setupView()
@@ -90,7 +92,7 @@ public class NeonAudioRecordingView: UIView {
         
         playButtonView = PlayButtonView()
         guard let playButtonView = playButtonView else { return }
-        self.recordButtonView?.voiceButton.setImage(NeonSymbols.mic_fill, for: .normal)
+        self.recordButtonView?.voiceButton.setImage(NeonAudioRecordingViewConstants.recordingButtonImage, for: .normal)
         playButtonView.playButton.addTarget(self, action: #selector(handlePlayButtonClick), for: .touchUpInside)
         playButtonView.trashButton.addTarget(self, action: #selector(trashButtonClick), for: .touchUpInside)
         playButtonView.isHidden = true
@@ -187,7 +189,7 @@ public class NeonAudioRecordingView: UIView {
             DispatchQueue.main.async {
             if granted {
                 self.isRecording = false
-                self.recordButtonView?.voiceButton.setImage(NeonSymbols.mic_fill, for: .normal)
+                self.recordButtonView?.voiceButton.setImage(NeonAudioRecordingViewConstants.recordingButtonImage, for: .normal)
                 self.recordButtonView?.infoLabel.text = "Tap to start recording"
                 self.progressBarView?.stopTimer()
                 self.progressBarView?.isHidden = true
