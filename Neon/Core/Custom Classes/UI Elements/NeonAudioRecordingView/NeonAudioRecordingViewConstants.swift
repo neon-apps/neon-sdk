@@ -19,5 +19,6 @@ class NeonAudioRecordingViewConstants{
     static var sliderTrackColor = UIColor()
     static var title = String()
     static var description = String()
+    static var fontSize = CGFloat()
     static var maximumRecordingDurationInSeconds = Int()
 }

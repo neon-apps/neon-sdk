@@ -47,6 +47,7 @@ public class NeonAudioRecordingView: UIView {
                           sliderTrackColor: UIColor,
                           title: String,
                           description: String,
+                          fontSize: CGFloat = 14,
                           maximumRecordingDurationInSeconds : Int) {
         
         NeonAudioRecordingViewConstants.controller = controller
@@ -58,6 +59,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.sliderTrackColor = sliderTrackColor
         NeonAudioRecordingViewConstants.title = title
         NeonAudioRecordingViewConstants.description = description
+        NeonAudioRecordingViewConstants.fontSize = fontSize
         NeonAudioRecordingViewConstants.maximumRecordingDurationInSeconds = maximumRecordingDurationInSeconds
         
         setupView()
@@ -76,6 +78,7 @@ public class NeonAudioRecordingView: UIView {
         }
         
         recordButtonView = RecordButtonView()
+        recordButtonView?.infoLabel.font = Font.custom(size: NeonAudioRecordingViewConstants.fontSize, fontWeight: .Regular)
         guard let recordButtonView = recordButtonView else { return }
         recordButtonView.voiceButton.addTarget(self, action: #selector(handleVoiceButtonToggle), for: .touchUpInside)
         addSubview(recordButtonView)
@@ -237,17 +240,35 @@ public class NeonAudioRecordingView: UIView {
         PlayerManager.shared.pause()
     }
     @objc func trashButtonClick() {
-        PlayerManager.shared.pause()
-        sliderView?.isHidden = true
-        playButtonView?.isHidden = true
-        recordButtonView?.isHidden = false
-        progressBarView?.resetTimer()
-        PlayerManager.shared.localAudioFileName = nil
-        PlayerManager.shared.remoteAudioUrl = nil
-        playButtonView?.update()
-        if let configureActions{
-            configureActions(.recordingDeleted)
-        }
+        
+        NeonAlertManager.default.present(
+            title: "Recording will be deleted",
+            message: "Your recording will be deleted and cannot be recovered. This action can not be undone. Are you sure you want to delete it?",
+            style: .alert,
+            buttons: [
+                AlertButton(title: "Delete", style: .destructive, completion: { [weak self] in
+                    guard let self else {return}
+                    PlayerManager.shared.pause()
+                    sliderView?.isHidden = true
+                    playButtonView?.isHidden = true
+                    recordButtonView?.isHidden = false
+                    progressBarView?.resetTimer()
+                    PlayerManager.shared.localAudioFileName = nil
+                    PlayerManager.shared.remoteAudioUrl = nil
+                    playButtonView?.update()
+                    if let configureActions{
+                        configureActions(.recordingDeleted)
+                    }
+                }),
+                AlertButton(title: "Cancel", style: .cancel, completion: {
+                })
+            ],
+            viewController: NeonAudioRecordingViewConstants.controller
+        )
+        
+        
+        
+ 
     }
     
     @objc func setupNotifications() {
