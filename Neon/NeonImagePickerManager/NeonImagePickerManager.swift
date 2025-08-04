@@ -25,7 +25,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
         self.viewController = viewController
     }
 
-    public func pickImage(completion: @escaping (UIImage?) -> Void) {
+    public func pickImage(accessLevel forLibrary: PHAccessLevel = .readWrite ,completion: @escaping (UIImage?) -> Void) {
         completionHandler = completion
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -39,7 +39,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
         }
 
         let photoLibraryAction = UIAlertAction(title: "Choose from Library", style: .default) { _ in
-            self.handlePhotoLibraryPermission(accessLevel: .addOnly)
+            self.handlePhotoLibraryPermission(accessLevel: forLibrary)
         }
         alertController.addAction(photoLibraryAction)
 
