@@ -39,7 +39,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
         }
 
         let photoLibraryAction = UIAlertAction(title: "Choose from Library", style: .default) { _ in
-            self.handlePhotoLibrarySelection()
+            self.handlePhotoLibraryPermission(accessLevel: .addOnly)
         }
         alertController.addAction(photoLibraryAction)
 
@@ -71,7 +71,7 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
             break
         }
     }
-
+    
     private func handlePhotoLibrarySelection() {
         switch PHPhotoLibrary.authorizationStatus() {
         case .notDetermined:
@@ -94,7 +94,34 @@ public class NeonImagePickerManager: NSObject, UIImagePickerControllerDelegate, 
             break
         }
     }
+    
 
+    
+    func handlePhotoLibraryPermission(accessLevel: PHAccessLevel = .readWrite) {
+        let status = PHPhotoLibrary.authorizationStatus(for: accessLevel)
+        switch status {
+        case .authorized, .limited:
+            showImagePicker(sourceType: .photoLibrary)
+        case .notDetermined:
+          PHPhotoLibrary.requestAuthorization(for: accessLevel) { newStatus in
+            DispatchQueue.main.async {
+              if newStatus == .authorized || newStatus == .limited {
+                  self.showImagePicker(sourceType: .photoLibrary)
+              } else {
+                  self.photoLibraryPermissionDenied = true
+                  self.showPhotoLibraryPermissionAlert()
+              }
+            }
+          }
+        case .denied, .restricted:
+            photoLibraryPermissionDenied = true
+            showPhotoLibraryPermissionAlert()
+        @unknown default:
+          break
+        }
+      }
+    
+    
     private func showCameraPermissionAlert() {
         let alert = UIAlertController(title: "Camera Access Needed", message: "Please allow camera access in Settings to take photos.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
