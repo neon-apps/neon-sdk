@@ -91,6 +91,7 @@ public final class RecordButtonView: UIView {
         voiceButton.addSubview(holdSquareView)
         holdSquareView.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            make.width.height.equalTo(28)
             squareW = make.width.equalTo(28).constraint
             squareH = make.height.equalTo(28).constraint
         }
