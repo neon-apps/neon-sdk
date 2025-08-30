@@ -210,7 +210,6 @@ public class NeonAudioRecordingView: UIView {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if granted {
-                    self.isRecording = false
                     self.recordButtonView?.setState(.idle, useHoldToFinish: NeonAudioRecordingViewConstants.shouldHoldToFinishRecording)
                     self.recordButtonView?.infoLabel.text = "Tap to start recording"
                     self.progressBarView?.stopTimer()
@@ -226,6 +225,7 @@ public class NeonAudioRecordingView: UIView {
                         },
                         remoteCompletion: { [weak self] remoteURL, error in
                             guard let self = self else { return }
+                            self.isRecording = false
                             if let remoteURL, error == nil {
                                 if self.shouldAllowListenRecording {
                                     self.playButtonView?.isHidden = false
