@@ -57,7 +57,7 @@ public final class RecordButtonView: UIView {
     }
 
     func showHoldHint() {
-        infoLabel.text = "Hold 3s to finish"
+        infoLabel.text = "Hold to finish"
     }
 
     private func setupView() {
@@ -121,7 +121,7 @@ public final class RecordButtonView: UIView {
         case .idle:
             infoLabel.text = "Tap to start recording"
         case .recording:
-            infoLabel.text = shouldUseHoldToFinish ? "Hold 3s to finish" : "Tap to finish recording"
+            infoLabel.text = shouldUseHoldToFinish ? "Hold to finish" : "Tap to finish recording"
         }
     }
 
@@ -165,7 +165,7 @@ public final class RecordButtonView: UIView {
         let targetSize = voiceButton.bounds.width
 
         squareAnimator?.stopAnimation(true)
-        squareAnimator = UIViewPropertyAnimator(duration: 3.0, curve: .linear) { [weak self] in
+        squareAnimator = UIViewPropertyAnimator(duration: 2.0, curve: .linear) { [weak self] in
             guard let self = self else { return }
             self.squareW?.update(offset: targetSize)
             self.squareH?.update(offset: targetSize)
@@ -188,7 +188,7 @@ public final class RecordButtonView: UIView {
                 animator.stopAnimation(false)
                 animator.finishAnimation(at: .current)
                 let elapsed = CACurrentMediaTime() - pressStartTime
-                if elapsed >= 3.0 {
+                if elapsed >= 2.0 {
                     onHoldToFinishCompleted?()
                 } else {
                     resetSquare()
