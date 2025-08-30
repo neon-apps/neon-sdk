@@ -44,6 +44,7 @@ public class NeonAudioRecordingView: UIView {
                           progressBarTrackColor: UIColor,
                           sliderTrackColor: UIColor,
                           loaderColor: UIColor? = nil,
+                          buttonBackgroundColor: UIColor? = nil,
                           title: String,
                           description: String,
                           fontSize: CGFloat = 14,
@@ -55,6 +56,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.primaryTextColor = primaryTextColor
         NeonAudioRecordingViewConstants.secondaryTextColor = secondaryTextColor
         NeonAudioRecordingViewConstants.buttonTextColor = buttonTextColor
+        NeonAudioRecordingViewConstants.buttonTextColor = buttonBackgroundColor ?? mainColor
         NeonAudioRecordingViewConstants.progressBarTrackColor = progressBarTrackColor
         NeonAudioRecordingViewConstants.sliderTrackColor = sliderTrackColor
         NeonAudioRecordingViewConstants.title = title
@@ -83,7 +85,7 @@ public class NeonAudioRecordingView: UIView {
         guard let recordButtonView = recordButtonView else { return }
         recordButtonView.infoLabel.font = Font.custom(size: NeonAudioRecordingViewConstants.fontSize, fontWeight: .Regular)
         recordButtonView.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
-        recordButtonView.configure(mainColor: NeonAudioRecordingViewConstants.mainColor,
+        recordButtonView.configure(buttonBackgroundColor: NeonAudioRecordingViewConstants.buttonBackgroundColor,
                                    buttonTextColor: NeonAudioRecordingViewConstants.buttonTextColor,
                                    shouldUseHoldToFinish: NeonAudioRecordingViewConstants.shouldHoldToFinishRecording)
         recordButtonView.onTap = { [weak self] in

@@ -14,6 +14,7 @@ class NeonAudioRecordingViewConstants{
     static var primaryTextColor = UIColor()
     static var secondaryTextColor = UIColor()
     static var buttonTextColor = UIColor()
+    static var buttonBackgroundColor = UIColor()
     static var mainColor = UIColor()
     static var progressBarTrackColor = UIColor()
     static var sliderTrackColor = UIColor()

@@ -38,9 +38,9 @@ public final class RecordButtonView: UIView {
         setupView()
     }
 
-    func configure(mainColor: UIColor, buttonTextColor: UIColor, shouldUseHoldToFinish: Bool) {
+    func configure(buttonBackgroundColor: UIColor, buttonTextColor: UIColor, shouldUseHoldToFinish: Bool) {
         self.shouldUseHoldToFinish = shouldUseHoldToFinish
-        voiceButton.backgroundColor = mainColor
+        voiceButton.backgroundColor = buttonBackgroundColor
         iconImageView.tintColor = buttonTextColor
         updateIcon()
         setupGestures()
@@ -85,8 +85,10 @@ public final class RecordButtonView: UIView {
             make.width.height.equalTo(28)
         }
 
-        holdSquareView.backgroundColor = UIColor.white
+        holdSquareView.backgroundColor = NeonAudioRecordingViewConstants.buttonTextColor
         holdSquareView.isHidden = true
+        holdSquareView.layer.cornerRadius = 8
+        holdSquareView.layer.masksToBounds = true
         voiceButton.addSubview(holdSquareView)
         holdSquareView.snp.makeConstraints { make in
             make.center.equalToSuperview()
