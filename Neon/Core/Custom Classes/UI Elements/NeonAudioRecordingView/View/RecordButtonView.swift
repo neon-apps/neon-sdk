@@ -26,7 +26,7 @@ public final class RecordButtonView: UIView {
     private var displayLink: CADisplayLink?
     private(set) var state: State = .idle
     private var shouldUseHoldToFinish = false
-    private let requiredHold: Double = 2.0
+    private let requiredHold: Double = 3.0
     private var targetSide: CGFloat = 0
 
     var onTap: (() -> Void)?
