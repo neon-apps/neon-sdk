@@ -11,6 +11,7 @@ import UIKit
 import SnapKit
 
 
+
 public final class RecordButtonView: UIView {
     enum State { case idle, recording }
 
@@ -25,6 +26,8 @@ public final class RecordButtonView: UIView {
     private var displayLink: CADisplayLink?
     private(set) var state: State = .idle
     private var shouldUseHoldToFinish = false
+    private let requiredHold: Double = 2.0
+    private var targetSide: CGFloat = 0
 
     var onTap: (() -> Void)?
     var onHoldToFinishCompleted: (() -> Void)?
@@ -134,8 +137,6 @@ public final class RecordButtonView: UIView {
         switch gr.state {
         case .began:
             startHoldAnimation()
-        case .changed:
-            break
         case .ended, .cancelled, .failed:
             endHold(gr.state == .ended)
         default:
@@ -155,27 +156,20 @@ public final class RecordButtonView: UIView {
         squareW?.update(offset: start)
         squareH?.update(offset: start)
         voiceButton.layoutIfNeeded()
-
-        holdSquareView.isHidden = true
-        iconImageView.isHidden = false
         holdSquareView.isHidden = false
         iconImageView.isHidden = true
-
         pressStartTime = CACurrentMediaTime()
-        let targetSize = voiceButton.bounds.width
-
+        targetSide = voiceButton.bounds.width
         squareAnimator?.stopAnimation(true)
-        squareAnimator = UIViewPropertyAnimator(duration: 2.0, curve: .linear) { [weak self] in
+        squareAnimator = UIViewPropertyAnimator(duration: requiredHold, curve: .linear) { [weak self] in
             guard let self = self else { return }
-            self.squareW?.update(offset: targetSize)
-            self.squareH?.update(offset: targetSize)
+            self.squareW?.update(offset: self.targetSide)
+            self.squareH?.update(offset: self.targetSide)
             self.voiceButton.layoutIfNeeded()
         }
         squareAnimator?.addCompletion { [weak self] position in
             guard let self = self else { return }
-            if position == .end {
-                self.onHoldToFinishCompleted?()
-            }
+            if position == .end { self.onHoldToFinishCompleted?() }
         }
         squareAnimator?.startAnimation()
         startDisplayLink()
@@ -183,21 +177,20 @@ public final class RecordButtonView: UIView {
 
     private func endHold(_ endedNormally: Bool) {
         stopDisplayLink()
-        if let animator = squareAnimator {
+        guard let animator = squareAnimator else { resetSquare(); return }
+        let elapsed = CACurrentMediaTime() - pressStartTime
+        if elapsed >= requiredHold {
+            animator.stopAnimation(true)
+            squareW?.update(offset: targetSide)
+            squareH?.update(offset: targetSide)
+            voiceButton.layoutIfNeeded()
+            onHoldToFinishCompleted?()
+        } else {
             if endedNormally {
-                animator.stopAnimation(false)
-                animator.finishAnimation(at: .current)
-                let elapsed = CACurrentMediaTime() - pressStartTime
-                if elapsed >= 2.0 {
-                    onHoldToFinishCompleted?()
-                } else {
-                    resetSquare()
-                }
+                animator.stopAnimation(true)
             } else {
                 animator.stopAnimation(true)
-                resetSquare()
             }
-        } else {
             resetSquare()
         }
     }
@@ -226,8 +219,11 @@ public final class RecordButtonView: UIView {
 
     @objc private func tick() {
         let elapsed = CACurrentMediaTime() - pressStartTime
-        if elapsed >= 2.0 {
+        if elapsed >= requiredHold {
             stopDisplayLink()
+            squareW?.update(offset: targetSide)
+            squareH?.update(offset: targetSide)
+            voiceButton.layoutIfNeeded()
         }
     }
 }
