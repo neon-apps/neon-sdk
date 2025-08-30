@@ -29,7 +29,7 @@ public class NeonAudioRecordingView: UIView {
     var sliderView: SliderView?
     
     private var isRecording = false
-    
+    public  var shouldAllowListenRecording = true
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -205,12 +205,16 @@ public class NeonAudioRecordingView: UIView {
                 }, remoteCompletion: { [weak self] remoteURL, error in
                     guard let self = self else { return }
                     if let remoteURL, error == nil {
-                        self.playButtonView?.isHidden = false
-                        self.processingView?.isHidden = true
-                        self.sliderView?.isHidden = false
-                        PlayerManager.shared.remoteAudioUrl = remoteURL.absoluteString
-                        PlayerManager.shared.setupAudioPlayer()
-                        self.sliderView?.updateInitialLabels()
+                        
+                        if shouldAllowListenRecording{
+                            self.playButtonView?.isHidden = false
+                            self.processingView?.isHidden = true
+                            self.sliderView?.isHidden = false
+                            PlayerManager.shared.remoteAudioUrl = remoteURL.absoluteString
+                            PlayerManager.shared.setupAudioPlayer()
+                            self.sliderView?.updateInitialLabels()
+                        }
+                     
                         
                         if let configureActions{
                             configureActions(.recordingCompleted(remoteURL.absoluteString, recordingDurationInSeconds))
