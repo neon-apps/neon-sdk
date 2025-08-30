@@ -44,7 +44,7 @@ class PlayButtonView: UIView {
        
         playButton.setImage(NeonSymbols.play_fill, for: .normal)
         playButton.imageView?.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
-        playButton.backgroundColor = NeonAudioRecordingViewConstants.mainColor
+        playButton.backgroundColor = NeonAudioRecordingViewConstants.buttonBackgroundColor
         playButton.layer.cornerRadius = 8
         addSubview(playButton)
         playButton.snp.makeConstraints { make in
