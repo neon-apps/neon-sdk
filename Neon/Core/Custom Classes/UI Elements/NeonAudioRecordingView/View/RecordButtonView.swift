@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
+
 public final class RecordButtonView: UIView {
     enum State { case idle, recording }
 
@@ -42,6 +43,7 @@ public final class RecordButtonView: UIView {
         self.shouldUseHoldToFinish = shouldUseHoldToFinish
         voiceButton.backgroundColor = buttonBackgroundColor
         iconImageView.tintColor = buttonTextColor
+        holdSquareView.tintColor = buttonTextColor
         updateIcon()
         setupGestures()
     }
@@ -84,14 +86,13 @@ public final class RecordButtonView: UIView {
             make.center.equalToSuperview()
             make.width.height.equalTo(28)
         }
+
         holdSquareView.image = NeonSymbols.stop_fill
-        holdSquareView.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
-        holdSquareView.isHidden = true
         holdSquareView.contentMode = .scaleAspectFit
+        holdSquareView.isHidden = true
         voiceButton.addSubview(holdSquareView)
         holdSquareView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(28)
             squareW = make.width.equalTo(28).constraint
             squareH = make.height.equalTo(28).constraint
         }
@@ -142,12 +143,27 @@ public final class RecordButtonView: UIView {
         }
     }
 
+    private func currentIconSize() -> CGFloat {
+        layoutIfNeeded()
+        let w = iconImageView.bounds.width
+        return w > 0 ? w : 28
+    }
+
     private func startHoldAnimation() {
         layoutIfNeeded()
+        let start = currentIconSize()
+        squareW?.update(offset: start)
+        squareH?.update(offset: start)
+        voiceButton.layoutIfNeeded()
+
+        holdSquareView.isHidden = true
+        iconImageView.isHidden = false
         holdSquareView.isHidden = false
         iconImageView.isHidden = true
+
         pressStartTime = CACurrentMediaTime()
         let targetSize = voiceButton.bounds.width
+
         squareAnimator?.stopAnimation(true)
         squareAnimator = UIViewPropertyAnimator(duration: 3.0, curve: .linear) { [weak self] in
             guard let self = self else { return }
@@ -189,8 +205,9 @@ public final class RecordButtonView: UIView {
     private func resetSquare() {
         squareAnimator?.stopAnimation(true)
         squareAnimator = nil
-        squareW?.update(offset: 8)
-        squareH?.update(offset: 8)
+        let s = currentIconSize()
+        squareW?.update(offset: s)
+        squareH?.update(offset: s)
         voiceButton.layoutIfNeeded()
         holdSquareView.isHidden = true
         iconImageView.isHidden = false
