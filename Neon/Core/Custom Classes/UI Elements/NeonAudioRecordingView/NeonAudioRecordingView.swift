@@ -169,7 +169,7 @@ public class NeonAudioRecordingView: UIView {
                     RecordingManager.shared.startRecording()
                     self.recordButtonView?.setState(.recording, useHoldToFinish: NeonAudioRecordingViewConstants.shouldHoldToFinishRecording)
                     if NeonAudioRecordingViewConstants.shouldHoldToFinishRecording {
-                        self.recordButtonView?.infoLabel.text = "Hold to finish"
+                        self.recordButtonView?.infoLabel.text = "Hold to finish recording"
                     } else {
                         self.recordButtonView?.infoLabel.text = "Tap to finish recording"
                     }

@@ -57,7 +57,7 @@ public final class RecordButtonView: UIView {
     }
 
     func showHoldHint() {
-        infoLabel.text = "Hold to finish"
+        infoLabel.text = "Hold to finish recording"
     }
 
     private func setupView() {
@@ -121,7 +121,7 @@ public final class RecordButtonView: UIView {
         case .idle:
             infoLabel.text = "Tap to start recording"
         case .recording:
-            infoLabel.text = shouldUseHoldToFinish ? "Hold to finish" : "Tap to finish recording"
+            infoLabel.text = shouldUseHoldToFinish ? "Hold to finish recording" : "Tap to finish recording"
         }
     }
 
@@ -226,7 +226,7 @@ public final class RecordButtonView: UIView {
 
     @objc private func tick() {
         let elapsed = CACurrentMediaTime() - pressStartTime
-        if elapsed >= 3.0 {
+        if elapsed >= 2.0 {
             stopDisplayLink()
         }
     }
