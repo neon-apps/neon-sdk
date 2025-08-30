@@ -42,6 +42,7 @@ public class NeonAudioRecordingView: UIView {
                           secondaryTextColor: UIColor,
                           buttonTextColor: UIColor,
                           progressBarTrackColor: UIColor,
+                          progressBarTintColor: UIColor? = nil,
                           sliderTrackColor: UIColor,
                           loaderColor: UIColor? = nil,
                           buttonBackgroundColor: UIColor? = nil,
@@ -58,6 +59,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.buttonTextColor = buttonTextColor
         NeonAudioRecordingViewConstants.buttonBackgroundColor = buttonBackgroundColor ?? mainColor
         NeonAudioRecordingViewConstants.progressBarTrackColor = progressBarTrackColor
+        NeonAudioRecordingViewConstants.progressBarTintColor = progressBarTintColor ?? mainColor
         NeonAudioRecordingViewConstants.sliderTrackColor = sliderTrackColor
         NeonAudioRecordingViewConstants.title = title
         NeonAudioRecordingViewConstants.description = description

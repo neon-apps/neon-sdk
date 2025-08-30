@@ -17,6 +17,7 @@ class NeonAudioRecordingViewConstants{
     static var buttonBackgroundColor = UIColor()
     static var mainColor = UIColor()
     static var progressBarTrackColor = UIColor()
+    static var progressBarTintColor = UIColor()
     static var sliderTrackColor = UIColor()
     static var title = String()
     static var recordingButtonImage: UIImage = NeonSymbols.mic_fill
