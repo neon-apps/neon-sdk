@@ -16,7 +16,7 @@ public final class RecordButtonView: UIView {
     let voiceButton = UIButton()
     let infoLabel = UILabel()
     private let iconImageView = UIImageView()
-    private let holdSquareView = UIView()
+    private let holdSquareView = UIImageView()
     private var squareW: Constraint?
     private var squareH: Constraint?
     private var squareAnimator: UIViewPropertyAnimator?
@@ -84,11 +84,9 @@ public final class RecordButtonView: UIView {
             make.center.equalToSuperview()
             make.width.height.equalTo(28)
         }
-
-        holdSquareView.backgroundColor = NeonAudioRecordingViewConstants.buttonTextColor
+        holdSquareView.image = NeonSymbols.stop_fill
+        holdSquareView.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
         holdSquareView.isHidden = true
-        holdSquareView.layer.cornerRadius = 8
-        holdSquareView.layer.masksToBounds = true
         voiceButton.addSubview(holdSquareView)
         holdSquareView.snp.makeConstraints { make in
             make.center.equalToSuperview()
