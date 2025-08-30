@@ -56,7 +56,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.primaryTextColor = primaryTextColor
         NeonAudioRecordingViewConstants.secondaryTextColor = secondaryTextColor
         NeonAudioRecordingViewConstants.buttonTextColor = buttonTextColor
-        NeonAudioRecordingViewConstants.buttonTextColor = buttonBackgroundColor ?? mainColor
+        NeonAudioRecordingViewConstants.buttonBackgroundColor = buttonBackgroundColor ?? mainColor
         NeonAudioRecordingViewConstants.progressBarTrackColor = progressBarTrackColor
         NeonAudioRecordingViewConstants.sliderTrackColor = sliderTrackColor
         NeonAudioRecordingViewConstants.title = title
