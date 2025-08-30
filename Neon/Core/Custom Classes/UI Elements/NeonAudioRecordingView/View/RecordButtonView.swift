@@ -159,7 +159,7 @@ public final class RecordButtonView: UIView {
         holdSquareView.isHidden = false
         iconImageView.isHidden = true
         pressStartTime = CACurrentMediaTime()
-        targetSide = 80
+        targetSide = 70
         squareAnimator?.stopAnimation(true)
         squareAnimator = UIViewPropertyAnimator(duration: requiredHold, curve: .linear) { [weak self] in
             guard let self = self else { return }
