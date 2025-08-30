@@ -87,6 +87,7 @@ public final class RecordButtonView: UIView {
         holdSquareView.image = NeonSymbols.stop_fill
         holdSquareView.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
         holdSquareView.isHidden = true
+        holdSquareView.contentMode = .scaleAspectFit
         voiceButton.addSubview(holdSquareView)
         holdSquareView.snp.makeConstraints { make in
             make.center.equalToSuperview()
