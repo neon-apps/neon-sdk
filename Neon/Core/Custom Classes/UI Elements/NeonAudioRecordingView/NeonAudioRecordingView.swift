@@ -45,6 +45,7 @@ public class NeonAudioRecordingView: UIView {
                           buttonTextColor: UIColor,
                           progressBarTrackColor: UIColor,
                           sliderTrackColor: UIColor,
+                          loaderColor: UIColor? = nil,
                           title: String,
                           description: String,
                           fontSize: CGFloat = 14,
@@ -63,6 +64,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.fontSize = fontSize
         NeonAudioRecordingViewConstants.recordingButtonImage = recordButtonImage
         NeonAudioRecordingViewConstants.maximumRecordingDurationInSeconds = maximumRecordingDurationInSeconds
+        NeonAudioRecordingViewConstants.loaderColor = loaderColor ?? mainColor
         
         setupView()
         setupNotifications()
