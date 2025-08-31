@@ -51,7 +51,8 @@ public class NeonAudioRecordingView: UIView {
                           fontSize: CGFloat = 14,
                           recordButtonImage: UIImage = NeonSymbols.mic_fill,
                           maximumRecordingDurationInSeconds: Int,
-                          shouldHoldToFinishRecording: Bool = false) {
+                          shouldHoldToFinishRecording: Bool = false,
+                          requiredHoldDurationInSeconds: Double = 1.0) {
         NeonAudioRecordingViewConstants.controller = controller
         NeonAudioRecordingViewConstants.mainColor = mainColor
         NeonAudioRecordingViewConstants.primaryTextColor = primaryTextColor
@@ -68,6 +69,7 @@ public class NeonAudioRecordingView: UIView {
         NeonAudioRecordingViewConstants.maximumRecordingDurationInSeconds = maximumRecordingDurationInSeconds
         NeonAudioRecordingViewConstants.loaderColor = loaderColor ?? mainColor
         NeonAudioRecordingViewConstants.shouldHoldToFinishRecording = shouldHoldToFinishRecording
+        NeonAudioRecordingViewConstants.requiredHoldDurationInSeconds = requiredHoldDurationInSeconds
         setupView()
         setupNotifications()
     }

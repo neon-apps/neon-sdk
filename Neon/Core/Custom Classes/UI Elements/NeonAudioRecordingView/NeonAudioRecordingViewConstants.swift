@@ -26,4 +26,5 @@ class NeonAudioRecordingViewConstants{
     static var maximumRecordingDurationInSeconds = Int()
     static var loaderColor =  UIColor()
     static var shouldHoldToFinishRecording: Bool = false
+    static var requiredHoldDurationInSeconds = Double()
 }

@@ -26,7 +26,7 @@ public final class RecordButtonView: UIView {
     private var displayLink: CADisplayLink?
     private(set) var state: State = .idle
     private var shouldUseHoldToFinish = false
-    private let requiredHold: Double = 1.0
+    private var requiredHold: Double = 0.5
     private var targetSide: CGFloat = 0
 
     var onTap: (() -> Void)?
@@ -43,6 +43,7 @@ public final class RecordButtonView: UIView {
     }
 
     func configure(buttonBackgroundColor: UIColor, buttonTextColor: UIColor, shouldUseHoldToFinish: Bool) {
+        requiredHold = NeonAudioRecordingViewConstants.requiredHoldDurationInSeconds
         self.shouldUseHoldToFinish = shouldUseHoldToFinish
         voiceButton.backgroundColor = buttonBackgroundColor
         iconImageView.tintColor = buttonTextColor
