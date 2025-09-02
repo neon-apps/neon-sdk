@@ -11,18 +11,25 @@ import UIKit
 open class NeonOnboardingController: UIViewController {
     
     private let backgroundImageView = UIImageView()
-    private let continueButton = UIButton()
+    open var continueButton = UIButton()
     private var pageControl = NeonBasePageControl()
     private let fadeView = UIView()
     private let fadeLayer = CAGradientLayer()
     private var pages = [NeonOnboardingPage]()
     private var currentPage = NeonOnboardingPage()
     private var contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>()
-    
+    private var bouncingButton = NeonBouncingButton()
+    private var buttonType = ButtonType.defaultButton
     public enum BackgroundType{
         case fullBackgroundImage(layerColor : UIColor, layerOpacity : CGFloat)
         case halfBackgroundImage(backgroundColor : UIColor, offset : CGFloat, isFaded : Bool)
         case topVectorImage(backgroundColor : UIColor, offset : CGFloat, horizontalPadding : CGFloat)
+    }
+    
+    
+    public enum ButtonType{
+        case bouncing
+        case defaultButton
     }
     
     open override func viewDidLayoutSubviews() {
@@ -42,16 +49,13 @@ open class NeonOnboardingController: UIViewController {
         backgroundImageView.layer.masksToBounds = true
         backgroundImageView.contentMode = .scaleAspectFill
         view.addSubview(backgroundImageView)
-        
+       
+
         
         view.addSubview(fadeView)
         fadeLayer.locations = [0, 1]
         fadeView.layer.insertSublayer(fadeLayer, at: 0)
-        
-        continueButton.layer.masksToBounds = true
-        view.addSubview(continueButton)
-        continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
-        
+   
          contentCollectionView = NeonCollectionView<NeonOnboardingPage, NeonOnboardingPageCell>(
             objects: pages,
             leftPadding: 0,
@@ -61,6 +65,8 @@ open class NeonOnboardingController: UIViewController {
         contentCollectionView.backgroundColor = .clear
         contentCollectionView.isScrollEnabled = false
         view.addSubview(contentCollectionView)
+        view.addSubview(continueButton)
+        view.addSubview(bouncingButton)
         
      
     }
@@ -68,7 +74,7 @@ open class NeonOnboardingController: UIViewController {
    
   
     
-    @objc private func continueButtonClicked(){
+    @objc open func continueButtonClicked(){
         
       
         let nextIndex = currentPage.index + 1
@@ -181,7 +187,7 @@ extension NeonOnboardingController{
     }
     
     
-    public func configureButton(title : String,
+    open func configureButton(title : String,
                                 titleColor : UIColor,
                                 font : UIFont,
                                 cornerRadious : CGFloat,
@@ -190,26 +196,62 @@ extension NeonOnboardingController{
                                 bottomPadding : CGFloat,
                                 backgroundColor : UIColor?,
                                 borderColor : UIColor?,
-                                borderWidth : CGFloat?){
-        
-        if let backgroundColor{
-            continueButton.backgroundColor = backgroundColor
+                                borderWidth : CGFloat?,
+                                type : ButtonType = .defaultButton){
+        self.buttonType = type
+        switch type {
+            
+        case .bouncing:
+            if let backgroundColor{
+                bouncingButton.backgroundColor = backgroundColor
+            }
+            if let borderColor, let borderWidth{
+                bouncingButton.layer.borderColor = borderColor.cgColor
+                bouncingButton.layer.borderWidth = borderWidth
+            }
+            
+            bouncingButton.isHidden = false
+            continueButton.isHidden = true
+            bouncingButton.bouncingDuration = 0.8
+            bouncingButton.bouncingScale = 1.15
+            bouncingButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
+            bouncingButton.titleLabel?.font = font
+            bouncingButton.setTitle(title, for: .normal)
+            bouncingButton.setTitleColor(titleColor, for: .normal)
+            bouncingButton.layer.cornerRadius = cornerRadious
+            bouncingButton.layer.masksToBounds = true
+
+            bouncingButton.snp.makeConstraints { make in
+                make.left.right.equalToSuperview().inset(horizontalPadding)
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
+                make.height.equalTo(height)
+            }
+            
+        case .defaultButton:
+            if let backgroundColor{
+                continueButton.backgroundColor = backgroundColor
+            }
+            
+            if let borderColor, let borderWidth{
+                continueButton.layer.borderColor = borderColor.cgColor
+                continueButton.layer.borderWidth = borderWidth
+            }
+            bouncingButton.isHidden = true
+            continueButton.isHidden = false
+            continueButton.addTarget(self, action: #selector(continueButtonClicked), for: .touchUpInside)
+            continueButton.titleLabel?.font = font
+            continueButton.setTitle(title, for: .normal)
+            continueButton.setTitleColor(titleColor, for: .normal)
+            continueButton.layer.cornerRadius = cornerRadious
+            continueButton.layer.masksToBounds = true
+            continueButton.snp.makeConstraints { make in
+                make.left.right.equalToSuperview().inset(horizontalPadding)
+                make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
+                make.height.equalTo(height)
+            }
         }
         
-        if let borderColor, let borderWidth{
-            continueButton.layer.borderColor = borderColor.cgColor
-            continueButton.layer.borderWidth = borderWidth
-        }
-        
-        continueButton.titleLabel?.font = font
-        continueButton.setTitle(title, for: .normal)
-        continueButton.setTitleColor(titleColor, for: .normal)
-        continueButton.layer.cornerRadius = cornerRadious
-        continueButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(horizontalPadding)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(bottomPadding)
-            make.height.equalTo(height)
-        }
+
         
         configurePageControl(type: .V1, currentPageTintColor: .white, tintColor: .lightGray)
         
@@ -286,7 +328,7 @@ extension NeonOnboardingController{
         pageControl.tintColor = tintColor
         pageControl.padding = padding
         pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(continueButton.snp.top).offset(-40)
+            make.bottom.equalTo(self.buttonType == .defaultButton ? continueButton.snp.top : bouncingButton.snp.top).offset(-40)
             make.centerX.equalToSuperview()
         }
      

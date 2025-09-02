@@ -71,7 +71,7 @@ public class CustomAlertManager {
         iconImageView.contentMode = .scaleAspectFit
         alertView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
-            make.top.equalTo(alertView.snp.top).offset(verticalPadding)
+            make.top.equalTo(alertView.snp.top).offset(36)
             make.centerX.equalTo(alertView.snp.centerX)
             make.width.equalTo(iconSize.width)
             make.height.equalTo(iconSize.height)
@@ -86,14 +86,14 @@ public class CustomAlertManager {
         alertView.addSubview(titleLabel)
         titleLabel.textAlignment = .center
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconImageView.snp.bottom).offset(verticalPadding)
+            make.top.equalTo(iconImageView.snp.bottom).offset(24)
             make.centerX.equalTo(alertView.snp.centerX)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(24)
         }
         
         if icon == nil{
             titleLabel.snp.remakeConstraints { make in
-                make.top.equalTo(alertView.snp.top).offset(verticalPadding)
+                make.top.equalTo(alertView.snp.top).offset(36)
                 make.centerX.equalTo(alertView.snp.centerX)
             }
         }
@@ -106,14 +106,14 @@ public class CustomAlertManager {
         alertView.addSubview(subtitleLabel)
         
         subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(24)
         }
       
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = 10
+        stackView.spacing = 12
       
         var alertButtons = [CustomAlertButton]()
         if let buttons = buttons, !buttons.isEmpty {
@@ -135,9 +135,11 @@ public class CustomAlertManager {
             }
 
             buttonView.titleLabel?.font = Font.custom(size: 16, fontWeight: .SemiBold)
-            buttonView.layer.cornerRadius = 10
+            buttonView.layer.cornerRadius = 25
             buttonView.layer.masksToBounds = true
-            
+            buttonView.snp.makeConstraints { make in
+                make.height.equalTo(50)
+            }
             switch button.buttonType {
             case .background:
                 buttonView.backgroundColor = buttonColor
@@ -155,13 +157,8 @@ public class CustomAlertManager {
         alertView.addSubview(stackView)
         
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(verticalPadding)
-            make.leading.trailing.equalToSuperview().inset(30)
-            if (buttons != nil){
-                make.height.equalTo(buttons!.count * 60)
-            }else{
-                make.height.equalTo(50)
-            }
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(24)
         }
         
         viewController.view.addSubview(alertView)
@@ -173,13 +170,13 @@ public class CustomAlertManager {
                     make.top.equalTo(viewController.view.snp.bottom)
                     make.width.equalTo(fixedWidth)
                     make.centerX.equalToSuperview()
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(36)
                 }
             }else{
                 alertView.snp.makeConstraints { make in
                     make.top.equalTo(viewController.view.snp.bottom)
                     make.leading.trailing.equalToSuperview().inset(50)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(36)
                 }
             }
            
@@ -190,7 +187,7 @@ public class CustomAlertManager {
                     make.centerX.equalToSuperview()
                     make.centerY.equalToSuperview()
                     make.width.equalTo(fixedWidth)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(36)
                 }
                 
             }else{
@@ -198,7 +195,7 @@ public class CustomAlertManager {
                     make.right.equalTo(viewController.view.snp.left)
                     make.centerY.equalToSuperview()
                     make.width.equalToSuperview().inset(50)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(38)
                 }
             }
             
@@ -260,13 +257,13 @@ public class CustomAlertManager {
                     make.centerY.equalToSuperview()
                     make.width.equalTo(fixedWidth)
                     make.centerX.equalToSuperview()
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(36)
                 }
             }else{
                 alertView.snp.remakeConstraints { make in
                     make.centerY.equalToSuperview()
                     make.leading.trailing.equalToSuperview().inset(50)
-                    make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                    make.bottom.equalTo(stackView.snp.bottom).offset(36)
                 }
             }
             
@@ -292,13 +289,13 @@ public class CustomAlertManager {
                         make.bottom.equalTo(controller.view.snp.top)
                         make.width.equalTo(fixedWidth)
                         make.centerX.equalToSuperview()
-                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(36)
                     }
                 }else{
                     alertView.snp.remakeConstraints { make in
                         make.bottom.equalTo(controller.view.snp.top)
                         make.leading.trailing.equalToSuperview().inset(50)
-                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(36)
                     }
                 }
                 
@@ -311,14 +308,14 @@ public class CustomAlertManager {
                         make.left.equalTo(controller.view.snp.right)
                         make.centerY.equalToSuperview()
                         make.width.equalTo(fixedWidth)
-                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(36)
                     }
                 }else{
                     alertView.snp.remakeConstraints { make in
                         make.left.equalTo(controller.view.snp.right)
                         make.centerY.equalToSuperview()
                         make.width.equalToSuperview().inset(50)
-                        make.bottom.equalTo(stackView.snp.bottom).offset(verticalPadding)
+                        make.bottom.equalTo(stackView.snp.bottom).offset(36)
                     }
                 }
                 

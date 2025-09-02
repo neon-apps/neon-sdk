@@ -52,10 +52,10 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
     }
     
     
-    func setupBeforeAfterViews(beforeItems: [String], afterItems: [String]){
+    func setupBeforeAfterViews(beforeItems: [String], afterItems: [String], beforeLabel : String, afterLabel : String){
         
         
-        afterView = BeforeAfterView(type: .after, title: "After", items: afterItems)
+        afterView = BeforeAfterView(type: .after, title: afterLabel, items: afterItems)
         afterView!.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.89, alpha: 1)
         contentView.addSubview(afterView!)
         afterView!.snp.makeConstraints { make in
@@ -68,7 +68,7 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
        
         
         
-        beforeView = BeforeAfterView(type: .before, title: "Before", items: beforeItems)
+        beforeView = BeforeAfterView(type: .before, title: beforeLabel, items: beforeItems)
         beforeView!.backgroundColor = NeonLongOnboardingConstants.optionBackgroundColor
         beforeView!.layer.borderColor = NeonLongOnboardingConstants.selectedOptionBorderColor.cgColor
         beforeView!.layer.borderWidth = 1
@@ -98,7 +98,7 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
     func configurePage(){
         progressView?.isHidden = true
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .beforeAfter(let title, let subtitle, _, _):
+        case .beforeAfter(let title, let subtitle, _, _ , _ , _):
             titleLabel.text = title.changeUsername()
             subtitleLabel.text = subtitle.changeUsername()
         break
@@ -109,8 +109,8 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
     
     func configureBeforeAfterViews(){
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .beforeAfter(_, _, let beforeItems, let afterItems):
-            setupBeforeAfterViews(beforeItems: beforeItems, afterItems: afterItems)
+        case .beforeAfter(_, _, let beforeItems, let afterItems, let beforeLabel, let afterLabel):
+            setupBeforeAfterViews(beforeItems: beforeItems, afterItems: afterItems, beforeLabel: beforeLabel, afterLabel: afterLabel)
         break
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")

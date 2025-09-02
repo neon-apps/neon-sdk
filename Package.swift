@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Neon",   
     platforms: [
-        .iOS(.v14),
+        .iOS(.v15),
     ], products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -21,9 +21,12 @@ let package = Package(
         .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.0.0"),
         .package(name: "Hero", url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.4.0")),
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "10.15.0")),
+
+        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git",    .upToNextMajor(from: "11.1.0")),
         .package(name: "Localize_Swift", url: "https://github.com/marmelroy/Localize-Swift.git", .upToNextMajor(from: "3.2.0")),
-        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("2.9.6"))
+        .package(name: "Adapty", url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", .exact("3.0.0-beta.2")),
+        .package(name: "AIProxy", url: "https://github.com/lzell/AIProxySwift.git", from: "0.71.0"),
+
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
@@ -36,6 +39,7 @@ let package = Package(
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",
+                "AIProxy",
                 .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
                 .product(name: "Lottie", package: "Lottie", condition: .when(platforms: [.iOS])),
@@ -43,7 +47,6 @@ let package = Package(
                 .product(name: "FirebaseRemoteConfig", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseStorage", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseFirestore", package: "Firebase", condition: .when(platforms: [.iOS])),
-                .product(name: "FirebaseFirestoreSwift", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseCrashlytics", package: "Firebase", condition: .when(platforms: [.iOS])),
                 .product(name: "FirebaseDynamicLinks", package: "Firebase", condition: .when(platforms: [.iOS])),

@@ -199,6 +199,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
     
 
     func animateStack(stack : UIStackView, toLeft : Bool){
+        /*
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [self] in
             
             stack.snp.updateConstraints { make in
@@ -213,6 +214,7 @@ class NeonLongOnboardingTestimonialPage: BaseNeonLongOnboardingPage{
             })
      
         })
+         */
     }
     
     func addTestimonials(testimonials : [NeonTestimonial]){

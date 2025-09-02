@@ -19,7 +19,7 @@ public class NeonLongOnboardingSection{
             return pages.filter({$0.isQuestion})
         }
     }
-    var index = Int()
+    public var index = Int()
     
     internal init(title: String) {
         self.title = title
@@ -29,6 +29,11 @@ public class NeonLongOnboardingSection{
     
     public func addPage(type : NeonLongOnboardingPageType){
         let newPage = NeonLongOnboardingPage(type: type)
+        NeonNotificationCenter.observe(id: "") {
+            
+            self.index = NeonLongOnboardingSection.lastSectionIndex + 1
+            NeonLongOnboardingSection.lastSectionIndex = self.index
+        }
         self.pages.append(newPage)
         checkPageCount()
     }

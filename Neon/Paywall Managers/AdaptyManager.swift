@@ -4,6 +4,7 @@
 //
 //  Created by Tuna Öztürk on 7.06.2023.
 //
+
 #if !os(xrOS)
 import Foundation
 import Adapty
@@ -32,7 +33,7 @@ public class AdaptyManager {
     
     
     public static var delegate: AdaptyManagerDelegate?
-    private static var accessLevel = String()
+    public static var accessLevel = String()
 
     
   
@@ -376,4 +377,3 @@ public class AdaptyManager {
 
 
 #endif
-

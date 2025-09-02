@@ -10,23 +10,61 @@ import Foundation
 import UIKit
 import SnapKit
 
-class RecordButtonView: UIView {
-    
+
+
+public final class RecordButtonView: UIView {
+    enum State { case idle, recording }
+
     let voiceButton = UIButton()
     let infoLabel = UILabel()
-    
+    private let iconImageView = UIImageView()
+    private let holdSquareView = UIImageView()
+    private var squareW: Constraint?
+    private var squareH: Constraint?
+    private var squareAnimator: UIViewPropertyAnimator?
+    private var pressStartTime: CFTimeInterval = 0
+    private var displayLink: CADisplayLink?
+    private(set) var state: State = .idle
+    private var shouldUseHoldToFinish = false
+    private var requiredHold: Double = 0.5
+    private var targetSide: CGFloat = 0
+
+    var onTap: (() -> Void)?
+    var onHoldToFinishCompleted: (() -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
-    
-    private func setupView() {
 
+    func configure(buttonBackgroundColor: UIColor, buttonTextColor: UIColor, shouldUseHoldToFinish: Bool) {
+        requiredHold = NeonAudioRecordingViewConstants.requiredHoldDurationInSeconds
+        self.shouldUseHoldToFinish = shouldUseHoldToFinish
+        voiceButton.backgroundColor = buttonBackgroundColor
+        iconImageView.tintColor = buttonTextColor
+        holdSquareView.tintColor = buttonTextColor
+        updateIcon()
+        setupGestures()
+    }
+
+    func setState(_ newState: State, useHoldToFinish: Bool) {
+        state = newState
+        shouldUseHoldToFinish = useHoldToFinish
+        updateIcon()
+        resetSquare()
+        updateInfoForState()
+    }
+
+    func showHoldHint() {
+        infoLabel.text = "Hold to finish recording"
+    }
+
+    private func setupView() {
         infoLabel.text = "Tap to start recording"
         infoLabel.textColor = NeonAudioRecordingViewConstants.secondaryTextColor
         infoLabel.font = Font.custom(size: 10, fontWeight: .Regular)
@@ -38,10 +76,6 @@ class RecordButtonView: UIView {
             make.left.right.equalToSuperview().inset(40)
         }
 
-       
-        voiceButton.setImage(UIImage(named: "microphone"), for: .normal)
-        voiceButton.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
-        voiceButton.backgroundColor = NeonAudioRecordingViewConstants.mainColor
         voiceButton.layer.cornerRadius = 8
         addSubview(voiceButton)
         voiceButton.snp.makeConstraints { make in
@@ -50,5 +84,147 @@ class RecordButtonView: UIView {
             make.width.height.equalTo(56)
         }
 
+        iconImageView.contentMode = .scaleAspectFit
+        voiceButton.addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(28)
+        }
+
+        holdSquareView.image = NeonSymbols.stop_fill
+        holdSquareView.contentMode = .scaleAspectFit
+        holdSquareView.isHidden = true
+        voiceButton.addSubview(holdSquareView)
+        holdSquareView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            squareW = make.width.equalTo(28).constraint
+            squareH = make.height.equalTo(28).constraint
+        }
+    }
+
+    private func setupGestures() {
+        voiceButton.removeTarget(nil, action: nil, for: .allEvents)
+        voiceButton.addTarget(self, action: #selector(tapped), for: .touchUpInside)
+        let lp = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        lp.minimumPressDuration = 0
+        lp.cancelsTouchesInView = false
+        voiceButton.addGestureRecognizer(lp)
+    }
+
+    private func updateIcon() {
+        switch state {
+        case .idle:
+            iconImageView.image = NeonSymbols.mic_fill
+        case .recording:
+            iconImageView.image = NeonSymbols.stop_fill
+        }
+    }
+
+    private func updateInfoForState() {
+        switch state {
+        case .idle:
+            infoLabel.text = "Tap to start recording"
+        case .recording:
+            infoLabel.text = shouldUseHoldToFinish ? "Hold to finish recording" : "Tap to finish recording"
+        }
+    }
+
+    @objc private func tapped() {
+        onTap?()
+    }
+
+    @objc private func handleLongPress(_ gr: UILongPressGestureRecognizer) {
+        guard state == .recording, shouldUseHoldToFinish else { return }
+        switch gr.state {
+        case .began:
+            startHoldAnimation()
+        case .ended, .cancelled, .failed:
+            endHold(gr.state == .ended)
+        default:
+            break
+        }
+    }
+
+    private func currentIconSize() -> CGFloat {
+        layoutIfNeeded()
+        let w = iconImageView.bounds.width
+        return w > 0 ? w : 28
+    }
+
+    private func startHoldAnimation() {
+        layoutIfNeeded()
+        let start = currentIconSize()
+        squareW?.update(offset: start)
+        squareH?.update(offset: start)
+        voiceButton.layoutIfNeeded()
+        holdSquareView.isHidden = false
+        iconImageView.isHidden = true
+        pressStartTime = CACurrentMediaTime()
+        targetSide = 70
+        squareAnimator?.stopAnimation(true)
+        squareAnimator = UIViewPropertyAnimator(duration: requiredHold, curve: .linear) { [weak self] in
+            guard let self = self else { return }
+            self.squareW?.update(offset: self.targetSide)
+            self.squareH?.update(offset: self.targetSide)
+            self.voiceButton.layoutIfNeeded()
+        }
+        squareAnimator?.addCompletion { [weak self] position in
+            guard let self = self else { return }
+            if position == .end { self.onHoldToFinishCompleted?() }
+        }
+        squareAnimator?.startAnimation()
+        startDisplayLink()
+    }
+
+    private func endHold(_ endedNormally: Bool) {
+        stopDisplayLink()
+        guard let animator = squareAnimator else { resetSquare(); return }
+        let elapsed = CACurrentMediaTime() - pressStartTime
+        if elapsed >= requiredHold {
+            animator.stopAnimation(true)
+            squareW?.update(offset: targetSide)
+            squareH?.update(offset: targetSide)
+            voiceButton.layoutIfNeeded()
+            onHoldToFinishCompleted?()
+        } else {
+            if endedNormally {
+                animator.stopAnimation(true)
+            } else {
+                animator.stopAnimation(true)
+            }
+            resetSquare()
+        }
+    }
+
+    private func resetSquare() {
+        squareAnimator?.stopAnimation(true)
+        squareAnimator = nil
+        let s = currentIconSize()
+        squareW?.update(offset: s)
+        squareH?.update(offset: s)
+        voiceButton.layoutIfNeeded()
+        holdSquareView.isHidden = true
+        iconImageView.isHidden = false
+    }
+
+    private func startDisplayLink() {
+        displayLink?.invalidate()
+        displayLink = CADisplayLink(target: self, selector: #selector(tick))
+        displayLink?.add(to: .main, forMode: .common)
+    }
+
+    private func stopDisplayLink() {
+        displayLink?.invalidate()
+        displayLink = nil
+    }
+
+    @objc private func tick() {
+        let elapsed = CACurrentMediaTime() - pressStartTime
+        if elapsed >= requiredHold {
+            stopDisplayLink()
+            squareW?.update(offset: targetSide)
+            squareH?.update(offset: targetSide)
+            voiceButton.layoutIfNeeded()
+        }
     }
 }

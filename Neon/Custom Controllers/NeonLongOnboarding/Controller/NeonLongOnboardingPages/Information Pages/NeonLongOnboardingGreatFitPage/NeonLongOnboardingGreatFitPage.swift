@@ -29,11 +29,11 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
         configurePage()
     }
     override func createUI(){
-        super.createUI()
+            super.createUI()
         configurePage()
         
         titleLabel.snp.remakeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.top.equalTo(backButton.snp.bottom).offset(20)
         }
        

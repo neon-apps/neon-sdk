@@ -38,7 +38,8 @@ public class RemoteConfigManager{
     
 
     public static func getString(key : String) -> String{
-        if let stringValue = RemoteConfig.remoteConfig().configValue(forKey: key).stringValue{
+        let stringValue = RemoteConfig.remoteConfig().configValue(forKey: key).stringValue
+        if stringValue != ""{
             UserDefaults.standard.setValue(stringValue, forKey: key)
             return stringValue
         }else{

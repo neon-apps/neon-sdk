@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import NeonSDK
 import Firebase
-import FirebaseFirestoreSwift
 
 class NeonMessengerManager{
     

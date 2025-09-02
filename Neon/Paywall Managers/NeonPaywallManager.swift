@@ -23,7 +23,8 @@ public class NeonPaywallManager{
         return false
     }
     
-    public static func getDefaultPrice(product : SKProduct) -> String{
+    public static func getDefaultPrice(product : SKProduct?) -> String{
+        guard let product else {  return "..." }
         let price = product.price
         let currencyCode = product.priceLocale.currencyCode
         let currencySymbol = NeonCurrencyManager.getCurrencySymbol(for: currencyCode ?? "USD") ?? "$"
@@ -33,7 +34,8 @@ public class NeonPaywallManager{
     
     
     
-    public static func getWeeklyPriceFor(product : SKProduct) -> String{
+    public static func getWeeklyPriceFor(product : SKProduct?) -> String{
+        guard let product else {  return "..." }
         if let numberOfUnits = product.subscriptionPeriod?.numberOfUnits,
            let unit = product.subscriptionPeriod?.unit{
             let price = product.price
@@ -48,7 +50,8 @@ public class NeonPaywallManager{
         }
     }
     
-    public static func getMonthlyPriceFor(product : SKProduct) -> String{
+    public static func getMonthlyPriceFor(product : SKProduct?) -> String{
+        guard let product else {  return "..." }
         if let numberOfUnits = product.subscriptionPeriod?.numberOfUnits,
            let unit = product.subscriptionPeriod?.unit{
             let price = product.price
@@ -159,7 +162,8 @@ public class NeonPaywallManager{
         
     }
     
-    public static func hasIntorductoryPeriod(product : SKProduct) -> Bool{
+    public static func hasIntorductoryPeriod(product : SKProduct?) -> Bool{
+        guard let product else { return false }
         var hasIntorductoryPeriod = false
         getIntroductoryPeriod(product: product) { duration, price in
             if let duration, duration != 0{
@@ -169,7 +173,8 @@ public class NeonPaywallManager{
         return hasIntorductoryPeriod
     }
     
-    public static func trackPurchase(product : SKProduct){
+    public static func trackPurchase(product : SKProduct?){
+        guard let product else { return }
         getIntroductoryPeriod(product: product) { duration, price in
             if let duration, duration != 0{
                 NeonAppTracking.trackTrialStart()

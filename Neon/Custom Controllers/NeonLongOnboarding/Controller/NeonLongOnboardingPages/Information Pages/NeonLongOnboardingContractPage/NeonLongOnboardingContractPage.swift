@@ -96,7 +96,6 @@ class NeonLongOnboardingContractPage: BaseNeonLongOnboardingPage{
             make.width.height.equalTo(50)
         }
        
-        longPressLabel.text = "Long press to confirm"
         longPressLabel.font = Font.custom(size: 16, fontWeight: .SemiBold)
         longPressLabel.textColor = NeonLongOnboardingConstants.textColor
         longPressLabel.textAlignment = .center
@@ -117,10 +116,11 @@ class NeonLongOnboardingContractPage: BaseNeonLongOnboardingPage{
 
     func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .contract(let emoji, let title, let items):
+        case .contract(let emoji, let title, let items, let confirmLabel):
             titleLabel.text = emoji
             subtitleLabel.text = title.changeUsername()
             itemsView.items = items
+            longPressLabel.text = confirmLabel
 
         break
         default:

@@ -29,7 +29,7 @@ public class NeonLongOnboardingPage{
         }
        
     }
-    var indexInSection : Int{
+    public var indexInSection : Int{
         get{
             for (_, section) in NeonLongOnboardingConstants.sections.enumerated(){
                 for (pageIndex, page) in section.pages.enumerated(){
@@ -63,7 +63,7 @@ public class NeonLongOnboardingPage{
             return NeonLongOnboardingMultipleSelectionPage()
         case .information(_,_,_):
             return NeonLongOnboardingInformationPage()
-        case .beforeAfter(_,_,_,_):
+        case .beforeAfter(_,_,_,_,_,_):
             return NeonLongOnboardingBeforeAfterPage()
         case .name(_,_,_):
             return NeonLongOnboardingNamePage()
@@ -73,11 +73,11 @@ public class NeonLongOnboardingPage{
             return NeonLongOnboardingGreatFitPage()
         case .customPlan(_,_,_,_,_,_,_):
             return NeonLongOnboardingCustomPlanPage()
-        case .contract(_,_,_):
+        case .contract(_,_,_,_):
             return NeonLongOnboardingContractPage()
         case .letsGo(_,_,_):
             return NeonLongOnboardingLetsGoPage()
-        case .statement(_,_,_):
+        case .statement(_,_,_,_,_):
             return NeonLongOnboardingStatementPage()
         case .slider(_,_,_,_,_,_,_):
             return NeonLongOnboardingSliderPage()
@@ -107,7 +107,7 @@ public class NeonLongOnboardingPage{
             isQuestion = true
         case .information(_,_,_):
             isQuestion = false
-        case .beforeAfter(_,_,_,_):
+        case .beforeAfter(_,_,_,_,_,_):
             isQuestion = false
         case .name(_,_,_):
             isQuestion = true
@@ -117,11 +117,11 @@ public class NeonLongOnboardingPage{
             isQuestion = false
         case .customPlan(_,_,_,_,_,_,_):
             isQuestion = false
-        case .contract(_,_,_):
+        case .contract(_,_,_,_):
             isQuestion = false
         case .letsGo(_,_,_):
             isQuestion = false
-        case .statement(_,_,_):
+        case .statement(_,_,_,_,_):
             isQuestion = false
         case .slider(_,_,_,_,_,_,_):
             isQuestion = true

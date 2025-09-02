@@ -38,20 +38,18 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         recordingSession = AVAudioSession.sharedInstance()
         
         do {
-            try recordingSession?.setCategory(.playAndRecord, options: [.defaultToSpeaker])
+            try recordingSession?.setCategory(.playAndRecord, options: [.defaultToSpeaker, .allowBluetooth, .mixWithOthers])
             try recordingSession?.setActive(true)
             recordingSession?.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
                     if allowed {
                         self.startRecordingSession()
                     } else {
-                        // Handle the case where the user denied microphone access
                         self.onCompletion?(nil, NSError(domain: "com.example.app", code: 1, userInfo: [NSLocalizedDescriptionKey: "Microphone access denied"]))
                     }
                 }
             }
         } catch {
-            // Handle the error
             self.onCompletion?(nil, error)
         }
     }
@@ -61,51 +59,52 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         PlayerManager.shared.localAudioFileName = audioID
         audioFileName = getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(audioID).wav")
         
-        let settings: [String : Any] = [AVFormatIDKey: Int(kAudioFormatLinearPCM),
-                                           AVSampleRateKey: 44100.0,
-                                           AVNumberOfChannelsKey: 1,
-                                           AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue ]
+        let settings: [String : Any] = [
+            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVSampleRateKey: 44100.0,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
 
         do {
             audioRecorder = try AVAudioRecorder(url: audioFileName!, settings: settings)
             audioRecorder?.delegate = self
             audioRecorder?.record()
         } catch {
-            // Handle the error
             self.onCompletion?(nil, error)
         }
     }
-    
 
-    func stopRecording(completion: @escaping (URL?, Error?) -> Void) {
+    func stopRecording(localCompletion: @escaping (String?, Error?) -> Void, remoteCompletion: @escaping (URL?, Error?) -> Void) {
         audioRecorder?.stop()
         audioRecorder = nil
 
         guard let audioFileName = audioFileName else {
-            completion(nil, NSError(domain: "com.example.app", code: 2, userInfo: [NSLocalizedDescriptionKey: "Audio file URL is nil"]))
+            localCompletion(nil, NSError(domain: "com.example.app", code: 2, userInfo: [NSLocalizedDescriptionKey: "Audio file URL is nil"]))
+            remoteCompletion(nil, nil)
             return
         }
 
         // Verify file existence
         if !FileManager.default.fileExists(atPath: audioFileName.path) {
-            completion(nil, NSError(domain: "com.example.app", code: 3, userInfo: [NSLocalizedDescriptionKey: "Audio file does not exist at path: \(audioFileName.path)"]))
+            localCompletion(nil, NSError(domain: "com.example.app", code: 3, userInfo: [NSLocalizedDescriptionKey: "Audio file does not exist at path: \(audioFileName.path)"]))
+            remoteCompletion(nil, nil)
             return
         }
 
+        localCompletion(getAudioId(), nil)
         print("Audio file exists at path: \(audioFileName.path)")
-        self.uploadAudio(fileURL: audioFileName, completion: completion)
+        self.uploadAudio(fileURL: audioFileName, completion: remoteCompletion)
     }
 
     private func uploadAudio(fileURL: URL, completion: @escaping (URL?, Error?) -> Void) {
         do {
-            // Convert the audio file to Data
             let audioData = try Data(contentsOf: fileURL)
             
             let storage = Storage.storage()
             let storageRef = storage.reference()
             let audioRef = storageRef.child("audios/\(UUID().uuidString).wav")
             
-            // Use putData instead of putFile
             uploadTask = audioRef.putData(audioData, metadata: nil) { metadata, error in
                 if let error = error {
                     completion(nil, error)
@@ -117,10 +116,9 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
                 }
             }
 
-            // Show loading indicator
             uploadTask?.observe(.progress) { snapshot in
                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-                // Update loading indicator (e.g., show percentComplete to the user)
+                // Update loading indicator
             }
 
             uploadTask?.observe(.success) { snapshot in
@@ -128,7 +126,6 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
             }
 
             uploadTask?.observe(.failure) { snapshot in
-                // Hide loading indicator
                 if let error = snapshot.error {
                     completion(nil, error)
                 }
@@ -138,30 +135,41 @@ class RecordingManager: NSObject, AVAudioRecorderDelegate {
         }
     }
 
+    public func getLocalFileURL() -> URL? {
+        guard let audioId = PlayerManager.shared.localAudioFileName else { return nil}
+        return  getDocumentsDirectory().appendingPathComponent("Recordings").appendingPathComponent("\(audioId).wav")
+    }
+    
+    public func getAudioId() -> String?{
+        guard let audioId = PlayerManager.shared.localAudioFileName else { return nil}
+        return  audioId
+    }
 
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
 
-
-    
     func requestRecordPermission(completion: @escaping (Bool, AVAudioSession.RecordPermission) -> Void) {
-            recordingSession = AVAudioSession.sharedInstance()
-            let currentStatus = recordingSession?.recordPermission
+        recordingSession = AVAudioSession.sharedInstance()
+        let currentStatus = recordingSession?.recordPermission
 
-            if currentStatus == .granted {
-                completion(true, .granted)
-            } else if currentStatus == .denied {
-                completion(false, .denied)
-            } else if currentStatus == .undetermined {
-                DispatchQueue.main.async {
-                    completion(false, .undetermined)
-                }
-                
-                recordingSession?.requestRecordPermission() { allowed in
-                    
+        if currentStatus == .granted {
+            completion(true, .granted)
+        } else if currentStatus == .denied {
+            completion(false, .denied)
+        } else if currentStatus == .undetermined {
+            DispatchQueue.main.async {
+                completion(false, .undetermined)
+            }
+            
+            recordingSession?.requestRecordPermission() { allowed in
+                if allowed {
+                    completion(true, .granted)
+                } else{
+                    completion(false, .denied)
                 }
             }
         }
+    }
 }

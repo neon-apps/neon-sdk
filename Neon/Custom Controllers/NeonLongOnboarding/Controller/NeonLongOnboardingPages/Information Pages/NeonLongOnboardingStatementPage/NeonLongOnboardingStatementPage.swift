@@ -27,14 +27,14 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         super.createUI()
         configurePage()
         
-      
         titleLabel.snp.remakeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(backButton.snp.bottom).offset(20)
+            make.height.equalTo(75)
         }
-        
-        
-        
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .left
+        titleLabel.font = Font.custom(size: 20, fontWeight: .SemiBold)
        
         
        
@@ -66,7 +66,11 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
             make.bottom.left.right.equalToSuperview()
         }
         
-
+        subtitleLabel.snp.remakeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.equalTo(imageView.snp.top).offset(-10)
+        }
         
       
         
@@ -74,7 +78,6 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         view.addSubview(btnNo)
         btnNo.layer.cornerRadius = 32.5
         btnNo.layer.masksToBounds = true
-        btnNo.setTitle("No", for: .normal)
         btnNo.titleLabel?.font = Font.custom(size: 18, fontWeight: .SemiBold)
         btnNo.layer.borderColor = NeonLongOnboardingConstants.buttonColor.cgColor
         btnNo.layer.borderWidth = 2
@@ -96,7 +99,6 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
         }
         
         
-        btnContinue.setTitle("Yes", for: .normal)
  
         enableButton()
      
@@ -108,10 +110,14 @@ class NeonLongOnboardingStatementPage: BaseNeonLongOnboardingPage{
 
     func configurePage(){
         switch NeonLongOnboardingConstants.currentPage?.type {
-        case .statement(let title, let statement, let image):
+        case .statement(let title, let statement, let image, let yesButtonTitle, let noButtonTitle):
             titleLabel.text = title.changeUsername()
             subtitleLabel.text = statement.changeUsername()
             imageView.image = image
+            btnNo.setTitle(noButtonTitle, for: .normal)
+            btnContinue.setTitle(yesButtonTitle, for: .normal)
+
+
         break
         default:
             fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")

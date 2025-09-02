@@ -26,7 +26,7 @@ class RecordTopView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.backgroundColor = .clear
-        imageView.image = UIImage(named: "microphone")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = NeonSymbols.mic.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = NeonAudioRecordingViewConstants.primaryTextColor
         addSubview(imageView)
         imageView.snp.makeConstraints { make in

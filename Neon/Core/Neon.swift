@@ -12,52 +12,54 @@ import AdSupport
 
 public class Neon{
     public static var isUserPremium = false
-    static var isPremiumTestActive = false
+    public static var isPremiumTestActive = false
     static var homeVC = UIViewController()
     static var onboardingVC = UIViewController()
     static var paywallVC = UIViewController()
     
-    public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController) {
+    public static func setWindow( window : inout UIWindow?, destinationVC: UIViewController, interfaceStyle: UIUserInterfaceStyle = .light) {
 #if !os(xrOS)
         window = UIWindow(frame: UIScreen.main.bounds)
 #else
         window = UIWindow()
 #endif
         if #available(iOS 13.0, *) {
-            window?.overrideUserInterfaceStyle = .light
+            window?.overrideUserInterfaceStyle = interfaceStyle
         }
         window?.makeKeyAndVisible()
         window?.rootViewController = destinationVC
     }
     
-    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController, splashVC : UIViewController? = nil, enableKeyboardManager : Bool = true){
+    public static func configure(window : inout UIWindow?, onboardingVC : UIViewController, paywallVC : UIViewController, homeVC : UIViewController, splashVC : UIViewController? = nil, enableKeyboardManager : Bool = true, interfaceStyle: UIUserInterfaceStyle = .light){
 #if !os(xrOS)
         if enableKeyboardManager{
             configureIQKeyboard()
         }
 #endif
+        SettingsManager.fetchAppID { appID in
+            NeonAppTracking.createDevice(appID : appID, completion: {
+                NeonAppTracking.trackSession()
+            })
+        }
         
-        NeonAppTracking.createDevice(completion: {
-            NeonAppTracking.trackSession()
-        })
         
         self.homeVC = homeVC
         self.paywallVC = paywallVC
         self.onboardingVC = onboardingVC
         
         if let splashVC{
-            Neon.setWindow(window: &window, destinationVC: splashVC)
+            Neon.setWindow(window: &window, destinationVC: splashVC, interfaceStyle: interfaceStyle)
         }else{
             
         if !UserDefaults.standard.bool(forKey: "Neon-isOnboardingCompleted"){
-            Neon.setWindow(window: &window, destinationVC: onboardingVC)
+            Neon.setWindow(window: &window, destinationVC: onboardingVC, interfaceStyle: interfaceStyle)
             return
         }
         
         if Neon.isUserPremium || UserDefaults.standard.bool(forKey: "Neon-IsUserPremium"){
-            Neon.setWindow(window: &window, destinationVC: homeVC)
+            Neon.setWindow(window: &window, destinationVC: homeVC, interfaceStyle: interfaceStyle)
         }else{
-            Neon.setWindow(window: &window, destinationVC: paywallVC)
+            Neon.setWindow(window: &window, destinationVC: paywallVC, interfaceStyle: interfaceStyle)
         }
             
         }
