@@ -101,7 +101,7 @@ public class NeonAudioRecordingView: UIView {
                     self.recordButtonView?.showHoldHint()
                 }
             } else {
-                self.startRecording()
+                self.startRecording(allowedRequest: {_ in }, requested: {})
             }
         }
         recordButtonView.onHoldToFinishCompleted = { [weak self] in
@@ -160,15 +160,17 @@ public class NeonAudioRecordingView: UIView {
                 stopRecording()
             }
         } else {
-            startRecording()
+            startRecording(allowedRequest: {_ in }, requested: {})
         }
     }
 
-    open func startRecording() {
+    open func startRecording(allowedRequest: @escaping(Bool) -> Void, requested: @escaping()->()) {
         RecordingManager.shared.requestRecordPermission { [weak self] granted, status in
             guard let self = self else { return }
+            requested()
             DispatchQueue.main.async {
                 if granted {
+                    allowedRequest(true)
                     self.isRecording = true
                     RecordingManager.shared.startRecording()
                     self.recordButtonView?.setState(.recording, useHoldToFinish: NeonAudioRecordingViewConstants.shouldHoldToFinishRecording)
@@ -183,6 +185,7 @@ public class NeonAudioRecordingView: UIView {
                     self.progressBarView?.isHidden = false
                 }
                 if status == .denied {
+                    allowedRequest(false)
                     NeonAlertManager.default.present(
                         title: "Permission Needed",
                         message: "To record audio, please enable microphone access in your device settings.",
