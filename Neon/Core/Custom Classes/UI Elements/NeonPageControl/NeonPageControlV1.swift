@@ -59,15 +59,15 @@ open class NeonPageControlV1: NeonBasePageControl {
         super.layoutSubviews()
 
         let floatCount = CGFloat(inactive.count)
-        let inactiveW = self.inactiveElementWidth
         let activeW = self.elementWidth
+        let inactiveW = activeW / 2
         let totalWidth = inactiveW * floatCount + self.padding * (floatCount - 1)
         let x = (self.bounds.size.width - totalWidth) * 0.5
         let y = (self.bounds.size.height - self.elementHeight) * 0.5
         var frame = CGRect(x: x, y: y, width: inactiveW, height: self.elementHeight)
 
         // Active (selected) pill – wider than inactive dots
-        active.cornerRadius = self.radius
+        active.cornerRadius = self.elementHeight / 2
         active.backgroundColor = (self.currentPageTintColor ?? self.tintColor)?.cgColor
         active.frame = CGRect(x: frame.origin.x - (activeW - inactiveW)/2,
                               y: frame.origin.y,
@@ -81,8 +81,8 @@ open class NeonPageControlV1: NeonBasePageControl {
                 layer.borderWidth = self.borderWidth
                 layer.borderColor = base.cgColor
             }
-            layer.cornerRadius = self.radius
-            layer.frame = frame
+            layer.cornerRadius = self.elementHeight / 2
+            layer.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: inactiveW, height: self.elementHeight)
             frame.origin.x += inactiveW + self.padding
         }
         update(for: progress)
