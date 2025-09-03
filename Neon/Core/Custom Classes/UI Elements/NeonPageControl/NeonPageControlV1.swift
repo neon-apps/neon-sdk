@@ -65,7 +65,7 @@ open class NeonPageControlV1: NeonBasePageControl {
             }
             layer.cornerRadius = self.radius
             layer.frame = frame
-            frame.origin.x += self.elementWidth + self.padding
+            frame.origin.x += self.elementWidth / 2 + self.padding
         }
         update(for: progress)
     }
