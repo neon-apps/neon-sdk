@@ -35,11 +35,13 @@ let package = Package(
        
         .target(
             name: "NeonSDK",  dependencies: [
-                "RevenueCat",
+               
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",
                 "AIProxy",
+                .product(name: "RevenueCatUI", package: "RevenueCat", condition: .when(platforms: [.iOS])),
+                .product(name: "RevenueCat", package: "RevenueCat", condition: .when(platforms: [.iOS])),
                 .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "AdaptyUI", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
