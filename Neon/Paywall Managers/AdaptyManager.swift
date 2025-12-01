@@ -7,11 +7,12 @@
 
 #if !os(xrOS)
 import Foundation
-import Adapty
 import StoreKit
 import UIKit
 import Lottie
+import Adapty
 import AdaptyUI
+import FirebaseAnalytics
 
 
 public protocol AdaptyManagerDelegate: AnyObject {
@@ -41,14 +42,27 @@ public class AdaptyManager {
   
  
     
-    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", customerUserId : String? = nil, completion : (() -> ())? = nil) {
+    public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", customerUserId : String? = nil,firebaseInstanceID: String? = nil, completion : (() -> ())? = nil) {
         self.accessLevel = accessLevel
         if let customerUserId{
             Adapty.activate(withAPIKey, customerUserId: customerUserId)
         }else{
             Adapty.activate(withAPIKey)
         }
-        
+        defer {
+            if let firebaseInstanceID {
+                Task {
+                    do {
+                        try await Adapty.setIntegrationIdentifier(
+                            key: "firebase_app_instance_id",
+                            value: firebaseInstanceID
+                        )
+                    } catch {
+                        // handle the error
+                    }
+                }
+            }
+        }
         if #available(iOS 15, *){
             AdaptyUI.activate()
 
