@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         
         .package(name: "SDWebImage", url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.15.5"),
-        .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "5.0.0"),
+        .package(name: "RevenueCat", url: "https://github.com/RevenueCat/purchases-ios.git", from: "5.50.1"),
         .package(name: "Lottie", url: "https://github.com/airbnb/lottie-spm.git", from: "4.1.3"),
         .package(name: "Hero", url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.4.0")),
         .package(name: "SnapKit", url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1")),
@@ -34,11 +34,12 @@ let package = Package(
        
         .target(
             name: "NeonSDK",  dependencies: [
-                "RevenueCat",
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",
                 "AIProxy",
+                .product(name: "RevenueCatUI", package: "RevenueCat", condition: .when(platforms: [.iOS])),
+                .product(name: "RevenueCat", package: "RevenueCat", condition: .when(platforms: [.iOS])),
                 .product(name: "Adapty", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "AdaptyUI", package: "Adapty", condition: .when(platforms: [.iOS])),
                 .product(name: "SDWebImage", package: "SDWebImage", condition: .when(platforms: [.iOS])),
