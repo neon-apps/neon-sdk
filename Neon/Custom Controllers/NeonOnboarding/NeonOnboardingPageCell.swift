@@ -33,6 +33,7 @@ class NeonOnboardingPageCell: NeonCollectionViewCell<NeonOnboardingPage> {
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2
         titleLabel.font = NeonOnboardingPageCell.titleFont
+        titleLabel.numberOfLines = 0
         titleLabel.textColor = NeonOnboardingPageCell.titleColor
         
         subtitleLabel.text = page.subtitle
