@@ -19,14 +19,16 @@ public class NeonSplashVC: UIViewController {
     var appIcon : UIImage
     let lblAppTitle = UILabel()
     var backgroundColor : UIColor
+    var backgroundImage : UIImage?
     var textColor : UIColor
     private let numberOfLines : Int
     
-    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3, backgroundColor : UIColor = .white, textColor : UIColor = .black, titleNumberOfLines : Int = 1){
+    public init(appIcon : UIImage, appName : String, progressBarColors : [UIColor], animationDuration : TimeInterval = 3, backgroundColor : UIColor = .white, backgroundImage : UIImage? = nil, textColor : UIColor = .black, titleNumberOfLines : Int = 1){
         self.animationDuration = animationDuration
         self.progressBarColors = progressBarColors
         self.appName = appName
         self.appIcon = appIcon
+        self.backgroundImage = backgroundImage
         self.backgroundColor = backgroundColor
         self.textColor = textColor
         self.numberOfLines = titleNumberOfLines
@@ -57,6 +59,18 @@ public class NeonSplashVC: UIViewController {
     func createUI(){
         
         view.backgroundColor = backgroundColor
+        
+        if let backgroundImage{
+            let backgroundImageView = UIImageView()
+            backgroundImageView.image = backgroundImage
+            backgroundImageView.contentMode = .scaleAspectFill
+            view.addSubview(backgroundImageView)
+            
+            backgroundImageView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+     
         
         let imgAppIcon = UIImageView()
         imgAppIcon.image = appIcon

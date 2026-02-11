@@ -14,10 +14,17 @@ class NeonAudioRecordingViewConstants{
     static var primaryTextColor = UIColor()
     static var secondaryTextColor = UIColor()
     static var buttonTextColor = UIColor()
+    static var buttonBackgroundColor = UIColor()
     static var mainColor = UIColor()
     static var progressBarTrackColor = UIColor()
+    static var progressBarTintColor = UIColor()
     static var sliderTrackColor = UIColor()
     static var title = String()
+    static var recordingButtonImage: UIImage = NeonSymbols.mic_fill
     static var description = String()
+    static var fontSize = CGFloat()
     static var maximumRecordingDurationInSeconds = Int()
+    static var loaderColor =  UIColor()
+    static var shouldHoldToFinishRecording: Bool = false
+    static var requiredHoldDurationInSeconds = Double()
 }

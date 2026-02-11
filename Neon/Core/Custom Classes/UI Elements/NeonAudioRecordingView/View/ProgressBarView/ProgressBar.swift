@@ -19,7 +19,7 @@ public class ProgressBar: UIView {
         }
     }
     
-    public var gradients: [UIColor] = [NeonAudioRecordingViewConstants.mainColor, NeonAudioRecordingViewConstants.mainColor] {
+    public var gradients: [UIColor] = [NeonAudioRecordingViewConstants.progressBarTintColor, NeonAudioRecordingViewConstants.progressBarTintColor] {
         didSet {
             let gradientColors = gradients.map { $0.cgColor }
             pulsingGradientLayer.colors = gradientColors

@@ -34,6 +34,7 @@ let package = Package(
        
         .target(
             name: "NeonSDK",  dependencies: [
+
                 "Hero",
                 "SnapKit",
                 "Localize_Swift",

@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import NeonSDK
 
 class RecordingProcessingView: UIView {
     
@@ -22,7 +21,7 @@ class RecordingProcessingView: UIView {
     }
     
     private func setupView() {
-        let animationView = NeonAnimationView(animation: .loadingDots2, color: NeonAudioRecordingViewConstants.mainColor)
+        let animationView = NeonAnimationView(animation: .loadingDots2, color: NeonAudioRecordingViewConstants.loaderColor)
         addSubview(animationView)
         animationView.snp.makeConstraints { make in
             make.top.equalToSuperview()

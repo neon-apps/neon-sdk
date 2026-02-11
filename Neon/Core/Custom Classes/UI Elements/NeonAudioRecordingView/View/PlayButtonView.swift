@@ -30,9 +30,9 @@ class PlayButtonView: UIView {
     
     private func setupView() {
         
-        infoLabel.text = "You can listen to your recorded voice, delete\nor re-record."
+        infoLabel.text = "You can listen to your recorded audio, or delete."
         infoLabel.textColor = NeonAudioRecordingViewConstants.secondaryTextColor
-        infoLabel.font = Font.custom(size: 10, fontWeight: .Regular)
+        infoLabel.font = Font.custom(size: NeonAudioRecordingViewConstants.fontSize, fontWeight: .Regular)
         infoLabel.textAlignment = .center
         infoLabel.numberOfLines = 0
         addSubview(infoLabel)
@@ -44,7 +44,7 @@ class PlayButtonView: UIView {
        
         playButton.setImage(NeonSymbols.play_fill, for: .normal)
         playButton.imageView?.tintColor = NeonAudioRecordingViewConstants.buttonTextColor
-        playButton.backgroundColor = NeonAudioRecordingViewConstants.mainColor
+        playButton.backgroundColor = NeonAudioRecordingViewConstants.buttonBackgroundColor
         playButton.layer.cornerRadius = 8
         addSubview(playButton)
         playButton.snp.makeConstraints { make in

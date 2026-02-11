@@ -10,7 +10,7 @@ import Foundation
 @available(iOS 13.0, *)
 public class NeonLongOnboardingSection{
     
-    private static var lastSectionIndex = -1
+    public static var lastSectionIndex = -1
     
     var title : String
     var pages = [NeonLongOnboardingPage]()
