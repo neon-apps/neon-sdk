@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lzell/AIProxySwift.git",
       "state" : {
-        "revision" : "4b0ce5e040894f82761a324819dd7fac0eb0bdd4",
-        "version" : "0.130.0"
+        "revision" : "061514a1a8809f584c77915a15add59e88639698",
+        "version" : "0.71.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "541ac342abead313f2ce0ccf33278962b5c1e43c",
-        "version" : "12.4.0"
+        "revision" : "e2a3c3fbcaa1df3fd549b5b3f1175bc8a11912fd",
+        "version" : "12.2.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
       "state" : {
-        "revision" : "2ba031f43ef88a7f6631c84d23794eb99751e891",
-        "version" : "3.1.0"
+        "revision" : "a2d0f1f1666de591eb1a811f40b1706f5c63a2ed",
+        "version" : "2.3.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "52713644ce2831bb687ded4aefd5e5c9f15565c5",
-        "version" : "12.4.0"
+        "revision" : "1c7edd5cc6e4ad22d2b81166bb9b208b9e63058a",
+        "version" : "12.2.0"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/HeroTransitions/Hero.git",
       "state" : {
-        "revision" : "670b81ed3d95f7183bbc009d0ec67c71506557b5",
-        "version" : "1.6.4"
+        "revision" : "7d541ecbf8f53edc87bf51c54ab207bddc39e4cb",
+        "version" : "1.4.0"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-spm.git",
       "state" : {
-        "revision" : "04f2fd18cc9404a0a0917265a449002674f24ec9",
-        "version" : "4.5.2"
+        "revision" : "c3852816c622ad35a03ed39c187c1644ece2382b",
+        "version" : "4.1.3"
       }
     },
     {
@@ -167,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "6238361173aa15a02b99de0d6c003b24fa5fa444",
-        "version" : "5.52.1"
+        "revision" : "2d95eedc59c06fa6349aab7a506f0950ac0a563b",
+        "version" : "5.50.1"
       }
     },
     {
@@ -176,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "2053b120767c42a70bcba21095f34e4cfb54a75d",
-        "version" : "5.21.3"
+        "revision" : "fb50c1d20f24db5322b2f8f379de3618f75fe08e",
+        "version" : "5.15.5"
       }
     },
     {
@@ -185,8 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit.git",
       "state" : {
-        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
-        "version" : "5.7.1"
+        "revision" : "d458564516e5676af9c70b4f4b2a9178294f1bc6",
+        "version" : "5.0.1"
       }
     },
     {
