@@ -62,6 +62,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! Cell
+        cell.indexPath = indexPath
         if !isShimmerActive{
             let object = objects[indexPath.row]
             cell.configure(with: object)
@@ -180,7 +181,7 @@ open class NeonTableView<T, Cell: NeonTableViewCell<T>>: UITableView, UITableVie
 open class NeonTableViewCell<T>: UITableViewCell, ConfigurableCell, ShimmeringViewProtocol {
     
     open var shimmerItems =  [UIView]()
-    
+    open var indexPath: IndexPath?
     open var configureCell: ((T) -> Void)?
     
     open func configure(with object: T) {
