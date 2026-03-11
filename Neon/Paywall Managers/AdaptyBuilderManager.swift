@@ -122,15 +122,25 @@ extension AdaptyBuilderManager{
     public func paywallController(_ controller: AdaptyPaywallController,
                                   didFinishPurchase product: AdaptyPaywallProduct,
                                   purchaseResult: AdaptyPurchaseResult) {
-        Neon.isUserPremium = true
+      
         
-        NeonPaywallManager.trackPurchase(product: product.sk2Product)
-        
-        controller.dismiss(animated: true)
-        
-        if let purchased{
-            purchased(product)
+        switch purchaseResult {
+        case .userCancelled:
+            print("User Cancellled")
+        case .pending:
+            print("Pending transaction")
+        case .success(let profile, let transaction):
+            Neon.isUserPremium = true
+            
+            NeonPaywallManager.trackPurchase(product: product.sk2Product)
+            
+            controller.dismiss(animated: true)
+            if let purchased{
+                purchased(product)
+            }
         }
+        
+     
         
     }
     public func paywallController(_ controller: AdaptyPaywallController,
