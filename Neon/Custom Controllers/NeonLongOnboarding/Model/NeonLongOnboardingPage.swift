@@ -25,7 +25,8 @@ public class NeonLongOnboardingPage{
                     }
                 }
             }
-            fatalError("This page not exist in any sections.")
+            print("This page not exist in any sections.")
+            return 0
         }
        
     }
@@ -38,7 +39,9 @@ public class NeonLongOnboardingPage{
                     }
                 }
             }
-            fatalError("This page not exist in any sections.")
+           
+            print("This page not exist in any sections.")
+            return 0
         }
     }
     

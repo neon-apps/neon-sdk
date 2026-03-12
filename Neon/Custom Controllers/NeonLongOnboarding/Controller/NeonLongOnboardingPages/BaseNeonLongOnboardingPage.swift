@@ -39,15 +39,18 @@ open class BaseNeonLongOnboardingPage: UIViewController {
         view.backgroundColor = NeonLongOnboardingConstants.pageBackgroundColor
         
         guard let currentSection =  NeonLongOnboardingConstants.currentSection else {
-            fatalError("You didn't configure the current section.")
+            print("You didn't configure the current section.")
+            return
         }
         
         guard let indexInSectionQuestions =  NeonLongOnboardingConstants.currentPage?.indexInSectionQuestions else {
-            fatalError("You didn't configure the current page.")
+            print("You didn't configure the current page.")
+            return
         }
         
         guard let currentPageIndex =  NeonLongOnboardingConstants.currentPage?.indexInSection else {
-            fatalError("You didn't configure the current page.")
+            print("You didn't configure the current page.")
+            return
         }
         
         

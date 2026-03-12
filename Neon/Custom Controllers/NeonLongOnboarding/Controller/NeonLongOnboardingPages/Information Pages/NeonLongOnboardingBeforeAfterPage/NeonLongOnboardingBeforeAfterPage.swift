@@ -103,7 +103,7 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
             subtitleLabel.text = subtitle.changeUsername()
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     
@@ -113,7 +113,7 @@ class NeonLongOnboardingBeforeAfterPage: BaseNeonLongOnboardingPage{
             setupBeforeAfterViews(beforeItems: beforeItems, afterItems: afterItems, beforeLabel: beforeLabel, afterLabel: afterLabel)
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     

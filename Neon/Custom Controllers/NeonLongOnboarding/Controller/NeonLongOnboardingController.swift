@@ -43,7 +43,8 @@ override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundl
     
     public func startOnboarding(controller : UIViewController){
         guard let firstSection = NeonLongOnboardingConstants.sections.first, let firstPage = firstSection.pages.first else {
-                fatalError("You should add at least one section and one page to use NeonLongOnboarding.")
+                print("You should add at least one section and one page to use NeonLongOnboarding.")
+            return
         }
 
         NeonLongOnboardingConstants.currentPage = firstPage

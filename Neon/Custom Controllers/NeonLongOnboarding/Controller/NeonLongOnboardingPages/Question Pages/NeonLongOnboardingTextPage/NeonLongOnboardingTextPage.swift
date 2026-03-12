@@ -84,7 +84,7 @@ class NeonLongOnboardingTextPage: BaseNeonLongOnboardingPage, UITextFieldDelegat
            
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     

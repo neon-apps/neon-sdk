@@ -104,7 +104,7 @@ class NeonLongOnboardingSayGoodbyePage: BaseNeonLongOnboardingPage{
             titleLabel.text = title.changeUsername()
             titleLabel.sizeToFit()
             if items.count != 4{
-                fatalError("To use Say Goodbye page, you should add exactly 4 items.")
+                print("To use Say Goodbye page, you should add exactly 4 items.")
             }
             
             sayGoodbyeView1.labelText = items[0]
@@ -114,7 +114,7 @@ class NeonLongOnboardingSayGoodbyePage: BaseNeonLongOnboardingPage{
   
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     

@@ -107,7 +107,7 @@ public class NeonLegalView : UIView{
                 legalController.controllerType = .privacyPolicy
                 currentController.present(destinationVC: legalController, slideDirection: .right)
             }else{
-                fatalError("You have to configure the legal controller with configureLegalController method. ")
+//                fatalError("You have to configure the legal controller with configureLegalController method. ")
             }
           
         }
@@ -131,7 +131,7 @@ public class NeonLegalView : UIView{
                 legalController.controllerType = .termsOfUse
                 currentController.present(destinationVC: legalController, slideDirection: .right)
             }else{
-                fatalError("You have to configure the legal controller with configureLegalController method. ")
+//                fatalError("You have to configure the legal controller with configureLegalController method. ")
             }
         }
     }

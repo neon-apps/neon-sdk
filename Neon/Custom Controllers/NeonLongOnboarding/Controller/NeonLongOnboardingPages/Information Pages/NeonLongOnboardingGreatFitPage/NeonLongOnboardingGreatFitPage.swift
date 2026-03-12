@@ -121,7 +121,7 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
             descriptionLabel.text = description.changeUsername()
             
             if benefits.count != 4{
-                fatalError("To use greatFit page, you should add exactly 4 benefits while you are adding the page, inside benefits array.")
+                print("To use greatFit page, you should add exactly 4 benefits while you are adding the page, inside benefits array.")
             }
             benefitView1.configure(benefit: benefits[0])
             benefitView2.configure(benefit: benefits[1])
@@ -129,7 +129,7 @@ class NeonLongOnboardingGreatFitPage: BaseNeonLongOnboardingPage{
             benefitView4.configure(benefit: benefits[3])
             break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     

@@ -39,7 +39,7 @@ public class NeonLongOnboardingSection{
     }
     func checkPageCount(){
         if self.questionPages.count > 5{
-            fatalError("You can't add more than 5 question page to single section.")
+            print("You can't add more than 5 question page to single section.")
         }
     }
 }

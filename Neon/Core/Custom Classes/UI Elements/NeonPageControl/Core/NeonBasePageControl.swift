@@ -71,7 +71,8 @@ import UIKit
     open var tintColors: [UIColor] = [] {
         didSet {
             guard tintColors.count == numberOfPages else {
-                fatalError("The number of tint colors needs to be the same as the number of page")
+//                fatalError("The number of tint colors needs to be the same as the number of page")
+                return
             }
             setNeedsLayout()
         }
@@ -201,11 +202,11 @@ import UIKit
     }
     
     func updateNumberOfPages(_ count: Int) {
-        fatalError("Should be implemented in child class")
+//        fatalError("Should be implemented in child class")
     }
     
     func update(for progress: Double) {
-        fatalError("Should be implemented in child class")
+//        fatalError("Should be implemented in child class")
     }
 
     deinit {

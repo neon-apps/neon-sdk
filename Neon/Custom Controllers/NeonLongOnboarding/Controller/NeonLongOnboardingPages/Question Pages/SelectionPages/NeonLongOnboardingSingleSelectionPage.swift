@@ -72,7 +72,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
                 showButton()
             }
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     
@@ -93,7 +93,7 @@ class NeonLongOnboardingSingleSelectionPage: BaseNeonLongOnboardingSelectionPage
                 newOptionView.animate(type: .fadeIn, delay: animationDelay)
             }
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
         
       

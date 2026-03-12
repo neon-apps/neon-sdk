@@ -86,7 +86,7 @@ class NeonLongOnboardingSliderPage: BaseNeonLongOnboardingPage, UITextFieldDeleg
             sliderDidChanged()
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     func createAttributedString(item: String, description: String) -> NSAttributedString {

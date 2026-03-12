@@ -130,7 +130,7 @@ class NeonLongOnboardingNumberPage: BaseNeonLongOnboardingPage, UITextFieldDeleg
           
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     
@@ -140,7 +140,7 @@ class NeonLongOnboardingNumberPage: BaseNeonLongOnboardingPage, UITextFieldDeleg
             numberField.numberOfDigits = digitCount
         break
         default:
-            fatalError("Something went wrong with NeonLongOnboarding. Please consult to manager.")
+            print("Something went wrong with NeonLongOnboarding. Please consult to manager.")
         }
     }
     
