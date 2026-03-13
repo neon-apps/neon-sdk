@@ -360,25 +360,32 @@ public class AdaptyManager {
     
     public static func verifySubscription(completionSuccess: (() -> ())?, completionFailure: (() -> ())?) {
         
-            Adapty.getProfile { result in
-                if let profile = try? result.get(),
-                   profile.accessLevels[self.accessLevel]?.isActive ?? false {
-                    Neon.isUserPremium = true
-                    trackTrialConversionIfNeeded(for: profile)
-                    UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
-                    guard let completionSuccess else { return }
-                    completionSuccess()
-                }else {
-                    if !Neon.isPremiumTestActive{
-                        Neon.isUserPremium = false
-                        UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
-                    }else{
-                        Neon.isUserPremium = true
-                    }
-                    guard let completionFailure else { return }
-                    completionFailure()
-                }
+        Adapty.getProfile { result in
+            switch result {
+            case .success(let profile):
+                if profile.accessLevels[self.accessLevel]?.isActive ?? false {
+                                Neon.isUserPremium = true
+                                trackTrialConversionIfNeeded(for: profile)
+                                UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                                guard let completionSuccess else { return }
+                                completionSuccess()
+                            } else {
+                                if !Neon.isPremiumTestActive{
+                                    Neon.isUserPremium = false
+                                    UserDefaults.standard.setValue(Neon.isUserPremium, forKey: "Neon-IsUserPremium")
+                                } else {
+                                    Neon.isUserPremium = true
+                                }
+                                guard let completionFailure else { return }
+                                completionFailure()
+                            }
+            case .failure(_):
+                Neon.isUserPremium =  UserDefaults.standard.bool(forKey: "Neon-IsUserPremium")
+                guard let completionFailure else { return }
+                completionFailure()
             }
+        }
+         
 
     }
     
