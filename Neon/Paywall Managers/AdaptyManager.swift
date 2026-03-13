@@ -45,9 +45,15 @@ public class AdaptyManager {
         self.accessLevel = accessLevel
         if let customerUserId{
             Adapty.logLevel = .verbose
+            Adapty.setLogHandler { record in
+                print("ADAPTY_DEBUG_LOG: \(record.message)")
+            }
             Adapty.activate(withAPIKey, customerUserId: customerUserId)
         }else{
             Adapty.logLevel = .verbose
+            Adapty.setLogHandler { record in
+                print("ADAPTY_DEBUG_LOG: \(record.message)")
+            }
             Adapty.activate(withAPIKey)
         }
         defer {
