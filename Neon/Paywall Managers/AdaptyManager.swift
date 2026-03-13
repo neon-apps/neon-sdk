@@ -44,8 +44,10 @@ public class AdaptyManager {
     public static func configure(withAPIKey : String, placementIDs : [String], accessLevel : String = "premium", customerUserId : String? = nil,firebaseInstanceID: String? = nil, completion : (() -> ())? = nil) {
         self.accessLevel = accessLevel
         if let customerUserId{
+            Adapty.logLevel = .verbose
             Adapty.activate(withAPIKey, customerUserId: customerUserId)
         }else{
+            Adapty.logLevel = .verbose
             Adapty.activate(withAPIKey)
         }
         defer {
