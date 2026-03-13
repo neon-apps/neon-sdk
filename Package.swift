@@ -23,7 +23,7 @@ let package = Package(
         .package(url: "https://github.com/SnapKit/SnapKit.git", from: "5.0.1"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.2.0"),
         .package(url: "https://github.com/marmelroy/Localize-Swift.git", from: "3.2.0"),
-        .package(url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", exact: "3.14.1"),
+        .package(url: "https://github.com/adaptyteam/AdaptySDK-iOS.git", from: "3.15.5"),
         .package(url: "https://github.com/lzell/AIProxySwift.git", from: "0.71.0"),
         
 
