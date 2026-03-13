@@ -12,7 +12,7 @@ import Lottie
 import Adapty
 import AdaptyUI
 import FirebaseAnalytics
-
+import os.log // Bunu en üste ekle
 
 public protocol AdaptyManagerDelegate: AnyObject {
     func packageFetched()
@@ -46,13 +46,13 @@ public class AdaptyManager {
         if let customerUserId{
             Adapty.logLevel = .verbose
             Adapty.setLogHandler { record in
-                print("ADAPTY_DEBUG_LOG: \(record.message)")
+                os_log("ADAPTY_DEBUG_LOG: %{public}@", log: OSLog.default, type: .default, record.message)
             }
             Adapty.activate(withAPIKey, customerUserId: customerUserId)
         }else{
             Adapty.logLevel = .verbose
             Adapty.setLogHandler { record in
-                print("ADAPTY_DEBUG_LOG: \(record.message)")
+                os_log("ADAPTY_DEBUG_LOG: %{public}@", log: OSLog.default, type: .default, record.message)
             }
             Adapty.activate(withAPIKey)
         }
