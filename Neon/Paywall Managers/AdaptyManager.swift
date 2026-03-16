@@ -69,6 +69,8 @@ public class AdaptyManager {
                     }
                 }
             }
+            verifySubscription(completionSuccess: nil, completionFailure: nil)
+
         }
         if #available(iOS 15, *){
             AdaptyUI.activate()
@@ -80,7 +82,6 @@ public class AdaptyManager {
             Neon.isUserPremium = true
         }
         fetchPaywalls(paywallIDs: placementIDs,completion: completion)
-        verifySubscription(completionSuccess: nil, completionFailure: nil)
         configureNotification()
     }
     
