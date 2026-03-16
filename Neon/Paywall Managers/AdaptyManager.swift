@@ -50,8 +50,10 @@ public class AdaptyManager {
             }
             Adapty.activate(withAPIKey, customerUserId: customerUserId) {error in
                 if let error {
-                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .default, error.localizedDescription)
+                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .error, error.localizedDescription)
+                    return
                 }
+                os_log("ADAPTY_DEBUG_LOG_CUSTOMERID_ACTIVATION: %{public}@", log: OSLog.default, type: .default, customerUserId)
                 if let firebaseInstanceID {
                     Task {
                         do {
@@ -87,8 +89,10 @@ public class AdaptyManager {
             }
             Adapty.activate(withAPIKey) {error in
                 if let error {
-                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .default, error.localizedDescription)
+                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .error, error.localizedDescription)
+                    return
                 }
+                os_log("ADAPTY_DEBUG_LOG_ACTIVATION: %{public}@", log: OSLog.default, type: .default,"ACTIVATED")
                 if let firebaseInstanceID {
                     Task {
                         do {
