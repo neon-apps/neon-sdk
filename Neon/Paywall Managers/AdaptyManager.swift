@@ -48,41 +48,76 @@ public class AdaptyManager {
             Adapty.setLogHandler { record in
                 os_log("ADAPTY_DEBUG_LOG: %{public}@", log: OSLog.default, type: .default, record.message)
             }
-            Adapty.activate(withAPIKey, customerUserId: customerUserId)
+            Adapty.activate(withAPIKey, customerUserId: customerUserId) {error in
+                if let error {
+                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .default, error.localizedDescription)
+                }
+                if let firebaseInstanceID {
+                    Task {
+                        do {
+                            try await Adapty.setIntegrationIdentifier(
+                                key: "firebase_app_instance_id",
+                                value: firebaseInstanceID
+                            )
+                        } catch {
+                            // handle the error
+                        }
+                    }
+                }
+                
+                 if #available(iOS 15, *){
+                     AdaptyUI.activate()
+
+                 }
+
+                 Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
+                 if Neon.isPremiumTestActive{
+                     Neon.isUserPremium = true
+                 }
+                 verifySubscription(completionSuccess: nil, completionFailure: nil)
+
+                 fetchPaywalls(paywallIDs: placementIDs,completion: completion)
+                 configureNotification()
+                
+            }
         }else{
             Adapty.logLevel = .verbose
             Adapty.setLogHandler { record in
                 os_log("ADAPTY_DEBUG_LOG: %{public}@", log: OSLog.default, type: .default, record.message)
             }
-            Adapty.activate(withAPIKey)
-        }
-        defer {
-            if let firebaseInstanceID {
-                Task {
-                    do {
-                        try await Adapty.setIntegrationIdentifier(
-                            key: "firebase_app_instance_id",
-                            value: firebaseInstanceID
-                        )
-                    } catch {
-                        // handle the error
+            Adapty.activate(withAPIKey) {error in
+                if let error {
+                    os_log("ADAPTY_DEBUG_LOG_ERROR: %{public}@", log: OSLog.default, type: .default, error.localizedDescription)
+                }
+                if let firebaseInstanceID {
+                    Task {
+                        do {
+                            try await Adapty.setIntegrationIdentifier(
+                                key: "firebase_app_instance_id",
+                                value: firebaseInstanceID
+                            )
+                        } catch {
+                            // handle the error
+                        }
                     }
                 }
+                
+                 if #available(iOS 15, *){
+                     AdaptyUI.activate()
+
+                 }
+
+                 Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
+                 if Neon.isPremiumTestActive{
+                     Neon.isUserPremium = true
+                 }
+                 verifySubscription(completionSuccess: nil, completionFailure: nil)
+
+                 fetchPaywalls(paywallIDs: placementIDs,completion: completion)
+                 configureNotification()
             }
-            verifySubscription(completionSuccess: nil, completionFailure: nil)
-
         }
-        if #available(iOS 15, *){
-            AdaptyUI.activate()
-
-        }
-
-        Neon.isUserPremium = (UserDefaults.standard.value(forKey: "Neon-IsUserPremium") as? Bool) ?? false
-        if Neon.isPremiumTestActive{
-            Neon.isUserPremium = true
-        }
-        fetchPaywalls(paywallIDs: placementIDs,completion: completion)
-        configureNotification()
+      
     }
     
     
